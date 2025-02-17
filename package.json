@@ -15,7 +15,10 @@
     "match-sorter": "^8.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-helmet": "^6.1.0",
+    "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^7.1.5",
+    "simple-parallax-js": "^6.0.1",
     "sort-by": "^1.2.0"
   },
   "devDependencies": {
