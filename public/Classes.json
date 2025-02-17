@@ -1,0 +1,72 @@
+[
+  {
+    "id": "yoga",
+    "title": "Yoga - Vinyasa Flow",
+    "description": "A peaceful yet effective workout focusing on flexibility, breathing, and mindfulness.",
+    "video_link": "https://www.youtube.com/watch?v=v7AYKMP6rOE",
+    "trainers": [
+      { "id": "t1", "image": "/assets/trainers/alice.jpg" },
+      { "id": "t2", "image": "/assets/trainers/michael.jpg" },
+      { "id": "t3", "image": "/assets/trainers/sophia.jpg" }
+    ],
+    "intensity": "Low",
+    "rating": 4.8,
+    "booked": 120
+  },
+  {
+    "id": "strength-training",
+    "title": "Strength Training - Full Body",
+    "description": "Build muscle and improve endurance with high-intensity strength workouts.",
+    "video_link": "https://www.youtube.com/watch?v=Xq7z57qrZU8",
+    "trainers": [
+      { "id": "t4", "image": "/assets/trainers/james.jpg" },
+      { "id": "t5", "image": "/assets/trainers/lisa.jpg" },
+      { "id": "t6", "image": "/assets/trainers/robert.jpg" }
+    ],
+    "intensity": "High",
+    "rating": 4.7,
+    "booked": 150
+  },
+  {
+    "id": "hiit",
+    "title": "HIIT - 20 Min Fat Burner",
+    "description": "A fast-paced, high-intensity workout designed to burn fat and boost endurance.",
+    "video_link": "https://www.youtube.com/watch?v=ml6cT4AZdqI",
+    "trainers": [
+      { "id": "t7", "image": "/assets/trainers/olivia.jpg" },
+      { "id": "t8", "image": "/assets/trainers/ethan.jpg" },
+      { "id": "t9", "image": "/assets/trainers/sarah.jpg" }
+    ],
+    "intensity": "Very High",
+    "rating": 4.9,
+    "booked": 200
+  },
+  {
+    "id": "boxing",
+    "title": "Boxing - Power Punches",
+    "description": "A high-energy class that improves strength, agility, and endurance with boxing techniques.",
+    "video_link": "https://www.youtube.com/watch?v=p1sHgoddPjA",
+    "trainers": [
+      { "id": "t10", "image": "/assets/trainers/chris.jpg" },
+      { "id": "t11", "image": "/assets/trainers/natalie.jpg" },
+      { "id": "t12", "image": "/assets/trainers/jason.jpg" }
+    ],
+    "intensity": "High",
+    "rating": 4.6,
+    "booked": 130
+  },
+  {
+    "id": "pilates",
+    "title": "Pilates - Core Strength",
+    "description": "A low-impact, full-body workout that strengthens muscles and improves posture.",
+    "video_link": "https://www.youtube.com/watch?v=lCg_gh_fppI",
+    "trainers": [
+      { "id": "t13", "image": "/assets/trainers/sophia_l.jpg" },
+      { "id": "t14", "image": "/assets/trainers/jacob.jpg" },
+      { "id": "t15", "image": "/assets/trainers/ava.jpg" }
+    ],
+    "intensity": "Moderate",
+    "rating": 4.7,
+    "booked": 110
+  }
+]

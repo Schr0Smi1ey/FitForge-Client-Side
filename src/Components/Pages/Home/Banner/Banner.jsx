@@ -14,7 +14,7 @@ const sliderContent = [
   {
     title: "Forge Your Strength",
     description:
-      "Push your limits and build a body that's as strong as your willpower. FirForge is your ultimate destination for fitness and transformation.",
+      "Push your limits and build a body that's as strong as your willpower. FitForge is your ultimate destination for fitness and transformation.",
     buttonText: "Start Your Journey",
     imgSrc: slide1,
   },
@@ -35,21 +35,21 @@ const sliderContent = [
   {
     title: "Your Fitness, Your Way",
     description:
-      "From personalized training to group classes, FirForge offers flexibility and variety to meet all your fitness needs.",
+      "From personalized training to group classes, FitForge offers flexibility and variety to meet all your fitness needs.",
     buttonText: "Browse Classes",
     imgSrc: slide4,
   },
   {
     title: "Empower Your Body, Elevate Your Mind",
     description:
-      "Fitness is about more than just physical strength. At FirForge, we nurture both your body and mind for complete wellness.",
+      "Fitness is about more than just physical strength. At FitForge, we nurture both your body and mind for complete wellness.",
     buttonText: "Learn More",
     imgSrc: slide5,
   },
   {
     title: "Celebrate Your Progress",
     description:
-      "Every milestone counts. Celebrate your fitness journey with us at FirForge, where every achievement is recognized and celebrated.",
+      "Every milestone counts. Celebrate your fitness journey with us at FitForge, where every achievement is recognized and celebrated.",
     buttonText: "Track Your Progress",
     imgSrc: slide6,
   },

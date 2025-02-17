@@ -10,16 +10,22 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@egjs/flicking": "^4.12.0",
     "@tailwindcss/vite": "^4.0.6",
     "localforage": "^1.10.0",
     "match-sorter": "^8.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-helmet": "^6.1.0",
+    "react-icons": "^5.4.0",
+    "react-id-swiper": "^4.0.0",
+    "react-rating": "^2.0.5",
+    "react-rating-stars-component": "^2.2.0",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^7.1.5",
     "simple-parallax-js": "^6.0.1",
-    "sort-by": "^1.2.0"
+    "sort-by": "^1.2.0",
+    "swiper": "^11.2.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
