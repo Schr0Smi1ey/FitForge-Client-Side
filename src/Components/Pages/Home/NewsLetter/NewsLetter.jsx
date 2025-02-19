@@ -1,4 +1,26 @@
+import { useContext } from "react";
+import useCustomAxios from "../../../../Hooks/useCustomAxios";
+import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
+
 const Newsletter = () => {
+  const customAxios = useCustomAxios();
+  const { Toast } = useContext(AuthContext);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = e.target;
+    const name = formData.name.value;
+    const email = formData.email.value;
+    try {
+      const res = await customAxios.post("/subscribers", { name, email });
+      if (res.status === 200) {
+        Toast("Subscribed Successfully", "success");
+        formData.reset();
+      }
+    } catch (error) {
+      console.log(error);
+      Toast(error.response.data, "error");
+    }
+  };
   return (
     <div className="container mx-auto bg-primary text-white p-8 rounded-lg shadow-lg text-center mt-10">
       <h2 className="text-2xl font-bold mb-3">Subscribe to Our Newsletter</h2>
@@ -6,19 +28,26 @@ const Newsletter = () => {
         Get the latest updates right in your inbox!
       </p>
       <div className="flex flex-col md:flex-row gap-3 justify-center">
-        <input
-          type="text"
-          placeholder="Your Name"
-          className="p-3 rounded-md text-black w-full md:w-1/3"
-        />
-        <input
-          type="email"
-          placeholder="Your Email"
-          className="p-3 rounded-md text-black w-full md:w-1/3"
-        />
-        <button className="bg-white text-primary font-bold px-5 py-3 rounded-md hover:bg-gray-200">
-          Subscribe
-        </button>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            className="p-3 rounded-md text-black w-full md:w-1/3"
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Your Email"
+            className="p-3 rounded-md text-black w-full md:w-1/3"
+          />
+          <button
+            type="submit"
+            className="bg-white text-primary font-bold px-5 py-3 rounded-md hover:bg-gray-200"
+          >
+            Subscribe
+          </button>
+        </form>
       </div>
     </div>
   );

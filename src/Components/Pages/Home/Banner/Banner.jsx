@@ -57,13 +57,14 @@ const sliderContent = [
 
 const Banner = () => {
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto py-20">
       <Carousel
         className="relative mx-auto"
-        // width={"80%"}
-        // axis="vertical"
         infiniteLoop
-        autoPlay={true}
+        autoPlay={{
+          interval: 2000,
+          pauseOnHover: false,
+        }}
         interval={2000}
         showStatus={false}
         showThumbs={false}
