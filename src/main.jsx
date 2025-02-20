@@ -8,11 +8,18 @@ import Home from "./Components/Pages/Home/Home.jsx";
 import AuthProvider from "./Contexts/AuthContext/AuthProvider.jsx";
 import Login from "./Components/Forms/Login.jsx";
 import SignUp from "./Components/Forms/SignUp.jsx";
-import Trainers from "./Components/Pages/Trainers/Trainers.jsx";
+import Trainers from "./Components/Pages/Dashboard/Trainers/Trainers.jsx";
 import Classes from "./Components/Pages/Classes/Classes.jsx";
 import Community from "./Components/Pages/Community/Community.jsx";
 import Dashboard from "./Components/Pages/Dashboard/Dashboard.jsx";
+import Subscribers from "./Components/Pages/Dashboard/Subscribers/Subscribers.jsx";
+import Applications from "./Components/Pages/Dashboard/Applications/Applications.jsx";
+import Balance from "./Components/Pages/Dashboard/Balance/Balance.jsx";
+import AddClass from "./Components/Pages/Dashboard/AddClass/AddClass.jsx";
+import AddForum from "./Components/Pages/Dashboard/AddForum/AddForum.jsx";
 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
     path: "/",
@@ -48,12 +55,40 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <Dashboard></Dashboard>,
+    children: [
+      {
+        path: "subscribers",
+        element: <Subscribers></Subscribers>,
+      },
+      {
+        path: "trainers",
+        element: <Trainers></Trainers>,
+      },
+      {
+        path: "applications",
+        element: <Applications></Applications>,
+      },
+      {
+        path: "balance",
+        element: <Balance></Balance>,
+      },
+      {
+        path: "add-class",
+        element: <AddClass></AddClass>,
+      },
+      {
+        path: "add-forum",
+        element: <AddForum></AddForum>,
+      },
+    ],
   },
 ]);
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>
-      <RouterProvider router={router} />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
     </AuthProvider>
   </StrictMode>
 );

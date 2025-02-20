@@ -35,8 +35,8 @@ const Dashboard = () => {
         <ul className="space-y-4 text-white font-semibold">
           <li>
             <NavLink
-              to="/dashboard/adminHome"
-              className="flex items-center space-x-2 hover:text-gray-200"
+              to="/dashboard/subscribers"
+              className="flex items-center space-x-2 hover:text-gray-200 w-fit"
             >
               <FaUsers />
               <span>Subscribers</span>
@@ -45,7 +45,7 @@ const Dashboard = () => {
           <li>
             <NavLink
               to="/dashboard/trainers"
-              className="flex items-center space-x-2 hover:text-gray-200"
+              className="flex items-center space-x-2 hover:text-gray-200 w-fit"
             >
               <FaChalkboardTeacher />
               <span>Trainers</span>
@@ -54,7 +54,7 @@ const Dashboard = () => {
           <li>
             <NavLink
               to="/dashboard/applications"
-              className="flex items-center space-x-2 hover:text-gray-200"
+              className="flex items-center space-x-2 hover:text-gray-200 w-fit"
             >
               <FaFileAlt />
               <span>Applications</span>
@@ -63,7 +63,7 @@ const Dashboard = () => {
           <li>
             <NavLink
               to="/dashboard/balance"
-              className="flex items-center space-x-2 hover:text-gray-200"
+              className="flex items-center space-x-2 hover:text-gray-200 w-fit"
             >
               <FaWallet />
               <span>Balance</span>
@@ -72,7 +72,7 @@ const Dashboard = () => {
           <li>
             <NavLink
               to="/dashboard/add-class"
-              className="flex items-center space-x-2 hover:text-gray-200"
+              className="flex items-center space-x-2 hover:text-gray-200 w-fit"
             >
               <FaUserGraduate />
               <span>Add Class</span>
@@ -81,7 +81,7 @@ const Dashboard = () => {
           <li>
             <NavLink
               to="/dashboard/add-forum"
-              className="flex items-center space-x-2 hover:text-gray-200"
+              className="flex items-center space-x-2 hover:text-gray-200 w-fit"
             >
               <FaPlusSquare />
               <span>Add Forum</span>
@@ -100,7 +100,9 @@ const Dashboard = () => {
           <FaBars />
         </button>
 
-        <Outlet />
+        <div className="p-4 pt-14 md:pt-32 lg:pt-40">
+          <Outlet />
+        </div>
       </div>
     </div>
   );
