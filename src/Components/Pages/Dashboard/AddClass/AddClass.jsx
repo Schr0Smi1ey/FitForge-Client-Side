@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 import useCustomAxios from "../../../../Hooks/useCustomAxios";
 import axios from "axios";
@@ -16,6 +16,7 @@ const AddClass = () => {
     trainers: [],
   });
   const { image_hosting_api, Toast } = useContext(AuthContext);
+  const fileInputRef = useRef(null);
   const customAxios = useCustomAxios();
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -65,6 +66,9 @@ const AddClass = () => {
         description: "",
         intensity: "Beginner",
       });
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
     } else {
       Toast("Class Addition Failed", "error");
     }
@@ -93,6 +97,7 @@ const AddClass = () => {
             accept="image/*"
             onChange={handleFileChange}
             preview="true"
+            ref={fileInputRef}
             className="w-full p-2 border rounded-lg"
             required
           />

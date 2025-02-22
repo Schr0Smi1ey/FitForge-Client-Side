@@ -87,12 +87,19 @@ const Dashboard = () => {
               <span>Add Forum</span>
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to="/dashboard/become-a-trainer"
+              className="flex items-center space-x-2 hover:text-gray-200 w-fit"
+            >
+              <FaPlusSquare />
+              <span>Become a Trainer</span>
+            </NavLink>
+          </li>
         </ul>
       </div>
 
-      {/* Content Area */}
       <div className="flex-1 p-8 ml-64 md:ml-0">
-        {/* Hamburger Menu Button for Mobile */}
         <button
           className="md:hidden text-orange-500 text-3xl mb-4"
           onClick={() => setIsOpen(true)}
@@ -100,7 +107,7 @@ const Dashboard = () => {
           <FaBars />
         </button>
 
-        <div className="p-4 pt-14 md:pt-32 lg:pt-40">
+        <div className="p-4 pt-14 md:pt-32">
           <Outlet />
         </div>
       </div>
