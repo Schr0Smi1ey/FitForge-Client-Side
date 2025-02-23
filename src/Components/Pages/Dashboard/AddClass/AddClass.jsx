@@ -12,8 +12,6 @@ const AddClass = () => {
     intensity: "",
     category: "",
     duration: "",
-    booked: 0,
-    trainers: [],
   });
   const { image_hosting_api, Toast } = useContext(AuthContext);
   const fileInputRef = useRef(null);
@@ -50,6 +48,8 @@ const AddClass = () => {
     const photoURL = await ConvertToLink(formData.image);
     const res = await customAxios.post("/classes", {
       ...formData,
+      booked: 0,
+      trainers: [],
       image: photoURL,
     });
     if (res.data.insertedId) {
@@ -64,7 +64,9 @@ const AddClass = () => {
         title: "",
         image: null,
         description: "",
-        intensity: "Beginner",
+        category: "",
+        duration: "",
+        intensity: "",
       });
       if (fileInputRef.current) {
         fileInputRef.current.value = "";

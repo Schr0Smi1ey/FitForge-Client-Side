@@ -3,7 +3,7 @@ import React from "react";
 const Trainers = () => {
   return (
     <div className="pt-32">
-      <p>This is Trainers Page!</p>
+      <p>hello!</p>
     </div>
   );
 };

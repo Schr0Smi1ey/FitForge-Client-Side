@@ -8,7 +8,6 @@ import Home from "./Components/Pages/Home/Home.jsx";
 import AuthProvider from "./Contexts/AuthContext/AuthProvider.jsx";
 import Login from "./Components/Forms/Login.jsx";
 import SignUp from "./Components/Forms/SignUp.jsx";
-import Trainers from "./Components/Pages/Dashboard/Trainers/Trainers.jsx";
 import Classes from "./Components/Pages/Classes/Classes.jsx";
 import Community from "./Components/Pages/Community/Community.jsx";
 import Dashboard from "./Components/Pages/Dashboard/Dashboard.jsx";
@@ -24,6 +23,8 @@ import TrainerDetails from "./Components/Details/TrainerDetails.jsx";
 import Activitylog from "./Components/Pages/Dashboard/ActivityLog/Activitylog.jsx";
 import UserProfile from "./Components/Pages/Dashboard/UserProfile/UserProfile.jsx";
 import UpdateProfile from "./Components/Forms/UpdateProfile.jsx";
+import Trainers from "./Components/Pages/Trainers/Trainers.jsx";
+import AllTrainers from "./Components/Pages/Dashboard/AllTrainers/AllTrainers.jsx";
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
@@ -67,7 +68,7 @@ const router = createBrowserRouter([
       },
       {
         path: "trainers",
-        element: <Trainers></Trainers>,
+        element: <AllTrainers></AllTrainers>,
       },
       {
         path: "applications",

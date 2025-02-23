@@ -6,11 +6,11 @@ import useCustomAxios from "../../../../Hooks/useCustomAxios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
-const Trainers = () => {
-  const { trainers, isLoading } = useTrainers(); // Fixed `isloading` to `isLoading`
+const AllTrainers = () => {
+  const { trainers, isFetching } = useTrainers();
   const customAxios = useCustomAxios();
   const navigate = useNavigate();
-  if (isLoading) {
+  if (isFetching) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <GridLoader color="#A94A4A" size={30} />
@@ -56,8 +56,6 @@ const Trainers = () => {
       }
     });
   };
-
-  console.log(trainers);
 
   return (
     <div>
@@ -113,4 +111,4 @@ const Trainers = () => {
   );
 };
 
-export default Trainers;
+export default AllTrainers;

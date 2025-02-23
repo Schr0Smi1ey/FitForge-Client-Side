@@ -4,17 +4,10 @@ import { Helmet } from "react-helmet";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { AuthContext } from "../../Contexts/AuthContext/AuthProvider";
-import { GridLoader } from "react-spinners";
 import axios from "axios";
 const UpdateProfile = () => {
-  const {
-    user,
-    updateUserProfile,
-    Toast,
-    setLoading,
-    loading,
-    image_hosting_api,
-  } = useContext(AuthContext);
+  const { user, updateUserProfile, Toast, setLoading, image_hosting_api } =
+    useContext(AuthContext);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     displayName: user.displayName || "",

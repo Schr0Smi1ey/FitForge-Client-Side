@@ -3,14 +3,14 @@ import useCustomAxios from "./useCustomAxios";
 
 const useTrainers = () => {
   const customAxios = useCustomAxios();
-  const { data: trainers = [], isloading } = useQuery({
+  const { data: trainers = [], isFetching } = useQuery({
     queryKey: ["trainers"],
     queryFn: async () => {
       const res = await customAxios.get("/trainers");
       return res.data;
     },
   });
-  return { trainers, isloading };
+  return { trainers, isFetching };
 };
 
 export default useTrainers;

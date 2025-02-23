@@ -18,12 +18,16 @@ const AddForum = () => {
     description: "",
     image: "",
     postedBy: user?.email || "Unknown",
-    totalVote: 0,
-    postedDate: new Date().toLocaleDateString("en-GB", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    }),
+    totalUpVote: 0,
+    totalDownVote: 0,
+    postedDate: {
+      date1: new Date().toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      }),
+      date2: new Date().toISOString(),
+    },
   });
   const fileInputRef = useRef(null);
   const customAxios = useCustomAxios();
@@ -148,7 +152,7 @@ const AddForum = () => {
             <input
               type="text"
               name="postedDate"
-              value={forum.postedDate}
+              value={forum.postedDate.date1}
               readOnly
               className="mt-1 p-3 border-2 border-gray-300 rounded-lg w-full focus:ring-primary focus:border-primary transition-all"
             />
