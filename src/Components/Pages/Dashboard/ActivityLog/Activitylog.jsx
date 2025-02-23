@@ -20,6 +20,7 @@ const Applications = () => {
   const colors = {
     pending: "bg-yellow-500",
     accepted: "bg-green-500",
+    cancelled: "bg-red-500",
     rejected: "bg-red-500",
   };
   const handleModal = (index) => {
@@ -35,6 +36,7 @@ const Applications = () => {
     );
   }
   const applications = applicantData[0]?.appliedTrainer;
+  console.log(applicantData);
   return (
     <div>
       {applicantData.error || !applicantData.length === 0 ? (
@@ -56,7 +58,7 @@ const Applications = () => {
                 <td>{index + 1}</td>
                 <td>{applicantData[0].user.name}</td>
                 <td>{applicantData[0].user.email}</td>
-                <td>{applicantData[0].trainer.applyDate}</td>
+                <td>{applicantData[0].applyDate}</td>
                 <td
                   className={`${
                     colors[applicant.status]
@@ -64,7 +66,10 @@ const Applications = () => {
                 >
                   {applicant.status === "rejected" && (
                     <button
-                      onClick={() => handleModal(index)}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleModal(index);
+                      }}
                       className="focus:outline-none"
                     >
                       <FaEye />
@@ -86,7 +91,10 @@ const Applications = () => {
             <div className="flex justify-center gap-4">
               <button
                 type="button"
-                onClick={() => setShowModal(false)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setShowModal(false);
+                }}
                 className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition-colors"
               >
                 Close
