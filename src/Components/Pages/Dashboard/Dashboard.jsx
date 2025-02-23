@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   FaUsers,
   FaWallet,
@@ -11,10 +11,12 @@ import {
 } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import NavBar from "../../Shared/Navbar/Navbar";
+import { AuthContext } from "../../../Contexts/AuthContext/AuthProvider";
+import { GridLoader } from "react-spinners";
 
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const { loading } = useContext(AuthContext);
   return (
     <div className="container mx-auto flex min-h-screen">
       <NavBar></NavBar>
@@ -126,7 +128,13 @@ const Dashboard = () => {
         </button>
 
         <div className="p-4 pt-14 md:pt-32">
-          <Outlet />
+          {loading ? (
+            <div className="flex items-center justify-center min-h-screen">
+              <GridLoader color="#A94A4A" size={30} />
+            </div>
+          ) : (
+            <Outlet></Outlet>
+          )}
         </div>
       </div>
     </div>

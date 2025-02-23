@@ -23,6 +23,7 @@ import BecomeTrainer from "./Components/Pages/Dashboard/Become a Trainer/BecomeT
 import TrainerDetails from "./Components/Details/TrainerDetails.jsx";
 import Activitylog from "./Components/Pages/Dashboard/ActivityLog/Activitylog.jsx";
 import UserProfile from "./Components/Pages/Dashboard/UserProfile/UserProfile.jsx";
+import UpdateProfile from "./Components/Forms/UpdateProfile.jsx";
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
@@ -101,6 +102,10 @@ const router = createBrowserRouter([
       {
         path: "user-profile",
         element: <UserProfile></UserProfile>,
+      },
+      {
+        path: "update-profile",
+        element: <UpdateProfile></UpdateProfile>,
       },
     ],
   },
