@@ -1,0 +1,56 @@
+[
+  {
+    "fullName": "Alex Johnson",
+    "email": "alex.johnson@example.com",
+    "age": 32,
+    "profileImage": "https://i.ibb.co/XYZ123/alex.png",
+    "skills": [
+      "Strength & Resistance",
+      "Cardio & Endurance",
+      "Mind-Body Wellness"
+    ],
+    "availableDays": ["Mon", "Wed", "Fri"],
+    "availableTime": "Morning",
+    "biography": "Alex is a certified personal trainer with over 10 years of experience specializing in strength and endurance training. He loves helping clients achieve their fitness goals.",
+    "experience": "10 years of personal training in various gyms and private sessions.",
+    "otherInfo": "Certified in CPR and First Aid.",
+    "totalRating": 0,
+    "totalRatedBy": 0
+  },
+  {
+    "fullName": "Bella Martinez",
+    "email": "bella.martinez@example.com",
+    "age": 28,
+    "profileImage": "https://i.ibb.co/ABC456/bella.png",
+    "skills": [
+      "Mobility & Flexibility",
+      "Rehabilitation & Injury Prevention",
+      "Special Populations"
+    ],
+    "availableDays": ["Tue", "Thu", "Sat"],
+    "availableTime": "Afternoon",
+    "biography": "Bella specializes in mobility and flexibility training, with a focus on injury prevention and rehabilitation. She works closely with seniors and clients recovering from injuries.",
+    "experience": "7 years working as a rehabilitation specialist and fitness trainer.",
+    "otherInfo": "Holds a degree in Kinesiology.",
+    "totalRating": 0,
+    "totalRatedBy": 0
+  },
+  {
+    "fullName": "Carlos Rivera",
+    "email": "carlos.rivera@example.com",
+    "age": 35,
+    "profileImage": "https://i.ibb.co/DEF789/carlos.png",
+    "skills": [
+      "Combat & Martial Arts",
+      "Sports & Athletic",
+      "Weight Management & Fat Loss"
+    ],
+    "availableDays": ["Mon", "Tue", "Thu"],
+    "availableTime": "Evening",
+    "biography": "Carlos is an expert in martial arts conditioning and athletic training. He designs high-energy sessions that combine combat techniques with weight management strategies.",
+    "experience": "Over 12 years in martial arts coaching and sports fitness.",
+    "otherInfo": "Certified MMA coach with competition experience.",
+    "totalRating": 0,
+    "totalRatedBy": 0
+  }
+]

@@ -151,6 +151,11 @@ const BecomeTrainer = () => {
       socialLinks,
       totalRating: 0,
       totalRatedBy: 0,
+      applyDate: new Date().toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      }),
       slot: [],
     };
     console.log(trainerData);
@@ -184,10 +189,11 @@ const BecomeTrainer = () => {
         setAvailableDays([]);
         setSelectedTimeSlot(null);
       } else {
-        Swal.fire("Submission Failed", "", "error");
+        Swal.fire(res.data.error, "", "error");
       }
     } catch (error) {
-      Swal.fire("Submission Failed", "", "error");
+      console.log(error);
+      Swal.fire("Application submission failed", "", "error");
     }
   };
 

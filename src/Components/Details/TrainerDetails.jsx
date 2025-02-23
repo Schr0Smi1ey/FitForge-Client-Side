@@ -6,7 +6,8 @@ import Swal from "sweetalert2";
 import useCustomAxios from "../../Hooks/useCustomAxios";
 
 const TrainerDetails = () => {
-  const { trainer, appliedTrainerId } = useLoaderData();
+  const { trainer } = useLoaderData();
+  console.log(trainer);
   const [showModal, setShowModal] = useState(false);
   const [feedback, setFeedback] = useState("");
   const customAxios = useCustomAxios();
@@ -20,40 +21,86 @@ const TrainerDetails = () => {
     );
   }
 
-  // Handler for confirming the application
-  const handleConfirm = async () => {
-    // try {
-    //   // API call to update user status to Trainer
-    //   // and remove the applied trainer entry.
-    //   // You may want to call two endpoints or a single endpoint that handles both.
-    //   await customAxios.patch(`/confirmTrainer/${appliedTrainerId}`);
-    //   Swal.fire("Success", "Trainer confirmed!", "success");
-    //   // Navigate back or update your UI as needed
-    //   navigate("/dashboard/applications");
-    // } catch (error) {
-    //   Swal.fire("Error", "Failed to confirm trainer.", "error");
-    // }
+  const handleConfirm = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#32CD32",
+      cancelButtonColor: "#FF4500",
+      confirmButtonText: "Yes, confirm it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await customAxios.patch(`/handleApplication`, {
+          applicationId: trainer._id,
+          status: "accepted",
+          userId: trainer.userId,
+        });
+        console.log(res);
+        if (
+          res.status === 200 &&
+          res.data.resultAppliedTrainer.modifiedCount &&
+          res.data.resultUser.modifiedCount
+        ) {
+          Swal.fire({
+            title: "Confirmed!",
+            text: "Application is accepted.",
+            icon: "success",
+          });
+          navigate("/dashboard/applications");
+        } else {
+          Swal.fire({
+            title: "Error!",
+            text: "Something went wrong!",
+            icon: "error",
+          });
+        }
+      }
+    });
   };
 
-  // Handler for rejection - simply shows modal
   const handleReject = () => {
-    setShowModal(true);
+    setShowModal(!showModal);
   };
 
-  // Handler for submitting rejection feedback
   const handleFeedbackSubmit = async (e) => {
     e.preventDefault();
-    // try {
-    //   // API call to submit rejection feedback and remove the applied trainer entry.
-    //   await customAxios.patch(`/rejectTrainer/${appliedTrainerId}`, {
-    //     feedback,
-    //   });
-    //   Swal.fire("Rejected", "Application rejected successfully.", "success");
-    //   setShowModal(false);
-    //   navigate("/dashboard/applications");
-    // } catch (error) {
-    //   Swal.fire("Error", "Failed to reject trainer.", "error");
-    // }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#32CD32",
+      cancelButtonColor: "#FF4500",
+      confirmButtonText: "Yes, reject it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await customAxios.patch(`/handleApplication`, {
+          applicationId: trainer._id,
+          status: "rejected",
+          userId: trainer.userId,
+          feedback: e.target.feedback.value,
+        });
+        console.log(res);
+        if (res.status === 200 && res.data.resultAppliedTrainer.modifiedCount) {
+          Swal.fire({
+            title: "Rejected!",
+            text: "Application is rejected!",
+            icon: "success",
+          });
+          navigate("/dashboard/applications");
+        } else {
+          Swal.fire({
+            title: "Error!",
+            text: "Something went wrong!",
+            icon: "error",
+          });
+        }
+      }
+    });
+    handleReject();
+    console.log(e.target.feedback.value);
   };
 
   return (
@@ -201,8 +248,7 @@ const TrainerDetails = () => {
             </p>
             <form onSubmit={handleFeedbackSubmit}>
               <textarea
-                value={feedback}
-                onChange={(e) => setFeedback(e.target.value)}
+                name="feedback"
                 placeholder="Enter rejection feedback..."
                 className="w-full h-32 p-3 border rounded-md mb-4"
                 required

@@ -96,6 +96,24 @@ const Dashboard = () => {
               <span>Become a Trainer</span>
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to="/dashboard/activity-log"
+              className="flex items-center space-x-2 hover:text-gray-200 w-fit"
+            >
+              <FaPlusSquare />
+              <span>Activity Log</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/dashboard/user-profile"
+              className="flex items-center space-x-2 hover:text-gray-200 w-fit"
+            >
+              <FaPlusSquare />
+              <span>User Profile</span>
+            </NavLink>
+          </li>
         </ul>
       </div>
 

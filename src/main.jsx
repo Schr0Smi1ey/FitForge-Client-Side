@@ -21,6 +21,8 @@ import AddForum from "./Components/Pages/Dashboard/AddForum/AddForum.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import BecomeTrainer from "./Components/Pages/Dashboard/Become a Trainer/BecomeTrainer.jsx";
 import TrainerDetails from "./Components/Details/TrainerDetails.jsx";
+import Activitylog from "./Components/Pages/Dashboard/ActivityLog/Activitylog.jsx";
+import UserProfile from "./Components/Pages/Dashboard/UserProfile/UserProfile.jsx";
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
@@ -91,6 +93,14 @@ const router = createBrowserRouter([
         element: <TrainerDetails></TrainerDetails>,
         loader: ({ params }) =>
           fetch(`http://localhost:3000/applicant-details/${params.id}`),
+      },
+      {
+        path: "activity-log",
+        element: <Activitylog></Activitylog>,
+      },
+      {
+        path: "user-profile",
+        element: <UserProfile></UserProfile>,
       },
     ],
   },
