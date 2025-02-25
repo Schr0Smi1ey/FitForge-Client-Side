@@ -152,7 +152,7 @@ const BecomeTrainer = () => {
       totalRating: 0,
       totalRatedBy: 0,
       applyDate: new Date().toISOString(),
-      slot: [],
+      slots: [],
     };
     console.log(trainerData);
 

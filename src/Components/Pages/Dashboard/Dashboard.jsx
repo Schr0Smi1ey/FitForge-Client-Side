@@ -116,6 +116,15 @@ const Dashboard = () => {
               <span>User Profile</span>
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to="/dashboard/add-slot"
+              className="flex items-center space-x-2 hover:text-gray-200 w-fit"
+            >
+              <FaPlusSquare />
+              <span>Add Slot</span>
+            </NavLink>
+          </li>
         </ul>
       </div>
 

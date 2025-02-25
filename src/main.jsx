@@ -26,6 +26,7 @@ import UpdateProfile from "./Components/Forms/UpdateProfile.jsx";
 import Trainers from "./Components/Pages/Trainers/Trainers.jsx";
 import AllTrainers from "./Components/Pages/Dashboard/AllTrainers/AllTrainers.jsx";
 import Trainer from "./Components/Details/Trainer.jsx";
+import AddSlot from "./Components/Pages/Dashboard/AddSlot/AddSlot.jsx";
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
@@ -114,6 +115,10 @@ const router = createBrowserRouter([
       {
         path: "update-profile",
         element: <UpdateProfile></UpdateProfile>,
+      },
+      {
+        path: "add-slot",
+        element: <AddSlot></AddSlot>,
       },
     ],
   },
