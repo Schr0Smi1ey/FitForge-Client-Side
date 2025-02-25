@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { FaArrowUp, FaArrowDown } from "react-icons/fa";
+import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import useCustomAxios from "../../Hooks/useCustomAxios";
+import { convertDate } from "../../utils/Utilities";
 
 const PostCard = ({ postData, refetch }) => {
   const {
@@ -10,7 +11,7 @@ const PostCard = ({ postData, refetch }) => {
     postedBy,
     totalUpVote,
     totalDownVote,
-    date1,
+    postedDate,
     _id,
   } = postData;
   console.log(typeof refetch);
@@ -37,9 +38,9 @@ const PostCard = ({ postData, refetch }) => {
   return (
     <div className="bg-white shadow rounded-xl overflow-hidden">
       <div className="relative">
-        <img src={image} alt={title} className="w-full h-48 object-cover" />
+        <img src={image} alt={title} className="w-full object-cover" />
         <div className="absolute top-2 left-2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">
-          {date1}
+          {convertDate(postedDate)}
         </div>
       </div>
       <div className="p-4">
@@ -55,14 +56,14 @@ const PostCard = ({ postData, refetch }) => {
               onClick={() => handleVote("up")}
               className={`p-2 rounded-full transition`}
             >
-              <FaArrowUp />
+              <AiOutlineLike className="text-2xl" />
             </button>
             <span className="font-bold">{totalDownVote}</span>
             <button
               onClick={() => handleVote("down")}
               className={`p-2 rounded-full`}
             >
-              <FaArrowDown />
+              <AiOutlineDislike className="text-2xl" />
             </button>
           </div>
         </div>

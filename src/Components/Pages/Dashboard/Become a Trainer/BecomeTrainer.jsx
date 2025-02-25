@@ -151,11 +151,7 @@ const BecomeTrainer = () => {
       socialLinks,
       totalRating: 0,
       totalRatedBy: 0,
-      applyDate: new Date().toLocaleDateString("en-GB", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-      }),
+      applyDate: new Date().toISOString(),
       slot: [],
     };
     console.log(trainerData);

@@ -4,7 +4,7 @@ import useCustomAxios from "../../../../Hooks/useCustomAxios";
 import { GridLoader } from "react-spinners";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 import { FaEye } from "react-icons/fa";
-
+import { convertDate } from "../../../../utils/Utilities.js";
 const Applications = () => {
   const customAxios = useCustomAxios();
   const { user } = useContext(AuthContext);
@@ -58,13 +58,14 @@ const Applications = () => {
                 <td>{index + 1}</td>
                 <td>{applicantData[0].user.name}</td>
                 <td>{applicantData[0].user.email}</td>
-                <td>{applicantData[0].applyDate}</td>
+                <td>{convertDate(applicant.applyDate)}</td>
                 <td
                   className={`${
                     colors[applicant.status]
                   } rounded-full text-white p-2 px-3 w-fit text-center flex items-center justify-center mx-auto gap-2`}
                 >
-                  {applicant.status === "rejected" && (
+                  {(applicant.status === "rejected" ||
+                    applicant.status == "cancelled") && (
                     <button
                       onClick={(e) => {
                         e.preventDefault();

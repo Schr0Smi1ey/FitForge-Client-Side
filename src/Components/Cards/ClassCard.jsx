@@ -14,7 +14,7 @@ const ClassCard = ({ classData }) => {
         <img
           src={image}
           alt={title}
-          className="w-full h-48 rounded-xl object-cover"
+          className="w-full h-60 rounded-xl object-cover"
         />
       </div>
 

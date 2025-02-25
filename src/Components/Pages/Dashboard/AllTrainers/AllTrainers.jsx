@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import useTrainers from "../../../../Hooks/useTrainers";
 import { GridLoader } from "react-spinners";
 import { FaTrash } from "react-icons/fa";
@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 
 const AllTrainers = () => {
   const { trainers, isFetching } = useTrainers();
+  const [trainer, setTrainer] = useState({});
+  const [showModal, setShowModal] = useState(false);
   const customAxios = useCustomAxios();
   const navigate = useNavigate();
   if (isFetching) {
@@ -17,8 +19,13 @@ const AllTrainers = () => {
       </div>
     );
   }
+  const handleReject = (trainer) => {
+    setShowModal(!showModal);
+    setTrainer(trainer);
+  };
 
-  const handleDelete = async (trainerId, userId) => {
+  const handleFeedbackSubmit = async (e) => {
+    e.preventDefault();
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -26,23 +33,26 @@ const AllTrainers = () => {
       showCancelButton: true,
       confirmButtonColor: "#32CD32",
       cancelButtonColor: "#FF4500",
-      confirmButtonText: "Yes, delete this!",
+      confirmButtonText: "Yes, cancel it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const res = await customAxios.delete(`/trainers`, {
-          data: trainerId,
-          userId,
+        const res = await customAxios.patch(`/handleApplication`, {
+          applicationId: trainer._id,
+          status: "cancelled",
+          userId: trainer.userId,
+          feedback: e.target.feedback.value,
         });
 
         console.log(res);
         if (
-          res.data.result.deletedCount &&
-          res.data.resUser.modifiedCount &&
-          res.data.resAppliedTrainers.modifiedCount
+          res.status === 200 &&
+          res.data.resultAppliedTrainer.modifiedCount &&
+          res.data.deleteTrainer.deletedCount &&
+          res.data.resultUser.modifiedCount
         ) {
           Swal.fire({
-            title: "Confirmed!",
-            text: "Application is accepted.",
+            title: "Cancelled!",
+            text: "Application is cancelled!",
             icon: "success",
           });
           navigate("/dashboard/applications");
@@ -55,8 +65,9 @@ const AllTrainers = () => {
         }
       }
     });
+    handleReject();
+    console.log(e.target.feedback.value);
   };
-
   return (
     <div>
       {trainers.length === 0 ? ( // Wrapped in a div
@@ -90,16 +101,47 @@ const AllTrainers = () => {
                   </td>
                   <td>{trainer.email}</td>
                   <td>
-                    <button
-                      onClick={() =>
-                        handleDelete({
-                          trainerId: trainer._id,
-                          userId: trainer.userId,
-                        })
-                      }
-                    >
+                    <button onClick={() => handleReject(trainer)}>
                       <FaTrash className="text-xl text-red-500" />
                     </button>
+                  </td>
+                  <td>
+                    {showModal && (
+                      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                        <div className="bg-white rounded-lg shadow-lg p-6 w-11/12 md:w-1/2">
+                          <h2 className="text-2xl font-bold mb-4">
+                            Cancel Application
+                          </h2>
+                          <p className="mb-4">
+                            Provide feedback for rejecting the application of{" "}
+                            <strong>{trainer.fullName}</strong>.
+                          </p>
+                          <form onSubmit={handleFeedbackSubmit}>
+                            <textarea
+                              name="feedback"
+                              placeholder="Enter Cancellation feedback..."
+                              className="w-full h-32 p-3 border rounded-md mb-4"
+                              required
+                            ></textarea>
+                            <div className="flex justify-end gap-4">
+                              <button
+                                type="button"
+                                onClick={() => setShowModal(false)}
+                                className="bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400 transition-colors"
+                              >
+                                Cancel
+                              </button>
+                              <button
+                                type="submit"
+                                className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition-colors"
+                              >
+                                Submit Cancellation
+                              </button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    )}
                   </td>
                 </tr>
               ))}

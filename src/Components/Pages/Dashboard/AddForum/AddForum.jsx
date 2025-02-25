@@ -20,14 +20,7 @@ const AddForum = () => {
     postedBy: user?.email || "Unknown",
     totalUpVote: 0,
     totalDownVote: 0,
-    postedDate: {
-      date1: new Date().toLocaleDateString("en-GB", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-      }),
-      date2: new Date().toISOString(),
-    },
+    postedDate: new Date().toISOString(),
   });
   const fileInputRef = useRef(null);
   const customAxios = useCustomAxios();
@@ -68,11 +61,7 @@ const AddForum = () => {
         image: null,
         postedBy: user?.email || "Unknown",
         totalVote: 0,
-        postedDate: new Date().toLocaleDateString("en-GB", {
-          day: "2-digit",
-          month: "short",
-          year: "numeric",
-        }),
+        postedDate: new Date().toISOString(),
       });
       if (fileInputRef.current) {
         fileInputRef.current.value = "";
