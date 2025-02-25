@@ -27,6 +27,7 @@ import Trainers from "./Components/Pages/Trainers/Trainers.jsx";
 import AllTrainers from "./Components/Pages/Dashboard/AllTrainers/AllTrainers.jsx";
 import Trainer from "./Components/Details/Trainer.jsx";
 import AddSlot from "./Components/Pages/Dashboard/AddSlot/AddSlot.jsx";
+import ManageSlot from "./Components/Pages/Dashboard/ManageSlot/ManageSlot.jsx";
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
@@ -119,6 +120,10 @@ const router = createBrowserRouter([
       {
         path: "add-slot",
         element: <AddSlot></AddSlot>,
+      },
+      {
+        path: "manage-slots",
+        element: <ManageSlot></ManageSlot>,
       },
     ],
   },

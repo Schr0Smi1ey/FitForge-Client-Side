@@ -19,7 +19,11 @@ const AddSlotForm = () => {
   });
 
   const customAxios = useCustomAxios();
-  const { data: trainer, isFetching: isFetchingTrainer } = useQuery({
+  const {
+    data: trainer,
+    isFetching: isFetchingTrainer,
+    refetch,
+  } = useQuery({
     queryKey: ["trainer"],
     queryFn: async () => {
       const res = await customAxios.get("/user", {
@@ -46,8 +50,6 @@ const AddSlotForm = () => {
       </div>
     );
   }
-
-  // Set Available Days from Trainer Data
 
   // Slot Name Options
   const slotNameOptions = [
@@ -103,6 +105,13 @@ const AddSlotForm = () => {
         title: "Slot added successfully",
         showConfirmButton: false,
         timer: 1500,
+      });
+      refetch();
+      setFormData({
+        slotName: null,
+        slotTime: "",
+        selectedDay: null,
+        selectedClass: null,
       });
     }
   };
