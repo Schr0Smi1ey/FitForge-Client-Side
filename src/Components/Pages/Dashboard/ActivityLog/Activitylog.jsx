@@ -5,15 +5,17 @@ import { GridLoader } from "react-spinners";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 import { FaEye } from "react-icons/fa";
 import { convertDate } from "../../../../utils/Utilities.js";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure.jsx";
 const Applications = () => {
   const customAxios = useCustomAxios();
+  const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
   const [feedback, setFeedback] = useState("");
   const { data: applicantData = [], isLoading } = useQuery({
     queryKey: ["applicantData"],
     queryFn: async () => {
-      const res = await customAxios.get(`/appliedTrainers?email=${user.email}`);
+      const res = await axiosSecure.get(`/appliedTrainers?email=${user.email}`);
       return res.data;
     },
   });

@@ -28,6 +28,8 @@ import AllTrainers from "./Components/Pages/Dashboard/AllTrainers/AllTrainers.js
 import Trainer from "./Components/Details/Trainer.jsx";
 import AddSlot from "./Components/Pages/Dashboard/AddSlot/AddSlot.jsx";
 import ManageSlot from "./Components/Pages/Dashboard/ManageSlot/ManageSlot.jsx";
+import PrivateRoute from "./ProtectedRoute/PrivateRoute.jsx";
+import AdminRoute from "./ProtectedRoute/AdminRoute.jsx";
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
@@ -61,7 +63,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/trainer-details/:id",
-        element: <Trainer></Trainer>,
+        element: (
+          <PrivateRoute>
+            <Trainer></Trainer>
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:3000/trainer-details/${params.id}`),
       },
@@ -69,11 +75,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard></Dashboard>,
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "subscribers",
-        element: <Subscribers></Subscribers>,
+        element: (
+          <AdminRoute>
+            <Subscribers></Subscribers>
+          </AdminRoute>
+        ),
       },
       {
         path: "trainers",

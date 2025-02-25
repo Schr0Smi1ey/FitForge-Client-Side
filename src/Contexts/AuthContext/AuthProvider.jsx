@@ -27,57 +27,52 @@ const AuthProvider = ({ children }) => {
   const image_hosting_api = `https://api.imgbb.com/1/upload?key=${
     import.meta.env.VITE_IMAGE_HOSTING_KEY
   }`;
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user);
-      } else {
-        setUser(null);
-      }
-      // if (user?.email) {
-      //   const currentUser = { email: user.email };
-      //   customAxios
-      //     .post("/jwt", currentUser, {
-      //       withCredentials: true,
-      //     })
-      //     // eslint-disable-next-line no-unused-vars
-      //     .then((res) => {
-      //       setLoading(false);
-      //     });
-      // } else {
-      //   customAxios
-      //     .post("/logout", {}, { withCredentials: true })
-      //     // eslint-disable-next-line no-unused-vars
-      //     .then((res) => {
-      //       setLoading(false);
-      //     });
-      // }
-      setLoading(false);
-    });
-    return () => unsubscribe();
-  }, [customAxios]);
 
   const createUser = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
   const signInUser = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
   const signOutUser = () => {
+    setLoading(true);
     return signOut(auth);
   };
   const signInWithGoogle = () => {
+    setLoading(true);
     return signInWithPopup(auth, provider);
   };
   const resetPassword = (email) => {
+    setLoading(true);
     return sendPasswordResetEmail(auth, email);
   };
   const updateUserProfile = (name, photoURL) => {
+    setLoading(true);
     return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photoURL,
     });
   };
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+      if (user?.email) {
+        const userInfo = { email: user?.email };
+        customAxios.post("/jwt", userInfo).then((res) => {
+          if (res.data.token) {
+            console.log(res.data.token);
+            localStorage.setItem("access-token", res.data.token);
+          }
+        });
+      } else {
+        localStorage.removeItem("access-token");
+      }
+      setLoading(false);
+    });
+    return () => unsubscribe();
+  }, [customAxios]);
   const Toast = (message, type) => {
     toast[type](message, {
       position: "top-center",

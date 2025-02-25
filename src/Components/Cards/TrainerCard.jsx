@@ -1,6 +1,7 @@
 import { FaCalendarAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 const TrainerCard = ({ trainer }) => {
+  console.log(trainer);
   return (
     <div className="relative bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
       <div className="p-6">
@@ -21,7 +22,7 @@ const TrainerCard = ({ trainer }) => {
         </div>
 
         <div className="flex flex-wrap gap-2 mb-4">
-          {trainer.skills.slice(0, 3).map((skill, index) => (
+          {trainer?.skills.slice(0, 3).map((skill, index) => (
             <span
               key={index}
               className="px-3 py-1 bg-purple-50 text-purple-700 text-sm rounded-full"

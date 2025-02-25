@@ -93,12 +93,14 @@ const Trainer = () => {
             Available Sessions
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {trainer.slot.map((time, index) => (
+            {trainer.slots.map((slot, index) => (
               <button
                 key={index}
                 className="p-3 bg-white border-2 border-purple-100 rounded-lg hover:border-purple-300 transition-colors text-center"
               >
-                <span className="block text-gray-800 font-medium">{time}</span>
+                <span className="block text-gray-800 font-medium">
+                  {slot.slotName}
+                </span>
                 <span className="text-sm text-purple-600">1 hour session</span>
               </button>
             ))}
