@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../Contexts/AuthContext/AuthProvider";
 import { IoMdEye } from "react-icons/io";
 import { VscEyeClosed } from "react-icons/vsc";
@@ -24,6 +24,7 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [passwordError, setPasswordError] = useState("");
   const customAxios = useCustomAxios();
+  const fileInputRef = useRef(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -111,6 +112,9 @@ const SignUp = () => {
       .finally(() => {
         setLoading(false);
         setFormData({ name: "", email: "", photo: "", password: "" });
+        if (fileInputRef.current) {
+          fileInputRef.current.value = "";
+        }
       });
   };
   const handleSignInWithGoogle = () => {
@@ -204,6 +208,7 @@ const SignUp = () => {
                 id="photo"
                 accept="image/*"
                 onChange={handleFileChange}
+                ref={fileInputRef}
                 required
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:ring-2"
               />

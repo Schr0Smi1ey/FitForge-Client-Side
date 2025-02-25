@@ -50,6 +50,7 @@ const AddClass = () => {
       ...formData,
       booked: 0,
       trainers: [],
+      postedDate: new Date().toISOString(),
       image: photoURL,
     });
     if (res.data.insertedId) {

@@ -1,49 +1,52 @@
-import { FaFacebookF, FaTwitter, FaLinkedinIn } from "react-icons/fa";
-
+import { FaCalendarAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 const TrainerCard = ({ trainer }) => {
   return (
-    <div className="bg-white rounded-lg shadow-lg overflow-hidden text-center p-6">
-      <div className="relative group">
-        <img
-          src={trainer.photo}
-          alt={trainer.name}
-          className="rounded-3xl mx-auto mb-4 object-cover transition duration-300 group-hover:opacity-40"
-        />
-
-        <div className="absolute inset-0 bg-primary bg-opacity-70 flex items-center justify-center opacity-0 group-hover:opacity-100 rounded-3xl">
-          <div className="flex gap-4">
-            <a
-              href={trainer.facebook}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white text-2xl hover:scale-110 transition"
-            >
-              <FaFacebookF />
-            </a>
-            <a
-              href={trainer.twitter}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white text-2xl hover:scale-110 transition"
-            >
-              <FaTwitter />
-            </a>
-            <a
-              href={trainer.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white text-2xl hover:scale-110 transition"
-            >
-              <FaLinkedinIn />
-            </a>
+    <div className="relative bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
+      <div className="p-6">
+        <div className="flex items-center gap-4 mb-4">
+          <img
+            src={trainer.profileImage}
+            alt={trainer.fullName}
+            className="w-20 h-20 rounded-full border-4 border-purple-100 object-cover"
+          />
+          <div>
+            <h3 className="text-xl font-bold text-gray-800">
+              {trainer.fullName}
+            </h3>
+            <p className="text-sm text-purple-600 font-medium">
+              {trainer.experience} years experience
+            </p>
           </div>
+        </div>
+
+        <div className="flex flex-wrap gap-2 mb-4">
+          {trainer.skills.slice(0, 3).map((skill, index) => (
+            <span
+              key={index}
+              className="px-3 py-1 bg-purple-50 text-purple-700 text-sm rounded-full"
+            >
+              {skill}
+            </span>
+          ))}
+        </div>
+
+        <div className="flex items-center justify-between text-sm">
+          <div className="flex items-center gap-2 text-gray-600">
+            <FaCalendarAlt className="w-5 h-5 text-purple-500" />
+            <span>{trainer.availableDays.join(", ")}</span>
+          </div>
+          <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm">
+            {trainer.availableTime}
+          </span>
         </div>
       </div>
 
-      {/* Trainer Info */}
-      <h3 className="text-2xl font-bold">{trainer.name}</h3>
-      <p className="text-gray-500 text-base">{trainer.expertise}</p>
-      <p className="text-gray-700 text-base mt-2 line-clamp-3">{trainer.bio}</p>
+      <Link to={`/trainer-details/${trainer._id}`}>
+        <button className="w-full bg-gradient-to-r from-purple-500 to-blue-500 text-white py-3 font-medium hover:opacity-90 transition-opacity">
+          Know More
+        </button>
+      </Link>
     </div>
   );
 };

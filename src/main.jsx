@@ -25,6 +25,7 @@ import UserProfile from "./Components/Pages/Dashboard/UserProfile/UserProfile.js
 import UpdateProfile from "./Components/Forms/UpdateProfile.jsx";
 import Trainers from "./Components/Pages/Trainers/Trainers.jsx";
 import AllTrainers from "./Components/Pages/Dashboard/AllTrainers/AllTrainers.jsx";
+import Trainer from "./Components/Details/Trainer.jsx";
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
@@ -55,6 +56,12 @@ const router = createBrowserRouter([
       {
         path: "/community",
         element: <Community></Community>,
+      },
+      {
+        path: "/trainer-details/:id",
+        element: <Trainer></Trainer>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/trainer-details/${params.id}`),
       },
     ],
   },
@@ -91,10 +98,10 @@ const router = createBrowserRouter([
         element: <BecomeTrainer></BecomeTrainer>,
       },
       {
-        path: "applicant-details/:id",
+        path: "trainer-details/:id",
         element: <TrainerDetails></TrainerDetails>,
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/applicant-details/${params.id}`),
+          fetch(`http://localhost:3000/trainer-details/${params.id}`),
       },
       {
         path: "activity-log",

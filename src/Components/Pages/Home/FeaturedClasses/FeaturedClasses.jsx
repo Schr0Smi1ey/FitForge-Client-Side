@@ -1,10 +1,17 @@
-import { useEffect, useState } from "react";
 import ClassCard from "../../../Cards/ClassCard";
-import useClasses from "../../../../Hooks/useClasses";
 import { GridLoader } from "react-spinners";
+import useCustomAxios from "../../../../Hooks/useCustomAxios";
+import { useQuery } from "@tanstack/react-query";
 
 const FeaturedClasses = () => {
-  const { classes, isFetching } = useClasses();
+  const customAxios = useCustomAxios();
+  const { data: classes, isFetching } = useQuery({
+    queryKey: ["classes"],
+    queryFn: async () => {
+      const res = await customAxios.get("/classes?home=true");
+      return res.data;
+    },
+  });
   if (isFetching) {
     return (
       <div className="flex items-center justify-center min-h-screen">

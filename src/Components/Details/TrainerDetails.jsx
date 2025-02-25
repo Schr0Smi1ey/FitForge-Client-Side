@@ -104,7 +104,7 @@ const TrainerDetails = () => {
   };
 
   return (
-    <div className=" bg-gray-100 p-8 flex flex-col items-center">
+    <div className="bg-gray-100 pt-32 p-8 flex flex-col items-center">
       <div className="bg-white shadow-lg rounded-xl max-w-4xl w-full overflow-hidden">
         <div className="flex flex-col md:flex-row">
           {/* Profile Image */}

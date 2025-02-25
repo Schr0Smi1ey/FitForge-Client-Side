@@ -332,7 +332,8 @@ const BecomeTrainer = () => {
         {/* Experience */}
         <div>
           <label className="font-semibold text-gray-700">Experience</label>
-          <textarea
+          <input
+            type="number"
             name="experience"
             value={formData.experience}
             onChange={handleChange}
@@ -340,7 +341,7 @@ const BecomeTrainer = () => {
             rows="3"
             required
             className="mt-1 w-full p-3 border rounded-md"
-          ></textarea>
+          ></input>
         </div>
 
         {/* Social Links */}

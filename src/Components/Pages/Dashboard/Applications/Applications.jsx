@@ -49,7 +49,7 @@ const Applications = () => {
                   <td>{applicant.trainer.applyDate}</td>
                   <td>
                     <Link
-                      to={`/dashboard/applicant-details/${applicant.trainer._id}`}
+                      to={`/dashboard/trainer-details/${applicant.trainer._id}`}
                       className="bg-primary p-2 rounded-full text-white"
                     >
                       Details
