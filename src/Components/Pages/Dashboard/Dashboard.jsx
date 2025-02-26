@@ -13,10 +13,39 @@ import { NavLink, Outlet } from "react-router-dom";
 import NavBar from "../../Shared/Navbar/Navbar";
 import { AuthContext } from "../../../Contexts/AuthContext/AuthProvider";
 import { GridLoader } from "react-spinners";
+import useCustomAxios from "../../../Hooks/useCustomAxios";
+import { useQuery } from "@tanstack/react-query";
 
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { loading } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
+  const [userData, setUserData] = useState([]);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isTrainer, setIsTrainer] = useState(false);
+  const [isMember, setIsMember] = useState(false);
+  const customAxios = useCustomAxios();
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <GridLoader color="#A94A4A" size={30} />
+      </div>
+    );
+  }
+  if (user) {
+    const { data: userData = [], isFetching } = useQuery({
+      queryKey: ["user"],
+      queryFn: async () => {
+        const res = await customAxios.get("/user", {
+          params: { email: user.email },
+        });
+        setUserData(res.data.user);
+        setIsAdmin(res.data.user.role === "admin");
+        setIsTrainer(res.data.user.role === "trainer");
+        setIsMember(res.data.user.role === "member");
+        return res.data;
+      },
+    });
+  }
   return (
     <div className="container mx-auto flex min-h-screen">
       <NavBar></NavBar>
@@ -34,106 +63,129 @@ const Dashboard = () => {
           <FaTimes />
         </button>
 
-        <ul className="space-y-4 text-white font-semibold">
-          <li>
-            <NavLink
-              to="/dashboard/subscribers"
-              className="flex items-center space-x-2 hover:text-gray-200 w-fit"
-            >
-              <FaUsers />
-              <span>Subscribers</span>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/trainers"
-              className="flex items-center space-x-2 hover:text-gray-200 w-fit"
-            >
-              <FaChalkboardTeacher />
-              <span>Trainers</span>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/applications"
-              className="flex items-center space-x-2 hover:text-gray-200 w-fit"
-            >
-              <FaFileAlt />
-              <span>Applications</span>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/balance"
-              className="flex items-center space-x-2 hover:text-gray-200 w-fit"
-            >
-              <FaWallet />
-              <span>Balance</span>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/add-class"
-              className="flex items-center space-x-2 hover:text-gray-200 w-fit"
-            >
-              <FaUserGraduate />
-              <span>Add Class</span>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/add-forum"
-              className="flex items-center space-x-2 hover:text-gray-200 w-fit"
-            >
-              <FaPlusSquare />
-              <span>Add Forum</span>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/become-a-trainer"
-              className="flex items-center space-x-2 hover:text-gray-200 w-fit"
-            >
-              <FaPlusSquare />
-              <span>Become a Trainer</span>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/activity-log"
-              className="flex items-center space-x-2 hover:text-gray-200 w-fit"
-            >
-              <FaPlusSquare />
-              <span>Activity Log</span>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/user-profile"
-              className="flex items-center space-x-2 hover:text-gray-200 w-fit"
-            >
-              <FaPlusSquare />
-              <span>User Profile</span>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/add-slot"
-              className="flex items-center space-x-2 hover:text-gray-200 w-fit"
-            >
-              <FaPlusSquare />
-              <span>Add Slot</span>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/manage-slots"
-              className="flex items-center space-x-2 hover:text-gray-200 w-fit"
-            >
-              <FaPlusSquare />
-              <span>Manage Slots</span>
-            </NavLink>
-          </li>
+        <ul className="text-white font-semibold">
+          {isAdmin && (
+            <div className="space-y-4">
+              <li>
+                <NavLink
+                  to="/dashboard/subscribers"
+                  className="flex items-center space-x-2 hover:text-gray-200 w-fit"
+                >
+                  <FaUsers />
+                  <span>Subscribers</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/trainers"
+                  className="flex items-center space-x-2 hover:text-gray-200 w-fit"
+                >
+                  <FaChalkboardTeacher />
+                  <span>Trainers</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/applications"
+                  className="flex items-center space-x-2 hover:text-gray-200 w-fit"
+                >
+                  <FaFileAlt />
+                  <span>Applications</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/balance"
+                  className="flex items-center space-x-2 hover:text-gray-200 w-fit"
+                >
+                  <FaWallet />
+                  <span>Balance</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/add-class"
+                  className="flex items-center space-x-2 hover:text-gray-200 w-fit"
+                >
+                  <FaUserGraduate />
+                  <span>Add Class</span>
+                </NavLink>
+              </li>
+            </div>
+          )}
+          {isMember && (
+            <div className="space-y-4">
+              <li>
+                <NavLink
+                  to="/dashboard/user-profile"
+                  className="flex items-center space-x-2 hover:text-gray-200 w-fit"
+                >
+                  <FaPlusSquare />
+                  <span>User Profile</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/activity-log"
+                  className="flex items-center space-x-2 hover:text-gray-200 w-fit"
+                >
+                  <FaPlusSquare />
+                  <span>Activity Log</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/become-a-trainer"
+                  className="flex items-center space-x-2 hover:text-gray-200 w-fit"
+                >
+                  <FaPlusSquare />
+                  <span>Become a Trainer</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/booked-trainers"
+                  className="flex items-center space-x-2 hover:text-gray-200 w-fit"
+                >
+                  <FaPlusSquare />
+                  <span>Booked Trainers</span>
+                </NavLink>
+              </li>
+            </div>
+          )}
+          {isTrainer && (
+            <div className="space-y-4">
+              <li>
+                <NavLink
+                  to="/dashboard/add-slot"
+                  className="flex items-center space-x-2 hover:text-gray-200 w-fit"
+                >
+                  <FaPlusSquare />
+                  <span>Add Slot</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/manage-slots"
+                  className="flex items-center space-x-2 hover:text-gray-200 w-fit"
+                >
+                  <FaPlusSquare />
+                  <span>Manage Slots</span>
+                </NavLink>
+              </li>
+            </div>
+          )}
+          {(isAdmin || isTrainer) && (
+            <li className="mt-4">
+              <NavLink
+                to="/dashboard/add-forum"
+                className="flex items-center space-x-2 hover:text-gray-200 w-fit"
+              >
+                <FaPlusSquare />
+                <span>Add Forum</span>
+              </NavLink>
+            </li>
+          )}
         </ul>
       </div>
 

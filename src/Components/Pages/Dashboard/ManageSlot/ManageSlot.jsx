@@ -27,6 +27,7 @@ const ManageSlot = () => {
       </div>
     );
   }
+  console.log(slotData);
   const handleDelete = async (id) => {
     Swal.fire({
       title: "Are you sure?",

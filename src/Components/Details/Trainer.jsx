@@ -1,5 +1,11 @@
-import { FaBriefcase, FaGlobe, FaStar } from "react-icons/fa";
-import { useLoaderData } from "react-router-dom";
+import {
+  FaBriefcase,
+  FaCalendarAlt,
+  FaGlobe,
+  FaGraduationCap,
+  FaStar,
+} from "react-icons/fa";
+import { Link, useLoaderData } from "react-router-dom";
 
 const Trainer = () => {
   const trainer = useLoaderData().trainer;
@@ -87,23 +93,110 @@ const Trainer = () => {
           </div>
         </div>
 
-        {/* Session Slots */}
-        <div className="mt-8">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">
+        <div className="mt-12">
+          {/* Section Title */}
+          <h2 className="text-2xl font-bold text-primary mb-6">
             Available Sessions
+            <span className="ml-2 text-lg text-gray-500 dark:text-gray-400 font-normal">
+              Choose your perfect time
+            </span>
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {trainer.slots.map((slot, index) => (
-              <button
-                key={index}
-                className="p-3 bg-white border-2 border-purple-100 rounded-lg hover:border-purple-300 transition-colors text-center"
-              >
-                <span className="block text-gray-800 font-medium">
-                  {slot.slotName}
-                </span>
-                <span className="text-sm text-purple-600">1 hour session</span>
-              </button>
-            ))}
+
+          <div className="mt-12 text-center">
+            {/* Section Title */}
+            <h2 className="text-2xl font-bold text-primary mb-6">
+              Available Sessions
+              <span className="block text-lg text-gray-500 dark:text-gray-400 font-normal">
+                Choose your perfect time
+              </span>
+            </h2>
+
+            {/* Table Container */}
+            <div className="border rounded-2xl shadow-sm dark:border-gray-700 overflow-hidden">
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-primary-50 dark:bg-gray-800">
+                    <tr className="text-center">
+                      <th className="px-6 py-4 text-primary font-semibold">
+                        Day
+                      </th>
+                      <th className="px-6 py-4 text-primary font-semibold">
+                        Session
+                      </th>
+                      <th className="px-6 py-4 text-primary font-semibold">
+                        Duration
+                      </th>
+                      <th className="px-6 py-4 text-primary font-semibold">
+                        Class
+                      </th>
+                      <th className="px-6 py-4 text-primary font-semibold">
+                        Action
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                    {trainer.slots.map((slot) => (
+                      <tr
+                        key={slot._id}
+                        className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors text-center"
+                      >
+                        <td className="px-6 py-4 font-medium text-gray-700 dark:text-gray-300">
+                          {slot.selectedDay}
+                        </td>
+                        <td className="px-6 py-4">
+                          <span className="bg-primary-100 dark:bg-primary-900/30 text-primary px-3 py-1 rounded-full text-sm">
+                            {slot.slotName}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 text-gray-600 dark:text-gray-400">
+                          {slot.slotTime}
+                        </td>
+                        <td className="px-6 py-4">
+                          <div className="flex justify-center items-center gap-2">
+                            <span className="w-2 h-2 bg-primary rounded-full"></span>
+                            {slot.selectedClass}
+                          </div>
+                        </td>
+                        <td className="px-6 py-4">
+                          <Link
+                            to={`/book-trainer/${trainer._id}/${slot._id}`} // Use URL parameters instead of query parameters
+                          >
+                            <button
+                              className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg transition-all 
+      focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+                            >
+                              <FaCalendarAlt className="w-5 h-5" />
+                              <span>Book Now</span>
+                            </button>
+                          </Link>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* CTA Section */}
+            <div className="mt-12 border-t pt-12">
+              <div className="max-w-4xl mx-auto text-center">
+                <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                  Ready to Transform Lives?
+                  <span className="block text-primary mt-2">
+                    Become a Trainer
+                  </span>
+                </h3>
+                <Link
+                  to="/become-a-trainer"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 text-lg font-semibold transition-all 
+                     border-2 border-primary text-primary hover:bg-primary/10 dark:hover:bg-primary/20
+                     rounded-[2rem] hover:shadow-lg"
+                >
+                  <FaGraduationCap className="w-6 h-6" />
+                  Start Your Trainer Journey
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>

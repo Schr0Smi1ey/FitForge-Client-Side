@@ -1,7 +1,10 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 import Root from "./Components/Layout/Root.jsx";
 import ErrorPage from "./Components/Shared/ErrorPage/ErrorPage.jsx";
 import Home from "./Components/Pages/Home/Home.jsx";
@@ -16,7 +19,6 @@ import Applications from "./Components/Pages/Dashboard/Applications/Applications
 import Balance from "./Components/Pages/Dashboard/Balance/Balance.jsx";
 import AddClass from "./Components/Pages/Dashboard/AddClass/AddClass.jsx";
 import AddForum from "./Components/Pages/Dashboard/AddForum/AddForum.jsx";
-
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import BecomeTrainer from "./Components/Pages/Dashboard/Become a Trainer/BecomeTrainer.jsx";
 import TrainerDetails from "./Components/Details/TrainerDetails.jsx";
@@ -30,6 +32,9 @@ import AddSlot from "./Components/Pages/Dashboard/AddSlot/AddSlot.jsx";
 import ManageSlot from "./Components/Pages/Dashboard/ManageSlot/ManageSlot.jsx";
 import PrivateRoute from "./ProtectedRoute/PrivateRoute.jsx";
 import AdminRoute from "./ProtectedRoute/AdminRoute.jsx";
+import BookTrainer from "./Components/Pages/BookTrainer/BookTrainer.jsx";
+import Payment from "./Components/Pages/Payment/Payment.jsx";
+import BookedTrainer from "./Components/Pages/Dashboard/BookedTrainer/BookedTrainer.jsx";
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
@@ -62,6 +67,40 @@ const router = createBrowserRouter([
         element: <Community></Community>,
       },
       {
+        path: "/become-a-trainer",
+        element: (
+          <div className="pt-32">
+            <PrivateRoute>
+              <BecomeTrainer></BecomeTrainer>
+            </PrivateRoute>
+          </div>
+        ),
+      },
+      {
+        path: "/book-trainer/:trainerId/:slotId",
+        element: (
+          <PrivateRoute>
+            <BookTrainer />
+          </PrivateRoute>
+        ),
+        loader: async ({ params }) => {
+          const { trainerId, slotId } = params;
+          console.log("trainerId", trainerId);
+          console.log("slotId", slotId);
+          return fetch(
+            `http://localhost:3000/book-trainer?trainerId=${trainerId}&slotId=${slotId}`
+          );
+        },
+      },
+      {
+        path: "/payment",
+        element: (
+          <PrivateRoute>
+            <Payment></Payment>
+          </PrivateRoute>
+        ),
+      },
+      {
         path: "/trainer-details/:id",
         element: (
           <PrivateRoute>
@@ -91,37 +130,58 @@ const router = createBrowserRouter([
       },
       {
         path: "trainers",
-        element: <AllTrainers></AllTrainers>,
+        element: (
+          <AdminRoute>
+            <AllTrainers></AllTrainers>
+          </AdminRoute>
+        ),
       },
       {
         path: "applications",
-        element: <Applications></Applications>,
+        element: (
+          <AdminRoute>
+            <Applications></Applications>
+          </AdminRoute>
+        ),
       },
       {
         path: "balance",
-        element: <Balance></Balance>,
+        element: (
+          <AdminRoute>
+            <Balance></Balance>
+          </AdminRoute>
+        ),
       },
       {
         path: "add-class",
-        element: <AddClass></AddClass>,
+        element: (
+          <AdminRoute>
+            <AddClass></AddClass>
+          </AdminRoute>
+        ),
+      },
+
+      {
+        path: "add-slot",
+        element: <AddSlot></AddSlot>,
+      },
+      {
+        path: "manage-slots",
+        element: <ManageSlot></ManageSlot>,
       },
       {
         path: "add-forum",
         element: <AddForum></AddForum>,
       },
       {
-        path: "become-a-trainer",
-        element: <BecomeTrainer></BecomeTrainer>,
-      },
-      {
         path: "trainer-details/:id",
-        element: <TrainerDetails></TrainerDetails>,
+        element: (
+          <AdminRoute>
+            <TrainerDetails></TrainerDetails>
+          </AdminRoute>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:3000/trainer-details/${params.id}`),
-      },
-      {
-        path: "activity-log",
-        element: <Activitylog></Activitylog>,
       },
       {
         path: "user-profile",
@@ -131,13 +191,19 @@ const router = createBrowserRouter([
         path: "update-profile",
         element: <UpdateProfile></UpdateProfile>,
       },
+
       {
-        path: "add-slot",
-        element: <AddSlot></AddSlot>,
+        path: "become-a-trainer",
+        element: <BecomeTrainer></BecomeTrainer>,
+      },
+
+      {
+        path: "activity-log",
+        element: <Activitylog></Activitylog>,
       },
       {
-        path: "manage-slots",
-        element: <ManageSlot></ManageSlot>,
+        path: "booked-trainers",
+        element: <BookedTrainer></BookedTrainer>,
       },
     ],
   },

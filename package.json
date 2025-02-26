@@ -11,6 +11,13 @@
   },
   "dependencies": {
     "@egjs/flicking": "^4.12.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^6.4.5",
+    "@mui/styled-engine-sc": "^6.4.3",
+    "@mui/x-charts": "^7.27.1",
+    "@stripe/react-stripe-js": "^3.1.1",
+    "@stripe/stripe-js": "^5.7.0",
     "@tailwindcss/vite": "^4.0.6",
     "@tanstack/react-query": "^5.66.7",
     "aos": "^2.3.4",
@@ -33,6 +40,7 @@
     "react-tooltip": "^5.28.0",
     "simple-parallax-js": "^6.0.1",
     "sort-by": "^0.0.2",
+    "styled-components": "^6.1.15",
     "sweetalert2": "^11.17.2",
     "swiper": "^11.2.4"
   },
