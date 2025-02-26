@@ -32,7 +32,6 @@ const Community = () => {
       </div>
     );
   }
-  console.log(data);
   const handlePageChange = (newPage) => {
     if (newPage > 0 && newPage <= totalPages) {
       setCurrentPage(newPage);

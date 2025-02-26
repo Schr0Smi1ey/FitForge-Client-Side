@@ -48,7 +48,6 @@ const AllTrainers = () => {
           email: user.email,
         });
 
-        console.log(res);
         if (
           res.status === 200 &&
           res.data.resultAppliedTrainer.modifiedCount &&
@@ -71,7 +70,6 @@ const AllTrainers = () => {
       }
     });
     handleReject();
-    console.log(e.target.feedback.value);
   };
   return (
     <div>

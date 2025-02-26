@@ -79,7 +79,6 @@ const AddForum = () => {
         timer: 1500,
       });
 
-      console.log("New Forum Submitted:", forum);
     } else {
       Toast("Class Addition Failed", "error");
     }

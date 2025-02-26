@@ -25,7 +25,6 @@ const Applications = () => {
       return res.data;
     },
   });
-  console.log(appliedTrainers);
   if (isFetching) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -33,7 +32,6 @@ const Applications = () => {
       </div>
     );
   }
-  console.log(appliedTrainers);
   return (
     <>
       {appliedTrainers.length === 0 ? (

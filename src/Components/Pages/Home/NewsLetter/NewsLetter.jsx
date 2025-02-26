@@ -18,7 +18,6 @@ const Newsletter = () => {
         formData.reset();
       }
     } catch (error) {
-      console.log(error);
       Toast(error.response.data, "error");
     }
   };

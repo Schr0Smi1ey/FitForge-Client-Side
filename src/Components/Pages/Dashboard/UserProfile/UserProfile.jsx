@@ -7,7 +7,6 @@ import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 import { GridLoader } from "react-spinners";
 const UserProfile = () => {
   const { user, loading } = useContext(AuthContext);
-  console.log(user);
   const navigate = useNavigate();
   const handleUpdateProfile = () => {
     navigate("/dashboard/update-profile");

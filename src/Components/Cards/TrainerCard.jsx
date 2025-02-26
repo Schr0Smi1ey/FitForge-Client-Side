@@ -1,7 +1,6 @@
 import { FaCalendarAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 const TrainerCard = ({ trainer }) => {
-  console.log(trainer);
   return (
     <div className="relative bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
       <div className="p-6">

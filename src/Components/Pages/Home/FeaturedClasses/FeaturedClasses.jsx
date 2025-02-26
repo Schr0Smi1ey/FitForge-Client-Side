@@ -12,7 +12,6 @@ const FeaturedClasses = () => {
     queryFn: async () => {
       const res = await customAxios.get("/classes?home=true");
       setClasses(res.data.classes);
-      console.log(res.data);
       return res.data;
     },
   });

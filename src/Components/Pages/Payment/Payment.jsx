@@ -11,7 +11,6 @@ const Payment = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { trainer, slot, packageName } = location.state || {};
-  console.log(trainer, slot, packageName);
   return (
     <div>
       <h2 className="text-2xl font-bold">Payment for {packageName} Package</h2>

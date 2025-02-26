@@ -13,7 +13,6 @@ const PaymentForm = ({ trainer, slot, packageName }) => {
   const elements = useElements();
   const secureAxios = useAxiosSecure();
   const { user } = useContext(AuthContext);
-  console.log(trainer, slot, packageName);
   const navigate = useNavigate();
   const totalPrice =
     (packageName === "Basic" && 10) ||
@@ -25,7 +24,6 @@ const PaymentForm = ({ trainer, slot, packageName }) => {
       secureAxios
         .post("/create-payment-intent", { price: totalPrice })
         .then((res) => {
-          console.log(res.data.clientSecret);
           setClientSecret(res.data.clientSecret);
         });
     }
@@ -50,10 +48,8 @@ const PaymentForm = ({ trainer, slot, packageName }) => {
     });
 
     if (error) {
-      console.log("payment error", error);
       setError(error.message);
     } else {
-      console.log("payment method", paymentMethod);
       setError("");
     }
 
@@ -69,11 +65,9 @@ const PaymentForm = ({ trainer, slot, packageName }) => {
       });
 
     if (confirmError) {
-      console.log("confirm error");
+      setError(confirmError.message);
     } else {
-      console.log("payment intent", paymentIntent);
       if (paymentIntent.status === "succeeded") {
-        console.log("transaction id", paymentIntent.id);
         setTransactionId(paymentIntent.id);
 
         const payment = {

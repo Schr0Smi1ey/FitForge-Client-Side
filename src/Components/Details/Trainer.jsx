@@ -9,7 +9,6 @@ import { Link, useLoaderData } from "react-router-dom";
 
 const Trainer = () => {
   const trainer = useLoaderData().trainer;
-  console.log(trainer);
   return (
     <div className="max-w-6xl pt-32 mx-auto p-6">
       <div className="bg-white rounded-2xl shadow-lg p-8">

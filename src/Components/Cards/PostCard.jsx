@@ -19,7 +19,7 @@ const PostCard = ({ postData, refetch, home }) => {
     postedDate,
     _id,
   } = postData;
-  const { user, loading } = useContext(AuthContext);
+  const { user, loading, Toast } = useContext(AuthContext);
   const [isExpanded, setIsExpanded] = useState(false);
 
   const secureAxios = useAxiosSecure();
@@ -54,11 +54,9 @@ const PostCard = ({ postData, refetch, home }) => {
       });
       if (res.status === 200) {
         refetch();
-      } else {
-        console.error(res.data.error);
       }
     } catch (error) {
-      console.error("Error voting:", error);
+      Toast("Error voting", "error");
     }
   };
 

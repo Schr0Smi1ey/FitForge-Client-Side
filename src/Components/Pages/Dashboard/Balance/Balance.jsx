@@ -16,7 +16,6 @@ const Balance = () => {
       const res = await secureAxios.get("/payments", {
         params: { email: user.email },
       });
-      console.log(res.data);
       return res.data;
     },
   });
@@ -46,7 +45,6 @@ const Balance = () => {
   const totalPaidMembers = paymentData?.totalPaidMembers || 0;
   const totalBalance = paymentData?.totalBalance || 0;
   const totalSubscribers = subscribersData?.totalSubscribers || 0;
-  console.log(paymentData, subscribersData.totalSubscribers);
   return (
     <div className="p-6">
       <div className="mb-6 flex items-center justify-between">

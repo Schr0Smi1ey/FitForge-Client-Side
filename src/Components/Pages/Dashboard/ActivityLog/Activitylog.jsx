@@ -38,7 +38,6 @@ const Applications = () => {
     );
   }
   const applications = applicantData[0]?.appliedTrainer;
-  console.log(applicantData);
   return (
     <div>
       {applicantData.error || !applicantData.length === 0 ? (

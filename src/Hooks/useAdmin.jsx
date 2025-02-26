@@ -12,7 +12,6 @@ const useAdmin = () => {
       const res = await axiosSecure.get(`/isAdmin`, {
         params: { email: user?.email },
       });
-      console.log(res.data);
       return res.data?.isAdmin;
     },
   });

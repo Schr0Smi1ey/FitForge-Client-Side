@@ -106,7 +106,6 @@ const TrainerDetails = () => {
       }
     });
     handleReject();
-    console.log(e.target.feedback.value);
   };
 
   return (

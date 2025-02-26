@@ -79,7 +79,6 @@ const AddSlotForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitting:", formData);
     const res = await secureAxios.post(
       `/add-slot`,
       {
@@ -97,7 +96,6 @@ const AddSlotForm = () => {
       }
     );
 
-    console.log(res.data.error);
     if (res.data.error) {
       Swal.fire({
         position: "center",

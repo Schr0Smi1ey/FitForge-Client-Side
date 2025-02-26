@@ -83,7 +83,7 @@ const router = createBrowserRouter([
         loader: async ({ params }) => {
           const { trainerId, slotId } = params;
           return fetch(
-            `http://localhost:3000/book-trainer?trainerId=${trainerId}&slotId=${slotId}`
+            `https://fitforge-server.vercel.app/book-trainer?trainerId=${trainerId}&slotId=${slotId}`
           );
         },
       },
@@ -103,7 +103,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/trainer-details/${params.id}`),
+          fetch(
+            `https://fitforge-server.vercel.app/trainer-details/${params.id}`
+          ),
       },
     ],
   },
@@ -176,7 +178,9 @@ const router = createBrowserRouter([
           </AdminRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/trainer-details/${params.id}`),
+          fetch(
+            `https://fitforge-server.vercel.app/trainer-details/${params.id}`
+          ),
       },
       {
         path: "user-profile",

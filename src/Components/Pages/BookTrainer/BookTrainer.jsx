@@ -6,8 +6,7 @@ const BookTrainer = () => {
   const [selectedPackage, setSelectedPackage] = useState("");
   const trainer = useLoaderData();
   const slot = trainer.slots[0];
-  console.log(slot);
-  const navigate = useNavigate(); // Hook to navigate
+  const navigate = useNavigate();
 
   const packages = [
     {
