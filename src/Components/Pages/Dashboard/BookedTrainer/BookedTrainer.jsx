@@ -16,6 +16,7 @@ const BookedTrainer = () => {
         params: { email: user.email },
       });
       setPayments(res.data.payments);
+      console.log(res.data);
       return res.data;
     },
   });

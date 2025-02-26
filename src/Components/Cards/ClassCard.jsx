@@ -1,7 +1,9 @@
 import { FaUsers } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const ClassCard = ({ classData }) => {
-  const { title, description, image, trainers, intensity, booked } = classData;
+  const { title, description, image, trainerDetails, intensity, booked } =
+    classData;
   const colors = {
     beginner: "bg-green-500",
     intermediate: "bg-yellow-500",
@@ -26,17 +28,16 @@ const ClassCard = ({ classData }) => {
 
       {/* Trainers */}
       <div className="mt-4 flex -space-x-2">
-        {trainers.length > 0 ? (
-          trainers
-            .slice(0, 5)
-            .map((trainer, index) => (
+        {trainerDetails.length > 0 ? (
+          trainerDetails.map((trainer, index) => (
+            <Link to={`/trainer-details/${trainer._id}`} key={index}>
               <img
-                key={index}
-                src={trainer.image || "https://via.placeholder.com/50"}
+                src={trainer.profileImage || "https://via.placeholder.com/50"}
                 alt={`Trainer ${index + 1}`}
                 className="w-10 h-10 rounded-full border-2 border-primary"
               />
-            ))
+            </Link>
+          ))
         ) : (
           <p className="text-gray-500 text-sm">No trainers assigned</p>
         )}
@@ -58,14 +59,6 @@ const ClassCard = ({ classData }) => {
           <FaUsers className="mr-1 text-gray-500" /> {booked} booked
         </div>
       </div>
-
-      {/* Book Now Button */}
-      <button
-        disabled={trainers.length === 0}
-        className="mt-6 bg-primary text-white py-2 px-4 rounded-lg font-semibold hover:bg-opacity-80 transition duration-300"
-      >
-        Book Now
-      </button>
     </div>
   );
 };

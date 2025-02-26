@@ -88,6 +88,7 @@ const AddSlotForm = () => {
           slotTime: formData.slotTime,
           selectedDay: formData.selectedDay,
           selectedClass: formData.selectedClass,
+          bookedMembers: [],
         },
         trainerId: trainerData._id,
       },

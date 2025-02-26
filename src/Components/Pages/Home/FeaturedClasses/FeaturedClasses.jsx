@@ -2,13 +2,17 @@ import ClassCard from "../../../Cards/ClassCard";
 import { GridLoader } from "react-spinners";
 import useCustomAxios from "../../../../Hooks/useCustomAxios";
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 
 const FeaturedClasses = () => {
   const customAxios = useCustomAxios();
-  const { data: classes, isFetching } = useQuery({
+  const [classes, setClasses] = useState([]);
+  const { data, isFetching } = useQuery({
     queryKey: ["classes"],
     queryFn: async () => {
       const res = await customAxios.get("/classes?home=true");
+      setClasses(res.data.classes);
+      console.log(res.data);
       return res.data;
     },
   });

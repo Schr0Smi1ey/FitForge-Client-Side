@@ -1,13 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext, useState } from "react";
-import useCustomAxios from "../../../../Hooks/useCustomAxios";
 import { GridLoader } from "react-spinners";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 import { FaEye } from "react-icons/fa";
 import { convertDate } from "../../../../utils/Utilities.js";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure.jsx";
 const Applications = () => {
-  const customAxios = useCustomAxios();
   const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
