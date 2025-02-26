@@ -15,7 +15,9 @@ const Applications = () => {
   const { data: applicantData = [], isLoading } = useQuery({
     queryKey: ["applicantData"],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/appliedTrainers?email=${user.email}`);
+      const res = await axiosSecure.get(
+        `/appliedTrainerInfo?email=${user.email}`
+      );
       return res.data;
     },
   });

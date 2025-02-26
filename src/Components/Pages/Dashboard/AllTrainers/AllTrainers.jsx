@@ -1,18 +1,22 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import useTrainers from "../../../../Hooks/useTrainers";
 import { GridLoader } from "react-spinners";
 import { FaTrash } from "react-icons/fa";
 import useCustomAxios from "../../../../Hooks/useCustomAxios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
+import { useRadioGroup } from "@mui/material";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const AllTrainers = () => {
   const { trainers, isFetching } = useTrainers();
+  const { user, loading } = useContext(AuthContext);
   const [trainer, setTrainer] = useState({});
   const [showModal, setShowModal] = useState(false);
-  const customAxios = useCustomAxios();
+  const secureAxios = useAxiosSecure();
   const navigate = useNavigate();
-  if (isFetching) {
+  if (isFetching || loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <GridLoader color="#A94A4A" size={30} />
@@ -36,11 +40,12 @@ const AllTrainers = () => {
       confirmButtonText: "Yes, cancel it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const res = await customAxios.patch(`/handleApplication`, {
+        const res = await secureAxios.patch(`/handleApplication`, {
           applicationId: trainer._id,
           status: "cancelled",
           userId: trainer.userId,
           feedback: e.target.feedback.value,
+          email: user.email,
         });
 
         console.log(res);

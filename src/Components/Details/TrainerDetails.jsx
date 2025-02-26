@@ -1,19 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { FaFacebook, FaTwitter, FaInstagram, FaGlobe } from "react-icons/fa";
 import { GridLoader } from "react-spinners";
 import Swal from "sweetalert2";
 import useCustomAxios from "../../Hooks/useCustomAxios";
+import { AuthContext } from "../../Contexts/AuthContext/AuthProvider";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const TrainerDetails = () => {
   const { trainer } = useLoaderData();
-  console.log(trainer);
+  const { user, loading } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
   const [feedback, setFeedback] = useState("");
-  const customAxios = useCustomAxios();
+  const secureAxios = useAxiosSecure();
   const navigate = useNavigate();
-  // In case trainer data is not available, show a loader
-  if (!trainer) {
+  if (!trainer || loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <GridLoader color="#A94A4A" size={30} />
@@ -32,12 +33,12 @@ const TrainerDetails = () => {
       confirmButtonText: "Yes, confirm it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const res = await customAxios.patch(`/handleApplication`, {
+        const res = await secureAxios.patch(`/handleApplication`, {
           applicationId: trainer._id,
           status: "accepted",
           userId: trainer.userId,
+          email: user.email,
         });
-        console.log(res);
         if (
           res.status === 200 &&
           res.data.resultAppliedTrainer.modifiedCount &&
@@ -76,14 +77,19 @@ const TrainerDetails = () => {
       confirmButtonText: "Yes, reject it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const res = await customAxios.patch(`/handleApplication`, {
+        const res = await secureAxios.patch(`/handleApplication`, {
           applicationId: trainer._id,
           status: "rejected",
           userId: trainer.userId,
           feedback: e.target.feedback.value,
+          email: user.email,
         });
-        console.log(res);
-        if (res.status === 200 && res.data.resultAppliedTrainer.modifiedCount) {
+        if (
+          res.status === 200 &&
+          res.data.resultAppliedTrainer.modifiedCount &&
+          res.data.deleteTrainer.deletedCount &&
+          res.data.resultUser.modifiedCount
+        ) {
           Swal.fire({
             title: "Rejected!",
             text: "Application is rejected!",

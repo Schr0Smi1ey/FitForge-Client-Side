@@ -5,6 +5,7 @@ import { GridLoader } from "react-spinners";
 import axios from "axios";
 import Swal from "sweetalert2";
 import useCustomAxios from "../../../../Hooks/useCustomAxios";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const skillsOptions = [
   { label: "Strength & Resistance", value: "Strength & Resistance" },
@@ -60,9 +61,8 @@ const BecomeTrainer = () => {
   const [selectedSkills, setSelectedSkills] = useState([]);
   const [availableDays, setAvailableDays] = useState([]);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
-  const customAxios = useCustomAxios();
+  const secureAxios = useAxiosSecure();
 
-  // Move the loading check after hooks are defined
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -154,11 +154,9 @@ const BecomeTrainer = () => {
       applyDate: new Date().toISOString(),
       slots: [],
     };
-    console.log(trainerData);
 
     try {
-      const res = await customAxios.post("/trainers", trainerData);
-      console.log(res.data);
+      const res = await secureAxios.post("/trainers", trainerData);
       if (res.data.trainerId) {
         Swal.fire({
           icon: "success",
@@ -188,7 +186,6 @@ const BecomeTrainer = () => {
         Swal.fire(res.data.error, "", "error");
       }
     } catch (error) {
-      console.log(error);
       Swal.fire("Application submission failed", "", "error");
     }
   };

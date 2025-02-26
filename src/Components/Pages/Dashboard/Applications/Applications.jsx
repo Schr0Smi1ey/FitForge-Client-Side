@@ -1,20 +1,32 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useContext } from "react";
 import useCustomAxios from "../../../../Hooks/useCustomAxios";
 import { Link } from "react-router-dom";
 import { GridLoader } from "react-spinners";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 
 const Applications = () => {
-  const customAxios = useCustomAxios();
-  const { data: appliedTrainers = [], isLoading } = useQuery({
+  const secureAxios = useAxiosSecure();
+  const { user, loading } = useContext(AuthContext);
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <GridLoader color="#A94A4A" size={30} />
+      </div>
+    );
+  }
+  const { data: appliedTrainers = [], isFetching } = useQuery({
     queryKey: ["appliedTrainers"],
     queryFn: async () => {
-      const res = await customAxios.get("/appliedTrainers");
+      const res = await secureAxios.get("/appliedTrainers", {
+        params: { email: user.email },
+      });
       return res.data;
     },
   });
   console.log(appliedTrainers);
-  if (isLoading) {
+  if (isFetching) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <GridLoader color="#A94A4A" size={30} />
