@@ -73,6 +73,9 @@ const ManageSlot = () => {
 
   return (
     <>
+      <Helmet>
+        <title>FitForge | Dashboard | Manage Slot</title>
+      </Helmet>
       {slotData.length === 0 ? (
         <div>
           <p>No Slot Found!</p>

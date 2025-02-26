@@ -47,6 +47,9 @@ const Balance = () => {
   const totalSubscribers = subscribersData?.totalSubscribers || 0;
   return (
     <div className="p-6">
+      <Helmet>
+        <title>FitForge | Dashboard | Balance</title>
+      </Helmet>
       <div className="mb-6 flex items-center justify-between">
         <h2 className="text-3xl font-bold mb-6 text-center">
           💰 Payment Balance $ {totalBalance}

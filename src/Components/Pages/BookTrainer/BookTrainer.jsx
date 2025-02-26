@@ -36,6 +36,9 @@ const BookTrainer = () => {
 
   return (
     <div className="pt-32 bg-gray-50 dark:bg-gray-900">
+      <Helmet>
+        <title>FitForge | Book Trainer</title>
+      </Helmet>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-12 text-center">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">

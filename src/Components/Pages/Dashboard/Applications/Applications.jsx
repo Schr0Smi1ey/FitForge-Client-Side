@@ -34,6 +34,9 @@ const Applications = () => {
   }
   return (
     <>
+      <Helmet>
+        <title>FitForge | Dashboard | Application</title>
+      </Helmet>
       {appliedTrainers.length === 0 ? (
         <div>
           <p>No Application Found!</p>

@@ -192,6 +192,9 @@ const BecomeTrainer = () => {
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-md">
+      <Helmet>
+        <title>FitForge | Dashboard | Become a Trainer</title>
+      </Helmet>
       <h2 className="text-3xl font-bold mb-6 text-center">Be a Trainer</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Full Name */}

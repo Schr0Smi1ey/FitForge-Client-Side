@@ -73,6 +73,9 @@ const AllTrainers = () => {
   };
   return (
     <div>
+      <Helmet>
+        <title>FitForge | Dashboard | All Trainers</title>
+      </Helmet>
       {trainers.length === 0 ? ( // Wrapped in a div
         <div>
           <p>No Trainers!</p>

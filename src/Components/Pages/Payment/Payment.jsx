@@ -13,6 +13,9 @@ const Payment = () => {
   const { trainer, slot, packageName } = location.state || {};
   return (
     <div>
+      <Helmet>
+        <title>FitForge | Payment</title>
+      </Helmet>
       <h2 className="text-2xl font-bold">Payment for {packageName} Package</h2>
       <Elements stripe={stripePromise}>
         <PaymentForm trainer={trainer} slot={slot} packageName={packageName} />

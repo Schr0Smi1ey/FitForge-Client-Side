@@ -50,6 +50,9 @@ const Dashboard = () => {
   }
   return (
     <div className="container mx-auto flex min-h-screen">
+      <Helmet>
+        <title>FitForge | Dashboard</title>
+      </Helmet>
       <NavBar></NavBar>
       {/* Sidebar */}
       <div

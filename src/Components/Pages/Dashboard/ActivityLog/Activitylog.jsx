@@ -40,6 +40,9 @@ const Applications = () => {
   const applications = applicantData[0]?.appliedTrainer;
   return (
     <div>
+      <Helmet>
+        <title>FitForge | Dashboard | Activity Log</title>
+      </Helmet>
       {applicantData.error || !applicantData.length === 0 ? (
         <p>No Applications found</p>
       ) : (

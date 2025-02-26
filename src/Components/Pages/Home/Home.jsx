@@ -11,6 +11,9 @@ import Team from "./Team/Team";
 const Home = () => {
   return (
     <div>
+      <Helmet>
+        <title>FitForge | Home</title>
+      </Helmet>
       <Banner></Banner>
       <About></About>
       <Featured></Featured>

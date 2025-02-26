@@ -11,7 +11,6 @@ const TrainerDetails = () => {
   const { trainer } = useLoaderData();
   const { user, loading } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
-  const [feedback, setFeedback] = useState("");
   const secureAxios = useAxiosSecure();
   const navigate = useNavigate();
   if (!trainer || loading) {
@@ -110,6 +109,9 @@ const TrainerDetails = () => {
 
   return (
     <div className="bg-gray-100 pt-32 p-8 flex flex-col items-center">
+      <Helmet>
+        <title>FitForge | Trainer-Details</title>
+      </Helmet>
       <div className="bg-white shadow-lg rounded-xl max-w-4xl w-full overflow-hidden">
         <div className="flex flex-col md:flex-row">
           {/* Profile Image */}

@@ -79,6 +79,9 @@ const AddClass = () => {
 
   return (
     <div className="max-w-xl mx-auto bg-white p-6 rounded-lg shadow-md">
+      <Helmet>
+        <title>FitForge | Dashboard | Add Class</title>
+      </Helmet>
       <h2 className="text-2xl font-bold mb-4 text-center">Add New Class</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>

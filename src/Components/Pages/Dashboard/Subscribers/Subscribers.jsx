@@ -29,6 +29,9 @@ const Subscribers = () => {
   }
   return (
     <div className="overflow-x-auto">
+      <Helmet>
+        <title>FitForge | Dashboard | Subscribers</title>
+      </Helmet>
       <table className="table table-zebra">
         <thead>
           <tr className="text-center">

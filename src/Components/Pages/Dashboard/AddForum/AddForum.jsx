@@ -78,7 +78,6 @@ const AddForum = () => {
         showConfirmButton: false,
         timer: 1500,
       });
-
     } else {
       Toast("Class Addition Failed", "error");
     }
@@ -86,6 +85,9 @@ const AddForum = () => {
 
   return (
     <div className="flex justify-center items-center">
+      <Helmet>
+        <title>FitForge | Dashboard | Add Forum</title>
+      </Helmet>
       <div className="w-full max-w-2xl bg-white shadow-2xl rounded-2xl p-6">
         <h2 className="text-3xl font-bold text-gray-800 text-center mb-4">
           📢 Create a New Forum

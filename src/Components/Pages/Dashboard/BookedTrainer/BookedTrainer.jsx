@@ -30,6 +30,9 @@ const BookedTrainer = () => {
 
   return (
     <div className="p-6">
+      <Helmet>
+        <title>FitForge | Dashboard | Booked Trainers</title>
+      </Helmet>
       <h2 className="text-3xl font-bold mb-6">Booked Trainers</h2>
 
       {payments.length === 0 ? (

@@ -11,6 +11,9 @@ const Trainer = () => {
   const trainer = useLoaderData().trainer;
   return (
     <div className="max-w-6xl pt-32 mx-auto p-6">
+      <Helmet>
+        <title>FitForge | {trainer.fullName}</title>
+      </Helmet>
       <div className="bg-white rounded-2xl shadow-lg p-8">
         {/* Header Section */}
         <div className="flex flex-col md:flex-row gap-8 mb-8">
@@ -157,9 +160,7 @@ const Trainer = () => {
                           </div>
                         </td>
                         <td className="px-6 py-4">
-                          <Link
-                            to={`/book-trainer/${trainer._id}/${slot._id}`}
-                          >
+                          <Link to={`/book-trainer/${trainer._id}/${slot._id}`}>
                             <button
                               className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg transition-all 
       focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-gray-900"

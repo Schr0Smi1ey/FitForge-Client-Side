@@ -67,7 +67,7 @@ const UpdateProfile = () => {
   return (
     <div className="min-h-[500px] flex items-center justify-center bg-gray-100 bg-gradient-to-r from-primary/40 to-primary/50">
       <Helmet>
-        <title>Fluent Deutsch | Profile Update</title>
+        <title>FitForge | Update Profile</title>
       </Helmet>
       <div
         data-aos="zoom-in"

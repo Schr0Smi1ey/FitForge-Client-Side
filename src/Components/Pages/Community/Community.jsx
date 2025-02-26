@@ -40,6 +40,9 @@ const Community = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <Helmet>
+        <title>FitForge | Community</title>
+      </Helmet>
       <h1 className="text-3xl font-bold mb-6 text-center">Forum</h1>
       <div className="max-w-6xl mx-auto grid grid-cols-1 gap-6">
         {posts.map((post) => (
