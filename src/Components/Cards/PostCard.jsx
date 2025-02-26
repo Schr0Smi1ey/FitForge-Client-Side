@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import useCustomAxios from "../../Hooks/useCustomAxios";
 import { convertDate } from "../../utils/Utilities";
 import { useQuery } from "@tanstack/react-query";
 import { GridLoader } from "react-spinners";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { AuthContext } from "../../Contexts/AuthContext/AuthProvider";
 
 const PostCard = ({ postData, refetch, home }) => {
   const {
@@ -17,25 +19,26 @@ const PostCard = ({ postData, refetch, home }) => {
     postedDate,
     _id,
   } = postData;
+  const { user, loading } = useContext(AuthContext);
+  const [isExpanded, setIsExpanded] = useState(false);
 
+  const secureAxios = useAxiosSecure();
   const customAxios = useCustomAxios();
   const navigate = useNavigate();
 
-  // Fetch user info using react-query
-  const { data: user, isFetching } = useQuery({
+  // Fetch user data
+  const { data: userData, isFetching } = useQuery({
     queryKey: ["user", postedBy],
     queryFn: async () => {
-      const res = await customAxios.get("/user", {
-        params: { email: postedBy },
+      const res = await secureAxios.get("/posterInfo", {
+        params: { postedBy, email: user?.email },
       });
       return res.data;
     },
+    enabled: user === null ? false : true,
   });
 
-  // Local state for toggling the description
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  if (isFetching) {
+  if (loading || isFetching) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <GridLoader color="#A94A4A" size={30} />
@@ -110,22 +113,22 @@ const PostCard = ({ postData, refetch, home }) => {
             {/* User Info */}
             <div className="flex items-center gap-4">
               <img
-                src={user.photoURL}
-                alt={user.name}
+                src={userData?.photoURL}
+                alt={userData?.name}
                 className="w-12 h-12 rounded-full object-cover"
               />
               <div>
-                <p className="font-bold text-lg">{user.name}</p>
-                <p className="text-gray-500 text-sm">{user.role}</p>
+                <p className="font-bold text-lg">{userData?.name}</p>
+                <p className="text-gray-500 text-sm">{userData?.role}</p>
               </div>
             </div>
 
-            {/* Post Date (repeated if needed) */}
+            {/* Post Date */}
             <div className="text-gray-600">
               <p className="text-sm md:text-base">{convertDate(postedDate)}</p>
             </div>
 
-            {/* Vote Buttons (only if not on home) */}
+            {/* Vote Buttons */}
             {!home && (
               <div className="flex items-center space-x-4">
                 <div className="flex items-center gap-1">

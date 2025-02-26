@@ -1,18 +1,32 @@
 import { useQuery } from "@tanstack/react-query";
 import useCustomAxios from "../../../../Hooks/useCustomAxios";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
+import { GridLoader } from "react-spinners";
 
 const Subscribers = () => {
-  const customAxios = useCustomAxios();
+  const secureAxios = useAxiosSecure();
   const [subscribers, setSubscribers] = useState([]);
-  const { data: subscriberData = [] } = useQuery({
+  const { user, loading } = useContext(AuthContext);
+  const { data: subscriberData = [], isFetching } = useQuery({
     queryKey: ["subscribers"],
     queryFn: async () => {
-      const res = await customAxios.get("/subscribers");
+      const res = await secureAxios.get("/subscribers", {
+        params: { email: user.email },
+      });
       setSubscribers(res.data.result);
       return res.data;
     },
+    enabled: user === null ? false : true,
   });
+  if (loading || isFetching) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <GridLoader color="#A94A4A" size={30} />
+      </div>
+    );
+  }
   return (
     <div className="overflow-x-auto">
       <table className="table table-zebra">

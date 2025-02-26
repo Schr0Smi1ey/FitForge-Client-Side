@@ -15,6 +15,7 @@ import { AuthContext } from "../../../Contexts/AuthContext/AuthProvider";
 import { GridLoader } from "react-spinners";
 import useCustomAxios from "../../../Hooks/useCustomAxios";
 import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,6 +25,7 @@ const Dashboard = () => {
   const [isTrainer, setIsTrainer] = useState(false);
   const [isMember, setIsMember] = useState(false);
   const customAxios = useCustomAxios();
+  const secureAxios = useAxiosSecure();
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -35,7 +37,7 @@ const Dashboard = () => {
     const { data: userData = [], isFetching } = useQuery({
       queryKey: ["user"],
       queryFn: async () => {
-        const res = await customAxios.get("/user", {
+        const res = await secureAxios.get("/user", {
           params: { email: user.email },
         });
         setUserData(res.data.user);

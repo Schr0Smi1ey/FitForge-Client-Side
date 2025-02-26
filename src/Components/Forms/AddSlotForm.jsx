@@ -5,9 +5,10 @@ import useCustomAxios from "../../Hooks/useCustomAxios";
 import { AuthContext } from "../../Contexts/AuthContext/AuthProvider";
 import { GridLoader } from "react-spinners";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const AddSlotForm = () => {
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   const [userData, setUserData] = useState(null);
   const [trainerData, setTrainerData] = useState(null);
   const [classData, setClassData] = useState(null);
@@ -17,7 +18,7 @@ const AddSlotForm = () => {
     selectedDay: null,
     selectedClass: null,
   });
-
+  const secureAxios = useAxiosSecure();
   const customAxios = useCustomAxios();
   const {
     data: trainer,
@@ -26,7 +27,7 @@ const AddSlotForm = () => {
   } = useQuery({
     queryKey: ["trainer"],
     queryFn: async () => {
-      const res = await customAxios.get("/user", {
+      const res = await secureAxios.get("/user", {
         params: { email: user.email, role: "trainer" },
       });
       setUserData(res.data.user);
@@ -43,7 +44,7 @@ const AddSlotForm = () => {
     },
   });
 
-  if (isFetchingClasses || isFetchingTrainer) {
+  if (loading || isFetchingClasses || isFetchingTrainer) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <GridLoader color="#A94A4A" size={30} />
@@ -51,7 +52,6 @@ const AddSlotForm = () => {
     );
   }
 
-  // Slot Name Options
   const slotNameOptions = [
     { value: "Morning-Burn", label: "🌞 Morning Burn" },
     { value: "Power-Hour", label: "💥 Power Hour" },
@@ -80,15 +80,22 @@ const AddSlotForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Submitting:", formData);
-    const res = await customAxios.post("/add-slot", {
-      slot: {
-        slotName: formData.slotName,
-        slotTime: formData.slotTime,
-        selectedDay: formData.selectedDay,
-        selectedClass: formData.selectedClass,
+    const res = await secureAxios.post(
+      `/add-slot`,
+      {
+        slot: {
+          slotName: formData.slotName,
+          slotTime: formData.slotTime,
+          selectedDay: formData.selectedDay,
+          selectedClass: formData.selectedClass,
+        },
+        trainerId: trainerData._id,
       },
-      trainerId: trainerData._id,
-    });
+      {
+        params: { email: user.email },
+      }
+    );
+
     console.log(res.data.error);
     if (res.data.error) {
       Swal.fire({

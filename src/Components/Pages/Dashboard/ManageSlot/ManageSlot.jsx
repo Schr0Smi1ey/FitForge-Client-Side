@@ -1,19 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext, useState } from "react";
-import useCustomAxios from "../../../../Hooks/useCustomAxios";
 import { FaTrash } from "react-icons/fa";
 import { GridLoader } from "react-spinners";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const ManageSlot = () => {
-  const customAxios = useCustomAxios();
+  const secureAxios = useAxiosSecure();
   const { user } = useContext(AuthContext);
   const [slotData, setSlotData] = useState(null);
   const { data, isFetching, refetch } = useQuery({
     queryKey: ["trainer"],
     queryFn: async () => {
-      const res = await customAxios.get("/slot", {
+      const res = await secureAxios.get("/slot", {
         params: { email: user.email },
       });
       setSlotData(res.data);
@@ -39,7 +39,7 @@ const ManageSlot = () => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const res = await customAxios.delete(`/slot`, {
+        const res = await secureAxios.delete(`/slot`, {
           params: {
             slotId: id,
             email: user.email,

@@ -1,11 +1,9 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useContext, useEffect, useState } from "react";
-// import useCart from "../../../hooks/useCart";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { AuthContext } from "../../Contexts/AuthContext/AuthProvider";
-import useCustomAxios from "../../Hooks/useCustomAxios";
 
 const PaymentForm = ({ trainer, slot, packageName }) => {
   const [error, setError] = useState("");
@@ -13,8 +11,7 @@ const PaymentForm = ({ trainer, slot, packageName }) => {
   const [transactionId, setTransactionId] = useState("");
   const stripe = useStripe();
   const elements = useElements();
-  const axiosSecure = useAxiosSecure();
-  const customAxios = useCustomAxios();
+  const secureAxios = useAxiosSecure();
   const { user } = useContext(AuthContext);
   console.log(trainer, slot, packageName);
   const navigate = useNavigate();
@@ -25,20 +22,14 @@ const PaymentForm = ({ trainer, slot, packageName }) => {
 
   useEffect(() => {
     if (totalPrice > 0) {
-      //   axiosSecure
-      //     .post("/create-payment-intent", { price: totalPrice })
-      //     .then((res) => {
-      //       console.log(res.data.clientSecret);
-      //       setClientSecret(res.data.clientSecret);
-      //     });
-      customAxios
+      secureAxios
         .post("/create-payment-intent", { price: totalPrice })
         .then((res) => {
           console.log(res.data.clientSecret);
           setClientSecret(res.data.clientSecret);
         });
     }
-  }, [customAxios, totalPrice]);
+  }, [secureAxios, totalPrice]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -94,8 +85,9 @@ const PaymentForm = ({ trainer, slot, packageName }) => {
           trainerId: trainer._id,
           slotId: slot._id,
         };
-        const res = await customAxios.post("/payments", payment);
-        console.log(res);
+        const res = await secureAxios.post("/payments", payment, {
+          params: { email: user.email },
+        });
         if (res.data?.insertedId) {
           Swal.fire({
             position: "center",

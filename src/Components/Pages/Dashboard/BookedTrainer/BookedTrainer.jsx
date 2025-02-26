@@ -2,17 +2,17 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import { GridLoader } from "react-spinners";
-import useCustomAxios from "../../../../Hooks/useCustomAxios";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const BookedTrainer = () => {
   const { user, loading } = useContext(AuthContext);
   const [payments, setPayments] = useState([]);
-  const customAxios = useCustomAxios();
+  const secureAxios = useAxiosSecure();
 
   const { data: paymentData = [], isFetching } = useQuery({
     queryKey: ["payments"],
     queryFn: async () => {
-      const res = await customAxios.get("/payments", {
+      const res = await secureAxios.get("/booked-trainers", {
         params: { email: user.email },
       });
       setPayments(res.data.payments);

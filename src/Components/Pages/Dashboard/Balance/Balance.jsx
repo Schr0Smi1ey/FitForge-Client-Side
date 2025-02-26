@@ -4,15 +4,19 @@ import { useQuery } from "@tanstack/react-query";
 import { GridLoader } from "react-spinners";
 import useCustomAxios from "../../../../Hooks/useCustomAxios";
 import { PieChart } from "@mui/x-charts";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const Balance = () => {
   const { user, loading } = useContext(AuthContext);
-  const customAxios = useCustomAxios();
+  const secureAxios = useAxiosSecure();
 
   const { data: paymentData, isFetching } = useQuery({
     queryKey: ["payments"],
     queryFn: async () => {
-      const res = await customAxios.get("/payments");
+      const res = await secureAxios.get("/payments", {
+        params: { email: user.email },
+      });
+      console.log(res.data);
       return res.data;
     },
   });
@@ -21,9 +25,12 @@ const Balance = () => {
     {
       queryKey: ["subscribers"],
       queryFn: async () => {
-        const res = await customAxios.get("/subscribers");
+        const res = await secureAxios.get("/subscribers", {
+          params: { email: user.email },
+        });
         return res.data;
       },
+      enabled: user === null ? false : true,
     }
   );
 

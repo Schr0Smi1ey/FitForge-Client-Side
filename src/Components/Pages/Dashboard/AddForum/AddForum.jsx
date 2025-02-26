@@ -2,8 +2,8 @@ import { useState, useContext, useRef } from "react";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 import { GridLoader } from "react-spinners";
 import axios from "axios";
-import useCustomAxios from "../../../../Hooks/useCustomAxios";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 const AddForum = () => {
   const { user, loading, image_hosting_api } = useContext(AuthContext);
   if (loading) {
@@ -23,7 +23,7 @@ const AddForum = () => {
     postedDate: new Date().toISOString(),
   });
   const fileInputRef = useRef(null);
-  const customAxios = useCustomAxios();
+  const secureAxios = useAxiosSecure();
   const handleChange = (e) => {
     setForum({ ...forum, [e.target.name]: e.target.value });
   };
@@ -48,12 +48,17 @@ const AddForum = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const photoURL = await ConvertToLink(forum.image);
-    console.log(photoURL);
-    console.log("New Forum Submitted:", forum);
-    const res = await customAxios.post("/forums", {
-      ...forum,
-      image: photoURL,
-    });
+    const res = await secureAxios.post(
+      "/forums",
+      {
+        ...forum,
+        image: photoURL,
+      },
+      {
+        params: { email: user.email },
+      }
+    );
+
     if (res.data.insertedId) {
       setForum({
         title: "",

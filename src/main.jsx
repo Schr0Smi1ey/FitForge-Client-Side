@@ -82,8 +82,6 @@ const router = createBrowserRouter([
         ),
         loader: async ({ params }) => {
           const { trainerId, slotId } = params;
-          console.log("trainerId", trainerId);
-          console.log("slotId", slotId);
           return fetch(
             `http://localhost:3000/book-trainer?trainerId=${trainerId}&slotId=${slotId}`
           );
