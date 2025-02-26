@@ -8,25 +8,29 @@ import {
   FaPlusSquare,
   FaBars,
   FaTimes,
+  FaUser,
+  FaListAlt,
+  FaClipboardCheck,
+  FaCalendarCheck,
+  FaDumbbell,
+  FaHome,
+  FaComments,
 } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
-import NavBar from "../../Shared/Navbar/Navbar";
 import { AuthContext } from "../../../Contexts/AuthContext/AuthProvider";
 import { GridLoader } from "react-spinners";
-import useCustomAxios from "../../../Hooks/useCustomAxios";
-import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet";
 
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, loading } = useContext(AuthContext);
-  const [userData, setUserData] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isTrainer, setIsTrainer] = useState(false);
   const [isMember, setIsMember] = useState(false);
-  const customAxios = useCustomAxios();
   const secureAxios = useAxiosSecure();
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -34,14 +38,14 @@ const Dashboard = () => {
       </div>
     );
   }
+
   if (user) {
-    const { data: userData = [], isFetching } = useQuery({
+    useQuery({
       queryKey: ["user"],
       queryFn: async () => {
         const res = await secureAxios.get("/user", {
           params: { email: user.email },
         });
-        setUserData(res.data.user);
         setIsAdmin(res.data.user.role === "admin");
         setIsTrainer(res.data.user.role === "trainer");
         setIsMember(res.data.user.role === "member");
@@ -49,19 +53,18 @@ const Dashboard = () => {
       },
     });
   }
+
   return (
-    <div className="container mx-auto flex min-h-screen">
+    <div className="flex min-h-screen">
       <Helmet>
         <title>FitForge | Dashboard</title>
       </Helmet>
-      <NavBar></NavBar>
+
       {/* Sidebar */}
       <div
-        className={`bg-primary w-64 min-h-screen p-4 pt-14 md:pt-32 lg:pt-40 fixed md:static transition-transform duration-300 ${
-          isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
-        }`}
+        className={`bg-primary w-64 min-h-screen p-6 fixed md:static transition-transform duration-300 z-50
+          ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
       >
-        {/* Close Button for Mobile */}
         <button
           className="md:hidden text-white text-2xl mb-4"
           onClick={() => setIsOpen(false)}
@@ -69,147 +72,164 @@ const Dashboard = () => {
           <FaTimes />
         </button>
 
-        <ul className="text-white font-semibold">
+        <ul className="text-white font-semibold pt-10 space-y-4">
           {isAdmin && (
-            <div className="space-y-4">
-              <li>
+            <div className="text-base md:text-lg lg:text-xl   space-y-4">
+              <li className="w-fit">
                 <NavLink
                   to="/dashboard/subscribers"
-                  className="flex items-center space-x-2 hover:text-gray-200 w-fit"
+                  className="flex items-center gap-2"
                 >
-                  <FaUsers />
-                  <span>Subscribers</span>
+                  <FaUsers /> Subscribers
                 </NavLink>
               </li>
-              <li>
+              <li className="w-fit">
                 <NavLink
                   to="/dashboard/trainers"
-                  className="flex items-center space-x-2 hover:text-gray-200 w-fit"
+                  className="flex items-center gap-2"
                 >
-                  <FaChalkboardTeacher />
-                  <span>Trainers</span>
+                  <FaChalkboardTeacher /> Trainers
                 </NavLink>
               </li>
-              <li>
+              <li className="w-fit">
                 <NavLink
                   to="/dashboard/applications"
-                  className="flex items-center space-x-2 hover:text-gray-200 w-fit"
+                  className="flex items-center gap-2"
                 >
-                  <FaFileAlt />
-                  <span>Applications</span>
+                  <FaFileAlt /> Applications
                 </NavLink>
               </li>
-              <li>
+              <li className="w-fit">
                 <NavLink
                   to="/dashboard/balance"
-                  className="flex items-center space-x-2 hover:text-gray-200 w-fit"
+                  className="flex items-center gap-2"
                 >
-                  <FaWallet />
-                  <span>Balance</span>
+                  <FaWallet /> Balance
                 </NavLink>
               </li>
-              <li>
+              <li className="w-fit">
                 <NavLink
                   to="/dashboard/add-class"
-                  className="flex items-center space-x-2 hover:text-gray-200 w-fit"
+                  className="flex items-center gap-2"
                 >
-                  <FaUserGraduate />
-                  <span>Add Class</span>
+                  <FaDumbbell /> Add Class
                 </NavLink>
               </li>
             </div>
           )}
+
           {isMember && (
-            <div className="space-y-4">
-              <li>
+            <div className="text-base md:text-lg lg:text-xl space-y-4">
+              <li className="w-fit">
                 <NavLink
                   to="/dashboard/user-profile"
-                  className="flex items-center space-x-2 hover:text-gray-200 w-fit"
+                  className="flex items-center gap-2"
                 >
-                  <FaPlusSquare />
-                  <span>User Profile</span>
+                  <FaUser /> User Profile
                 </NavLink>
               </li>
-              <li>
+              <li className="w-fit">
                 <NavLink
                   to="/dashboard/activity-log"
-                  className="flex items-center space-x-2 hover:text-gray-200 w-fit"
+                  className="flex items-center gap-2"
                 >
-                  <FaPlusSquare />
-                  <span>Activity Log</span>
+                  <FaListAlt /> Activity Log
                 </NavLink>
               </li>
-              <li>
+              <li className="w-fit">
                 <NavLink
                   to="/dashboard/become-a-trainer"
-                  className="flex items-center space-x-2 hover:text-gray-200 w-fit"
+                  className="flex items-center gap-2"
                 >
-                  <FaPlusSquare />
-                  <span>Become a Trainer</span>
+                  <FaClipboardCheck /> Become a Trainer
                 </NavLink>
               </li>
-              <li>
+              <li className="w-fit">
                 <NavLink
                   to="/dashboard/booked-trainers"
-                  className="flex items-center space-x-2 hover:text-gray-200 w-fit"
+                  className="flex items-center gap-2"
                 >
-                  <FaPlusSquare />
-                  <span>Booked Trainers</span>
+                  <FaCalendarCheck /> Booked Trainers
                 </NavLink>
               </li>
             </div>
           )}
+
           {isTrainer && (
-            <div className="space-y-4">
-              <li>
+            <div className="text-base md:text-lg lg:text-xl space-y-4">
+              <li className="w-fit">
                 <NavLink
                   to="/dashboard/add-slot"
-                  className="flex items-center space-x-2 hover:text-gray-200 w-fit"
+                  className="flex items-center gap-2"
                 >
-                  <FaPlusSquare />
-                  <span>Add Slot</span>
+                  <FaPlusSquare /> Add Slot
                 </NavLink>
               </li>
-              <li>
+              <li className="w-fit">
                 <NavLink
                   to="/dashboard/manage-slots"
-                  className="flex items-center space-x-2 hover:text-gray-200 w-fit"
+                  className="flex items-center gap-2"
                 >
-                  <FaPlusSquare />
-                  <span>Manage Slots</span>
+                  <FaClipboardCheck /> Manage Slots
                 </NavLink>
               </li>
             </div>
           )}
+
           {(isAdmin || isTrainer) && (
-            <li className="mt-4">
+            <li className="w-fit text-base md:text-lg lg:text-xl space-y-4">
               <NavLink
                 to="/dashboard/add-forum"
-                className="flex items-center space-x-2 hover:text-gray-200 w-fit"
+                className="flex items-center gap-2"
               >
-                <FaPlusSquare />
-                <span>Add Forum</span>
+                <FaComments /> Add Forum
               </NavLink>
             </li>
           )}
+
+          {/* General Links */}
+          <div className="border-t border-white my-4"></div>
+          <div className="text-base md:text-lg lg:text-xl space-y-4">
+            <li className="w-fit">
+              <NavLink to="/" className="flex items-center gap-2">
+                <FaHome /> Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/trainers" className="flex items-center gap-2">
+                <FaChalkboardTeacher /> Trainers
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/classes" className="flex items-center gap-2">
+                <FaDumbbell /> Classes
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/community" className="flex items-center gap-2">
+                <FaComments /> Community
+              </NavLink>
+            </li>
+          </div>
         </ul>
       </div>
 
-      <div className="flex-1 p-8 ml-64 md:ml-0">
+      {/* Main Content */}
+      <div className="flex-1 p-8 md:ml-64">
         <button
-          className="md:hidden text-orange-500 text-3xl mb-4"
+          className="md:hidden text-primary-500 text-3xl mb-4"
           onClick={() => setIsOpen(true)}
         >
           <FaBars />
         </button>
 
-        <div className="p-4 pt-14 md:pt-32">
+        <div className="p-4">
           {loading ? (
             <div className="flex items-center justify-center min-h-screen">
               <GridLoader color="#A94A4A" size={30} />
             </div>
           ) : (
-            <Outlet></Outlet>
+            <Outlet />
           )}
         </div>
       </div>

@@ -45,7 +45,7 @@ const Applications = () => {
       ) : (
         <div>
           <table className="table table-zebra">
-            <thead>
+            <thead className="bg-primary text-white text-base md:text-lg lg:text-xl">
               <tr className="text-center">
                 <th>No.</th>
                 <th>Name</th>
@@ -54,7 +54,7 @@ const Applications = () => {
                 <th>Details</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="text-gray-700 text-sm md:text-base lg:text-lg">
               {appliedTrainers.map((applicant, index) => (
                 <tr key={applicant._id} className="text-center">
                   <td>{index + 1}</td>

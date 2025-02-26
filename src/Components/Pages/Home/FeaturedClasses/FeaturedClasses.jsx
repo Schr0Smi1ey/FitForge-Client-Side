@@ -1,10 +1,16 @@
+import { useEffect, useState } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import ClassCard from "../../../Cards/ClassCard";
 import { GridLoader } from "react-spinners";
 import useCustomAxios from "../../../../Hooks/useCustomAxios";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
 
 const FeaturedClasses = () => {
+  useEffect(() => {
+    AOS.init();
+  }, []);
+
   const customAxios = useCustomAxios();
   const [classes, setClasses] = useState([]);
   const { data, isFetching } = useQuery({
@@ -15,6 +21,7 @@ const FeaturedClasses = () => {
       return res.data;
     },
   });
+
   if (isFetching) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -22,11 +29,36 @@ const FeaturedClasses = () => {
       </div>
     );
   }
+
   return (
-    <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-      {classes.map((featuredClass, index) => {
-        return <ClassCard key={index} classData={featuredClass}></ClassCard>;
-      })}
+    <div className="container mx-auto px-6 lg:px-12 py-16">
+      {/* Section Heading */}
+      <div
+        className="text-center mb-12"
+        data-aos="fade-up"
+        data-aos-delay="200"
+      >
+        <h2 className="text-4xl font-extrabold text-primary uppercase">
+          Featured Classes
+        </h2>
+        <p className="text-gray-600 mt-3 max-w-xl mx-auto">
+          Elevate your fitness journey with expert-led classes tailored for all
+          levels.
+        </p>
+      </div>
+
+      {/* Class Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {classes.map((featuredClass, index) => (
+          <div
+            key={index}
+            data-aos="fade-up"
+            data-aos-delay={index * 100 + 200} // Staggered effect for cards
+          >
+            <ClassCard classData={featuredClass} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

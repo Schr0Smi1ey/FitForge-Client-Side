@@ -89,7 +89,7 @@ const AddForum = () => {
       <Helmet>
         <title>FitForge | Dashboard | Add Forum</title>
       </Helmet>
-      <div className="w-full max-w-2xl bg-white shadow-2xl rounded-2xl p-6">
+      <div className="w-full container mx-auto max-w-3xl bg-white shadow-2xl rounded-2xl p-6">
         <h2 className="text-3xl font-bold text-gray-800 text-center mb-4">
           📢 Create a New Forum
         </h2>

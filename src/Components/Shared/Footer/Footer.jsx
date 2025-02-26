@@ -12,7 +12,7 @@ import { IoIosMailUnread } from "react-icons/io";
 const Footer = () => {
   return (
     <footer className="bg-gray-900 text-gray-300 py-10">
-      <div className="container mx-auto mt-5 px-6 md:px-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center md:text-left">
         {/* Logo & About */}
         <div>
           <h2 className="text-3xl font-bold text-primary">FitForge</h2>
@@ -21,6 +21,7 @@ const Footer = () => {
             stay motivated.
           </p>
         </div>
+
         {/* Quick Links */}
         <div>
           <h3 className="text-xl font-semibold text-white">Quick Links</h3>
@@ -40,42 +41,36 @@ const Footer = () => {
                 Community
               </a>
             </li>
-            {/* <li>
-              <a href="/contact" className="hover:text-primary">
-                Contact
-              </a>
-            </li> */}
           </ul>
         </div>
+
         {/* Contact */}
         <div>
-          <h3 className="text-xl font-semibold text-white mb-4">Contact</h3>
-
-          <div className="flex items-center space-x-2 text-sm mt-3">
-            <MdLocationOn className="text-primary text-lg" />
-            <span>Khulna University, Khulna</span>
-          </div>
-
-          <div className="flex items-center space-x-2 text-sm mt-2">
-            <FaPhoneAlt className="text-primary text-lg" />
-            <span>(123) 456-7890</span>
-          </div>
-
-          <div className="flex items-center space-x-2 text-sm mt-2">
-            <IoIosMailUnread className="text-primary text-lg" />
-            <span>support@fitforge.com</span>
+          <h3 className="text-xl font-semibold text-white">Contact</h3>
+          <div className="mt-3 space-y-3 text-sm">
+            <div className="flex items-center justify-center md:justify-start space-x-2">
+              <MdLocationOn className="text-primary text-lg" />
+              <span>Khulna University, Khulna</span>
+            </div>
+            <div className="flex items-center justify-center md:justify-start space-x-2">
+              <FaPhoneAlt className="text-primary text-lg" />
+              <span>(123) 456-7890</span>
+            </div>
+            <div className="flex items-center justify-center md:justify-start space-x-2">
+              <IoIosMailUnread className="text-primary text-lg" />
+              <span>support@fitforge.com</span>
+            </div>
           </div>
         </div>
-        {/* Follow Us & Social Media */}
+
+        {/* Follow Us */}
         <div>
           <h3 className="text-xl font-semibold text-white">Follow Us</h3>
           <p className="mt-3 text-sm">
             Join our community and stay motivated. Follow us for fitness tips,
             workouts, and exclusive content!
           </p>
-
-          {/* Social Media Icons */}
-          <div className="mt-5 flex space-x-4">
+          <div className="mt-5 flex justify-center md:justify-start space-x-4">
             <a href="#" className="text-gray-400 hover:text-primary text-2xl">
               <FaFacebook />
             </a>

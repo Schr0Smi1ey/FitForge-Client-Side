@@ -34,8 +34,8 @@ const Subscribers = () => {
         <title>FitForge | Dashboard | Subscribers</title>
       </Helmet>
       <table className="table table-zebra">
-        <thead>
-          <tr className="text-center">
+        <thead className="bg-primary text-white">
+          <tr className="text-center text-base md:text-lg lg:text-xl">
             <th>No.</th>
             <th>Name</th>
             <th>Email</th>
@@ -43,7 +43,10 @@ const Subscribers = () => {
         </thead>
         <tbody>
           {subscribers.map((subscriber, index) => (
-            <tr key={subscriber._id} className="text-center">
+            <tr
+              key={subscriber._id}
+              className="text-center text-base md:text-lg lg:text-xl"
+            >
               <td>{index + 1}</td>
               <td>{subscriber.name}</td>
               <td>{subscriber.email}</td>

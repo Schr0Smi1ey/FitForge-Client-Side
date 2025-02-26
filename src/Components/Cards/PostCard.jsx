@@ -44,7 +44,6 @@ const PostCard = ({ postData, refetch, home }) => {
     );
   }
 
-  console.log(userData);
   const handleVote = async (vote) => {
     try {
       const res = await customAxios.patch(`/voteForums`, {

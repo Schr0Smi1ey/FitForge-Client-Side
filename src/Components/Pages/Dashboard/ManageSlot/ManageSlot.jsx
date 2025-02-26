@@ -84,7 +84,7 @@ const ManageSlot = () => {
       ) : (
         <div>
           <table className="table table-zebra">
-            <thead>
+            <thead className="bg-primary text-white text-base md:text-lg lg:text-xl">
               <tr className="text-center">
                 <th>Day</th>
                 <th>Slot Name</th>
@@ -93,7 +93,7 @@ const ManageSlot = () => {
                 <th>Action</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="text-gray-700 text-sm md:text-base lg:text-lg">
               {slotData.map((slot, index) => (
                 <tr key={slot._id} className="text-center">
                   <td>{slot.selectedDay}</td>

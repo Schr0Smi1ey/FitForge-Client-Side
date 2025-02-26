@@ -43,7 +43,7 @@ const BookTrainer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-12 text-center">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Book Session with {trainer.name}
+            Book Session with {trainer.fullName}
           </h1>
           <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm inline-block">
             <div className="flex gap-8 items-center text-sm text-gray-600 dark:text-gray-300">

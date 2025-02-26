@@ -79,58 +79,75 @@ const AddClass = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto bg-white p-6 rounded-lg shadow-md">
+    <div className="container mx-auto max-w-4xl bg-white p-8 rounded-2xl shadow-lg">
       <Helmet>
         <title>FitForge | Dashboard | Add Class</title>
       </Helmet>
-      <h2 className="text-2xl font-bold mb-4 text-center">Add New Class</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <h2 className="text-3xl font-bold mb-6 text-center text-primary">
+        Add New Class
+      </h2>
+
+      <form onSubmit={handleSubmit} className="space-y-5">
+        {/* Class Title */}
         <div>
-          <label className="block text-gray-700 font-medium">Class Title</label>
+          <label className="block text-gray-600 font-semibold mb-1">
+            Class Title
+          </label>
           <input
             type="text"
             name="title"
             value={formData.title}
             onChange={handleChange}
-            className="w-full p-2 border rounded-lg"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
             required
           />
         </div>
 
+        {/* Image Upload */}
         <div>
-          <label className="block text-gray-700 font-medium">Image</label>
+          <label className="block text-gray-600 font-semibold mb-1">
+            Upload Image
+          </label>
           <input
             type="file"
             accept="image/*"
             onChange={handleFileChange}
-            preview="true"
             ref={fileInputRef}
-            className="w-full p-2 border rounded-lg"
+            className="w-full p-3 border border-gray-300 rounded-lg cursor-pointer focus:outline-none"
             required
           />
         </div>
 
+        {/* Description */}
         <div>
-          <label className="block text-gray-700 font-medium">Description</label>
+          <label className="block text-gray-600 font-semibold mb-1">
+            Description
+          </label>
           <textarea
             name="description"
             value={formData.description}
             onChange={handleChange}
-            className="w-full p-2 border rounded-lg"
-            rows="3"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+            rows="4"
             required
           ></textarea>
         </div>
+
+        {/* Category */}
         <div>
-          <label className="block text-gray-700 font-medium">Category</label>
+          <label className="block text-gray-600 font-semibold mb-1">
+            Category
+          </label>
           <select
             name="category"
             value={formData.category}
             onChange={handleChange}
-            className="w-full p-2 border rounded-lg"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
             required
           >
-            <option value="" disabled></option>
+            <option value="" disabled>
+              Select Category
+            </option>
             <option value="Strength & Resistance">Strength & Resistance</option>
             <option value="Cardio & Endurance">Cardio & Endurance</option>
             <option value="Mobility & Flexibility">
@@ -148,40 +165,55 @@ const AddClass = () => {
             </option>
           </select>
         </div>
-        <div>
-          <label className="block text-gray-700 font-medium">Duration</label>
-          <select
-            name="duration"
-            value={formData.duration}
-            onChange={handleChange}
-            className="w-full p-2 border rounded-lg"
-            required
-          >
-            <option value="" disabled></option>
-            <option value="1">1 hr</option>
-            <option value="2">2 hr</option>
-            <option value="3">3 hr</option>
-          </select>
-        </div>
-        <div>
-          <label className="block text-gray-700 font-medium">Intensity</label>
-          <select
-            name="intensity"
-            value={formData.intensity}
-            onChange={handleChange}
-            className="w-full p-2 border rounded-lg"
-            required
-          >
-            <option value="" disabled></option>
-            <option value="Beginner">Beginner</option>
-            <option value="Intermediate">Intermediate</option>
-            <option value="Advanced">Advanced</option>
-          </select>
+
+        {/* Duration */}
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="block text-gray-600 font-semibold mb-1">
+              Duration
+            </label>
+            <select
+              name="duration"
+              value={formData.duration}
+              onChange={handleChange}
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+              required
+            >
+              <option value="" disabled>
+                Select Duration
+              </option>
+              <option value="1">1 Hour</option>
+              <option value="2">2 Hours</option>
+              <option value="3">3 Hours</option>
+            </select>
+          </div>
+
+          {/* Intensity */}
+          <div>
+            <label className="block text-gray-600 font-semibold mb-1">
+              Intensity
+            </label>
+            <select
+              name="intensity"
+              value={formData.intensity}
+              onChange={handleChange}
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+              required
+            >
+              <option value="" disabled>
+                Select Intensity
+              </option>
+              <option value="Beginner">Beginner</option>
+              <option value="Intermediate">Intermediate</option>
+              <option value="Advanced">Advanced</option>
+            </select>
+          </div>
         </div>
 
+        {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-primary text-white py-2 rounded-lg hover:bg-primary"
+          className="w-full bg-primary text-white py-3 rounded-lg text-lg font-semibold hover:bg-opacity-90 transition-all duration-200"
         >
           Add Class
         </button>

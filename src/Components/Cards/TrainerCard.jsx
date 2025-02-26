@@ -1,49 +1,74 @@
-import { FaCalendarAlt } from "react-icons/fa";
+import { FaFacebookF, FaTwitter, FaLinkedin } from "react-icons/fa";
 import { Link } from "react-router-dom";
+
 const TrainerCard = ({ trainer }) => {
   return (
-    <div className="relative bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
-      <div className="p-6">
-        <div className="flex items-center gap-4 mb-4">
-          <img
-            src={trainer.profileImage}
-            alt={trainer.fullName}
-            className="w-20 h-20 rounded-full border-4 border-purple-100 object-cover"
-          />
-          <div>
-            <h3 className="text-xl font-bold text-gray-800">
-              {trainer.fullName}
-            </h3>
-            <p className="text-sm text-purple-600 font-medium">
-              {trainer.experience} years experience
-            </p>
-          </div>
+    <div className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+      {/* Image Section */}
+      <div className="relative group">
+        <img
+          src={trainer.profileImage}
+          alt={trainer.fullName}
+          className="w-full h-60 object-cover transition-transform duration-300"
+        />
+        {/* Overlay on Hover */}
+        <div className="absolute inset-0 bg-primary/60 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <a
+            href={trainer.socialLinks[0]}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaFacebookF className="text-white text-3xl hover:scale-110 transition-transform" />
+          </a>
+          <a
+            href={trainer.socialLinks[1]}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaTwitter className="text-white text-3xl hover:scale-110 transition-transform" />
+          </a>
+          <a
+            href={trainer.socialLinks[2]}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaLinkedin className="text-white text-3xl hover:scale-110 transition-transform" />
+          </a>
         </div>
+      </div>
 
-        <div className="flex flex-wrap gap-2 mb-4">
-          {trainer?.skills.slice(0, 3).map((skill, index) => (
+      {/* Info Section */}
+      <div className="p-5 text-center">
+        <h3 className="text-xl font-bold text-gray-800">{trainer.fullName}</h3>
+        <p className="text-base text-primary font-medium">
+          {trainer.experience} years experience
+        </p>
+
+        {/* Skills */}
+        <div className="flex flex-wrap justify-center gap-2 my-3">
+          {trainer.skills.slice(0, 3).map((skill, index) => (
             <span
               key={index}
-              className="px-3 py-1 bg-purple-50 text-purple-700 text-sm rounded-full"
+              className="px-3 py-1 bg-primary/10 text-primary text-xs rounded-full font-medium"
             >
               {skill}
             </span>
           ))}
         </div>
 
-        <div className="flex items-center justify-between text-sm">
-          <div className="flex items-center gap-2 text-gray-600">
-            <FaCalendarAlt className="w-5 h-5 text-purple-500" />
-            <span>{trainer.availableDays.join(", ")}</span>
-          </div>
-          <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm">
-            {trainer.availableTime}
-          </span>
+        {/* Availability */}
+        <div className="text-base text-gray-600">
+          <span className="font-semibold">Available:</span>{" "}
+          {trainer.availableDays.join(", ")}
+        </div>
+        <div className="text-base text-green-700 font-medium mt-1">
+          {trainer.availableTime}
         </div>
       </div>
 
+      {/* CTA Button */}
       <Link to={`/trainer-details/${trainer._id}`}>
-        <button className="w-full bg-gradient-to-r from-purple-500 to-blue-500 text-white py-3 font-medium hover:opacity-90 transition-opacity">
+        <button className="w-full bg-gradient-to-r from-primary to-blue-500 text-white py-3 font-semibold text-lg tracking-wide hover:brightness-110 transition-all duration-300 hover:shadow-md">
           Know More
         </button>
       </Link>

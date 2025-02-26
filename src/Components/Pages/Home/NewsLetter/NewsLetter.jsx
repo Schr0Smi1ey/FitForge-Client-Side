@@ -1,58 +1,60 @@
-import { useContext } from "react";
-import useCustomAxios from "../../../../Hooks/useCustomAxios";
-import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Newsletter = () => {
-  const customAxios = useCustomAxios();
-  const { Toast } = useContext(AuthContext);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const formData = e.target;
-    const name = formData.name.value;
-    const email = formData.email.value;
-    try {
-      const res = await customAxios.post("/subscribers", { name, email });
-      if (res.status === 200) {
-        Toast("Subscribed Successfully", "success");
-        formData.reset();
-      }
-    } catch (error) {
-      Toast(error.response.data, "error");
-    }
-  };
+  useEffect(() => {
+    AOS.init({ duration: 1000, once: true });
+  }, []);
 
   return (
-    <div className="container mx-auto bg-primary text-white p-8 rounded-lg shadow-lg text-center mt-10">
-      <h2 className="text-2xl font-bold mb-3">Subscribe to Our Newsletter</h2>
-      <p className="text-sm mb-5">
-        Get the latest updates right in your inbox!
-      </p>
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col md:flex-row gap-3 justify-center items-center"
+    <div className="container mx-auto px-6 md:px-12 lg:px-20 mt-10">
+      <div
+        className="bg-primary text-white p-8 md:p-12 rounded-2xl shadow-xl text-center relative overflow-hidden"
+        data-aos="fade-up"
       >
-        <input
-          type="text"
-          name="name"
-          placeholder="Your Name"
-          className="p-3 rounded-md text-black w-full md:w-1/3"
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Your Email"
-          className="p-3 rounded-md text-black w-full md:w-1/3"
-          required
-        />
-        <button
-          type="submit"
-          className="bg-white text-primary font-bold px-5 py-3 rounded-md hover:bg-gray-200 transition w-full md:w-auto"
+        <div className="absolute inset-0 bg-white/10 backdrop-blur-md rounded-2xl"></div>
+
+        <h2
+          className="relative text-3xl md:text-4xl font-extrabold mb-3"
+          data-aos="fade-down"
         >
-          Subscribe
-        </button>
-      </form>
+          Stay Updated with Our Newsletter
+        </h2>
+        <p
+          className="relative text-sm md:text-base text-white/80 max-w-lg mx-auto mb-6"
+          data-aos="fade-up"
+        >
+          Subscribe to receive the latest news, tips, and exclusive updates
+          straight to your inbox.
+        </p>
+
+        <form className="relative flex flex-col md:flex-row gap-3 justify-center items-center">
+          <input
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            className="w-full md:w-1/3 px-4 py-3 rounded-lg text-black outline-none border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary transition-all"
+            data-aos="zoom-in"
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Your Email"
+            className="w-full md:w-1/3 px-4 py-3 rounded-lg text-black outline-none border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary transition-all"
+            data-aos="zoom-in"
+            required
+          />
+          <button
+            type="submit"
+            className="w-full md:w-auto bg-gradient-to-r from-white to-gray-200 text-primary font-semibold px-6 py-3 rounded-lg hover:brightness-110 transition-all shadow-md"
+            data-aos="zoom-in"
+          >
+            Subscribe
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

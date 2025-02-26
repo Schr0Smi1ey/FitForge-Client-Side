@@ -85,7 +85,7 @@ const AllTrainers = () => {
         <div className="overflow-x-auto">
           <table className="table">
             {/* head */}
-            <thead>
+            <thead className="bg-primary text-white text-base md:text-lg lg:text-xl">
               <tr className="text-center">
                 <th>Profile</th>
                 <th>Name</th>
@@ -93,7 +93,7 @@ const AllTrainers = () => {
                 <th>Action</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="text-sm md:text-base lg:text-lg">
               {trainers.map((trainer) => (
                 <tr key={trainer._id} className="text-center">
                   <td>

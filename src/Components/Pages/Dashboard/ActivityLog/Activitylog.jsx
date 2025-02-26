@@ -45,7 +45,9 @@ const Applications = () => {
         <title>FitForge | Dashboard | Activity Log</title>
       </Helmet>
       {applicantData.error || !applicantData.length === 0 ? (
-        <p>No Applications found</p>
+        <p className="text-2xl text-red-500 font-bold text-center">
+          No Applications found
+        </p>
       ) : (
         <table className="table table-zebra">
           <thead>

@@ -34,55 +34,71 @@ const BookedTrainer = () => {
       <Helmet>
         <title>FitForge | Dashboard | Booked Trainers</title>
       </Helmet>
-      <h2 className="text-3xl font-bold mb-6">Booked Trainers</h2>
+      <h2 className="text-3xl text-center font-bold mb-6">Booked Trainers</h2>
 
       {payments.length === 0 ? (
         <p className="text-gray-500">No bookings found.</p>
       ) : (
-        <div className="grid grid-cols-1 gap-6">
+        <div className="max-w-2xl mx-auto grid grid-cols-1 gap-6">
           {payments.map((payment) => (
             <div
               key={payment._id}
-              className="card bg-white shadow-xl rounded-lg p-4"
+              className="bg-white shadow-lg rounded-2xl overflow-hidden transition-transform transform hover:scale-105 duration-300"
             >
               {/* Trainer Image */}
-              <img
-                src={payment.trainerDetails.profileImage}
-                alt={payment.trainerDetails.fullName}
-                className="w-full h-40 object-cover rounded-lg"
-              />
+              <div className="relative">
+                <img
+                  src={payment.trainerDetails.profileImage}
+                  alt={payment.trainerDetails.fullName}
+                  className="w-[75%] rounded-3xl mx-auto object-cover"
+                />
+                <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                  <p className="text-white text-lg font-semibold">
+                    {payment.trainerDetails.fullName}
+                  </p>
+                </div>
+              </div>
 
               {/* Trainer Details */}
-              <div className="mt-4">
-                <h3 className="text-xl font-semibold">
-                  {payment.trainerDetails.fullName}
-                </h3>
-                <p className="text-gray-600">
-                  📧 {payment.trainerDetails.email}
-                </p>
-                <p className="text-gray-600">
-                  🎯 Age: {payment.trainerDetails.age}
-                </p>
-                <p className="text-gray-600">
-                  💰 Package: {payment.packageName}
-                </p>
+              <div className="p-5">
+                <div className="flex flex-col md:flex-row gap-3 md:gap-4 lg:gap-8 justify-center items-center">
+                  <div>
+                    <h3 className="text-2xl font-bold text-primary">
+                      {payment.trainerDetails.fullName}
+                    </h3>
+                    <p className="text-gray-500 text-sm mb-2">
+                      📧 {payment.trainerDetails.email}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-gray-700">
+                      🎯 Age: {payment.trainerDetails.age}
+                    </p>
+                    <p className="text-gray-700">
+                      💰 Package: {payment.packageName}
+                    </p>
+                  </div>
+                </div>
 
                 {/* Class Details */}
-                <div className="mt-4">
-                  <h4 className="font-bold text-lg">
+                <div className="mt-4 p-3 bg-gray-100 rounded-xl">
+                  <h4 className="text-lg font-semibold text-primary">
                     🏋️ {payment.classDetails.title}
                   </h4>
-                  <p className="text-gray-600">
+                  <p className="text-gray-600 text-sm">
                     {payment.classDetails.description}
                   </p>
-                  <p className="text-gray-500">
-                    🔥 Intensity: {payment.classDetails.intensity}
+                  <p className="text-sm text-gray-600">
+                    🔥 Intensity:{" "}
+                    <span className="font-semibold">
+                      {payment.classDetails.intensity}
+                    </span>
                   </p>
                 </div>
 
                 {/* Slot Details */}
-                <div className="mt-4 p-3 bg-gray-100 rounded-lg">
-                  <p className="text-gray-700 font-semibold">🕒 Slot Details</p>
+                <div className="mt-4 p-3 border border-primary rounded-xl bg-gray-50">
+                  <p className="text-gray-800 font-semibold">🕒 Slot Details</p>
                   <p className="text-gray-600">
                     ⏰ {payment.slotDetails.slotName}
                   </p>

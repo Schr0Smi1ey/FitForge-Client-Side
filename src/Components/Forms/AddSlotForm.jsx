@@ -124,7 +124,7 @@ const AddSlotForm = () => {
 
   return (
     <div className="mx-auto bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-4">Add Slot</h2>
+      <h2 className="text-2xl text-center font-bold mb-4">Add a New Slot</h2>
 
       {/* Trainer Info (Read-Only) */}
       {trainerData && (

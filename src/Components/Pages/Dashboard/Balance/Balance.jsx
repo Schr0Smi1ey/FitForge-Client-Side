@@ -41,24 +41,27 @@ const Balance = () => {
       </div>
     );
   }
-
   const payments = paymentData?.payments || [];
   const totalPaidMembers = paymentData?.totalPaidMembers || 0;
   const totalBalance = paymentData?.totalBalance || 0;
   const totalSubscribers = subscribersData?.totalSubscribers || 0;
+  console.log(paymentData);
   return (
     <div className="p-6">
       <Helmet>
         <title>FitForge | Dashboard | Balance</title>
       </Helmet>
-      <div className="mb-6 flex items-center justify-between">
-        <h2 className="text-3xl font-bold mb-6 text-center">
-          💰 Payment Balance $ {totalBalance}
+      <div className="mb-6 flex flex-col md:flex-row items-center justify-between gap-6">
+        {/* Payment Balance */}
+        <h2 className="text-2xl md:text-3xl font-bold text-center bg-primary text-white px-6 py-3 rounded-lg shadow-md">
+          💰 Payment Balance: $ {totalBalance}
         </h2>
 
         {/* Pie Chart Section */}
-        <div className="flex flex-col items-center mb-6">
-          <h3 className="text-xl font-semibold mb-2">📊 Membership Overview</h3>
+        <div className="bg-white p-4 rounded-lg shadow-md w-full md:w-auto">
+          <h3 className="text-lg md:text-xl font-semibold text-center mb-4">
+            📊 Membership Overview
+          </h3>
           <PieChart
             skipAnimation={true}
             series={[
@@ -92,8 +95,8 @@ const Balance = () => {
         <div className="overflow-x-auto">
           <table className="table w-full border border-gray-300 shadow-lg">
             {/* Table Header */}
-            <thead>
-              <tr className="bg-gray-100 text-left text-gray-700">
+            <thead className="bg-primary text-white text-base md:text-lg lg:text-xl">
+              <tr className="text-center">
                 <th className="p-3 border">Trainer</th>
                 <th className="p-3 border">Trainee</th>
                 <th className="p-3 border">Class</th>
@@ -105,7 +108,7 @@ const Balance = () => {
             </thead>
 
             {/* Table Body */}
-            <tbody>
+            <tbody className="text-gray-700 text-center text-sm md:text-base lg:text-lg">
               {payments.map((payment) => (
                 <tr key={payment._id} className="hover:bg-gray-50">
                   <td className="p-3 border">

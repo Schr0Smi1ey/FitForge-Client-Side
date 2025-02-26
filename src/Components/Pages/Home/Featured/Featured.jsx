@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
+
 import card1 from "../../../../assets/Home/Featured/1.png";
 import card2 from "../../../../assets/Home/Featured/2.png";
 import card3 from "../../../../assets/Home/Featured/3.png";
 import card4 from "../../../../assets/Home/Featured/4.png";
 import card5 from "../../../../assets/Home/Featured/5.png";
 import card6 from "../../../../assets/Home/Featured/6.png";
+import Aos from "aos";
+import "aos/dist/aos.css";
+
 const featuredData = [
   {
     title: "Personalized Training Plans",
@@ -49,43 +53,61 @@ const featuredData = [
     link: "#online-training",
   },
 ];
+
 const Featured = () => {
+  useEffect(() => {
+    Aos.init();
+  }, []);
+
   return (
-    <div>
-      <section className="bg-gray-50 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-extrabold text-center text-primary mb-12">
+    <section className="bg-gray-50 py-16">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        {/* Section Heading */}
+        <div
+          className="text-center mb-12"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
+          <h2 className="text-4xl font-extrabold text-primary uppercase">
             Why Choose Us?
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredData.map((feature, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-lg shadow-lg p-6 transform hover:scale-105 transition-all duration-300"
-              >
-                <div className="flex justify-center mb-4">
-                  <img
-                    src={feature.imgSrc}
-                    alt={feature.title}
-                    className="rounded-xl"
-                  />
-                </div>
-                <h3 className="text-xl font-semibold text-primary mb-3">
-                  {feature.title}
-                </h3>
-                <p className="text-gray-700 mb-4">{feature.description}</p>
-                <a
-                  href={feature.link}
-                  className="text-primary font-semibold hover:underline"
-                >
-                  Learn More
-                </a>
-              </div>
-            ))}
-          </div>
+          <p className="text-gray-600 mt-3 max-w-xl mx-auto">
+            Discover what makes FitForge the ultimate fitness destination for
+            all your training needs.
+          </p>
         </div>
-      </section>
-    </div>
+
+        {/* Feature Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          {featuredData.map((feature, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-2xl shadow-lg p-6 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 group"
+              data-aos="zoom-in"
+              data-aos-delay={index * 100 + 200} // Staggered effect
+            >
+              <div className="relative overflow-hidden rounded-xl mb-5">
+                <img
+                  src={feature.imgSrc}
+                  alt={feature.title}
+                  className="rounded-xl w-full group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <h3 className="text-xl font-bold text-primary mb-3">
+                {feature.title}
+              </h3>
+              <p className="text-gray-700 mb-4">{feature.description}</p>
+              <a
+                href={feature.link}
+                className="inline-block text-primary font-semibold hover:underline transition-opacity duration-200 opacity-90 hover:opacity-100"
+              >
+                Learn More →
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 };
 

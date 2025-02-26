@@ -1,4 +1,7 @@
+import { useEffect } from "react";
 import { Carousel } from "react-responsive-carousel";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 import slide1 from "../../../../assets/Home/Banner/1.png";
@@ -7,77 +10,97 @@ import slide3 from "../../../../assets/Home/Banner/3.png";
 import slide4 from "../../../../assets/Home/Banner/4.png";
 import slide5 from "../../../../assets/Home/Banner/5.png";
 import slide6 from "../../../../assets/Home/Banner/6.png";
-import bg1 from "../../../../assets/Home/Banner/bg-1.png";
-import bg2 from "../../../../assets/Home/Banner/bg-2.png";
 
 const sliderContent = [
   {
-    title: "Forge Your Strength",
+    title: "Unleash Your Inner Athlete",
     description:
-      "Push your limits and build a body that's as strong as your willpower. FitForge is your ultimate destination for fitness and transformation.",
-    buttonText: "Start Your Journey",
+      "Break limits, build strength, and transform your fitness journey. Your goals are closer than you think!",
+    buttonText: "Start Training",
     imgSrc: slide1,
   },
   {
-    title: "Unite in Fitness",
+    title: "Fitness Meets Community",
     description:
-      "Join a community of fitness enthusiasts! Share your journey, inspire others, and stay motivated as you work toward your goals.",
-    buttonText: "Join the Community",
+      "Join a tribe of motivated individuals pushing toward greatness. Your journey is better together!",
+    buttonText: "Join Us",
     imgSrc: slide2,
   },
   {
-    title: "Unlock Your Potential",
+    title: "Elevate Your Routine",
     description:
-      "Achieve your fitness goals with tailored workouts, expert coaching, and state-of-the-art equipment. Take your fitness to the next level.",
-    buttonText: "Explore Our Programs",
+      "Experience expert-led training programs tailored to your unique fitness level.",
+    buttonText: "Find a Program",
     imgSrc: slide3,
   },
   {
-    title: "Your Fitness, Your Way",
+    title: "Train Smarter, Not Just Harder",
     description:
-      "From personalized training to group classes, FitForge offers flexibility and variety to meet all your fitness needs.",
-    buttonText: "Browse Classes",
+      "From personalized coaching to high-tech fitness tracking, optimize every rep.",
+    buttonText: "Explore Features",
     imgSrc: slide4,
   },
   {
-    title: "Empower Your Body, Elevate Your Mind",
+    title: "Fuel Your Fire",
     description:
-      "Fitness is about more than just physical strength. At FitForge, we nurture both your body and mind for complete wellness.",
-    buttonText: "Learn More",
+      "Your potential is limitless. FitForge is here to ignite the power within you.",
+    buttonText: "Discover More",
     imgSrc: slide5,
   },
   {
-    title: "Celebrate Your Progress",
+    title: "Results That Speak",
     description:
-      "Every milestone counts. Celebrate your fitness journey with us at FitForge, where every achievement is recognized and celebrated.",
-    buttonText: "Track Your Progress",
+      "Every milestone is a victory. Track your progress and celebrate your wins!",
+    buttonText: "Track Progress",
     imgSrc: slide6,
   },
 ];
 
 const Banner = () => {
+  useEffect(() => {
+    AOS.init({ duration: 1000, once: true });
+  }, []);
+
   return (
-    <div className="container mx-auto py-20">
+    <div className="container mx-auto py-24">
       <Carousel
-        className="relative mx-auto"
+        className="relative"
         infiniteLoop
-        autoPlay={{
-          interval: 2000,
-          pauseOnHover: false,
-        }}
-        interval={2000}
+        autoPlay
+        interval={3000}
         showStatus={false}
         showThumbs={false}
       >
         {sliderContent.map((slide, index) => (
-          <div key={index}>
-            <img src={slide.imgSrc} alt="slide" />
-            <img src={bg1} className="absolute left-0 top-0" alt="" />
-            <img src={bg2} className="absolute left-0 top-0" alt="" />
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-black flex flex-col justify-center items-center text-primary text-center p-4">
-              <h1 className="text-3xl font-bold">{slide.title}</h1>
-              <p>{slide.description}</p>
-              <button className="bg-primary text-white px-4 py-2 mt-4 rounded-md">
+          <div key={index} className="relative">
+            <img
+              src={slide.imgSrc}
+              alt="Fitness Banner"
+              className="w-full object-cover"
+            />
+            <div
+              className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/90 flex flex-col justify-center items-center text-white text-center p-6"
+              data-aos="fade-up"
+            >
+              <h1
+                className="text-3xl md:text-5xl font-extrabold mb-4"
+                data-aos="zoom-in"
+                data-aos-delay="200"
+              >
+                {slide.title}
+              </h1>
+              <p
+                className="max-w-2xl mx-auto text-lg md:text-xl text-gray-300 mb-6"
+                data-aos="fade-up"
+                data-aos-delay="400"
+              >
+                {slide.description}
+              </p>
+              <button
+                className="bg-primary text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:brightness-110 transition-all"
+                data-aos="fade-up"
+                data-aos-delay="600"
+              >
                 {slide.buttonText}
               </button>
             </div>
