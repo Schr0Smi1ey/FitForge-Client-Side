@@ -3,6 +3,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import PaymentForm from "../../Forms/PaymentForm";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet";
 
 // Load Stripe
 const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);

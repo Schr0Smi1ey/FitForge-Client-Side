@@ -7,6 +7,7 @@ import Testimonials from "./Testimonials/Testimonials";
 import LatestForumPosts from "./LatestForumPosts/LatestForumPosts";
 import Newsletter from "./NewsLetter/NewsLetter";
 import Team from "./Team/Team";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   return (

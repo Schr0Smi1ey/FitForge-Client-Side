@@ -16,6 +16,7 @@ import { GridLoader } from "react-spinners";
 import useCustomAxios from "../../../Hooks/useCustomAxios";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);

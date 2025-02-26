@@ -3,6 +3,7 @@ import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 import useCustomAxios from "../../../../Hooks/useCustomAxios";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 const AddClass = () => {
   const [formData, setFormData] = useState({

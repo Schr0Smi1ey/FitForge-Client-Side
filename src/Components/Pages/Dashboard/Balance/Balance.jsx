@@ -5,6 +5,7 @@ import { GridLoader } from "react-spinners";
 import useCustomAxios from "../../../../Hooks/useCustomAxios";
 import { PieChart } from "@mui/x-charts";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 
 const Balance = () => {
   const { user, loading } = useContext(AuthContext);

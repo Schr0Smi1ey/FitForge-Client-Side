@@ -5,6 +5,7 @@ import { GridLoader } from "react-spinners";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 
 const ManageSlot = () => {
   const secureAxios = useAxiosSecure();

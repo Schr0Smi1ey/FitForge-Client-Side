@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 import { useRadioGroup } from "@mui/material";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 
 const AllTrainers = () => {
   const { trainers, isFetching } = useTrainers();

@@ -3,9 +3,9 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import { FaFacebook, FaTwitter, FaInstagram, FaGlobe } from "react-icons/fa";
 import { GridLoader } from "react-spinners";
 import Swal from "sweetalert2";
-import useCustomAxios from "../../Hooks/useCustomAxios";
 import { AuthContext } from "../../Contexts/AuthContext/AuthProvider";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 
 const TrainerDetails = () => {
   const { trainer } = useLoaderData();

@@ -3,6 +3,7 @@ import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import { GridLoader } from "react-spinners";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 
 const BookedTrainer = () => {
   const { user, loading } = useContext(AuthContext);

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 import { FaCheckCircle, FaLock } from "react-icons/fa";
 import { useLoaderData, useNavigate } from "react-router-dom"; // Import useNavigate
 
@@ -37,7 +38,7 @@ const BookTrainer = () => {
   return (
     <div className="pt-32 bg-gray-50 dark:bg-gray-900">
       <Helmet>
-        <title>FitForge | Book Trainer</title>
+        <title>FitForge | Book-Trainer</title>
       </Helmet>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-12 text-center">

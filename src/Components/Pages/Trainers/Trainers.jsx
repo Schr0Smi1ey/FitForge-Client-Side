@@ -2,6 +2,7 @@ import React from "react";
 import useTrainers from "../../../Hooks/useTrainers";
 import TrainerCard from "../../Cards/TrainerCard";
 import { GridLoader } from "react-spinners";
+import { Helmet } from "react-helmet";
 const Trainers = () => {
   const { trainers, isFetching } = useTrainers();
   if (isFetching) {

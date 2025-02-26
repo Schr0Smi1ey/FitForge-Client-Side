@@ -3,6 +3,7 @@ import PostCard from "../../Cards/PostCard";
 import { useQuery } from "@tanstack/react-query";
 import useCustomAxios from "../../../Hooks/useCustomAxios";
 import { GridLoader } from "react-spinners";
+import { Helmet } from "react-helmet";
 
 const Community = () => {
   const [posts, setPosts] = useState([]);

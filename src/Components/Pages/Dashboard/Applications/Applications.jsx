@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { GridLoader } from "react-spinners";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
+import { Helmet } from "react-helmet";
 
 const Applications = () => {
   const secureAxios = useAxiosSecure();

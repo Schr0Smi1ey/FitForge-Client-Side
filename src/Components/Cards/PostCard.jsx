@@ -26,7 +26,6 @@ const PostCard = ({ postData, refetch, home }) => {
   const customAxios = useCustomAxios();
   const navigate = useNavigate();
 
-  // Fetch user data
   const { data: userData, isFetching } = useQuery({
     queryKey: ["user", postedBy],
     queryFn: async () => {
@@ -37,7 +36,6 @@ const PostCard = ({ postData, refetch, home }) => {
     },
     enabled: user === null ? false : true,
   });
-
   if (loading || isFetching) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -46,6 +44,7 @@ const PostCard = ({ postData, refetch, home }) => {
     );
   }
 
+  console.log(userData);
   const handleVote = async (vote) => {
     try {
       const res = await customAxios.patch(`/voteForums`, {

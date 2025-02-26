@@ -5,6 +5,7 @@ import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 import { FaEye } from "react-icons/fa";
 import { convertDate } from "../../../../utils/Utilities.js";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure.jsx";
+import { Helmet } from "react-helmet";
 const Applications = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);

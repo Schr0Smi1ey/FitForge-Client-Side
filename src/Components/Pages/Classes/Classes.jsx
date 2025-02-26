@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import useCustomAxios from "../../../Hooks/useCustomAxios";
 import { GridLoader } from "react-spinners";
 import ClassCard from "../../Cards/ClassCard";
+import { Helmet } from "react-helmet";
 
 const Community = () => {
   const [classes, setClasses] = useState([]);

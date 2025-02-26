@@ -4,6 +4,7 @@ import { GridLoader } from "react-spinners";
 import axios from "axios";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 const AddForum = () => {
   const { user, loading, image_hosting_api } = useContext(AuthContext);
   if (loading) {

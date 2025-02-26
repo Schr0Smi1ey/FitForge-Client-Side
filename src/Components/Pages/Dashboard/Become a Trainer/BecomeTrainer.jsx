@@ -6,6 +6,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import useCustomAxios from "../../../../Hooks/useCustomAxios";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 
 const skillsOptions = [
   { label: "Strength & Resistance", value: "Strength & Resistance" },

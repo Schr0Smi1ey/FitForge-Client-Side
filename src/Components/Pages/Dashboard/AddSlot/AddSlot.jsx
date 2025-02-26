@@ -1,5 +1,6 @@
 import React from "react";
 import AddSlotForm from "../../../Forms/AddSlotForm";
+import { Helmet } from "react-helmet";
 
 const AddSlot = () => {
   return (
