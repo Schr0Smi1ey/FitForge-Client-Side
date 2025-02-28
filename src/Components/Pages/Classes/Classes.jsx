@@ -30,7 +30,7 @@ const Classes = () => {
       setTotalPages(res.data.totalPages);
       return res.data;
     },
-    keepPreviousData: true, 
+    keepPreviousData: true,
   });
 
   const handlePageChange = (newPage) => {
@@ -69,7 +69,7 @@ const Classes = () => {
       <div>
         {isFetching ? (
           <div className="flex items-center justify-center min-h-screen">
-            <GridLoader color="#A94A4A" size={110} />
+            <GridLoader color="#A94A4A" size={50} />
           </div>
         ) : classes.length > 0 ? (
           <div>

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   FaUsers,
   FaWallet,
@@ -16,7 +16,7 @@ import {
   FaHome,
   FaComments,
 } from "react-icons/fa";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Contexts/AuthContext/AuthProvider";
 import { GridLoader } from "react-spinners";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
@@ -30,7 +30,7 @@ const Dashboard = () => {
   const [isTrainer, setIsTrainer] = useState(false);
   const [isMember, setIsMember] = useState(false);
   const secureAxios = useAxiosSecure();
-
+  const navigate = useNavigate();
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -53,6 +53,15 @@ const Dashboard = () => {
       },
     });
   }
+  useEffect(() => {
+    if (isAdmin) {
+      navigate("/dashboard/subscribers");
+    } else if (isTrainer) {
+      navigate("/dashboard/add-slot");
+    } else if (isMember) {
+      navigate("/dashboard/user-profile");
+    }
+  }, [isAdmin, isMember, isTrainer, navigate]);
 
   return (
     <div className="flex min-h-screen">

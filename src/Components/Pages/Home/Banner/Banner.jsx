@@ -76,28 +76,28 @@ const Banner = () => {
             <img
               src={slide.imgSrc}
               alt="Fitness Banner"
-              className="w-full object-cover"
+              className="w-full min-h-96 object-cover"
             />
             <div
               className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/90 flex flex-col justify-center items-center text-white text-center p-6"
               data-aos="fade-up"
             >
               <h1
-                className="text-3xl md:text-5xl font-extrabold mb-4"
+                className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-4"
                 data-aos="zoom-in"
                 data-aos-delay="200"
               >
                 {slide.title}
               </h1>
               <p
-                className="max-w-2xl mx-auto text-lg md:text-xl text-gray-300 mb-6"
+                className="max-w-md sm:max-w-2xl mx-auto text-lg md:text-xl text-gray-300 mb-4"
                 data-aos="fade-up"
                 data-aos-delay="400"
               >
                 {slide.description}
               </p>
               <button
-                className="bg-primary text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:brightness-110 transition-all"
+                className="bg-primary text-white font-semibold px-4 py-1 md:px-6 md:py-3 rounded-lg shadow-md hover:brightness-110 transition-all"
                 data-aos="fade-up"
                 data-aos-delay="600"
               >

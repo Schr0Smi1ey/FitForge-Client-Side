@@ -39,7 +39,7 @@ const Testimonials = () => {
           <div className="relative">
             <FaQuoteLeft className="text-6xl text-white/60 absolute -top-10 -left-10" />
           </div>
-          <h2 className="text-4xl mt-2 md:text-5xl font-extrabold leading-tight">
+          <h2 className="text-2xl md:text-3xl mt-2 lg:text-4xl font-extrabold leading-tight">
             The Power of Words from Those Who Matter”
           </h2>
           <p className="text-lg text-white/80">

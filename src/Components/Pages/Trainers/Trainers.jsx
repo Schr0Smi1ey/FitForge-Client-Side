@@ -8,7 +8,7 @@ const Trainers = () => {
   if (isFetching) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <GridLoader color="#A94A4A" size={30} />
+        <GridLoader color="#A94A4A" size={50} />
       </div>
     );
   }
