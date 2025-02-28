@@ -1,34 +1,39 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useCustomAxios from "../../../Hooks/useCustomAxios";
 import { GridLoader } from "react-spinners";
 import ClassCard from "../../Cards/ClassCard";
 import { Helmet } from "react-helmet";
 
-const Community = () => {
+const Classes = () => {
   const [classes, setClasses] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [searchQuery, setSearchQuery] = useState("");
   const limit = 6;
   const customAxios = useCustomAxios();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    console.log(e.target.value);
+    setSearchQuery(e.target.value);
+    setCurrentPage(1);
+  };
+
   const { data, isFetching, refetch } = useQuery({
-    queryKey: ["classes", currentPage],
+    queryKey: ["classes", currentPage, searchQuery],
     queryFn: async () => {
+      const query = searchQuery ? `&search=${searchQuery}` : "";
       const res = await customAxios.get(
-        `/classes?page=${currentPage}&limit=${limit}`
+        `/classes?page=${currentPage}&limit=${limit}${query}`
       );
       setClasses(res.data.classes);
       setTotalPages(res.data.totalPages);
       return res.data;
     },
+    keepPreviousData: true, 
   });
-  if (isFetching) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <GridLoader color="#A94A4A" size={30} />
-      </div>
-    );
-  }
+
   const handlePageChange = (newPage) => {
     if (newPage > 0 && newPage <= totalPages) {
       setCurrentPage(newPage);
@@ -36,24 +41,60 @@ const Community = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 pt-32">
       <Helmet>
         <title>FitForge | Classes</title>
       </Helmet>
-      <h1 className="text-3xl font-bold mb-6 text-center">Forum</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {classes.map((cls) => (
-          <ClassCard key={cls._id} classData={cls} refetch={refetch} />
-        ))}
+
+      {/* Main Heading Section */}
+      <div className="text-center mb-12">
+        <h1 className="text-4xl font-bold text-gray-800 mb-4">
+          Explore Our Fitness Classes
+        </h1>
+        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          Discover a variety of fitness classes designed to help you achieve
+          your goals. From high-intensity workouts to relaxing yoga sessions, we
+          have something for everyone.
+        </p>
+
+        <div className="flex justify-center my-8">
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={handleSearch}
+            placeholder="Search by class name..."
+            className="input input-bordered w-full md:w-1/3 py-2 px-4 text-lg font-medium border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+          />
+        </div>
       </div>
-      {/* Pagination */}
+      <div>
+        {isFetching ? (
+          <div className="flex items-center justify-center min-h-screen">
+            <GridLoader color="#A94A4A" size={110} />
+          </div>
+        ) : classes.length > 0 ? (
+          <div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {classes.map((cls) => (
+                <ClassCard key={cls._id} classData={cls} refetch={refetch} />
+              ))}
+            </div>
+          </div>
+        ) : (
+          <p className="text-5xl text-center font-bold text-red-500 mt-5">
+            No classes available.
+          </p>
+        )}
+      </div>
+
+      {/* Pagination Section */}
       <div className="flex justify-center items-center space-x-4 mt-8">
         <button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+          className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50 hover:bg-gray-400 transition-colors"
         >
-          Prev
+          Previous
         </button>
         <span className="font-medium">
           Page {currentPage} of {totalPages}
@@ -61,7 +102,7 @@ const Community = () => {
         <button
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+          className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50 hover:bg-gray-400 transition-colors"
         >
           Next
         </button>
@@ -70,4 +111,4 @@ const Community = () => {
   );
 };
 
-export default Community;
+export default Classes;

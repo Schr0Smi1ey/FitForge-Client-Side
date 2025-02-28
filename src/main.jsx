@@ -8,7 +8,6 @@ import Home from "./Components/Pages/Home/Home.jsx";
 import AuthProvider from "./Contexts/AuthContext/AuthProvider.jsx";
 import Login from "./Components/Forms/Login.jsx";
 import SignUp from "./Components/Forms/SignUp.jsx";
-import Classes from "./Components/Pages/Classes/Classes.jsx";
 import Community from "./Components/Pages/Community/Community.jsx";
 import Dashboard from "./Components/Pages/Dashboard/Dashboard.jsx";
 import Subscribers from "./Components/Pages/Dashboard/Subscribers/Subscribers.jsx";
@@ -32,6 +31,7 @@ import AdminRoute from "./ProtectedRoute/AdminRoute.jsx";
 import BookTrainer from "./Components/Pages/BookTrainer/BookTrainer.jsx";
 import Payment from "./Components/Pages/Payment/Payment.jsx";
 import BookedTrainer from "./Components/Pages/Dashboard/BookedTrainer/BookedTrainer.jsx";
+import Classes from "./Components/Pages/Classes/Classes.jsx";
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
