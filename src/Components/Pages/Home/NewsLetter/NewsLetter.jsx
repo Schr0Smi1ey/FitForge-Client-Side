@@ -4,7 +4,7 @@ import "aos/dist/aos.css";
 
 const Newsletter = () => {
   useEffect(() => {
-    AOS.init({ duration: 1000, once: true });
+    AOS.init({ duration: 500 });
   }, []);
 
   return (

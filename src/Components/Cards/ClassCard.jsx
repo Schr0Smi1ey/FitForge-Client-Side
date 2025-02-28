@@ -1,5 +1,8 @@
 import { FaUsers } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 
 const ClassCard = ({ classData }) => {
   const { title, description, image, trainerDetails, intensity, booked } =
@@ -9,10 +12,15 @@ const ClassCard = ({ classData }) => {
     intermediate: "bg-yellow-500",
     advanced: "bg-red-500",
   };
+
+  useEffect(() => {
+    AOS.init({ duration: 500 });
+  }, []);
+
   return (
     <div className="bg-white shadow-lg rounded-xl p-6 flex flex-col hover:shadow-2xl transition duration-300">
       {/* Image */}
-      <div className="relative">
+      <div data-aos="fade-down" className="relative">
         <img
           src={image}
           alt={title}
@@ -22,8 +30,15 @@ const ClassCard = ({ classData }) => {
 
       {/* Class Info */}
       <div className="mt-4">
-        <h3 className="text-xl font-bold text-gray-900">{title}</h3>
-        <p className="text-gray-600 text-sm mt-2 line-clamp-3">{description}</p>
+        <h3 data-aos="fade-right" className="text-xl font-bold text-gray-900">
+          {title}
+        </h3>
+        <p
+          data-aos="fade-left"
+          className="text-gray-600 text-sm mt-2 line-clamp-3"
+        >
+          {description}
+        </p>
       </div>
 
       {/* Trainers */}
@@ -32,6 +47,7 @@ const ClassCard = ({ classData }) => {
           trainerDetails.map((trainer, index) => (
             <Link to={`/trainer-details/${trainer._id}`} key={index}>
               <img
+                data-aos="fade-right"
                 src={trainer.profileImage || "https://via.placeholder.com/50"}
                 alt={`Trainer ${index + 1}`}
                 className="w-10 h-10 rounded-full border-2 border-primary"
@@ -39,7 +55,9 @@ const ClassCard = ({ classData }) => {
             </Link>
           ))
         ) : (
-          <p className="text-gray-500 text-sm">No trainers assigned</p>
+          <p data-aos="fade-right" className="text-gray-500 text-sm">
+            No trainers assigned
+          </p>
         )}
       </div>
 
@@ -47,6 +65,7 @@ const ClassCard = ({ classData }) => {
       <div className="flex justify-between items-center mt-4 text-sm">
         {/* Intensity Badge */}
         <span
+          data-aos="fade-up"
           className={`px-3 py-1 rounded-full text-white font-semibold ${
             colors[intensity.toLowerCase()]
           } `}
@@ -55,7 +74,7 @@ const ClassCard = ({ classData }) => {
         </span>
 
         {/* Bookings Count */}
-        <div className="flex items-center text-gray-600">
+        <div data-aos="fade-up" className="flex items-center text-gray-600">
           <FaUsers className="mr-1 text-gray-500" /> {booked} booked
         </div>
       </div>

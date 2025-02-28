@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import AOS from "aos";
+import Aos from "aos";
 import "aos/dist/aos.css";
 import ClassCard from "../../../Cards/ClassCard";
 import { GridLoader } from "react-spinners";
@@ -8,7 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const FeaturedClasses = () => {
   useEffect(() => {
-    AOS.init();
+    Aos.init({ duration: 500 });
   }, []);
 
   const customAxios = useCustomAxios();
@@ -25,7 +25,7 @@ const FeaturedClasses = () => {
   if (isFetching) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <GridLoader color="#A94A4A" size={30} />
+        <GridLoader color="#A94A4A" size={40} />
       </div>
     );
   }
@@ -33,11 +33,7 @@ const FeaturedClasses = () => {
   return (
     <div className="container mx-auto px-6 lg:px-12 py-16">
       {/* Section Heading */}
-      <div
-        className="text-center mb-12"
-        data-aos="fade-up"
-        data-aos-delay="200"
-      >
+      <div className="text-center mb-12" data-aos="fade-up">
         <h2 className="text-4xl font-extrabold text-primary uppercase">
           Featured Classes
         </h2>
@@ -50,11 +46,7 @@ const FeaturedClasses = () => {
       {/* Class Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {classes.map((featuredClass, index) => (
-          <div
-            key={index}
-            data-aos="fade-up"
-            data-aos-delay={index * 100 + 200}
-          >
+          <div key={index} data-aos="fade-up">
             <ClassCard classData={featuredClass} />
           </div>
         ))}

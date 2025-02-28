@@ -9,8 +9,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 const LatestForumPosts = () => {
   useEffect(() => {
-    AOS.init();
-    window.scrollTo(0, 0);
+    AOS.init({ duration: 500 });
   }, []);
 
   const customAxios = useCustomAxios();
@@ -31,7 +30,7 @@ const LatestForumPosts = () => {
   if (isFetching) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <GridLoader color="#A94A4A" size={30} />
+        <GridLoader color="#A94A4A" size={40} />
       </div>
     );
   }

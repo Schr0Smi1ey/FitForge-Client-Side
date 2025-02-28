@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { convertDate } from "../../utils/Utilities";
@@ -9,7 +9,8 @@ import { AuthContext } from "../../Contexts/AuthContext/AuthProvider";
 import { BsPersonBadge } from "react-icons/bs";
 import { HiCheckBadge } from "react-icons/hi2";
 import useCustomAxios from "../../Hooks/useCustomAxios";
-import { FaThumbsUp } from "react-icons/fa";
+import Aos from "aos";
+import "aos/dist/aos.css";
 const PostCard = ({ postData, refetch, home }) => {
   const {
     title,
@@ -25,7 +26,9 @@ const PostCard = ({ postData, refetch, home }) => {
   } = postData;
   const { user, loading, Toast } = useContext(AuthContext);
   const [isExpanded, setIsExpanded] = useState(false);
-
+  useEffect(() => {
+    Aos.init({ duration: 500 });
+  }, []);
   const secureAxios = useAxiosSecure();
   const navigate = useNavigate();
   const customAxios = useCustomAxios();
@@ -41,7 +44,7 @@ const PostCard = ({ postData, refetch, home }) => {
   if (loading || isFetching) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <GridLoader color="#A94A4A" size={30} />
+        <GridLoader color="#A94A4A" size={40} />
       </div>
     );
   }
@@ -81,7 +84,7 @@ const PostCard = ({ postData, refetch, home }) => {
       <div className="bg-white shadow-lg rounded-xl">
         {/* Image Section */}
 
-        <div className="relative">
+        <div data-aos="fade-up" className="relative">
           <img
             src={image}
             alt={home ? (isExpanded ? title : minimizedTitle) : title}
@@ -94,10 +97,16 @@ const PostCard = ({ postData, refetch, home }) => {
 
         {/* Content Section */}
         <div className="p-6">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">
+          <h2
+            data-aos="fade-right"
+            className="text-2xl md:text-3xl font-bold mb-4"
+          >
             {home ? (isExpanded ? title : minimizedTitle) : title}
           </h2>
-          <p className="text-gray-700 text-base md:text-lg mb-4">
+          <p
+            data-aos="fade-left"
+            className="text-gray-700 text-base md:text-lg mb-4"
+          >
             {home
               ? isExpanded
                 ? description
@@ -119,7 +128,7 @@ const PostCard = ({ postData, refetch, home }) => {
           {/* User & Meta Info */}
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             {/* User Info */}
-            <div className="flex items-center gap-4">
+            <div data-aos="fade-right" className="flex items-center gap-4">
               <img
                 src={posterData?.user?.photoURL}
                 alt={posterData?.user?.name}
@@ -141,7 +150,7 @@ const PostCard = ({ postData, refetch, home }) => {
             </div>
 
             {/* Post Date */}
-            <div className="text-gray-600">
+            <div data-aos="fade-up" className="text-gray-600">
               <p className="text-sm md:text-base">
                 {convertDate(postedDate, "PostCard")}
               </p>
@@ -149,7 +158,7 @@ const PostCard = ({ postData, refetch, home }) => {
 
             {/* Vote Buttons */}
             {!home && (
-              <div className="flex items-center space-x-4">
+              <div data-aos="fade-left" className="flex items-center space-x-4">
                 <div className="flex items-center gap-1">
                   <span className="font-bold">{totalUpVote}</span>
                   <button

@@ -9,11 +9,11 @@ const UserProfile = () => {
   const { user, loading } = useContext(AuthContext);
   const navigate = useNavigate();
   const handleUpdateProfile = () => {
-    navigate("/dashboard/update-profile");
+    navigate("/update-profile");
   };
   useEffect(() => {
     window.scrollTo(0, 0);
-    AOS.init({ duration: 700 });
+    AOS.init({ duration: 500 });
   }, []);
   if (loading) {
     return (

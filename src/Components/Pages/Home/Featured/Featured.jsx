@@ -56,18 +56,14 @@ const featuredData = [
 
 const Featured = () => {
   useEffect(() => {
-    Aos.init();
+    Aos.init({ duration: 500 });
   }, []);
 
   return (
     <section className="bg-gray-50 py-16">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* Section Heading */}
-        <div
-          className="text-center mb-12"
-          data-aos="fade-up"
-          data-aos-delay="200"
-        >
+        <div className="text-center mb-12" data-aos="fade-up">
           <h2 className="text-4xl font-extrabold text-primary uppercase">
             Why Choose Us?
           </h2>
@@ -83,8 +79,7 @@ const Featured = () => {
             <div
               key={index}
               className="bg-white rounded-2xl shadow-lg p-6 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 group"
-              data-aos="zoom-in"
-              data-aos-delay={index * 100 + 200} // Staggered effect
+              data-aos="fade-up"
             >
               <div className="relative overflow-hidden rounded-xl mb-5">
                 <img

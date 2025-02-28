@@ -124,9 +124,13 @@ const NavBar = () => {
                 />
               </li>
               <li className="hover:bg-gradient-to-t hover:from-primary/20 hover:to-primary/10">
-                <h3 className="justify-between flex font-medium text-base">
+                <Link
+                  to="/user-profile"
+                  onClick={toggleMenuDropdown}
+                  className="justify-between flex font-medium text-base"
+                >
                   {user.displayName}
-                </h3>
+                </Link>
               </li>
               <li className="hover:bg-gradient-to-t hover:from-primary/20 hover:to-primary/10">
                 <div className="my-1">

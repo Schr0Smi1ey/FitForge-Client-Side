@@ -7,7 +7,7 @@ import { GridLoader } from "react-spinners";
 
 const Team = () => {
   useEffect(() => {
-    AOS.init({ duration: 1000, once: true });
+    AOS.init({ duration: 500 });
   }, []);
 
   const { trainers, isFetching } = useTrainers();
@@ -15,7 +15,7 @@ const Team = () => {
   if (isFetching) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <GridLoader color="#A94A4A" size={30} />
+        <GridLoader color="#A94A4A" size={40} />
       </div>
     );
   }

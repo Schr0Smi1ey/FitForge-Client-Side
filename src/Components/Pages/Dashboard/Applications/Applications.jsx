@@ -13,7 +13,7 @@ const Applications = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <GridLoader color="#A94A4A" size={30} />
+        <GridLoader color="#A94A4A" size={40} />
       </div>
     );
   }
@@ -29,7 +29,7 @@ const Applications = () => {
   if (isFetching) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <GridLoader color="#A94A4A" size={30} />
+        <GridLoader color="#A94A4A" size={40} />
       </div>
     );
   }

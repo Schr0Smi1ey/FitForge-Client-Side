@@ -64,6 +64,26 @@ const router = createBrowserRouter([
         element: <Community></Community>,
       },
       {
+        path: "/user-profile",
+        element: (
+          <div className="pt-32 container mx-auto px-4 min-h-screen">
+            <PrivateRoute>
+              <UserProfile></UserProfile>
+            </PrivateRoute>
+          </div>
+        ),
+      },
+      {
+        path: "/update-profile",
+        element: (
+          <div className="pt-32 container mx-auto px-4 min-h-screen">
+            <PrivateRoute>
+              <UpdateProfile></UpdateProfile>
+            </PrivateRoute>
+          </div>
+        ),
+      },
+      {
         path: "/become-a-trainer",
         element: (
           <div className="pt-32">
@@ -183,19 +203,9 @@ const router = createBrowserRouter([
           ),
       },
       {
-        path: "user-profile",
-        element: <UserProfile></UserProfile>,
-      },
-      {
-        path: "update-profile",
-        element: <UpdateProfile></UpdateProfile>,
-      },
-
-      {
         path: "become-a-trainer",
         element: <BecomeTrainer></BecomeTrainer>,
       },
-
       {
         path: "activity-log",
         element: <Activitylog></Activitylog>,

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Banner from "./Banner/Banner";
 import Featured from "./Featured/Featured";
 import About from "./About/About";
@@ -10,6 +10,9 @@ import Team from "./Team/Team";
 import { Helmet } from "react-helmet";
 
 const Home = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div>
       <Helmet>

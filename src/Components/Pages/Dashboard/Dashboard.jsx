@@ -34,7 +34,7 @@ const Dashboard = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <GridLoader color="#A94A4A" size={30} />
+        <GridLoader color="#A94A4A" size={40} />
       </div>
     );
   }
@@ -59,7 +59,7 @@ const Dashboard = () => {
     } else if (isTrainer) {
       navigate("/dashboard/add-slot");
     } else if (isMember) {
-      navigate("/dashboard/user-profile");
+      navigate("/dashboard/activity-log");
     }
   }, [isAdmin, isMember, isTrainer, navigate]);
 
@@ -129,14 +129,6 @@ const Dashboard = () => {
 
           {isMember && (
             <div className="text-base md:text-lg lg:text-xl space-y-4">
-              <li className="w-fit">
-                <NavLink
-                  to="/dashboard/user-profile"
-                  className="flex items-center gap-2"
-                >
-                  <FaUser /> User Profile
-                </NavLink>
-              </li>
               <li className="w-fit">
                 <NavLink
                   to="/dashboard/activity-log"
@@ -235,7 +227,7 @@ const Dashboard = () => {
         <div className="p-4">
           {loading ? (
             <div className="flex items-center justify-center min-h-screen">
-              <GridLoader color="#A94A4A" size={30} />
+              <GridLoader color="#A94A4A" size={40} />
             </div>
           ) : (
             <Outlet />

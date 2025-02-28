@@ -1,12 +1,18 @@
 import { FaFacebookF, FaTwitter, FaLinkedin } from "react-icons/fa";
 import { Link } from "react-router-dom";
-
+import Aos from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 const TrainerCard = ({ trainer }) => {
+  useEffect(() => {
+    Aos.init({ duration: 500 });
+  }, []);
   return (
     <div className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
       {/* Image Section */}
       <div className="relative group">
         <img
+          data-aos="fade-down"
           src={trainer.profileImage}
           alt={trainer.fullName}
           className="w-full h-60 object-cover transition-transform duration-300"
@@ -39,8 +45,10 @@ const TrainerCard = ({ trainer }) => {
 
       {/* Info Section */}
       <div className="p-5 text-center">
-        <h3 className="text-xl font-bold text-gray-800">{trainer.fullName}</h3>
-        <p className="text-base text-primary font-medium">
+        <h3 data-aos="fade-up" className="text-xl font-bold text-gray-800">
+          {trainer.fullName}
+        </h3>
+        <p data-aos="fade-up" className="text-base text-primary font-medium">
           {trainer.experience} years experience
         </p>
 
@@ -48,6 +56,7 @@ const TrainerCard = ({ trainer }) => {
         <div className="flex flex-wrap justify-center gap-2 my-3">
           {trainer.skills.slice(0, 3).map((skill, index) => (
             <span
+              data-aos="fade-right"
               key={index}
               className="px-3 py-1 bg-primary/10 text-primary text-xs rounded-full font-medium"
             >
@@ -57,17 +66,20 @@ const TrainerCard = ({ trainer }) => {
         </div>
 
         {/* Availability */}
-        <div className="text-base text-gray-600">
+        <div data-aos="fade-up" className="text-base text-gray-600">
           <span className="font-semibold">Available:</span>{" "}
           {trainer.availableDays.join(", ")}
         </div>
-        <div className="text-base text-green-700 font-medium mt-1">
+        <div
+          data-aos="fade-up"
+          className="text-base text-green-700 font-medium mt-1"
+        >
           {trainer.availableTime}
         </div>
       </div>
 
       {/* CTA Button */}
-      <Link to={`/trainer-details/${trainer._id}`}>
+      <Link data-aos="fade-up" to={`/trainer-details/${trainer._id}`}>
         <button className="w-full bg-gradient-to-r from-primary to-blue-500 text-white py-3 font-semibold text-lg tracking-wide hover:brightness-110 transition-all duration-300 hover:shadow-md">
           Know More
         </button>

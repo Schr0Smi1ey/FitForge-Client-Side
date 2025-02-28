@@ -12,6 +12,9 @@ import {
 } from "swiper/modules";
 import { FaQuoteLeft, FaRegStar, FaStar } from "react-icons/fa";
 import userImg from "../../../../assets/Home/Testimonials/commenter1.jpg";
+import Aos from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 
 const testimonials = [
   {
@@ -31,11 +34,14 @@ const testimonials = [
 ];
 
 const Testimonials = () => {
+  useEffect(() => {
+    Aos.init({ duration: 500 });
+  }, []);
   return (
     <div className="bg-primary my-10">
       <div className="container mx-auto text-white py-16 px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-12">
         {/* Left Side - Text Content */}
-        <div className="md:w-[45%] text-left space-y-6">
+        <div data-aos="fade-right" className="md:w-[45%] text-left space-y-6">
           <div className="relative">
             <FaQuoteLeft className="text-6xl text-white/60 absolute -top-10 -left-10" />
           </div>
@@ -55,7 +61,7 @@ const Testimonials = () => {
         </div>
 
         {/* Right Side - Swiper Carousel */}
-        <div className="relative md:w-[50%]">
+        <div data-aos="fade-left" className="relative md:w-[50%]">
           <Swiper
             effect="coverflow"
             grabCursor={true}

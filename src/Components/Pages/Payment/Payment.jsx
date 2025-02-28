@@ -17,7 +17,7 @@ const Payment = () => {
   const { trainer, slot, packageName } = location.state || {};
 
   useEffect(() => {
-    AOS.init({ duration: 1000, once: true });
+    AOS.init({ duration: 500 });
   }, []);
 
   return (

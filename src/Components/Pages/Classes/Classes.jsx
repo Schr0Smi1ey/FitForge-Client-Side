@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useCustomAxios from "../../../Hooks/useCustomAxios";
 import { GridLoader } from "react-spinners";
 import ClassCard from "../../Cards/ClassCard";
 import { Helmet } from "react-helmet";
-
+import Aos from "aos";
+import "aos/dist/aos.css";
 const Classes = () => {
   const [classes, setClasses] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -13,6 +14,10 @@ const Classes = () => {
   const limit = 6;
   const customAxios = useCustomAxios();
 
+  useEffect(() => {
+    Aos.init({ duration: 500 });
+    window.scrollTo(0, 0);
+  }, []);
   const handleSearch = (e) => {
     e.preventDefault();
     setSearchQuery(e.target.value);
@@ -47,10 +52,16 @@ const Classes = () => {
 
       {/* Main Heading Section */}
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-gray-800 mb-4">
+        <h1
+          data-aos="fade-up"
+          className="text-4xl font-bold text-gray-800 mb-4"
+        >
           Explore Our Fitness Classes
         </h1>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+        <p
+          data-aos="fade-up"
+          className="text-lg text-gray-600 max-w-2xl mx-auto"
+        >
           Discover a variety of fitness classes designed to help you achieve
           your goals. From high-intensity workouts to relaxing yoga sessions, we
           have something for everyone.
@@ -69,7 +80,7 @@ const Classes = () => {
       <div>
         {isFetching ? (
           <div className="flex items-center justify-center min-h-screen">
-            <GridLoader color="#A94A4A" size={50} />
+            <GridLoader color="#A94A4A" size={40} />
           </div>
         ) : classes.length > 0 ? (
           <div>

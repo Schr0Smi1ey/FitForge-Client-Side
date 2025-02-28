@@ -5,7 +5,7 @@ import "./About.css";
 
 const About = () => {
   useEffect(() => {
-    Aos.init();
+    Aos.init({ duration: 500 });
   }, []);
 
   return (
@@ -23,9 +23,12 @@ const About = () => {
       <div className=" z-10 md:w-1/2 p-2 text-white text-center md:text-left mb-8 md:mb-0">
         <div
           className="absolute inset-0 flex flex-col justify-center items-center text-center md:text-left px-4 sm:px-8"
-          data-aos="fade-right"
+          data-aos="fade-up"
         >
-          <h2 className="text-2xl lg:text-4xl font-bold text-white mb-2 md:mb-4 lg:mb-6">
+          <h2
+            data-aos="fade-up"
+            className="text-2xl lg:text-4xl font-bold text-white mb-2 md:mb-4 lg:mb-6"
+          >
             About <span className="text-primary">FitForge</span>
           </h2>
           <p
@@ -40,6 +43,7 @@ const About = () => {
             and cutting-edge equipment.
           </p>
           <a
+            data-aos="fade-up"
             href="/trainers"
             className="mt-2 md:mt-4 lg:mt-6 inline-block bg-white text-primary py-1 lg:py-3 px-5 lg:px-8 rounded-lg font-semibold hover:bg-gray-200 transition duration-300 shadow-md"
           >
