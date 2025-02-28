@@ -15,7 +15,6 @@ const Classes = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    console.log(e.target.value);
     setSearchQuery(e.target.value);
     setCurrentPage(1);
   };

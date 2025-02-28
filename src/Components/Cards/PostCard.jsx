@@ -1,13 +1,15 @@
 import React, { useContext, useState } from "react";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import useCustomAxios from "../../Hooks/useCustomAxios";
 import { convertDate } from "../../utils/Utilities";
 import { useQuery } from "@tanstack/react-query";
 import { GridLoader } from "react-spinners";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { AuthContext } from "../../Contexts/AuthContext/AuthProvider";
-
+import { BsPersonBadge } from "react-icons/bs";
+import { HiCheckBadge } from "react-icons/hi2";
+import useCustomAxios from "../../Hooks/useCustomAxios";
+import { FaThumbsUp } from "react-icons/fa";
 const PostCard = ({ postData, refetch, home }) => {
   const {
     title,
@@ -17,24 +19,24 @@ const PostCard = ({ postData, refetch, home }) => {
     totalUpVote,
     totalDownVote,
     postedDate,
+    liked,
+    disliked,
     _id,
   } = postData;
   const { user, loading, Toast } = useContext(AuthContext);
   const [isExpanded, setIsExpanded] = useState(false);
 
   const secureAxios = useAxiosSecure();
-  const customAxios = useCustomAxios();
   const navigate = useNavigate();
-
-  const { data: userData, isFetching } = useQuery({
+  const customAxios = useCustomAxios();
+  const { data: posterData, isFetching } = useQuery({
     queryKey: ["user", postedBy],
     queryFn: async () => {
-      const res = await secureAxios.get("/posterInfo", {
-        params: { postedBy, email: user?.email },
+      const res = await customAxios.get("/posterInfo", {
+        params: { postedBy },
       });
       return res.data;
     },
-    enabled: user === null ? false : true,
   });
   if (loading || isFetching) {
     return (
@@ -46,10 +48,20 @@ const PostCard = ({ postData, refetch, home }) => {
 
   const handleVote = async (vote) => {
     try {
-      const res = await customAxios.patch(`/voteForums`, {
-        forumId: _id,
-        vote,
-      });
+      if (!user) {
+        navigate("/login");
+        return;
+      }
+      const res = await secureAxios.patch(
+        `/voteForums`,
+        {
+          forumId: _id,
+          vote,
+        },
+        {
+          params: { email: user ? user.email : "" },
+        }
+      );
       if (res.status === 200) {
         refetch();
       }
@@ -64,11 +76,11 @@ const PostCard = ({ postData, refetch, home }) => {
       : description;
   const minimizedTitle =
     title.length > 40 ? title.substring(0, 40) + "..." : title;
-
   return (
-    <div className="max-w-4xl mx-auto my-4">
-      <div className="bg-white shadow-lg rounded-xl overflow-hidden">
+    <div className="max-w-4xl w-full mx-auto my-4">
+      <div className="bg-white shadow-lg rounded-xl">
         {/* Image Section */}
+
         <div className="relative">
           <img
             src={image}
@@ -76,7 +88,7 @@ const PostCard = ({ postData, refetch, home }) => {
             className="w-full h-96 object-fill"
           />
           <div className="absolute top-2 left-2 bg-black bg-opacity-60 text-white px-3 py-1 rounded">
-            {convertDate(postedDate)}
+            {convertDate(postedDate, "PostCard")}
           </div>
         </div>
 
@@ -109,19 +121,30 @@ const PostCard = ({ postData, refetch, home }) => {
             {/* User Info */}
             <div className="flex items-center gap-4">
               <img
-                src={userData?.photoURL}
-                alt={userData?.name}
+                src={posterData?.user?.photoURL}
+                alt={posterData?.user?.name}
                 className="w-12 h-12 rounded-full object-cover"
               />
               <div>
-                <p className="font-bold text-lg">{userData?.name}</p>
-                <p className="text-gray-500 text-sm">{userData?.role}</p>
+                <p className="font-bold text-lg">{posterData?.user?.name}</p>
+                <p className="flex items-center gap-2 text-gray-500 text-base">
+                  <span>
+                    {posterData?.user?.role === "admin" ? (
+                      <HiCheckBadge className="text-xl text-blue-500"></HiCheckBadge>
+                    ) : (
+                      <BsPersonBadge className="text-xl text-blue-500"></BsPersonBadge>
+                    )}{" "}
+                  </span>{" "}
+                  {posterData?.user?.role}
+                </p>
               </div>
             </div>
 
             {/* Post Date */}
             <div className="text-gray-600">
-              <p className="text-sm md:text-base">{convertDate(postedDate)}</p>
+              <p className="text-sm md:text-base">
+                {convertDate(postedDate, "PostCard")}
+              </p>
             </div>
 
             {/* Vote Buttons */}
@@ -133,7 +156,9 @@ const PostCard = ({ postData, refetch, home }) => {
                     onClick={() => handleVote("up")}
                     className="p-2 rounded-full hover:bg-gray-200 transition"
                   >
-                    <AiOutlineLike className="text-2xl" />
+                    <AiOutlineLike
+                      className={`text-3xl ${liked ? "text-green-500" : ""}`}
+                    />
                   </button>
                 </div>
                 <div className="flex items-center gap-1">
@@ -142,7 +167,9 @@ const PostCard = ({ postData, refetch, home }) => {
                     onClick={() => handleVote("down")}
                     className="p-2 rounded-full hover:bg-gray-200 transition"
                   >
-                    <AiOutlineDislike className="text-2xl" />
+                    <AiOutlineDislike
+                      className={`text-3xl ${disliked ? "text-red-500" : ""}`}
+                    />
                   </button>
                 </div>
               </div>

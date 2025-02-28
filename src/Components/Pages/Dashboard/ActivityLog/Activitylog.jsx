@@ -65,7 +65,7 @@ const Applications = () => {
                 <td>{index + 1}</td>
                 <td>{applicantData[0].user.name}</td>
                 <td>{applicantData[0].user.email}</td>
-                <td>{convertDate(applicant.applyDate)}</td>
+                <td>{convertDate(applicant.applyDate, "ActivityLog")}</td>
                 <td
                   className={`${
                     colors[applicant.status]

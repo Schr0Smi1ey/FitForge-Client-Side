@@ -5,6 +5,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { Helmet } from "react-helmet";
+import { convertDate } from "../../../../utils/Utilities";
 const AddForum = () => {
   const { user, loading, image_hosting_api } = useContext(AuthContext);
   if (loading) {
@@ -66,7 +67,8 @@ const AddForum = () => {
         description: "",
         image: null,
         postedBy: user?.email || "Unknown",
-        totalVote: 0,
+        totalUpVote: 0,
+        totalDownVote: 0,
         postedDate: new Date().toISOString(),
       });
       if (fileInputRef.current) {
@@ -148,7 +150,7 @@ const AddForum = () => {
             <input
               type="text"
               name="postedDate"
-              value={forum.postedDate.date1}
+              value={convertDate(forum.postedDate, "AddForum")}
               readOnly
               className="mt-1 p-3 border-2 border-gray-300 rounded-lg w-full focus:ring-primary focus:border-primary transition-all"
             />

@@ -45,7 +45,6 @@ const Balance = () => {
   const totalPaidMembers = paymentData?.totalPaidMembers || 0;
   const totalBalance = paymentData?.totalBalance || 0;
   const totalSubscribers = subscribersData?.totalSubscribers || 0;
-  console.log(paymentData);
   return (
     <div className="p-6">
       <Helmet>

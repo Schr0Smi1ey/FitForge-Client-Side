@@ -71,6 +71,9 @@ const SignUp = () => {
       role: "member",
       creationTime,
       lastSignInTime,
+      likedPosts: [],
+      dislikedPosts: [],
+      savedPosts: [],
     });
   };
   const ConvertToLink = async (photo) => {
