@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
+import { AuthContext } from "../../../Contexts/AuthContext/AuthProvider";
 import { GridLoader } from "react-spinners";
 const UserProfile = () => {
   const { user, loading } = useContext(AuthContext);
@@ -22,6 +22,7 @@ const UserProfile = () => {
       </div>
     );
   }
+  console.log(user);
   return (
     <div className="min-h-[400px] flex items-center justify-center bg-gradient-to-r from-primary/40 to-primary/50">
       <Helmet>
@@ -49,10 +50,17 @@ const UserProfile = () => {
           >
             Welcome, {user.displayName || "Guest"}!
           </h1>
-          <p data-aos="fade-left" className="text-gray-600 text-lg mb-4">
+          <p data-aos="fade-left" className="text-gray-600 text-lg mb-2">
             Email:{" "}
             <span className="font-medium">{user.email || "Not Provided"}</span>
           </p>
+          <p data-aos="fade-left" className="text-gray-600 text-lg mb-4">
+            Last sign in time:{" "}
+            <span className="font-medium">
+              {user.metadata.lastSignInTime || "Not Provided"}
+            </span>
+          </p>
+
           <button
             data-aos="fade-left"
             onClick={handleUpdateProfile}

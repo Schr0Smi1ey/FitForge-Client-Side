@@ -2,9 +2,11 @@ import { Helmet } from "react-helmet";
 import {
   FaBriefcase,
   FaCalendarAlt,
-  FaGlobe,
+  FaFacebook,
   FaGraduationCap,
+  FaLinkedin,
   FaStar,
+  FaTwitter,
 } from "react-icons/fa";
 import { Link, useLoaderData } from "react-router-dom";
 
@@ -28,7 +30,7 @@ const Trainer = () => {
               {trainer.fullName}
             </h1>
             <div className="flex items-center gap-4 mb-4">
-              <div className="flex items-center gap-2 text-purple-600">
+              <div className="flex items-center gap-2 text-primary">
                 <FaBriefcase className="w-5 h-5" />
                 <span>{trainer.experience} years experience</span>
               </div>
@@ -39,17 +41,30 @@ const Trainer = () => {
               </div>
             </div>
             <div className="flex gap-3">
-              {trainer.socialLinks.map((link, index) => (
-                <a
-                  key={index}
-                  href={link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 bg-gray-100 rounded-lg hover:bg-purple-100 transition-colors"
-                >
-                  <FaGlobe className="w-6 h-6 text-gray-600" />
-                </a>
-              ))}
+              <a
+                href={trainer.socialLinks[0]}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 bg-gray-100 rounded-lg hover:bg-purple-100 transition-colors"
+              >
+                <FaLinkedin className="w-6 h-6 text-blue-600" />
+              </a>
+              <a
+                href={trainer.socialLinks[1]}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 bg-gray-100 rounded-lg hover:bg-purple-100 transition-colors"
+              >
+                <FaFacebook className="w-6 h-6 text-blue-600" />
+              </a>
+              <a
+                href={trainer.socialLinks[1]}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 bg-gray-100 rounded-lg hover:bg-purple-100 transition-colors"
+              >
+                <FaTwitter className="w-6 h-6 text-blue-600" />
+              </a>
             </div>
           </div>
         </div>
@@ -97,14 +112,6 @@ const Trainer = () => {
         </div>
 
         <div className="mt-12">
-          {/* Section Title */}
-          <h2 className="text-2xl font-bold text-primary mb-6">
-            Available Sessions
-            <span className="ml-2 text-lg text-gray-500 dark:text-gray-400 font-normal">
-              Choose your perfect time
-            </span>
-          </h2>
-
           <div className="mt-12 text-center">
             {/* Section Title */}
             <h2 className="text-2xl font-bold text-primary mb-6">
@@ -147,7 +154,7 @@ const Trainer = () => {
                           {slot.selectedDay}
                         </td>
                         <td className="px-6 py-4">
-                          <span className="bg-primary-100 dark:bg-primary-900/30 text-primary px-3 py-1 rounded-full text-sm">
+                          <span className="bg-primary-100 dark:bg-primary-900/30 px-3 py-1 rounded-full text-sm">
                             {slot.slotName}
                           </span>
                         </td>

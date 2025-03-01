@@ -1,10 +1,11 @@
-import React, { useState, useContext, useRef } from "react";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import Select from "react-select";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 import { GridLoader } from "react-spinners";
 import axios from "axios";
 import Swal from "sweetalert2";
-import useCustomAxios from "../../../../Hooks/useCustomAxios";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { Helmet } from "react-helmet";
 
@@ -52,13 +53,16 @@ const BecomeTrainer = () => {
     age: "",
     profileImage: null,
     biography: "",
-    experience: "",
+    experience: 0,
     classDuration: "",
     availableTime: "",
     linkedin: "",
     facebook: "",
     twitter: "",
   });
+  useEffect(() => {
+    AOS.init({ duration: 500 });
+  }, []);
   const [selectedSkills, setSelectedSkills] = useState([]);
   const [availableDays, setAvailableDays] = useState([]);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
@@ -173,7 +177,7 @@ const BecomeTrainer = () => {
           age: "",
           profileImage: null,
           biography: "",
-          experience: "",
+          experience: 0,
           classDuration: "",
           availableTime: "",
           linkedin: "",
@@ -196,10 +200,19 @@ const BecomeTrainer = () => {
       <Helmet>
         <title>FitForge | Dashboard | Become a Trainer</title>
       </Helmet>
-      <h2 className="text-3xl font-bold mb-6 text-center">Be a Trainer</h2>
+      <h2 data-aos="fade-down" className="text-3xl font-bold mb-4 text-center">
+        Join Us as a Trainer
+      </h2>
+      <p
+        data-aos="fade-down"
+        data-aos-delay="100"
+        className="text-lg text-gray-600 mb-6 text-center"
+      >
+        Share your expertise and inspire others by becoming part of our team.
+      </p>
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Full Name */}
-        <div>
+        <div data-aos="fade-up">
           <label className="font-semibold text-gray-700">Full Name</label>
           <input
             type="text"
@@ -213,7 +226,7 @@ const BecomeTrainer = () => {
         </div>
 
         {/* Email (read-only) */}
-        <div>
+        <div data-aos="fade-up">
           <label className="font-semibold text-gray-700">Email</label>
           <input
             type="email"
@@ -225,7 +238,7 @@ const BecomeTrainer = () => {
         </div>
 
         {/* Age */}
-        <div>
+        <div data-aos="fade-up">
           <label className="font-semibold text-gray-700">Age</label>
           <input
             type="number"
@@ -239,7 +252,7 @@ const BecomeTrainer = () => {
         </div>
 
         {/* Profile Image */}
-        <div>
+        <div data-aos="fade-up">
           <label className="font-semibold text-gray-700">Profile Image</label>
           <input
             type="file"
@@ -252,7 +265,7 @@ const BecomeTrainer = () => {
         </div>
 
         {/* Skills */}
-        <div>
+        <div data-aos="fade-up">
           <label className="font-semibold text-gray-700">Skills</label>
           <div className="mt-1">
             {skillsOptions.map((skill) => (
@@ -274,7 +287,7 @@ const BecomeTrainer = () => {
         </div>
 
         {/* Available Days */}
-        <div>
+        <div data-aos="fade-up">
           <label className="font-semibold text-gray-700">
             Available Days a Week
           </label>
@@ -288,7 +301,7 @@ const BecomeTrainer = () => {
         </div>
 
         {/* Available Time */}
-        <div>
+        <div data-aos="fade-up">
           <label className="font-semibold text-gray-700">
             Available Time in a Day
           </label>
@@ -301,7 +314,7 @@ const BecomeTrainer = () => {
         </div>
 
         {/* Class Duration */}
-        <div>
+        <div data-aos="fade-up">
           <label className="font-semibold text-gray-700">
             Class Duration (hour)
           </label>
@@ -317,21 +330,21 @@ const BecomeTrainer = () => {
         </div>
 
         {/* Biography */}
-        <div>
+        <div data-aos="fade-up">
           <label className="font-semibold text-gray-700">Biography</label>
           <textarea
             name="biography"
             value={formData.biography}
             onChange={handleChange}
             placeholder="Tell us about yourself..."
-            rows="4"
+            rows="6"
             required
             className="mt-1 w-full p-3 border rounded-md"
           ></textarea>
         </div>
 
         {/* Experience */}
-        <div>
+        <div data-aos="fade-up">
           <label className="font-semibold text-gray-700">Experience</label>
           <input
             type="number"
@@ -350,6 +363,7 @@ const BecomeTrainer = () => {
           <label className="font-semibold text-gray-700">Social Links</label>
           <div className="mt-1 space-y-2">
             <input
+              data-aos="fade-up"
               type="url"
               name="linkedin"
               value={formData.linkedin}
@@ -358,6 +372,7 @@ const BecomeTrainer = () => {
               className="w-full p-3 border rounded-md"
             />
             <input
+              data-aos="fade-up"
               type="url"
               name="facebook"
               value={formData.facebook}
@@ -366,6 +381,7 @@ const BecomeTrainer = () => {
               className="w-full p-3 border rounded-md"
             />
             <input
+              data-aos="fade-up"
               type="url"
               name="twitter"
               value={formData.twitter}
@@ -377,7 +393,7 @@ const BecomeTrainer = () => {
         </div>
 
         {/* Apply Button */}
-        <div className="text-center">
+        <div data-aos="fade-up" className="text-center">
           <button
             type="submit"
             className="mt-4 bg-primary text-white py-3 px-6 rounded-md font-bold hover:bg-primary-dark transition-all"

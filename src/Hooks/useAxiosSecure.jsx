@@ -4,8 +4,8 @@ import { useContext, useEffect } from "react";
 import { AuthContext } from "../Contexts/AuthContext/AuthProvider";
 
 const axiosSecure = axios.create({
-  // baseURL: "http://localhost:3000",
-  baseURL: "https://fitforge-server.vercel.app",
+  baseURL: "http://localhost:3000",
+  // baseURL: "https://fitforge-server.vercel.app",
 });
 
 const useAxiosSecure = () => {

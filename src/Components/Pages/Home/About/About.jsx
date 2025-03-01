@@ -1,13 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import "aos/dist/aos.css";
 import Aos from "aos";
 import "./About.css";
+import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 
 const About = () => {
   useEffect(() => {
     Aos.init({ duration: 500 });
   }, []);
-
+  const { user } = useContext(AuthContext);
   return (
     <section
       className="relative parallax text-white min-h-96 container my-10 mx-auto"
@@ -44,7 +45,7 @@ const About = () => {
           </p>
           <a
             data-aos="fade-up"
-            href="/trainers"
+            href={user ? "/classes" : "/signup"}
             className="mt-2 md:mt-4 lg:mt-6 inline-block bg-white text-primary py-1 lg:py-3 px-5 lg:px-8 rounded-lg font-semibold hover:bg-gray-200 transition duration-300 shadow-md"
           >
             Get Started

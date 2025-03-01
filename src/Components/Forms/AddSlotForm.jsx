@@ -124,7 +124,10 @@ const AddSlotForm = () => {
 
   return (
     <div className="mx-auto bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-2xl text-center font-bold mb-4">Add a New Slot</h2>
+      <h2 className="text-2xl text-center font-bold mb-2">Add a New Slot</h2>
+      <p className="text-lg text-center text-gray-600 mb-6">
+        Customize your availability and connect with clients effortlessly.
+      </p>
 
       {/* Trainer Info (Read-Only) */}
       {trainerData && (
@@ -183,13 +186,13 @@ const AddSlotForm = () => {
               className="input input-bordered w-full"
             />
           </div>
-          <div className="col-span-2 h-24 mb-4">
+          <div className="col-span-2 h-fit mb-4">
             <label className="font-bold">Skills</label>
             <textarea
               value={(trainerData.skills || []).join(", ")}
               readOnly
-              className="input input-bordered w-full h-full overflow-auto resize-none"
-              style={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }} // Ensures long words break appropriately
+              className="input input-bordered w-full h-fit p-2 overflow-auto"
+              style={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }}
             />
           </div>
           <div>
@@ -210,12 +213,12 @@ const AddSlotForm = () => {
               className="input input-bordered w-full"
             />
           </div>
-          <div className="col-span-2 h-24 mb-4">
+          <div className="col-span-2 h-auto mb-4">
             <label className="font-bold">Biography</label>
             <textarea
               value={trainerData.biography}
               readOnly
-              className="input input-bordered w-full h-full overflow-auto resize-none"
+              className="input input-bordered w-full h-32 h p-2"
               style={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }} // Ensures long words break appropriately
             />
           </div>

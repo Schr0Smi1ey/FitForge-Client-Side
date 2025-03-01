@@ -19,8 +19,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import BecomeTrainer from "./Components/Pages/Dashboard/Become a Trainer/BecomeTrainer.jsx";
 import TrainerDetails from "./Components/Details/TrainerDetails.jsx";
 import Activitylog from "./Components/Pages/Dashboard/ActivityLog/Activitylog.jsx";
-import UserProfile from "./Components/Pages/Dashboard/UserProfile/UserProfile.jsx";
-import UpdateProfile from "./Components/Forms/UpdateProfile.jsx";
 import Trainers from "./Components/Pages/Trainers/Trainers.jsx";
 import AllTrainers from "./Components/Pages/Dashboard/AllTrainers/AllTrainers.jsx";
 import Trainer from "./Components/Details/Trainer.jsx";
@@ -32,6 +30,8 @@ import BookTrainer from "./Components/Pages/BookTrainer/BookTrainer.jsx";
 import Payment from "./Components/Pages/Payment/Payment.jsx";
 import BookedTrainer from "./Components/Pages/Dashboard/BookedTrainer/BookedTrainer.jsx";
 import Classes from "./Components/Pages/Classes/Classes.jsx";
+import UserProfile from "./Components/Pages/UserProfile/UserProfile.jsx";
+import UpdateProfile from "./Components/Forms/UpdateProfile.jsx";
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
