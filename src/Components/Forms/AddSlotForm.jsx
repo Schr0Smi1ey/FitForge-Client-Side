@@ -274,7 +274,10 @@ const AddSlotForm = () => {
         </div>
 
         {/* Submit Button */}
-        <button type="submit" className="btn btn-primary w-full mt-4">
+        <button
+          type="submit"
+          className="py-2 rounded-xl font-semibold text-lg bg-primary text-white w-full mt-4"
+        >
           Submit
         </button>
       </form>
