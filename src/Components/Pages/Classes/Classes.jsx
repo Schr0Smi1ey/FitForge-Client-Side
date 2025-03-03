@@ -17,7 +17,7 @@ const Classes = () => {
   useEffect(() => {
     Aos.init({ duration: 500 });
     window.scrollTo(0, 0);
-  }, []);
+  }, [classes]);
   const handleSearch = (e) => {
     e.preventDefault();
     setSearchQuery(e.target.value);
@@ -80,7 +80,7 @@ const Classes = () => {
       <div>
         {isFetching ? (
           <div className="flex items-center justify-center min-h-screen">
-            <GridLoader color="#A94A4A" size={40} />
+            <GridLoader color="#198068" size={40} />
           </div>
         ) : classes.length > 0 ? (
           <div>

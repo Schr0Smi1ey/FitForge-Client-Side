@@ -37,7 +37,7 @@ const Balance = () => {
   if (loading || isFetching || isFetchingSubscribers) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <GridLoader color="#A94A4A" size={40} />
+        <GridLoader color="#198068" size={40} />
       </div>
     );
   }

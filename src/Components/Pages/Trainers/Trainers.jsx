@@ -14,14 +14,6 @@ const Trainers = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  if (isFetching) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <GridLoader color="#A94A4A" size={40} />
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen container mx-auto pt-32">
       <Helmet>
@@ -42,14 +34,28 @@ const Trainers = () => {
       </div>
 
       {/* Trainers Grid */}
-      <div
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        data-aos="fade-up"
-        data-aos-delay="200"
-      >
-        {trainers.map((trainer) => (
-          <TrainerCard key={trainer._id} trainer={trainer} />
-        ))}
+      <div>
+        {isFetching ? (
+          <div className="flex items-center justify-center min-h-screen">
+            <GridLoader color="#198068" size={40} />
+          </div>
+        ) : trainers.length > 0 ? (
+          <div>
+            <div
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              {trainers.map((trainer) => (
+                <TrainerCard key={trainer._id} trainer={trainer} />
+              ))}
+            </div>
+          </div>
+        ) : (
+          <p className="text-5xl text-center font-bold text-red-500 mt-5">
+            No trainers available.
+          </p>
+        )}
       </div>
     </div>
   );

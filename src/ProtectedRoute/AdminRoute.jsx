@@ -12,7 +12,7 @@ const AdminRoute = ({ children }) => {
   if (loading || isAdminLoading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <GridLoader color="#A94A4A" size={50} />
+        <GridLoader color="#198068" size={50} />
       </div>
     );
   }

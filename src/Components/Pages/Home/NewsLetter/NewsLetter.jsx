@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -13,8 +13,6 @@ const Newsletter = () => {
         className="bg-primary text-white p-8 md:p-12 rounded-2xl shadow-xl text-center relative overflow-hidden"
         data-aos="fade-up"
       >
-        <div className="absolute inset-0 bg-white/10 backdrop-blur-md rounded-2xl"></div>
-
         <h2
           className="relative text-3xl md:text-4xl font-extrabold mb-3"
           data-aos="fade-down"

@@ -44,7 +44,7 @@ const PostCard = ({ postData, refetch, home }) => {
   if (loading || isFetching) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <GridLoader color="#A94A4A" size={40} />
+        <GridLoader color="#198068" size={40} />
       </div>
     );
   }
@@ -117,7 +117,7 @@ const PostCard = ({ postData, refetch, home }) => {
           {home && description.length > 50 && (
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              className="text-blue-500 font-medium mb-4 focus:outline-none"
+              className="text-primary font-medium mb-4 focus:outline-none"
             >
               {isExpanded ? "Show Less" : "Read More"}
             </button>
@@ -139,9 +139,9 @@ const PostCard = ({ postData, refetch, home }) => {
                 <p className="flex items-center gap-2 text-gray-500 text-base">
                   <span>
                     {posterData?.user?.role === "admin" ? (
-                      <HiCheckBadge className="text-xl text-blue-500"></HiCheckBadge>
+                      <HiCheckBadge className="text-xl text-primary"></HiCheckBadge>
                     ) : (
-                      <BsPersonBadge className="text-xl text-blue-500"></BsPersonBadge>
+                      <BsPersonBadge className="text-xl text-primary"></BsPersonBadge>
                     )}{" "}
                   </span>{" "}
                   {posterData?.user?.role}

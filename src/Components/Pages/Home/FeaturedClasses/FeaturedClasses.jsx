@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import ClassCard from "../../../Cards/ClassCard";
@@ -25,7 +25,7 @@ const FeaturedClasses = () => {
   if (isFetching) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <GridLoader color="#A94A4A" size={40} />
+        <GridLoader color="#198068" size={40} />
       </div>
     );
   }

@@ -33,14 +33,6 @@ const Community = () => {
     },
   });
 
-  if (isFetching || loading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen ">
-        <GridLoader color="#A94A4A" size={40} />
-      </div>
-    );
-  }
-
   const handlePageChange = (newPage) => {
     if (newPage > 0 && newPage <= totalPages) {
       setCurrentPage(newPage);
@@ -78,10 +70,25 @@ const Community = () => {
       >
         Recent Forum Posts
       </h2>
-      <div className="max-w-6xl mx-auto grid grid-cols-1 gap-6">
-        {posts.map((post) => (
-          <PostCard key={post._id} postData={post} refetch={refetch} />
-        ))}
+
+      <div>
+        {isFetching || loading ? (
+          <div className="flex items-center justify-center min-h-screen">
+            <GridLoader color="#198068" size={40} />
+          </div>
+        ) : posts.length > 0 ? (
+          <div>
+            <div className="max-w-6xl mx-auto grid grid-cols-1 gap-6">
+              {posts.map((post) => (
+                <PostCard key={post._id} postData={post} refetch={refetch} />
+              ))}
+            </div>
+          </div>
+        ) : (
+          <p className="text-5xl text-center font-bold text-red-500 mt-5">
+            No posts available.
+          </p>
+        )}
       </div>
 
       {/* Pagination */}

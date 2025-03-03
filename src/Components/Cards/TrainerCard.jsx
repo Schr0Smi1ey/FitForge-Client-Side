@@ -80,7 +80,7 @@ const TrainerCard = ({ trainer }) => {
 
       {/* CTA Button */}
       <Link data-aos="fade-up" to={`/trainer-details/${trainer._id}`}>
-        <button className="w-full bg-gradient-to-r from-primary to-blue-500 text-white py-3 font-semibold text-lg tracking-wide hover:brightness-110 transition-all duration-300 hover:shadow-md">
+        <button className="w-full bg-gradient-to-r from-[#3D8D7A] to-primary text-white py-3 font-semibold text-lg tracking-wide hover:brightness-110 transition-all duration-300 hover:shadow-md">
           Know More
         </button>
       </Link>
