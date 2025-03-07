@@ -50,7 +50,7 @@ const Balance = () => {
       <Helmet>
         <title>FitForge | Dashboard | Balance</title>
       </Helmet>
-      <div className="mb-6 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div className="mb-6 flex flex-col lg:flex-row items-center justify-between gap-6">
         {/* Payment Balance */}
         <h2 className="text-2xl md:text-3xl font-bold text-center bg-primary text-white px-6 py-3 rounded-lg shadow-md">
           💰 Payment Balance: $ {totalBalance}

@@ -33,6 +33,11 @@ const Subscribers = () => {
       <Helmet>
         <title>FitForge | Dashboard | Subscribers</title>
       </Helmet>
+      <div className="mb-6">
+        <h1 class="text-2xl md:text-3xl font-bold text-gray-800 text-center">
+          📋 Subscriber List
+        </h1>
+      </div>
       <table className="table table-zebra">
         <thead className="bg-primary text-white">
           <tr className="text-center text-base md:text-lg lg:text-xl">

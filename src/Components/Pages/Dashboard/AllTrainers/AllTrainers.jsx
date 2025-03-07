@@ -83,6 +83,11 @@ const AllTrainers = () => {
         </div>
       ) : (
         <div className="overflow-x-auto">
+          <div className="mb-6">
+            <h1 class="text-3xl font-bold text-gray-800 text-center">
+              👩‍🏫 All Trainers
+            </h1>
+          </div>
           <table className="table">
             {/* head */}
             <thead className="bg-primary text-white text-base md:text-lg lg:text-xl">

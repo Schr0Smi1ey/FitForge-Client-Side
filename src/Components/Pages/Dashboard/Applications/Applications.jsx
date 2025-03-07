@@ -39,11 +39,16 @@ const Applications = () => {
         <title>FitForge | Dashboard | Application</title>
       </Helmet>
       {appliedTrainers.length === 0 ? (
-        <div>
-          <p>No Application Found!</p>
-        </div>
+        <p className="text-2xl text-red-500 font-bold text-center">
+          No Applications found
+        </p>
       ) : (
         <div>
+          <div className="mb-6">
+            <h1 class="text-3xl font-bold text-gray-800 text-center">
+              📋 All Applications
+            </h1>
+          </div>
           <table className="table table-zebra">
             <thead className="bg-primary text-white text-base md:text-lg lg:text-xl">
               <tr className="text-center">

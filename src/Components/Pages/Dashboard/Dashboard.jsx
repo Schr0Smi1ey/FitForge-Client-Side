@@ -7,7 +7,6 @@ import {
   FaFileAlt,
   FaPlusSquare,
   FaBars,
-  FaTimes,
   FaUser,
   FaListAlt,
   FaClipboardCheck,
@@ -16,6 +15,7 @@ import {
   FaHome,
   FaComments,
 } from "react-icons/fa";
+import { RiMenuFold4Fill, RiMenuUnfold4Fill } from "react-icons/ri";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Contexts/AuthContext/AuthProvider";
 import { GridLoader } from "react-spinners";
@@ -71,21 +71,22 @@ const Dashboard = () => {
 
       {/* Sidebar */}
       <div
-        className={`bg-primary w-64 min-h-screen p-6 fixed md:static transition-transform duration-300 z-50
-          ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}
+        className={`bg-primary w-64 min-h-screen p-6 fixed lg:static transition-transform duration-300 z-50
+          ${isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}`}
       >
         <button
-          className="md:hidden text-white text-2xl mb-4"
+          className="lg:hidden mt-5 md:ml-4 text-white text-2xl"
           onClick={() => setIsOpen(false)}
         >
-          <FaTimes />
+          <RiMenuUnfold4Fill className="flex md:w-12 md:h-12" />
         </button>
 
-        <ul className="text-white font-semibold pt-10 space-y-4">
+        <ul className="text-white font-semibold pt-5 md:ml-4">
           {isAdmin && (
             <div className="text-base md:text-lg lg:text-xl   space-y-4">
               <li className="w-fit">
                 <NavLink
+                  onClick={() => setIsOpen(false)}
                   to="/dashboard/subscribers"
                   className="flex items-center gap-2"
                 >
@@ -94,6 +95,7 @@ const Dashboard = () => {
               </li>
               <li className="w-fit">
                 <NavLink
+                  onClick={() => setIsOpen(false)}
                   to="/dashboard/trainers"
                   className="flex items-center gap-2"
                 >
@@ -102,6 +104,7 @@ const Dashboard = () => {
               </li>
               <li className="w-fit">
                 <NavLink
+                  onClick={() => setIsOpen(false)}
                   to="/dashboard/applications"
                   className="flex items-center gap-2"
                 >
@@ -110,6 +113,7 @@ const Dashboard = () => {
               </li>
               <li className="w-fit">
                 <NavLink
+                  onClick={() => setIsOpen(false)}
                   to="/dashboard/balance"
                   className="flex items-center gap-2"
                 >
@@ -118,6 +122,7 @@ const Dashboard = () => {
               </li>
               <li className="w-fit">
                 <NavLink
+                  onClick={() => setIsOpen(false)}
                   to="/dashboard/add-class"
                   className="flex items-center gap-2"
                 >
@@ -131,6 +136,7 @@ const Dashboard = () => {
             <div className="text-base md:text-lg lg:text-xl space-y-4">
               <li className="w-fit">
                 <NavLink
+                  onClick={() => setIsOpen(false)}
                   to="/dashboard/activity-log"
                   className="flex items-center gap-2"
                 >
@@ -139,6 +145,7 @@ const Dashboard = () => {
               </li>
               <li className="w-fit">
                 <NavLink
+                  onClick={() => setIsOpen(false)}
                   to="/dashboard/become-a-trainer"
                   className="flex items-center gap-2"
                 >
@@ -147,6 +154,7 @@ const Dashboard = () => {
               </li>
               <li className="w-fit">
                 <NavLink
+                  onClick={() => setIsOpen(false)}
                   to="/dashboard/booked-trainers"
                   className="flex items-center gap-2"
                 >
@@ -160,6 +168,7 @@ const Dashboard = () => {
             <div className="text-base md:text-lg lg:text-xl space-y-4">
               <li className="w-fit">
                 <NavLink
+                  onClick={() => setIsOpen(false)}
                   to="/dashboard/add-slot"
                   className="flex items-center gap-2"
                 >
@@ -168,6 +177,7 @@ const Dashboard = () => {
               </li>
               <li className="w-fit">
                 <NavLink
+                  onClick={() => setIsOpen(false)}
                   to="/dashboard/manage-slots"
                   className="flex items-center gap-2"
                 >
@@ -178,8 +188,9 @@ const Dashboard = () => {
           )}
 
           {(isAdmin || isTrainer) && (
-            <li className="w-fit text-base md:text-lg lg:text-xl space-y-4">
+            <li className="w-fit text-base md:text-lg lg:text-xl mt-3">
               <NavLink
+                onClick={() => setIsOpen(false)}
                 to="/dashboard/add-forum"
                 className="flex items-center gap-2"
               >
@@ -216,15 +227,15 @@ const Dashboard = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 p-8 md:ml-64">
+      <div className="flex-1 py-4 pt-10 lg:ml-5">
         <button
-          className="md:hidden text-primary-500 text-3xl mb-4"
+          className="lg:hidden text-primary-500 text-3xl ml-5 md:ml-10 mb-4"
           onClick={() => setIsOpen(true)}
         >
-          <FaBars />
+          <RiMenuFold4Fill className="md:w-12 md:h-12" />
         </button>
 
-        <div className="p-4">
+        <div className="container mx-auto p-4">
           {loading ? (
             <div className="flex items-center justify-center min-h-screen">
               <GridLoader color="#198068" size={40} />
