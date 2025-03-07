@@ -6,8 +6,8 @@ import {
   FaTwitter,
   FaYoutube,
 } from "react-icons/fa";
-import { MdLocationOn } from "react-icons/md";
-import { IoIosMailUnread } from "react-icons/io";
+import { MdEmail, MdLocationOn } from "react-icons/md";
+import { IoMdMailUnread } from "react-icons/io";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
@@ -19,7 +19,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-gray-900 text-gray-300 py-10">
-      <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center md:text-left">
+      <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center lg:text-left">
         {/* Logo & About */}
         <div>
           <h2 data-aos="fade-right" className="text-3xl font-bold text-primary">
@@ -63,23 +63,23 @@ const Footer = () => {
           <div className="mt-3 space-y-3 text-sm">
             <div
               data-aos="fade-up"
-              className="flex items-center justify-center md:justify-start space-x-2"
+              className="flex items-center justify-center lg:justify-start space-x-2"
             >
-              <MdLocationOn className="text-primary text-lg" />
+              <MdLocationOn className="text-primary w-5 h-5" />
               <span>Khulna University, Khulna</span>
             </div>
             <div
               data-aos="fade-up"
-              className="flex items-center justify-center md:justify-start space-x-2"
+              className="flex items-center justify-center lg:justify-start space-x-2"
             >
-              <FaPhoneAlt className="text-primary text-lg" />
-              <span>(123) 456-7890</span>
+              <FaPhoneAlt className="text-primary w-5 h-5" />
+              <span>+8801719430433</span>
             </div>
             <div
               data-aos="fade-up"
-              className="flex items-center justify-center md:justify-start space-x-2"
+              className="flex items-center justify-center lg:justify-start space-x-2"
             >
-              <IoIosMailUnread className="text-primary text-lg" />
+              <MdEmail className="text-primary w-5 h-5" />
               <span>support@fitforge.com</span>
             </div>
           </div>
@@ -94,38 +94,43 @@ const Footer = () => {
             Join our community and stay motivated. Follow us for fitness tips,
             workouts, and exclusive content!
           </p>
-          <div className="mt-5 flex justify-center md:justify-start space-x-4">
+          <div className="mt-5 flex justify-center lg:justify-start space-x-4">
             <a
               data-aos="fade-up"
-              href="#"
+              href="https://www.facebook.com/share/15kKdfwbrL/"
+              target="_blank"
               className="text-gray-400 hover:text-primary text-2xl"
             >
               <FaFacebook />
             </a>
             <a
               data-aos="fade-up"
-              href="#"
+              target="_blank"
+              href="https://www.instagram.com/sarafat.karim?igsh=MWtzMmt1azlxZWw3MQ=="
               className="text-gray-400 hover:text-primary text-2xl"
             >
               <FaInstagram />
             </a>
             <a
               data-aos="fade-up"
-              href="#"
+              target="_blank"
+              href="https://x.com/sarafat_karim"
               className="text-gray-400 hover:text-primary text-2xl"
             >
               <FaTwitter />
             </a>
             <a
               data-aos="fade-up"
-              href="#"
+              href="https://www.youtube.com/"
+              target="_blank"
               className="text-gray-400 hover:text-primary text-2xl"
             >
               <FaYoutube />
             </a>
             <a
               data-aos="fade-up"
-              href="#"
+              target="_blank"
+              href="https://www.linkedin.com/in/sarafat-karim/"
               className="text-gray-400 hover:text-primary text-2xl"
             >
               <FaLinkedin />

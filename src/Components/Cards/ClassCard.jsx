@@ -18,13 +18,13 @@ const ClassCard = ({ classData }) => {
   }, []);
 
   return (
-    <div className="bg-white shadow-lg rounded-xl p-6 flex flex-col hover:shadow-2xl transition duration-300">
+    <div className="bg-white shadow-lg rounded-xl p-3 md:p-4 flex flex-col hover:shadow-2xl transition duration-300">
       {/* Image */}
       <div data-aos="fade-down" className="relative">
         <img
           src={image}
           alt={title}
-          className="w-full h-60 rounded-xl object-cover"
+          className="w-full h-60 hover:scale-105 rounded-xl object-cover"
         />
       </div>
 

@@ -15,6 +15,7 @@ const Banner = () => {
   const navigate = useNavigate();
   const [index, setIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [startX, setStartX] = useState(null); // For swipe tracking
 
   const sliderContent = [
     {
@@ -67,8 +68,8 @@ const Banner = () => {
     let interval;
     if (!isHovered) {
       interval = setInterval(() => {
-        setIndex((prevIndex) => (prevIndex + 1) % sliderContent.length);
-      }, 3000);
+        nextSlide();
+      }, 4000);
     }
     return () => clearInterval(interval);
   }, [isHovered]);
@@ -92,6 +93,25 @@ const Banner = () => {
     );
   };
 
+  // ✅ Handle Swipe Gesture for Touch Devices & Mouse Drag
+  const handleTouchStart = (e) => {
+    setStartX(e.touches ? e.touches[0].clientX : e.clientX);
+  };
+
+  const handleTouchEnd = (e) => {
+    if (startX === null) return;
+    const endX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+    const diff = startX - endX;
+
+    if (diff > 50) {
+      nextSlide(); // Swipe left → go to next slide
+    } else if (diff < -50) {
+      prevSlide(); // Swipe right → go to previous slide
+    }
+
+    setStartX(null);
+  };
+
   const { imgSrc, title, description, buttonText, buttonNavigateTo } =
     sliderContent[index];
 
@@ -100,27 +120,27 @@ const Banner = () => {
       className="container mx-auto py-24 relative"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      onMouseDown={handleTouchStart}
+      onMouseUp={handleTouchEnd}
     >
       {/* Slide */}
       <div key={index} className="relative">
-        <img
-          src={imgSrc}
-          alt="Fitness Banner"
-          className="w-full min-h-96 object-cover"
-        />
+        <img src={imgSrc} alt="Fitness Banner" className="w-full min-h-96" />
         <div
           className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/90 flex flex-col justify-center items-center text-white text-center p-6"
           data-aos="fade-up"
         >
           <h1
-            className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-4"
+            className="text-3xl lg:text-4xl font-extrabold mb-4"
             data-aos="zoom-in"
             data-aos-delay="100"
           >
             {title}
           </h1>
           <p
-            className="max-w-md sm:max-w-2xl mx-auto text-lg md:text-xl text-gray-300 mb-4"
+            className="w-[85%] sm:w-full text-center mx-auto text-lg md:text-xl text-gray-300 mb-4"
             data-aos="fade-up"
             data-aos-delay="200"
           >
@@ -140,19 +160,19 @@ const Banner = () => {
       {/* Navigation Buttons */}
       <button
         onClick={prevSlide}
-        className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/80 transition"
+        className="absolute top-1/2 left-0 transform -translate-y-1/2 text-white p-1 rounded-full hover:bg-black/80 transition"
       >
         ❮
       </button>
       <button
         onClick={nextSlide}
-        className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/80 transition"
+        className="absolute top-1/2 right-0 transform -translate-y-1/2 text-white p-1 rounded-full hover:bg-black/80 transition"
       >
         ❯
       </button>
 
       {/* Slide Indicator Dots */}
-      <div className="absolute bottom-[12%] left-1/2 transform -translate-x-1/2 flex space-x-2">
+      <div className="absolute bottom-[21%] sm:bottom-[20%] md:bottom-[19%] lg:bottom-[17%] xl:bottom-[12%] left-1/2 transform -translate-x-1/2 flex space-x-2">
         {sliderContent.map((_, idx) => (
           <span
             key={idx}

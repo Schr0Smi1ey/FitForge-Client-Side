@@ -15,42 +15,36 @@ const featuredData = [
     description:
       "Get customized workout routines designed specifically for your goals, whether it's strength building, weight loss, or overall fitness.",
     imgSrc: card1,
-    link: "#training-plans",
   },
   {
     title: "Expert Coaching",
     description:
       "Work with certified trainers who provide expert guidance and support, ensuring you get the most out of every workout.",
     imgSrc: card2,
-    link: "#coaching",
   },
   {
     title: "State-of-the-Art Equipment",
     description:
       "Train with the best tools available. Our gym is equipped with the latest and most advanced fitness equipment to help you reach your peak performance.",
     imgSrc: card3,
-    link: "#equipment",
   },
   {
     title: "Group Fitness Classes",
     description:
       "Join our high-energy group fitness classes. Whether it's yoga, spin, or bootcamp, there is something for everyone to enjoy.",
     imgSrc: card4,
-    link: "#classes",
   },
   {
     title: "Flexible Membership Options",
     description:
       "Choose a membership that works for you. From month-to-month to yearly plans, we have flexible options to fit any schedule.",
     imgSrc: card5,
-    link: "#membership",
   },
   {
     title: "Online Training",
     description:
       "Train from anywhere with our online coaching platform. Get personalized sessions and progress tracking from the comfort of your home.",
     imgSrc: card6,
-    link: "#online-training",
   },
 ];
 
@@ -60,8 +54,8 @@ const Featured = () => {
   }, []);
 
   return (
-    <section className="bg-gray-50 py-16">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+    <section className="bg-gray-50 py-8 rounded-md px-6 md:px-12 lg:px-20 mt-10">
+      <div className="max-w-7xl mx-auto">
         {/* Section Heading */}
         <div className="text-center mb-12" data-aos="fade-up">
           <h2 className="text-4xl font-extrabold text-primary uppercase">
@@ -92,12 +86,6 @@ const Featured = () => {
                 {feature.title}
               </h3>
               <p className="text-gray-700 mb-4">{feature.description}</p>
-              <a
-                href={feature.link}
-                className="inline-block text-primary font-semibold hover:underline transition-opacity duration-200 opacity-90 hover:opacity-100"
-              >
-                Learn More →
-              </a>
             </div>
           ))}
         </div>

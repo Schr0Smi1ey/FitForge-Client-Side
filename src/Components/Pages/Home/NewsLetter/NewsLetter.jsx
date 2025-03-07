@@ -8,13 +8,13 @@ const Newsletter = () => {
   }, []);
 
   return (
-    <div className="container mx-auto px-6 md:px-12 lg:px-20 mt-10">
+    <div className="container mx-auto py-8 rounded-md px-6 md:px-12 lg:px-20 mt-10">
       <div
         className="bg-primary text-white p-8 md:p-12 rounded-2xl shadow-xl text-center relative overflow-hidden"
         data-aos="fade-up"
       >
         <h2
-          className="relative text-3xl md:text-4xl font-extrabold mb-3"
+          className="relative text-2xl md:text-4xl font-extrabold mb-3"
           data-aos="fade-down"
         >
           Stay Updated with Our Newsletter

@@ -138,12 +138,12 @@ const SignUp = () => {
   };
 
   return (
-    <div className={`pt-20 md:pt-32 lg:pt-40`}>
+    <div className={`my-10 pt-20 md:pt-32 lg:pt-40`}>
       <Helmet>
         <title>FitForge | Sign Up</title>
       </Helmet>
       <div
-        className={`min-h-[450px] flex rounded-lg container mx-auto shadow-xl w-full max-w-5xl overflow-hidden`}
+        className={`min-h-screen lg:min-h-[450px] flex rounded-lg container mx-auto shadow-xl w-full max-w-5xl overflow-hidden`}
       >
         <div
           data-aos="fade-right"

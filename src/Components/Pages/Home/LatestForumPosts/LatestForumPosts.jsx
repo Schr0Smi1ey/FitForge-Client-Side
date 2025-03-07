@@ -36,10 +36,10 @@ const LatestForumPosts = () => {
   }
 
   return (
-    <div className="container mx-auto px-6 lg:px-12 py-16">
+    <div className="container mx-auto py-8 rounded-md px-6 md:px-12 lg:px-20 mt-10">
       {/* Section Heading */}
       <div className="text-center mb-12" data-aos="fade-up">
-        <h2 className="text-4xl font-extrabold text-primary uppercase">
+        <h2 className="text-2xl md:text-4xl font-extrabold text-primary uppercase">
           Latest Forum Discussions
         </h2>
         <p className="text-gray-600 mt-3 max-w-xl mx-auto">
@@ -49,7 +49,7 @@ const LatestForumPosts = () => {
       </div>
 
       {/* Posts Grid */}
-      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6">
+      <div className="grid lg:grid-cols-3 grid-cols-1 gap-6">
         {posts.map((post, index) => (
           <div
             key={index}

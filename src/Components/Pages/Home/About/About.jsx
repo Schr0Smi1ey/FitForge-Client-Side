@@ -26,22 +26,19 @@ const About = () => {
           className="absolute inset-0 flex flex-col justify-center items-center text-center md:text-left px-4 sm:px-8"
           data-aos="fade-up"
         >
-          <h2
-            data-aos="fade-up"
-            className="text-2xl lg:text-4xl font-bold text-white mb-2 md:mb-4 lg:mb-6"
-          >
-            About <span className="text-primary">FitForge</span>
-          </h2>
           <p
             data-aos="fade-up"
-            className="text-sm md:text-base lg:text-lg text-white leading-relaxed max-w-3xl"
+            className="text-base lg:text-lg text-white leading-relaxed max-w-3xl"
           >
-            FitForge is a state-of-the-art fitness community that provides
-            personalized training plans, expert coaching, and a welcoming
-            atmosphere for individuals looking to take their fitness journey to
-            the next level. We believe in empowering our members to reach their
-            full potential through customized fitness programs, group classes,
-            and cutting-edge equipment.
+            <span className="font-bold text-lg md:text-xl lg:text-2xl">
+              Fit<span className="text-primary">F</span>orge
+            </span>{" "}
+            is a state-of-the-art fitness community that provides personalized
+            training plans, expert coaching, and a welcoming atmosphere for
+            individuals looking to take their fitness journey to the next level.
+            We believe in empowering our members to reach their full potential
+            through customized fitness programs, group classes, and cutting-edge
+            equipment.
           </p>
           <a
             data-aos="fade-up"

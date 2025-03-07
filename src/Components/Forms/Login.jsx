@@ -56,12 +56,12 @@ const Login = () => {
   };
 
   return (
-    <div className={`pt-20 md:pt-32 lg:pt-40`}>
+    <div className={`my-10 pt-20 md:pt-32 lg:pt-40`}>
       <Helmet>
         <title>FitForge | Login</title>
       </Helmet>
       <div
-        className={`min-h-[600px] flex bg-white w-full container mx-auto max-w-5xl shadow-lg  rounded-lg overflow-hidden`}
+        className={`min-h-screen lg:min-h-[600px] flex bg-white w-full container mx-auto max-w-5xl shadow-lg  rounded-lg overflow-hidden`}
       >
         <div
           className="hidden md:flex md:w-1/2 bg-gradient-to-r from-primary to-primary/70 text-white flex-col items-center justify-center p-8"

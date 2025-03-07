@@ -209,9 +209,9 @@ const NavBar = () => {
       <div className="navbar-start">
         <Link
           to={"/"}
-          className="text-black flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-2 rounded-lg font-bold bg-white hover:border-2 hover:border-black text-lg sm:text-xl"
+          className="text-black border-[2px] border-primary flex items-center gap-2 px-2 py-1 sm:px-4 sm:py-2 rounded-lg bg-white hover:border-2 hover:border-black"
         >
-          <span>
+          <span className="font-bold text-base sm:text-lg md:text-xl">
             Fit<span className="text-primary">F</span>orge
           </span>
         </Link>

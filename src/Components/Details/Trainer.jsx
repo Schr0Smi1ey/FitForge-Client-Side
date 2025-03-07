@@ -13,11 +13,11 @@ import { Link, useLoaderData } from "react-router-dom";
 const Trainer = () => {
   const trainer = useLoaderData().trainer;
   return (
-    <div className="max-w-6xl pt-32 mx-auto p-6">
+    <div className="max-w-6xl p-4 pt-32 mx-auto">
       <Helmet>
         <title>FitForge | {trainer.fullName}</title>
       </Helmet>
-      <div className="bg-white rounded-2xl shadow-lg p-8">
+      <div className="bg-white rounded-2xl shadow-lg p-4 md:p-6 lg:p-8">
         {/* Header Section */}
         <div className="flex flex-col md:flex-row gap-8 mb-8">
           <img
@@ -34,18 +34,13 @@ const Trainer = () => {
                 <FaBriefcase className="w-5 h-5" />
                 <span>{trainer.experience} years experience</span>
               </div>
-              <div className="flex items-center gap-1 text-yellow-500">
-                {[...Array(5)].map((_, i) => (
-                  <FaStar key={i} className="w-5 h-5 fill-current" />
-                ))}
-              </div>
             </div>
             <div className="flex gap-3">
               <a
                 href={trainer.socialLinks[0]}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 bg-gray-100 rounded-lg hover:bg-purple-100 transition-colors"
+                className="p-2 bg-gray-100 rounded-lg hover:bg-primary/30 transition-colors"
               >
                 <FaLinkedin className="w-6 h-6 text-blue-600" />
               </a>
@@ -53,7 +48,7 @@ const Trainer = () => {
                 href={trainer.socialLinks[1]}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 bg-gray-100 rounded-lg hover:bg-purple-100 transition-colors"
+                className="p-2 bg-gray-100 rounded-lg hover:bg-primary/30 transition-colors"
               >
                 <FaFacebook className="w-6 h-6 text-blue-600" />
               </a>
@@ -61,7 +56,7 @@ const Trainer = () => {
                 href={trainer.socialLinks[1]}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 bg-gray-100 rounded-lg hover:bg-purple-100 transition-colors"
+                className="p-2 bg-gray-100 rounded-lg hover:bg-primary/30 transition-colors"
               >
                 <FaTwitter className="w-6 h-6 text-blue-600" />
               </a>
@@ -123,7 +118,7 @@ const Trainer = () => {
 
             {/* Table Container */}
             <div className="border rounded-2xl shadow-sm dark:border-gray-700 overflow-hidden">
-              <div className="overflow-x-auto">
+              <div className="overflow-x-auto scrollbar-show">
                 <table className="w-full">
                   <thead className="bg-primary-50 dark:bg-gray-800">
                     <tr className="text-center">

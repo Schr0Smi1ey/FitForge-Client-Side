@@ -39,26 +39,22 @@ const Testimonials = () => {
     Aos.init({ duration: 500 });
   }, []);
   return (
-    <div className="bg-primary my-10">
-      <div className="container mx-auto text-white py-16 px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-12">
+    <div className="bg-primary pb-8 pt-14 rounded-md px-6 md:px-12 lg:px-20 mt-10">
+      <div className="container mx-auto text-white flex flex-col md:flex-row items-center justify-between gap-12">
         {/* Left Side - Text Content */}
         <div data-aos="fade-right" className="md:w-[45%] text-left space-y-6">
           <div className="relative">
-            <FaQuoteLeft className="text-6xl text-white/60 absolute -top-10 -left-10" />
+            <FaQuoteLeft className="text-4xl lg:text-6xl text-white/60 absolute -top-5 sm:-top-8 sm:-left-10" />
           </div>
-          <h2 className="text-2xl md:text-3xl mt-2 lg:text-4xl font-extrabold leading-tight">
-            The Power of Words from Those Who Matter”
+          <h2 className="flex text-2xl ml-3 md:text-3xl lg:mt-2 lg:text-4xl font-extrabold leading-tight">
+            The Power of Words from Those Who Matter
           </h2>
           <p className="text-lg text-white/80">
             Real voices, real experiences—our clients’ words hold the true
             essence of what we do. Dive into their stories and see why we stand
             out.
           </p>
-
-          {/* CTA Button */}
-          <button className="mt-4 text-white border-b-2 border-white pb-1 hover:opacity-80 transition duration-300 text-lg font-medium">
-            READ ALL REVIEWS
-          </button>
+          <div className="border-white border-b-4"></div>
         </div>
 
         {/* Right Side - Swiper Carousel */}

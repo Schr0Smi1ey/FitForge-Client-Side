@@ -23,9 +23,12 @@ const Team = () => {
   const toShow = trainers.slice(0, 3);
 
   return (
-    <div className="container mx-auto my-16 text-center" data-aos="fade-up">
+    <div
+      className="container mx-auto py-8 rounded-md px-6 md:px-12 lg:px-20 my-10 text-center"
+      data-aos="fade-up"
+    >
       <h2
-        className="text-primary text-4xl md:text-5xl font-extrabold mb-6"
+        className="text-primary text-2xl md:text-4xl font-extrabold mb-6"
         data-aos="zoom-in"
       >
         Meet Our Expert Trainers
@@ -38,7 +41,7 @@ const Team = () => {
         Our trainers bring a wealth of experience and passion to help you
         achieve your fitness goals.
       </p>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {toShow.map((trainer, index) => (
           <div key={index} data-aos="fade-up" data-aos-delay={index * 200}>
             <TrainerCard trainer={trainer} />
