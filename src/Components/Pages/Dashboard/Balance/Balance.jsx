@@ -1,16 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import { GridLoader } from "react-spinners";
-import useCustomAxios from "../../../../Hooks/useCustomAxios";
 import { PieChart } from "@mui/x-charts";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { Helmet } from "react-helmet";
-
+import Aos from "aos";
+import "aos/dist/aos.css";
 const Balance = () => {
   const { user, loading } = useContext(AuthContext);
   const secureAxios = useAxiosSecure();
-
+  useEffect(() => {
+    Aos.init({ duration: 500 });
+  }, []);
   const { data: paymentData, isFetching } = useQuery({
     queryKey: ["payments"],
     queryFn: async () => {
@@ -52,12 +54,18 @@ const Balance = () => {
       </Helmet>
       <div className="mb-6 flex flex-col lg:flex-row items-center justify-between gap-6">
         {/* Payment Balance */}
-        <h2 className="text-2xl md:text-3xl font-bold text-center bg-primary text-white px-6 py-3 rounded-lg shadow-md">
+        <h2
+          data-aos="fade-right"
+          className="text-2xl md:text-3xl font-bold text-center bg-primary text-white px-6 py-3 rounded-lg shadow-md"
+        >
           💰 Payment Balance: $ {totalBalance}
         </h2>
 
         {/* Pie Chart Section */}
-        <div className="bg-white p-4 rounded-lg shadow-md w-full md:w-auto">
+        <div
+          data-aos="fade-left"
+          className="bg-white p-4 rounded-lg shadow-md w-full md:w-auto"
+        >
           <h3 className="text-lg md:text-xl font-semibold text-center mb-4">
             📊 Membership Overview
           </h3>
@@ -89,20 +97,67 @@ const Balance = () => {
 
       {/* Payment Table Section */}
       {payments.length === 0 ? (
-        <p className="text-gray-500 text-center">No transactions found.</p>
+        <p data-aos="fade-up" className="text-gray-500 text-center">
+          No transactions found.
+        </p>
       ) : (
         <div className="overflow-x-auto">
-          <table className="table w-full border border-gray-300 shadow-lg">
+          <table
+            data-aos="fade-up"
+            className="table w-full border border-gray-300 shadow-lg"
+          >
             {/* Table Header */}
             <thead className="bg-primary text-white text-base md:text-lg lg:text-xl">
               <tr className="text-center">
-                <th className="p-3 border">Trainer</th>
-                <th className="p-3 border">Trainee</th>
-                <th className="p-3 border">Class</th>
-                <th className="p-3 border">Slot</th>
-                <th className="p-3 border">Package</th>
-                <th className="p-3 border">Price ($)</th>
-                <th className="p-3 border">Date</th>
+                <th
+                  data-aos="fade-up"
+                  data-aos-delay="100"
+                  className="p-3 border"
+                >
+                  Trainer
+                </th>
+                <th
+                  data-aos="fade-up"
+                  data-aos-delay="100"
+                  className="p-3 border"
+                >
+                  Trainee
+                </th>
+                <th
+                  data-aos="fade-up"
+                  data-aos-delay="100"
+                  className="p-3 border"
+                >
+                  Class
+                </th>
+                <th
+                  data-aos="fade-up"
+                  data-aos-delay="100"
+                  className="p-3 border"
+                >
+                  Slot
+                </th>
+                <th
+                  data-aos="fade-up"
+                  data-aos-delay="100"
+                  className="p-3 border"
+                >
+                  Package
+                </th>
+                <th
+                  data-aos="fade-up"
+                  data-aos-delay="100"
+                  className="p-3 border"
+                >
+                  Price ($)
+                </th>
+                <th
+                  data-aos="fade-up"
+                  data-aos-delay="100"
+                  className="p-3 border"
+                >
+                  Date
+                </th>
               </tr>
             </thead>
 
@@ -110,7 +165,11 @@ const Balance = () => {
             <tbody className="text-gray-700 text-center text-sm md:text-base lg:text-lg">
               {payments.map((payment) => (
                 <tr key={payment._id} className="hover:bg-gray-50">
-                  <td className="p-3 border">
+                  <td
+                    data-aos="fade-up"
+                    data-aos-delay="250"
+                    className="p-3 border"
+                  >
                     <div className="flex items-center gap-3">
                       <img
                         src={payment.trainerDetails.profileImage}
@@ -120,15 +179,47 @@ const Balance = () => {
                       <span>{payment.trainerDetails.fullName}</span>
                     </div>
                   </td>
-                  <td className="p-3 border">{user.displayName || "N/A"}</td>
-                  <td className="p-3 border">{payment.classDetails.title}</td>
-                  <td className="p-3 border">
+                  <td
+                    data-aos="fade-up"
+                    data-aos-delay="250"
+                    className="p-3 border"
+                  >
+                    {user.displayName || "N/A"}
+                  </td>
+                  <td
+                    data-aos="fade-up"
+                    data-aos-delay="250"
+                    className="p-3 border"
+                  >
+                    {payment.classDetails.title}
+                  </td>
+                  <td
+                    data-aos="fade-up"
+                    data-aos-delay="250"
+                    className="p-3 border"
+                  >
                     {payment.slotDetails.slotName} (
                     {payment.slotDetails.selectedDay})
                   </td>
-                  <td className="p-3 border">{payment.packageName}</td>
-                  <td className="p-3 border font-semibold">${payment.price}</td>
-                  <td className="p-3 border text-gray-500">
+                  <td
+                    data-aos="fade-up"
+                    data-aos-delay="250"
+                    className="p-3 border"
+                  >
+                    {payment.packageName}
+                  </td>
+                  <td
+                    data-aos="fade-up"
+                    data-aos-delay="250"
+                    className="p-3 border font-semibold"
+                  >
+                    ${payment.price}
+                  </td>
+                  <td
+                    data-aos="fade-up"
+                    data-aos-delay="250"
+                    className="p-3 border text-gray-500"
+                  >
                     {new Date(payment.date).toLocaleDateString()}
                   </td>
                 </tr>

@@ -22,6 +22,8 @@ import { GridLoader } from "react-spinners";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,6 +33,9 @@ const Dashboard = () => {
   const [isMember, setIsMember] = useState(false);
   const secureAxios = useAxiosSecure();
   const navigate = useNavigate();
+  useEffect(() => {
+    Aos.init({ duration: 500 });
+  }, []);
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -75,13 +80,20 @@ const Dashboard = () => {
           ${isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}`}
       >
         <button
+          data-aos="fade-right"
+          data-aos-delay="100"
+          key={isOpen}
           className="lg:hidden mt-5 md:ml-4 text-white text-2xl"
           onClick={() => setIsOpen(false)}
         >
           <RiMenuUnfold4Fill className="flex md:w-12 md:h-12" />
         </button>
 
-        <ul className="text-white font-semibold pt-5 md:ml-4">
+        <ul
+          data-aos="fade-right"
+          data-aos-delay="150"
+          className="text-white font-semibold pt-5 md:ml-4"
+        >
           {isAdmin && (
             <div className="text-base md:text-lg lg:text-xl   space-y-4">
               <li className="w-fit">

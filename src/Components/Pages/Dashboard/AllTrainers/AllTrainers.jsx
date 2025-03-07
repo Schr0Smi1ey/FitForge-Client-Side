@@ -1,15 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import useTrainers from "../../../../Hooks/useTrainers";
 import { GridLoader } from "react-spinners";
 import { FaTrash } from "react-icons/fa";
-import useCustomAxios from "../../../../Hooks/useCustomAxios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
-import { useRadioGroup } from "@mui/material";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { Helmet } from "react-helmet";
-
+import Aos from "aos";
+import "aos/dist/aos.css";
 const AllTrainers = () => {
   const { trainers, isFetching } = useTrainers();
   const { user, loading } = useContext(AuthContext);
@@ -17,6 +16,9 @@ const AllTrainers = () => {
   const [showModal, setShowModal] = useState(false);
   const secureAxios = useAxiosSecure();
   const navigate = useNavigate();
+  useEffect(() => {
+    Aos.init({ duration: 500 });
+  }, []);
   if (isFetching || loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -77,14 +79,19 @@ const AllTrainers = () => {
       <Helmet>
         <title>FitForge | Dashboard | All Trainers</title>
       </Helmet>
-      {trainers.length === 0 ? ( // Wrapped in a div
-        <div>
-          <p>No Trainers!</p>
+      {trainers.length === 0 ? (
+        <div data-aos="fade-down" className="text-center">
+          <p className="text-2xl text-red-500 font-bold text-center">
+            No trainers found!
+          </p>
         </div>
       ) : (
         <div className="overflow-x-auto">
           <div className="mb-6">
-            <h1 class="text-3xl font-bold text-gray-800 text-center">
+            <h1
+              data-aos="fade-down"
+              className="text-3xl font-bold text-gray-800 text-center"
+            >
               👩‍🏫 All Trainers
             </h1>
           </div>
@@ -92,27 +99,27 @@ const AllTrainers = () => {
             {/* head */}
             <thead className="bg-primary text-white text-base md:text-lg lg:text-xl">
               <tr className="text-center">
-                <th>Profile</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Action</th>
+                <th data-aos="fade-down">Profile</th>
+                <th data-aos="fade-down">Name</th>
+                <th data-aos="fade-down">Email</th>
+                <th data-aos="fade-down">Action</th>
               </tr>
             </thead>
             <tbody className="text-sm md:text-base lg:text-lg">
               {trainers.map((trainer) => (
                 <tr key={trainer._id} className="text-center">
-                  <td>
+                  <td data-aos="fade-up">
                     <div className="avatar">
                       <div className="mask mask-squircle h-12 w-12">
                         <img src={trainer.profileImage} alt="Trainer Profile" />
                       </div>
                     </div>
                   </td>
-                  <td>
+                  <td data-aos="fade-up">
                     <div className="font-bold">{trainer.fullName}</div>
                   </td>
-                  <td>{trainer.email}</td>
-                  <td>
+                  <td data-aos="fade-up">{trainer.email}</td>
+                  <td data-aos="fade-up">
                     <button onClick={() => handleReject(trainer)}>
                       <FaTrash className="text-xl text-red-500" />
                     </button>
@@ -121,15 +128,20 @@ const AllTrainers = () => {
                     {showModal && (
                       <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
                         <div className="bg-white rounded-lg shadow-lg p-6 w-11/12 md:w-1/2">
-                          <h2 className="text-2xl font-bold mb-4">
+                          <h2
+                            data-aos="fade-down"
+                            className="text-2xl font-bold mb-4"
+                          >
                             Cancel Application
                           </h2>
-                          <p className="mb-4">
+                          <p data-aos="fade-down" className="mb-4">
                             Provide feedback for rejecting the application of{" "}
                             <strong>{trainer.fullName}</strong>.
                           </p>
                           <form onSubmit={handleFeedbackSubmit}>
                             <textarea
+                              data-aos="fade-up"
+                              data-aos-delay="100"
                               name="feedback"
                               placeholder="Enter Cancellation feedback..."
                               className="w-full h-32 p-3 border rounded-md mb-4"
@@ -137,6 +149,8 @@ const AllTrainers = () => {
                             ></textarea>
                             <div className="flex justify-end gap-4">
                               <button
+                                data-aos="fade-up"
+                                data-aos-delay="150"
                                 type="button"
                                 onClick={() => setShowModal(false)}
                                 className="bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400 transition-colors"
@@ -144,6 +158,8 @@ const AllTrainers = () => {
                                 Cancel
                               </button>
                               <button
+                                data-aos="fade-up"
+                                data-aos-delay="200"
                                 type="submit"
                                 className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition-colors"
                               >

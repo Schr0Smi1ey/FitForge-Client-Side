@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import {
   FaBriefcase,
@@ -12,6 +13,9 @@ import { Link, useLoaderData } from "react-router-dom";
 
 const Trainer = () => {
   const trainer = useLoaderData().trainer;
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="max-w-6xl p-4 pt-32 mx-auto">
       <Helmet>

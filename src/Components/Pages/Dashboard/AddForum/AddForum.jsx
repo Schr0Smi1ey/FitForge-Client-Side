@@ -1,4 +1,4 @@
-import { useState, useContext, useRef } from "react";
+import { useState, useContext, useRef, useEffect } from "react";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 import { GridLoader } from "react-spinners";
 import axios from "axios";
@@ -6,6 +6,8 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { Helmet } from "react-helmet";
 import { convertDate } from "../../../../utils/Utilities";
+import Aos from "aos";
+import "aos/dist/aos.css";
 const AddForum = () => {
   const { user, loading, image_hosting_api } = useContext(AuthContext);
   if (loading) {
@@ -26,6 +28,9 @@ const AddForum = () => {
   });
   const fileInputRef = useRef(null);
   const secureAxios = useAxiosSecure();
+  useEffect(() => {
+    Aos.init({ duration: 500 });
+  }, []);
   const handleChange = (e) => {
     setForum({ ...forum, [e.target.name]: e.target.value });
   };
@@ -92,14 +97,26 @@ const AddForum = () => {
         <title>FitForge | Dashboard | Add Forum</title>
       </Helmet>
       <div className="w-full container mx-auto max-w-3xl bg-white shadow-2xl rounded-2xl p-6">
-        <h2 className="text-3xl font-bold text-gray-800 text-center mb-4">
+        <h2
+          data-aos="fade-down"
+          data-aos-delay="100"
+          className="text-3xl font-bold text-gray-800 text-center mb-4"
+        >
           📢 Create a New Forum
         </h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="font-semibold text-gray-700">Forum Title</label>
+            <label
+              data-aos="fade-up"
+              data-aos-delay="150"
+              className="font-semibold text-gray-700"
+            >
+              Forum Title
+            </label>
             <input
+              data-aos="fade-up"
+              data-aos-delay="160"
               type="text"
               name="title"
               placeholder="Enter forum title..."
@@ -111,8 +128,16 @@ const AddForum = () => {
           </div>
 
           <div>
-            <label className="font-semibold text-gray-700">Description</label>
+            <label
+              data-aos="fade-up"
+              data-aos-delay="170"
+              className="font-semibold text-gray-700"
+            >
+              Description
+            </label>
             <textarea
+              data-aos="fade-up"
+              data-aos-delay="180"
               name="description"
               placeholder="Describe your forum..."
               rows="4"
@@ -124,8 +149,16 @@ const AddForum = () => {
           </div>
 
           <div>
-            <label className="block text-gray-700 font-medium">Image</label>
+            <label
+              data-aos="fade-up"
+              data-aos-delay="190"
+              className="block text-gray-700 font-medium"
+            >
+              Image
+            </label>
             <input
+              data-aos="fade-up"
+              data-aos-delay="200"
               type="file"
               accept="image/*"
               onChange={handleFileChange}
@@ -136,8 +169,16 @@ const AddForum = () => {
             />
           </div>
           <div>
-            <label className="font-semibold text-gray-700">Posted By</label>
+            <label
+              data-aos="fade-up"
+              data-aos-delay="210"
+              className="font-semibold text-gray-700"
+            >
+              Posted By
+            </label>
             <input
+              data-aos="fade-up"
+              data-aos-delay="220"
               type="text"
               name="postedBy"
               value={forum.postedBy}
@@ -146,8 +187,16 @@ const AddForum = () => {
             />
           </div>
           <div>
-            <label className="font-semibold text-gray-700">Posted Date</label>
+            <label
+              data-aos="fade-up"
+              data-aos-delay="230"
+              className="font-semibold text-gray-700"
+            >
+              Posted Date
+            </label>
             <input
+              data-aos="fade-up"
+              data-aos-delay="240"
               type="text"
               name="postedDate"
               value={convertDate(forum.postedDate, "AddForum")}
@@ -156,6 +205,8 @@ const AddForum = () => {
             />
           </div>
           <button
+            data-aos="fade-up"
+            data-aos-delay="250"
             type="submit"
             className="w-full bg-primary hover:bg-primary text-white font-bold text-lg py-3 rounded-lg shadow-md transition-all"
           >

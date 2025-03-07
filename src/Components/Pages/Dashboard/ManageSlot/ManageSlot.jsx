@@ -1,18 +1,22 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FaEye, FaTrash, FaTimes } from "react-icons/fa";
 import { GridLoader } from "react-spinners";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { Helmet } from "react-helmet";
-
+import Aos from "aos";
+import "aos/dist/aos.css";
 const ManageSlot = () => {
   const secureAxios = useAxiosSecure();
   const { user } = useContext(AuthContext);
   const [slotData, setSlotData] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [bookedMembers, setBookedMembers] = useState([]);
+  useEffect(() => {
+    Aos.init({ duration: 500 });
+  }, []);
   const { data, isFetching, refetch } = useQuery({
     queryKey: ["trainer"],
     queryFn: async () => {
@@ -78,30 +82,62 @@ const ManageSlot = () => {
         <title>FitForge | Dashboard | Manage Slot</title>
       </Helmet>
       {slotData.length === 0 ? (
-        <div>
-          <p>No Slot Found!</p>
-        </div>
+        <p
+          data-aos="fade-down"
+          className="text-2xl text-red-500 font-bold text-center"
+        >
+          No Slot found!
+        </p>
       ) : (
         <div>
+          <h1
+            data-aos="fade-down "
+            data-aos-delay="150"
+            className="text-3xl mb-6 font-bold text-gray-800 text-center"
+          >
+            🗓️ Manage Slots
+          </h1>
           <table className="table table-zebra">
             <thead className="bg-primary text-white text-base md:text-lg lg:text-xl">
               <tr className="text-center">
-                <th>Day</th>
-                <th>Slot Name</th>
-                <th>Duration</th>
-                <th>Class</th>
-                <th>Action</th>
+                <th data-aos="fade-up" data-aos-delay="200">
+                  Day
+                </th>
+                <th data-aos="fade-up" data-aos-delay="200">
+                  Slot Name
+                </th>
+                <th data-aos="fade-up" data-aos-delay="200">
+                  Duration
+                </th>
+                <th data-aos="fade-up" data-aos-delay="200">
+                  Class
+                </th>
+                <th data-aos="fade-up" data-aos-delay="200">
+                  Action
+                </th>
               </tr>
             </thead>
             <tbody className="text-gray-700 text-sm md:text-base lg:text-lg">
               {slotData.map((slot, index) => (
                 <tr key={slot._id} className="text-center">
-                  <td>{slot.selectedDay}</td>
-                  <td>{slot.slotName}</td>
-                  <td>{slot.slotTime}</td>
-                  <td>{slot.selectedClass}</td>
+                  <td data-aos="fade-up" data-aos-delay="200">
+                    {slot.selectedDay}
+                  </td>
+                  <td data-aos="fade-up" data-aos-delay="200">
+                    {slot.slotName}
+                  </td>
+                  <td data-aos="fade-up" data-aos-delay="200">
+                    {slot.slotTime}
+                  </td>
+                  <td data-aos="fade-up" data-aos-delay="200">
+                    {slot.selectedClass}
+                  </td>
                   <td className="flex justify-center">
-                    <div className="flex gap-3 items-center">
+                    <div
+                      data-aos="fade-up"
+                      data-aos-delay="200"
+                      className="flex gap-3 items-center"
+                    >
                       {slot.bookedMembers.length > 0 ? (
                         <button
                           onClick={(e) => {
@@ -131,13 +167,23 @@ const ManageSlot = () => {
                 >
                   <FaTimes />
                 </button>
-                <h2 className="text-lg font-semibold mb-4 text-center">
+                <h2
+                  data-aos="fade-down"
+                  data-aos-delay="150"
+                  className="text-lg text-primary font-semibold mb-4 text-center"
+                >
                   Booked Members
                 </h2>
                 <table className="w-full border-collapse border border-gray-300">
                   <thead>
                     <tr className="text-center bg-gray-200">
-                      <th className="border border-gray-300 p-2">Profile</th>
+                      <th
+                        data-aos="fade-up"
+                        data-aos-delay="200"
+                        className="border border-gray-300 p-2"
+                      >
+                        Profile
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -146,7 +192,13 @@ const ManageSlot = () => {
                         key={member.email}
                         className="text-center border border-gray-300"
                       >
-                        <td className="p-2">{member.email}</td>
+                        <td
+                          data-aos="fade-up"
+                          data-aos-delay="250"
+                          className="p-2"
+                        >
+                          {member.email}
+                        </td>
                       </tr>
                     ))}
                   </tbody>
