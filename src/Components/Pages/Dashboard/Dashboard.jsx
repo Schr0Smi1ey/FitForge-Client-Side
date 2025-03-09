@@ -14,6 +14,7 @@ import {
   FaDumbbell,
   FaHome,
   FaComments,
+  FaStar,
 } from "react-icons/fa";
 import { RiMenuFold4Fill, RiMenuUnfold4Fill } from "react-icons/ri";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
@@ -171,6 +172,15 @@ const Dashboard = () => {
                   className="flex items-center gap-2"
                 >
                   <FaCalendarCheck /> Booked Trainers
+                </NavLink>
+              </li>
+              <li className="w-fit">
+                <NavLink
+                  onClick={() => setIsOpen(false)}
+                  to="/dashboard/review"
+                  className="flex items-center gap-2"
+                >
+                  <FaStar /> Review
                 </NavLink>
               </li>
             </div>

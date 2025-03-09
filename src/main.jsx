@@ -33,6 +33,7 @@ import BookedTrainer from "./Components/Pages/Dashboard/BookedTrainer/BookedTrai
 import Classes from "./Components/Pages/Classes/Classes.jsx";
 import UserProfile from "./Components/Pages/UserProfile/UserProfile.jsx";
 import UpdateProfile from "./Components/Forms/UpdateProfile.jsx";
+import Review from "./Components/Pages/Dashboard/Review/Review.jsx";
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
@@ -214,6 +215,10 @@ const router = createBrowserRouter([
       {
         path: "booked-trainers",
         element: <BookedTrainer></BookedTrainer>,
+      },
+      {
+        path: "review",
+        element: <Review></Review>,
       },
     ],
   },

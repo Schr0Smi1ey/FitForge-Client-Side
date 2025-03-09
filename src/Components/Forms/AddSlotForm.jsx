@@ -309,6 +309,9 @@ const AddSlotForm = () => {
 
         {/* Submit Button */}
         <button
+          data-aos="fade-up"
+          data-aos-delay="260"
+          data-aos-offset="30px"
           type="submit"
           className="py-2 rounded-xl font-semibold text-lg bg-primary text-white w-full mt-4"
         >

@@ -393,7 +393,7 @@ const BecomeTrainer = () => {
         </div>
 
         {/* Apply Button */}
-        <div data-aos="fade-up" className="text-center">
+        <div data-aos="fade-up" data-aos-offset="30px" className="text-center">
           <button
             type="submit"
             className="mt-4 bg-primary text-white py-3 px-6 rounded-md font-bold hover:bg-primary-dark transition-all"
