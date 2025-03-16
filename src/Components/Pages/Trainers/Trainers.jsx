@@ -15,7 +15,7 @@ const Trainers = () => {
   }, []);
 
   return (
-    <div className="min-h-screen container mx-auto py-8 md:py-20 lg:py-32">
+    <div className="min-h-screen container mx-auto py-32">
       <Helmet>
         <title>FitForge | Trainers</title>
       </Helmet>

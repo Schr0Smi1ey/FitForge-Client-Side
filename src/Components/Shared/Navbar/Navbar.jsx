@@ -121,7 +121,7 @@ const NavBar = () => {
         <div className="relative profile-menu">
           <button
             onClick={() => setIsProfileOpen((prevState) => !prevState)}
-            className="btn border-2 border-primary btn-ghost btn-circle avatar"
+            className="btn border-2 border-primary hover:border-primary btn-ghost btn-circle avatar"
           >
             <div className="w-10 rounded-full">
               <img
@@ -315,7 +315,7 @@ const NavBar = () => {
           <div className="modal-action justify-between flex mx-auto items-center">
             <button
               onClick={hideSignOutModal}
-              className="px-4 py-2 bg-green-500 font-semibold text-base rounded-lg hover:bg-black"
+              className="px-4 py-2 bg-green-500 hover:bg-green-600 hover:scale-105 font-semibold text-base rounded-lg"
             >
               Cancel
             </button>

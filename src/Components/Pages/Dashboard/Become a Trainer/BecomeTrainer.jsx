@@ -196,7 +196,7 @@ const BecomeTrainer = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white dark:bg-black dark:text-white shadow-md rounded-md">
+    <div className="max-w-4xl mx-auto p-6 bg-white dark:bg-black dark:text-white shadow-md rounded-md">
       <Helmet>
         <title>FitForge | Dashboard | Become a Trainer</title>
       </Helmet>
@@ -223,19 +223,21 @@ const BecomeTrainer = () => {
             onChange={handleChange}
             placeholder="Enter your full name..."
             required
-            className="mt-1 w-full p-3 text-gray-700 border rounded-md"
+            className="mt-1 w-full p-3 text-gray-700 dark:text-gray-500 dark:bg-black border rounded-md"
           />
         </div>
 
         {/* Email (read-only) */}
         <div data-aos="fade-up">
-          <label className="font-semibold text-gray-700">Email</label>
+          <label className="font-semibold text-gray-700 dark:text-gray-300">
+            Email
+          </label>
           <input
             type="email"
             name="email"
             value={user?.email || "unknown@example.com"}
             readOnly
-            className="mt-1 w-full p-3 border text-gray-700 rounded-md"
+            className="mt-1 w-full p-3 border text-gray-700 dark:text-gray-500 dark:bg-black rounded-md"
           />
         </div>
 
@@ -251,7 +253,7 @@ const BecomeTrainer = () => {
             onChange={handleChange}
             placeholder="Enter your age..."
             required
-            className="mt-1 w-full p-3 text-gray-700 border rounded-md"
+            className="mt-1 w-full p-3 text-gray-700 dark:text-gray-500 dark:bg-black border rounded-md"
           />
         </div>
 
@@ -332,7 +334,7 @@ const BecomeTrainer = () => {
             value={formData.classDuration}
             onChange={handleChange}
             required
-            className="mt-1 w-full p-3 text-gray-700 border rounded-md"
+            className="mt-1 w-full p-3 text-gray-700 dark:text-gray-500 dark:bg-black border rounded-md"
             placeholder="Enter class duration..."
           />
         </div>
@@ -349,7 +351,7 @@ const BecomeTrainer = () => {
             placeholder="Tell us about yourself..."
             rows="6"
             required
-            className="mt-1 w-full p-3 text-gray-700 border rounded-md"
+            className="mt-1 w-full p-3 text-gray-700 dark:text-gray-500 dark:bg-black border rounded-md"
           ></textarea>
         </div>
 
@@ -366,7 +368,7 @@ const BecomeTrainer = () => {
             placeholder="Describe your training experience..."
             rows="3"
             required
-            className="mt-1 w-full p-3 text-gray-700 border rounded-md"
+            className="mt-1 w-full p-3 text-gray-700 dark:text-gray-500 dark:bg-black border rounded-md"
           ></input>
         </div>
 
@@ -383,7 +385,7 @@ const BecomeTrainer = () => {
               value={formData.linkedin}
               onChange={handleChange}
               placeholder="LinkedIn URL"
-              className="w-full p-3 text-gray-700 border rounded-md"
+              className="w-full p-3 text-gray-700 dark:text-gray-500 dark:bg-black border rounded-md"
             />
             <input
               data-aos="fade-up"
@@ -392,7 +394,7 @@ const BecomeTrainer = () => {
               value={formData.facebook}
               onChange={handleChange}
               placeholder="Facebook URL"
-              className="w-full p-3 text-gray-700 border rounded-md"
+              className="w-full p-3 text-gray-700 dark:text-gray-500 dark:bg-black border rounded-md"
             />
             <input
               data-aos="fade-up"
@@ -401,7 +403,7 @@ const BecomeTrainer = () => {
               value={formData.twitter}
               onChange={handleChange}
               placeholder="Twitter URL"
-              className="w-full p-3 text-gray-700 border rounded-md"
+              className="w-full p-3 text-gray-700 dark:text-gray-500 dark:bg-black border rounded-md"
             />
           </div>
         </div>

@@ -48,11 +48,14 @@ const UpdateProfile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const photoURL = await ConvertToLink(formData.photo);
+    let photoURL = user.photoURL;
+    if (formData.photo) {
+      photoURL = await ConvertToLink(formData.photo);
+    }
     updateUserProfile(formData.displayName, photoURL)
       .then(() => {
         setTimeout(() => {
-          navigate("/dashboard/profile");
+          navigate("/profile");
           Toast("Profile Updated Successfully", "success");
         }, 200);
       })
@@ -65,17 +68,17 @@ const UpdateProfile = () => {
   };
 
   return (
-    <div className="min-h-[500px] flex items-center justify-center bg-gray-100 bg-gradient-to-r from-primary/40 to-primary/50">
+    <div className="min-h-[500px] flex items-center justify-center bg-gray-100 dark:bg-black dark:text-white bg-gradient-to-r from-primary/40 to-primary/50">
       <Helmet>
         <title>FitForge | Update Profile</title>
       </Helmet>
       <div
         data-aos="zoom-in"
-        className="bg-white shadow-lg rounded-lg w-full max-w-md p-6"
+        className="bg-white dark:bg-black dark:text-white shadow-lg rounded-lg w-full max-w-md p-6"
       >
         <h2
           data-aos="fade-down"
-          className="text-3xl text-center font-bold text-gray-800 mb-4"
+          className="text-3xl text-center font-bold text-gray-800 dark:text-gray-300 mb-4"
         >
           Update Profile
         </h2>
@@ -83,7 +86,7 @@ const UpdateProfile = () => {
           <div data-aos="fade-up">
             <label
               htmlFor="displayName"
-              className="block text-gray-700 font-medium mb-2"
+              className="block text-gray-700 dark:text-gray-300 font-medium mb-2"
             >
               New Name
             </label>
@@ -93,7 +96,7 @@ const UpdateProfile = () => {
               name="displayName"
               value={formData.displayName}
               onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg"
+              className="w-full p-3 border border-gray-300 dark:border-gray-700 dark:bg-black dark:text-white rounded-lg"
               placeholder="Enter your new name"
               required
             />
@@ -101,7 +104,7 @@ const UpdateProfile = () => {
           <div data-aos="fade-up">
             <label
               htmlFor="photoURL"
-              className="block text-gray-700 font-medium mb-2"
+              className="block text-gray-700 dark:text-gray-300 font-medium mb-2"
             >
               New Profile
             </label>
@@ -110,8 +113,7 @@ const UpdateProfile = () => {
               id="photo"
               accept="image/*"
               onChange={handleFileChange}
-              required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:ring-2"
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-primary focus:ring-2"
             />
           </div>
 

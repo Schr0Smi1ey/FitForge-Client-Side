@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { AuthContext } from "../../Contexts/AuthContext/AuthProvider";
+import { FaLock } from "react-icons/fa";
 
 const PaymentForm = ({ trainer, slot, packageName }) => {
   const [error, setError] = useState("");
@@ -97,33 +98,41 @@ const PaymentForm = ({ trainer, slot, packageName }) => {
   };
   return (
     <form className="pt-32 container mx-auto" onSubmit={handleSubmit}>
-      <CardElement
-        options={{
-          style: {
-            base: {
-              fontSize: "16px",
-              color: "#424770",
-              "::placeholder": {
-                color: "#aab7c4",
+      <div className="bg-gray-100 dark:bg-black dark:text-white p-4 rounded-lg">
+        <CardElement
+          options={{
+            style: {
+              base: {
+                fontSize: "16px",
+                color: "#424770",
+                "::placeholder": {
+                  color: "#aab7c4",
+                },
+              },
+              invalid: {
+                color: "#ff4d4d",
               },
             },
-            invalid: {
-              color: "#9e2146",
-            },
-          },
-        }}
-      />
+          }}
+          className="p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 transition"
+        />
+      </div>
+
+      {/* Pay Button */}
       <button
-        className="btn btn-sm btn-primary my-4"
         type="submit"
         disabled={!stripe || !clientSecret}
+        className={`w-full flex items-center justify-center gap-2 px-6 py-3 text-lg font-medium rounded-lg transition-all shadow-md 
+        ${
+          stripe && clientSecret
+            ? "bg-primary-500 hover:bg-primary-600 text-white"
+            : "bg-gray-300 dark:bg-gray-700 text-gray-400 cursor-not-allowed"
+        }`}
       >
-        Pay
+        <FaLock className="w-5 h-5" />
+        Pay Securely
       </button>
       <p className="text-red-600">{error}</p>
-      {/* {transactionId && (
-        <p className="text-green-600"> Your transaction id: {transactionId}</p>
-      )} */}
     </form>
   );
 };

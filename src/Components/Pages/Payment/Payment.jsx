@@ -18,16 +18,17 @@ const Payment = () => {
 
   useEffect(() => {
     AOS.init({ duration: 500 });
+    window.scrollTo(0, 0);
   }, []);
 
   return (
-    <div className="container mx-auto min-h-screen flex flex-col items-center justify-center py-16 px-4">
+    <div className="container mx-auto dark:bg-black dark:text-white min-h-screen flex flex-col items-center justify-center py-32 px-4">
       <Helmet>
         <title>FitForge | Payment</title>
       </Helmet>
 
       <div
-        className="bg-white shadow-lg rounded-2xl p-8 md:p-10 w-full max-w-lg"
+        className="bg-white dark:bg-black dark:text-white dark:border-2 dark:border-white/40 shadow-lg rounded-2xl p-8 md:p-10 w-full max-w-lg"
         data-aos="fade-up"
       >
         <h2
@@ -39,7 +40,7 @@ const Payment = () => {
 
         {/* Trainer & Slot Summary */}
         <div
-          className="bg-gray-100 p-5 rounded-lg mb-6 text-gray-800 space-y-4"
+          className="p-5 rounded-lg mb-6 text-gray-800 dark:text-white space-y-4"
           data-aos="fade-up"
           data-aos-delay="200"
         >
@@ -51,24 +52,42 @@ const Payment = () => {
             />
             <div>
               <h3 className="text-lg font-semibold">{trainer?.fullName}</h3>
-              <p className="text-sm text-gray-600">{trainer?.email}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-300">
+                {trainer?.email}
+              </p>
             </div>
           </div>
 
-          <div className="border-t pt-4">
-            <p>
-              <span className="font-bold">Package:</span> {packageName}
+          <div className="border-t-2 border-gray-600 pt-4">
+            <p className="text-primary">
+              <span className="font-bold text-black dark:text-white/70">
+                Package:
+              </span>{" "}
+              {packageName}
             </p>
-            <p>
-              <span className="font-bold">Selected Class:</span>{" "}
+            <p className="text-primary">
+              <span className="font-bold text-black dark:text-white/70">
+                Selected Class:
+              </span>{" "}
               {slot?.selectedClass}
             </p>
-            <p>
-              <span className="font-bold">Slot:</span> {slot?.slotName} at{" "}
-              {slot?.slotTime}:00 PM
+            <p className="text-primary">
+              <span className="font-bold text-black dark:text-white/70">
+                Slot:
+              </span>{" "}
+              {slot?.slotName}
             </p>
-            <p>
-              <span className="font-bold">Day:</span> {slot?.selectedDay}
+            <p className="text-primary">
+              <span className="font-bold text-black dark:text-white/70">
+                Duration:
+              </span>{" "}
+              {slot?.slotTime} Hour
+            </p>
+            <p className="text-primary">
+              <span className="font-bold text-black dark:text-white/70">
+                Day:
+              </span>{" "}
+              {slot?.selectedDay}
             </p>
           </div>
         </div>

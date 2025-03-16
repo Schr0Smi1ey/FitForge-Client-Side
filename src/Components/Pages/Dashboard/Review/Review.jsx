@@ -23,18 +23,25 @@ const Review = () => {
         params: { email: user.email },
       }
     );
-    // if (res.data.insertedId) {
-    console.log(res);
-    setRating(0);
-    setFeedback("");
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "Reviews added successfully",
-      showConfirmButton: false,
-      timer: 1500,
-    });
-    // }
+    if (res.data.insertedId) {
+      setRating(0);
+      setFeedback("");
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Reviews added successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } else {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Reviews addition failed",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
   };
 
   if (loading) {
@@ -64,7 +71,7 @@ const Review = () => {
         </div>
 
         <textarea
-          className="w-full p-3 bg-black border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+          className="w-full p-3 dark:bg-black border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
           placeholder="Write your feedback here..."
           rows="4"
           value={feedback}

@@ -112,7 +112,7 @@ const TrainerDetails = () => {
       <Helmet>
         <title>FitForge | Trainer-Details</title>
       </Helmet>
-      <div className="bg-white dark:bg-black shadow-lg rounded-xl max-w-4xl w-full overflow-hidden">
+      <div className="bg-white shadow-lg rounded-xl max-w-4xl w-full overflow-hidden">
         <div className="flex flex-col md:flex-row">
           {/* Profile Image */}
           <div className="md:w-1/3 flex items-center justify-center p-6 bg-primary">

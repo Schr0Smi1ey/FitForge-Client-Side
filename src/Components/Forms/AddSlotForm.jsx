@@ -127,7 +127,7 @@ const AddSlotForm = () => {
   };
 
   return (
-    <div className="mx-auto bg-white p-6 rounded-lg shadow-md">
+    <div className="mx-auto bg-white dark:bg-black dark:text-white p-6 rounded-lg shadow-md">
       <h2
         data-aos="fade-down"
         data-aos-delay="150"
@@ -138,7 +138,7 @@ const AddSlotForm = () => {
       <p
         data-aos="fade-down"
         data-aos-delay="150"
-        className="text-lg text-center text-gray-600 mb-6"
+        className="text-lg text-center text-gray-600 dark:text-gray-400 mb-6"
       >
         Customize your availability and connect with clients effortlessly.
       </p>
@@ -148,7 +148,7 @@ const AddSlotForm = () => {
         <div
           data-aos="fade-up"
           data-aos-delay="200"
-          className="grid grid-cols-2 gap-4 bg-gray-100 p-4 rounded-md"
+          className="grid grid-cols-2 gap-4 bg-gray-100 dark:bg-black dark:text-gray-400 p-4 rounded-md"
         >
           <div>
             <label className="font-bold">Name:</label>
@@ -156,7 +156,7 @@ const AddSlotForm = () => {
               type="text"
               value={userData?.name}
               readOnly
-              className="input input-bordered w-full"
+              className="input input-bordered w-full dark:bg-black dark:border-2 dark:border-white/10 dark:text-gray-500"
             />
           </div>
           <div>
@@ -165,7 +165,7 @@ const AddSlotForm = () => {
               type="text"
               value={userData?.email}
               readOnly
-              className="input input-bordered w-full"
+              className="input input-bordered w-full dark:bg-black dark:border-2 dark:border-white/10 dark:text-gray-500"
             />
           </div>
           <div>
@@ -174,7 +174,7 @@ const AddSlotForm = () => {
               type="text"
               value={trainerData.availableDays}
               readOnly
-              className="input input-bordered w-full"
+              className="input input-bordered w-full dark:bg-black dark:border-2 dark:border-white/10 dark:text-gray-500"
             />
           </div>
           <div>
@@ -183,7 +183,7 @@ const AddSlotForm = () => {
               type="text"
               value={trainerData.experience}
               readOnly
-              className="input input-bordered w-full"
+              className="input input-bordered w-full dark:bg-black dark:border-2 dark:border-white/10 dark:text-gray-500"
             />
           </div>
           <div>
@@ -192,7 +192,7 @@ const AddSlotForm = () => {
               type="text"
               value={trainerData.age}
               readOnly
-              className="input input-bordered w-full"
+              className="input input-bordered w-full dark:bg-black dark:border-2 dark:border-white/10 dark:text-gray-500"
             />
           </div>
           <div>
@@ -201,7 +201,7 @@ const AddSlotForm = () => {
               type="text"
               value={trainerData.profileImage}
               readOnly
-              className="input input-bordered w-full"
+              className="input input-bordered w-full dark:bg-black dark:border-2 dark:border-white/10 dark:text-gray-500"
             />
           </div>
           <div className="col-span-2 h-fit mb-4">
@@ -209,7 +209,7 @@ const AddSlotForm = () => {
             <textarea
               value={(trainerData.skills || []).join(", ")}
               readOnly
-              className="input input-bordered w-full h-fit p-2 overflow-auto"
+              className="input input-bordered w-full dark:bg-black dark:border-2 dark:border-white/10 dark:text-gray-500 h-fit p-2 overflow-auto"
               style={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }}
             />
           </div>
@@ -219,7 +219,7 @@ const AddSlotForm = () => {
               type="text"
               value={trainerData.classDuration}
               readOnly
-              className="input input-bordered w-full"
+              className="input input-bordered w-full dark:bg-black dark:border-2 dark:border-white/10 dark:text-gray-500"
             />
           </div>
           <div>
@@ -228,7 +228,7 @@ const AddSlotForm = () => {
               type="text"
               value={trainerData.availableTime}
               readOnly
-              className="input input-bordered w-full"
+              className="input input-bordered w-full dark:bg-black dark:border-2 dark:border-white/10 dark:text-gray-500"
             />
           </div>
           <div className="col-span-2 h-auto mb-4">
@@ -236,7 +236,7 @@ const AddSlotForm = () => {
             <textarea
               value={trainerData.biography}
               readOnly
-              className="input input-bordered w-full h-32 h p-2"
+              className="input input-bordered w-full dark:bg-black dark:border-2 dark:border-white/10 dark:text-gray-500 h-32 h p-2"
               style={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }} // Ensures long words break appropriately
             />
           </div>
@@ -287,7 +287,7 @@ const AddSlotForm = () => {
             name="slotTime"
             value={formData.slotTime}
             onChange={handleChange}
-            className="input input-bordered w-full"
+            className="input input-bordered w-full dark:bg-black dark:border-2 dark:border-white/10 dark:text-gray-500"
             required
           />
         </div>

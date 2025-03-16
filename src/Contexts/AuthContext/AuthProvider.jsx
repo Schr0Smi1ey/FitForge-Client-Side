@@ -28,7 +28,6 @@ const AuthProvider = ({ children }) => {
   const image_hosting_api = `https://api.imgbb.com/1/upload?key=${
     import.meta.env.VITE_IMAGE_HOSTING_KEY
   }`;
-  console.log(theme);
   useEffect(() => {
     if (theme === "dark") {
       document.documentElement.classList.add("dark");

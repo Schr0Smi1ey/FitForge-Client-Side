@@ -64,7 +64,7 @@ const Balance = () => {
         {/* Pie Chart Section */}
         <div
           data-aos="fade-left"
-          className="bg-white p-4 rounded-lg shadow-md w-full md:w-auto"
+          className="bg-white dark:bg-black dark:text-white p-4 rounded-lg shadow-md w-full md:w-auto"
         >
           <h3 className="text-lg md:text-xl font-semibold text-center mb-4">
             📊 Membership Overview
@@ -74,7 +74,11 @@ const Balance = () => {
             series={[
               {
                 data: [
-                  { id: 0, value: totalPaidMembers, label: "Paid Members" },
+                  {
+                    id: 0,
+                    value: totalPaidMembers,
+                    label: "Paid Members",
+                  },
                   {
                     id: 1,
                     value: totalSubscribers,
@@ -97,7 +101,10 @@ const Balance = () => {
 
       {/* Payment Table Section */}
       {payments.length === 0 ? (
-        <p data-aos="fade-up" className="text-gray-500 text-center">
+        <p
+          data-aos="fade-up"
+          className="text-2xl text-red-500 font-bold text-center"
+        >
           No transactions found.
         </p>
       ) : (
@@ -112,49 +119,50 @@ const Balance = () => {
                 <th
                   data-aos="fade-up"
                   data-aos-delay="100"
-                  className="p-3 border"
+                  className="p-1 border"
+                  colSpan={2}
                 >
                   Trainer
                 </th>
                 <th
                   data-aos="fade-up"
                   data-aos-delay="100"
-                  className="p-3 border"
+                  className="p-1 border"
                 >
                   Trainee
                 </th>
                 <th
                   data-aos="fade-up"
                   data-aos-delay="100"
-                  className="p-3 border"
+                  className="p-1 border"
                 >
                   Class
                 </th>
                 <th
                   data-aos="fade-up"
                   data-aos-delay="100"
-                  className="p-3 border"
+                  className="p-1 border"
                 >
                   Slot
                 </th>
                 <th
                   data-aos="fade-up"
                   data-aos-delay="100"
-                  className="p-3 border"
+                  className="p-1 border"
                 >
                   Package
                 </th>
                 <th
                   data-aos="fade-up"
                   data-aos-delay="100"
-                  className="p-3 border"
+                  className="p-1 border"
                 >
                   Price ($)
                 </th>
                 <th
                   data-aos="fade-up"
                   data-aos-delay="100"
-                  className="p-3 border"
+                  className="p-1 border"
                 >
                   Date
                 </th>
@@ -162,15 +170,16 @@ const Balance = () => {
             </thead>
 
             {/* Table Body */}
-            <tbody className="text-gray-700 text-center text-sm md:text-base lg:text-lg">
+            <tbody className="text-gray-700 dark:text-gray-400 text-center text-sm">
               {payments.map((payment) => (
-                <tr key={payment._id} className="hover:bg-gray-50">
+                <tr key={payment._id}>
                   <td
                     data-aos="fade-up"
                     data-aos-delay="250"
-                    className="p-3 border"
+                    className="p-1 border"
+                    colSpan={2}
                   >
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center justify-center gap-3">
                       <img
                         src={payment.trainerDetails.profileImage}
                         alt={payment.trainerDetails.fullName}
@@ -182,21 +191,21 @@ const Balance = () => {
                   <td
                     data-aos="fade-up"
                     data-aos-delay="250"
-                    className="p-3 border"
+                    className="p-1 border"
                   >
                     {user.displayName || "N/A"}
                   </td>
                   <td
                     data-aos="fade-up"
                     data-aos-delay="250"
-                    className="p-3 border"
+                    className="p-1 border"
                   >
                     {payment.classDetails.title}
                   </td>
                   <td
                     data-aos="fade-up"
                     data-aos-delay="250"
-                    className="p-3 border"
+                    className="p-1 border"
                   >
                     {payment.slotDetails.slotName} (
                     {payment.slotDetails.selectedDay})
@@ -204,21 +213,21 @@ const Balance = () => {
                   <td
                     data-aos="fade-up"
                     data-aos-delay="250"
-                    className="p-3 border"
+                    className="p-1 border"
                   >
                     {payment.packageName}
                   </td>
                   <td
                     data-aos="fade-up"
                     data-aos-delay="250"
-                    className="p-3 border font-semibold"
+                    className="p-1 border font-semibold"
                   >
                     ${payment.price}
                   </td>
                   <td
                     data-aos="fade-up"
                     data-aos-delay="250"
-                    className="p-3 border text-gray-500"
+                    className="p-1 border text-gray-500"
                   >
                     {new Date(payment.date).toLocaleDateString()}
                   </td>

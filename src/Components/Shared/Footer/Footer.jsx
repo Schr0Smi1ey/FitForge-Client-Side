@@ -144,10 +144,7 @@ const Footer = () => {
       </div>
 
       {/* Copyright */}
-      <div
-        data-aos="fade-up"
-        className="border-t border-gray-700 mt-10 pt-6 text-center text-sm"
-      >
+      <div className="border-t border-gray-700 mt-10 pt-6 text-center text-sm">
         <p>&copy; {new Date().getFullYear()} FitForge. All Rights Reserved.</p>
       </div>
     </footer>

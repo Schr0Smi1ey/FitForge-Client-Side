@@ -80,8 +80,10 @@ const Trainer = () => {
           </div>
 
           <div>
-            <div className="bg-purple-50 rounded-xl p-6 mb-6">
-              <h3 className="font-semibold text-gray-800 mb-3">Availability</h3>
+            <div className="bg-purple-50 dark:bg-black/20 dark:border-2 dark:border-white/40 rounded-xl p-6 mb-6">
+              <h3 className="font-semibold text-gray-800 dark:text-gray-400 mb-3">
+                Availability
+              </h3>
               <div className="flex flex-wrap gap-2">
                 {trainer.availableDays.map((day, index) => (
                   <span
@@ -94,8 +96,8 @@ const Trainer = () => {
               </div>
             </div>
 
-            <div className="bg-green-50 rounded-xl p-6">
-              <h3 className="font-semibold text-gray-800 mb-3">
+            <div className="bg-green-50 dark:bg-black/20 dark:border-2 dark:border-white/40 rounded-xl p-6">
+              <h3 className="font-semibold text-gray-800 dark:text-gray-400 mb-3">
                 Specializations
               </h3>
               <div className="flex flex-wrap gap-2">

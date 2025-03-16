@@ -39,7 +39,7 @@ const Subscribers = () => {
       <div className="mb-6">
         <h1
           data-aos="fade-down"
-          className="text-2xl md:text-3xl font-bold text-gray-800 text-center"
+          className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-300 text-center"
         >
           📋 Subscriber List
         </h1>
@@ -52,7 +52,7 @@ const Subscribers = () => {
           </p>
         </div>
       ) : (
-        <table className="table table-zebra">
+        <table className="table">
           <thead className="bg-primary text-white">
             <tr className="text-center text-base md:text-lg lg:text-xl">
               <th data-aos="fade-down">No.</th>
@@ -64,7 +64,7 @@ const Subscribers = () => {
             {subscribers.map((subscriber, index) => (
               <tr
                 key={subscriber._id}
-                className="text-center text-base md:text-lg lg:text-xl"
+                className="text-center dark:text-gray-400 text-base md:text-lg lg:text-xl"
               >
                 <td data-aos="fade-up">{index + 1}</td>
                 <td data-aos="fade-up">{subscriber.name}</td>

@@ -48,7 +48,11 @@ const BookedTrainer = () => {
       </h2>
 
       {payments.length === 0 ? (
-        <p data-aos="fade-up" data-aos-delay="150" className="text-gray-500">
+        <p
+          data-aos="fade-up"
+          data-aos-delay="150"
+          className="text-2xl text-red-500 font-bold text-center"
+        >
           No bookings found.
         </p>
       ) : (
@@ -56,7 +60,7 @@ const BookedTrainer = () => {
           {payments.map((payment) => (
             <div
               key={payment._id}
-              className="bg-white shadow-lg rounded-2xl overflow-hidden transition-transform transform duration-300"
+              className="bg-white dark:bg-black dark:border-2 dark:border-white/40 dark:p-1 shadow-lg rounded-2xl overflow-hidden transition-transform transform duration-300"
             >
               {/* Trainer Image */}
               <div className="relative">
@@ -76,15 +80,16 @@ const BookedTrainer = () => {
                     <h3 className="text-2xl font-bold text-primary">
                       {payment.trainerDetails.fullName}
                     </h3>
-                    <p className="text-gray-500 text-sm mb-2">
+                    <p className="text-gray-500 dark:text-gray-400 text-sm mb-2">
                       📧 {payment.trainerDetails.email}
                     </p>
                   </div>
                   <div data-aos="fade-up" data-aos-delay="240">
-                    <p className="text-gray-700">
-                      🎯 Age: {payment.trainerDetails.age}
+                    <p className="text-gray-700 dark:text-gray-400">
+                      🎯 <span className="dark:text-gray-300">Age</span>:{" "}
+                      {payment.trainerDetails.age}
                     </p>
-                    <p className="text-gray-700">
+                    <p className="text-gray-700 dark:text-gray-300">
                       💰 Package:{" "}
                       <span className="text-primary font-bold">
                         {payment.packageName}
@@ -97,15 +102,15 @@ const BookedTrainer = () => {
                 <div
                   data-aos="fade-up"
                   data-aos-delay="260"
-                  className="mt-4 p-3 bg-gray-100 rounded-xl"
+                  className="mt-4 p-3 bg-gray-100 dark:bg-black dark:border-2 dark:border-white/40 rounded-xl"
                 >
                   <h4 className="text-lg font-semibold text-primary">
                     🏋️ {payment.classDetails.title}
                   </h4>
-                  <p className="text-gray-600 text-sm">
+                  <p className="text-gray-600 dark:text-gray-400 text-sm">
                     {payment.classDetails.description}
                   </p>
-                  <p className="text-sm mt-2 font-bold">
+                  <p className="text-sm mt-2 font-bold text-gray-700 dark:text-gray-300">
                     🔥 Intensity:{" "}
                     <span className="font-medium text-primary">
                       {payment.classDetails.intensity}
@@ -117,13 +122,15 @@ const BookedTrainer = () => {
                 <div
                   data-aos="fade-up"
                   data-aos-delay="280"
-                  className="mt-4 p-3 border border-primary rounded-xl bg-gray-50"
+                  className="mt-4 p-3 border border-primary rounded-xl bg-gray-50 dark:bg-black dark:border-2 dark:border-white/40"
                 >
-                  <p className="text-gray-800 font-semibold">🕒 Slot Details</p>
+                  <p className="text-gray-800 dark:text-gray-400 font-semibold">
+                    🕒 Slot Details
+                  </p>
                   <p className="text-primary font-medium">
                     ⏰ {payment.slotDetails.slotName}
                   </p>
-                  <p className="text-gray-600">
+                  <p className="text-gray-600 dark:text-gray-400">
                     📅 {payment.slotDetails.selectedDay}
                   </p>
                 </div>
@@ -133,7 +140,7 @@ const BookedTrainer = () => {
                 onClick={() =>
                   navigate(`/trainer-details/${payment.trainerDetails._id}`)
                 }
-                className="w-full bg-primary text-white py-2"
+                className="w-full bg-primary rounded-lg text-white py-2"
               >
                 Know More!
               </button>

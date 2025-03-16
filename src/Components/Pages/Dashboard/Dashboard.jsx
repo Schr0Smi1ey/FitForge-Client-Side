@@ -223,7 +223,7 @@ const Dashboard = () => {
           )}
 
           {/* General Links */}
-          <div className="border-t border-white my-4"></div>
+          <div className="border-t border-white my-4 mt-6"></div>
           <div className="text-base md:text-lg lg:text-xl space-y-4 mt-4">
             <li className="w-fit">
               <NavLink to="/" className="flex items-center gap-2">

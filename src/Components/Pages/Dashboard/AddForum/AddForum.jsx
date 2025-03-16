@@ -96,21 +96,24 @@ const AddForum = () => {
       <Helmet>
         <title>FitForge | Dashboard | Add Forum</title>
       </Helmet>
-      <div className="w-full container mx-auto max-w-3xl bg-white shadow-2xl rounded-2xl p-6">
+      <div className="w-full container mx-auto max-w-3xl bg-white dark:bg-black dark:text-white shadow-2xl rounded-2xl p-6">
         <h2
           data-aos="fade-down"
           data-aos-delay="100"
-          className="text-3xl font-bold text-gray-800 text-center mb-4"
+          className="text-3xl font-bold text-gray-800 dark:text-gray-300 text-center mb-4"
         >
           📢 Create a New Forum
         </h2>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-4 dark:border-2 dark:border-gray-800 dark:p-4 dark:rounded-lg"
+        >
           <div>
             <label
               data-aos="fade-up"
               data-aos-delay="150"
-              className="font-semibold text-gray-700"
+              className="font-semibold text-gray-700 dark:text-gray-400"
             >
               Forum Title
             </label>
@@ -123,7 +126,7 @@ const AddForum = () => {
               value={forum.title}
               onChange={handleChange}
               required
-              className="mt-1 p-3 border-2 border-gray-300 rounded-lg w-full focus:ring-primary focus:border-primary transition-all"
+              className="mt-1 p-3 border-2 border-gray-300 dark:bg-black dark:text-gray-300 dark:border-gray-600 rounded-lg w-full focus:ring-primary focus:border-primary transition-all"
             />
           </div>
 
@@ -131,7 +134,7 @@ const AddForum = () => {
             <label
               data-aos="fade-up"
               data-aos-delay="170"
-              className="font-semibold text-gray-700"
+              className="font-semibold text-gray-700 dark:text-gray-400"
             >
               Description
             </label>
@@ -144,7 +147,7 @@ const AddForum = () => {
               value={forum.description}
               onChange={handleChange}
               required
-              className="mt-1 p-3 border-2 border-gray-300 rounded-lg w-full focus:ring-primary focus:border-primary transition-all"
+              className="mt-1 p-3 border-2 border-gray-300 dark:bg-black dark:text-gray-300 dark:border-gray-600 rounded-lg w-full focus:ring-primary focus:border-primary transition-all"
             />
           </div>
 
@@ -152,7 +155,7 @@ const AddForum = () => {
             <label
               data-aos="fade-up"
               data-aos-delay="190"
-              className="block text-gray-700 font-medium"
+              className="block text-gray-700 dark:text-gray-400 font-medium"
             >
               Image
             </label>
@@ -164,7 +167,7 @@ const AddForum = () => {
               onChange={handleFileChange}
               preview="true"
               ref={fileInputRef}
-              className="w-full p-2 border rounded-lg focus:ring-primary focus:border-primary transition-all"
+              className="w-full p-2 border rounded-lg dark:border-2 dark:border-gray-600 focus:ring-primary focus:border-primary transition-all"
               required
             />
           </div>
@@ -172,7 +175,7 @@ const AddForum = () => {
             <label
               data-aos="fade-up"
               data-aos-delay="210"
-              className="font-semibold text-gray-700"
+              className="font-semibold text-gray-700 dark:text-gray-400"
             >
               Posted By
             </label>
@@ -183,14 +186,14 @@ const AddForum = () => {
               name="postedBy"
               value={forum.postedBy}
               readOnly
-              className="mt-1 p-3 border-2 border-gray-300 rounded-lg w-full focus:ring-primary focus:border-primary transition-all"
+              className="mt-1 p-3 border-2 border-gray-300 dark:bg-black dark:text-gray-300 dark:border-gray-600 rounded-lg w-full focus:ring-primary focus:border-primary transition-all"
             />
           </div>
           <div>
             <label
               data-aos="fade-up"
               data-aos-delay="230"
-              className="font-semibold text-gray-700"
+              className="font-semibold text-gray-700 dark:text-gray-400"
             >
               Posted Date
             </label>
@@ -201,7 +204,7 @@ const AddForum = () => {
               name="postedDate"
               value={convertDate(forum.postedDate, "AddForum")}
               readOnly
-              className="mt-1 p-3 border-2 border-gray-300 rounded-lg w-full focus:ring-primary focus:border-primary transition-all"
+              className="mt-1 p-3 border-2 border-gray-300 dark:bg-black dark:text-gray-300 dark:border-gray-600 rounded-lg w-full focus:ring-primary focus:border-primary transition-all"
             />
           </div>
           <button

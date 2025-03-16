@@ -45,7 +45,7 @@ const Classes = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 md:py-20 lg:py-32">
+    <div className="container mx-auto px-4 py-32">
       <Helmet>
         <title>FitForge | Classes</title>
       </Helmet>

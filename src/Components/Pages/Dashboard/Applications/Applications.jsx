@@ -50,7 +50,7 @@ const Applications = () => {
           <div className="mb-6">
             <h1
               data-aos="fade-down"
-              className="text-3xl font-bold text-gray-800 text-center"
+              className="text-3xl font-bold text-gray-800 dark:text-gray-300 text-center"
             >
               📋 All Applications
             </h1>
@@ -65,7 +65,7 @@ const Applications = () => {
                 <th data-aos="fade-down">Details</th>
               </tr>
             </thead>
-            <tbody className="text-gray-700 text-sm md:text-base lg:text-lg">
+            <tbody className="text-gray-700 dark:text-gray-400 text-sm md:text-base lg:text-lg">
               {appliedTrainers.map((applicant, index) => (
                 <tr key={applicant._id} className="text-center">
                   <td data-aos="fade-up">{index + 1}</td>

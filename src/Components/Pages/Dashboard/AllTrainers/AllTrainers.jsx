@@ -90,7 +90,7 @@ const AllTrainers = () => {
           <div className="mb-6">
             <h1
               data-aos="fade-down"
-              className="text-3xl font-bold text-gray-800 text-center"
+              className="text-3xl font-bold text-gray-800 dark:text-gray-300 text-center"
             >
               👩‍🏫 All Trainers
             </h1>
@@ -105,7 +105,7 @@ const AllTrainers = () => {
                 <th data-aos="fade-down">Action</th>
               </tr>
             </thead>
-            <tbody className="text-sm md:text-base lg:text-lg">
+            <tbody className="text-sm md:text-base dark:text-gray-300 lg:text-lg">
               {trainers.map((trainer) => (
                 <tr key={trainer._id} className="text-center">
                   <td data-aos="fade-up">
@@ -127,7 +127,7 @@ const AllTrainers = () => {
                   <td>
                     {showModal && (
                       <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-                        <div className="bg-white rounded-lg shadow-lg p-6 w-11/12 md:w-1/2">
+                        <div className="bg-white dark:bg-black dark:text-white/70 dark:border-2 dark:border-white/40 rounded-lg shadow-lg p-6 w-11/12 md:w-1/2">
                           <h2
                             data-aos="fade-down"
                             className="text-2xl font-bold mb-4"
@@ -144,7 +144,7 @@ const AllTrainers = () => {
                               data-aos-delay="100"
                               name="feedback"
                               placeholder="Enter Cancellation feedback..."
-                              className="w-full h-32 p-3 border rounded-md mb-4"
+                              className="w-full h-32 p-3 dark:bg-black border rounded-md mb-4"
                               required
                             ></textarea>
                             <div className="flex justify-end gap-4">

@@ -7,12 +7,14 @@ import { Helmet } from "react-helmet";
 import logo from "../../assets/fitforge-logo.png";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import useCustomAxios from "../../Hooks/useCustomAxios";
 
 const Login = () => {
   const { signInUser, signInWithGoogle, Toast, setLoading } =
     useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
+  const customAxios = useCustomAxios();
   const [email, setEmail] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const attemptedPath = location.state?.from || "/";
@@ -21,6 +23,25 @@ const Login = () => {
     window.scrollTo(0, 0);
     AOS.init({ duration: 500 });
   }, []);
+  const sendToDatabase = async (
+    email,
+    name,
+    photo,
+    creationTime,
+    lastSignInTime
+  ) => {
+    await customAxios.post("/users", {
+      email,
+      name,
+      photo,
+      role: "member",
+      creationTime,
+      lastSignInTime,
+      likedPosts: [],
+      dislikedPosts: [],
+      savedPosts: [],
+    });
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     const password = e.target[1].value;
@@ -41,18 +62,19 @@ const Login = () => {
 
   const handleSignInWithGoogle = () => {
     signInWithGoogle()
-      .then(() => {
-        setTimeout(() => {
-          navigate(attemptedPath);
-          Toast("Login Successful", "success");
-        }, 200);
+      .then((res) => {
+        Toast("Login Successful", "success");
+        sendToDatabase(
+          res.user.email,
+          res.user.displayName,
+          res.user.photoURL,
+          res.user.metadata.creationTime,
+          res.user.metadata.lastSignInTime
+        );
+        navigate(location.state?.from || "/", { replace: true });
       })
-      .catch((error) => {
-        Toast(error.message, "error");
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+      .catch((error) => Toast(error.message, "error"))
+      .finally(() => setLoading(false));
   };
 
   return (
@@ -67,7 +89,7 @@ const Login = () => {
           className="hidden md:flex md:w-1/2 bg-gradient-to-r from-primary to-primary/70 text-white flex-col items-center justify-center p-8"
           data-aos="fade-right"
         >
-          <img src={logo} className="mx-auto mb-2 rounded-xl" alt="" />
+          <img src={logo} className="mx-auto w-[80%] mb-2 rounded-xl" alt="" />
           <h2 className="text-4xl text-center font-bold mb-4">
             Welcome Back to FitForge!
           </h2>
@@ -95,7 +117,7 @@ const Login = () => {
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-primary focus:border-primary"
+                className="mt-1 block w-full px-4 py-2 border border-gray-300 bg-white dark:bg-black dark:text-gray-400 rounded-lg shadow-sm focus:ring-primary focus:border-primary"
                 placeholder="Enter your email"
                 required
               />
@@ -109,7 +131,7 @@ const Login = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   id="password"
-                  className="mt-1 block text-black w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-primary focus:border-primary"
+                  className="mt-1 block text-black w-full px-4 py-2 border border-gray-300 dark:bg-black dark:text-gray-400 rounded-lg shadow-sm focus:ring-primary focus:border-primary"
                   placeholder="Enter your password"
                   required
                 />

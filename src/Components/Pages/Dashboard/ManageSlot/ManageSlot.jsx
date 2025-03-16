@@ -93,11 +93,11 @@ const ManageSlot = () => {
           <h1
             data-aos="fade-down "
             data-aos-delay="150"
-            className="text-3xl mb-6 font-bold text-gray-800 text-center"
+            className="text-3xl mb-6 font-bold text-gray-800 dark:text-gray-300 text-center"
           >
             🗓️ Manage Slots
           </h1>
-          <table className="table table-zebra">
+          <table className="table">
             <thead className="bg-primary text-white text-base md:text-lg lg:text-xl">
               <tr className="text-center">
                 <th data-aos="fade-up" data-aos-delay="200">
@@ -117,7 +117,7 @@ const ManageSlot = () => {
                 </th>
               </tr>
             </thead>
-            <tbody className="text-gray-700 text-sm md:text-base lg:text-lg">
+            <tbody className="text-gray-700 dark:text-gray-400 text-sm md:text-base lg:text-lg">
               {slotData.map((slot, index) => (
                 <tr key={slot._id} className="text-center">
                   <td data-aos="fade-up" data-aos-delay="200">

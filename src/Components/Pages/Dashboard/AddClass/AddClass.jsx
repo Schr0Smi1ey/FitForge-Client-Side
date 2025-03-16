@@ -83,7 +83,7 @@ const AddClass = () => {
   };
 
   return (
-    <div className="container mx-auto max-w-4xl bg-white p-8 rounded-2xl shadow-lg">
+    <div className="container mx-auto max-w-4xl bg-white dark:bg-black dark:text-white p-8 rounded-2xl shadow-lg">
       <Helmet>
         <title>FitForge | Dashboard | Add Class</title>
       </Helmet>
@@ -95,13 +95,16 @@ const AddClass = () => {
         Add New Class
       </h2>
 
-      <form onSubmit={handleSubmit} className="space-y-5">
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-5 dark:border-2 dark:border-gray-800 dark:p-4 dark:rounded-lg"
+      >
         {/* Class Title */}
         <div>
           <label
             data-aos="fade-up"
             data-aos-delay="150"
-            className="block text-gray-600 font-semibold mb-1"
+            className="block text-gray-600 dark:text-gray-400 font-semibold mb-1"
           >
             Class Title
           </label>
@@ -112,7 +115,7 @@ const AddClass = () => {
             name="title"
             value={formData.title}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+            className="w-full p-3 border border-gray-300 dark:border-gray-600 dark:bg-black dark:text-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
             required
           />
         </div>
@@ -122,7 +125,7 @@ const AddClass = () => {
           <label
             data-aos="fade-up"
             data-aos-delay="150"
-            className="block text-gray-600 font-semibold mb-1"
+            className="block text-gray-600 dark:text-gray-400 font-semibold mb-1"
           >
             Upload Image
           </label>
@@ -143,7 +146,7 @@ const AddClass = () => {
           <label
             data-aos="fade-up"
             data-aos-delay="150"
-            className="block text-gray-600 font-semibold mb-1"
+            className="block text-gray-600 dark:text-gray-400 font-semibold mb-1"
           >
             Description
           </label>
@@ -153,7 +156,7 @@ const AddClass = () => {
             name="description"
             value={formData.description}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+            className="w-full p-3 border border-gray-300 dark:border-gray-600 dark:bg-black dark:text-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
             rows="4"
             required
           ></textarea>
@@ -164,7 +167,7 @@ const AddClass = () => {
           <label
             data-aos="fade-up"
             data-aos-delay="150"
-            className="block text-gray-600 font-semibold mb-1"
+            className="block text-gray-600 dark:text-gray-400 font-semibold mb-1"
           >
             Category
           </label>
@@ -174,25 +177,52 @@ const AddClass = () => {
             name="category"
             value={formData.category}
             onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+            className="w-full p-3 border border-gray-300 dark:border-gray-600 dark:bg-black dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
             required
           >
             <option value="" disabled>
               Select Category
             </option>
-            <option value="Strength & Resistance">Strength & Resistance</option>
-            <option value="Cardio & Endurance">Cardio & Endurance</option>
-            <option value="Mobility & Flexibility">
+            <option
+              value="Strength & Resistance"
+              className="dark:text-gray-500"
+            >
+              Strength & Resistance
+            </option>
+            <option value="Cardio & Endurance" className="dark:text-gray-500">
+              Cardio & Endurance
+            </option>
+            <option
+              value="Mobility & Flexibility"
+              className="dark:text-gray-500"
+            >
               Mobility & Flexibility
             </option>
-            <option value="Sports & Athletic">Sports & Athletic</option>
-            <option value="Rehabilitation & Injury Prevention">
+            <option value="Sports & Athletic" className="dark:text-gray-500">
+              Sports & Athletic
+            </option>
+            <option
+              value="Rehabilitation & Injury Prevention"
+              className="dark:text-gray-500"
+            >
               Rehabilitation & Injury Prevention
             </option>
-            <option value="Special Populations">Special Populations</option>
-            <option value="Combat & Martial Arts">Combat & Martial Arts</option>
-            <option value="Mind-Body Wellness">Mind-Body Wellness</option>
-            <option value="Weight Management & Fat Loss">
+            <option value="Special Populations" className="dark:text-gray-500">
+              Special Populations
+            </option>
+            <option
+              value="Combat & Martial Arts"
+              className="dark:text-gray-500"
+            >
+              Combat & Martial Arts
+            </option>
+            <option value="Mind-Body Wellness" className="dark:text-gray-500">
+              Mind-Body Wellness
+            </option>
+            <option
+              value="Weight Management & Fat Loss"
+              className="dark:text-gray-500"
+            >
               Weight Management & Fat Loss
             </option>
           </select>
@@ -204,7 +234,7 @@ const AddClass = () => {
             <label
               data-aos="fade-up"
               data-aos-delay="150"
-              className="block text-gray-600 font-semibold mb-1"
+              className="block text-gray-600 dark:text-gray-400 font-semibold mb-1"
             >
               Duration
             </label>
@@ -214,15 +244,21 @@ const AddClass = () => {
               name="duration"
               value={formData.duration}
               onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full p-3 border border-gray-300 dark:border-gray-600 dark:bg-black dark:text-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
               required
             >
               <option value="" disabled>
                 Select Duration
               </option>
-              <option value="1">1 Hour</option>
-              <option value="2">2 Hours</option>
-              <option value="3">3 Hours</option>
+              <option value="1" className="dark:text-gray-500">
+                1 Hour
+              </option>
+              <option value="2" className="dark:text-gray-500">
+                2 Hours
+              </option>
+              <option value="3" className="dark:text-gray-500">
+                3 Hours
+              </option>
             </select>
           </div>
 
@@ -231,7 +267,7 @@ const AddClass = () => {
             <label
               data-aos="fade-up"
               data-aos-delay="150"
-              className="block text-gray-600 font-semibold mb-1"
+              className="block text-gray-600 dark:text-gray-400 font-semibold mb-1"
             >
               Intensity
             </label>
@@ -241,15 +277,21 @@ const AddClass = () => {
               name="intensity"
               value={formData.intensity}
               onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full p-3 border border-gray-300 dark:border-gray-600 dark:bg-black dark:text-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
               required
             >
               <option value="" disabled>
                 Select Intensity
               </option>
-              <option value="Beginner">Beginner</option>
-              <option value="Intermediate">Intermediate</option>
-              <option value="Advanced">Advanced</option>
+              <option value="Beginner" className="text-gray-500">
+                Beginner
+              </option>
+              <option value="Intermediate" className="text-gray-500">
+                Intermediate
+              </option>
+              <option value="Advanced" className="text-gray-500">
+                Advanced
+              </option>
             </select>
           </div>
         </div>

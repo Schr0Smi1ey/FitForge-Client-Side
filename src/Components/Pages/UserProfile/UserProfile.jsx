@@ -22,15 +22,14 @@ const UserProfile = () => {
       </div>
     );
   }
-  console.log(user);
   return (
-    <div className="min-h-[400px] flex items-center justify-center bg-gradient-to-r from-primary/40 to-primary/50">
+    <div className="min-h-[400px] py-32 dark:bg-black dark:text-white flex items-center justify-center bg-gradient-to-r from-primary/40 to-primary/50 rounded-lg">
       <Helmet>
         <title>FitForge | Profile</title>
       </Helmet>
       <div
         data-aos="zoom-in"
-        className="bg-white shadow-lg rounded-lg  flex flex-col sm:flex-row items-center sm:gap-20 justify-center max-w-4xl p-6"
+        className="bg-white dark:bg-black dark:text-white shadow-lg rounded-lg  flex flex-col sm:flex-row items-center sm:gap-20 justify-center max-w-4xl p-6"
       >
         <div
           data-aos="fade-right"
@@ -46,15 +45,21 @@ const UserProfile = () => {
         <div className="flex flex-col justify-center items-center sm:items-start md:w-2/3 px-6">
           <h1
             data-aos="fade-left"
-            className="text-2xl font-bold text-gray-800 mb-2"
+            className="text-2xl font-bold text-gray-800 dark:text-gray-300 mb-2"
           >
             Welcome, {user.displayName || "Guest"}!
           </h1>
-          <p data-aos="fade-left" className="text-gray-600 text-lg mb-2">
+          <p
+            data-aos="fade-left"
+            className="text-gray-600 dark:text-gray-300 text-lg mb-2"
+          >
             Email:{" "}
             <span className="font-medium">{user.email || "Not Provided"}</span>
           </p>
-          <p data-aos="fade-left" className="text-gray-600 text-lg mb-4">
+          <p
+            data-aos="fade-left"
+            className="text-gray-600 dark:text-gray-300 text-lg mb-4"
+          >
             Last sign in time:{" "}
             <span className="font-medium">
               {user.metadata.lastSignInTime || "Not Provided"}

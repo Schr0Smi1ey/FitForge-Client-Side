@@ -42,7 +42,9 @@ const SignUp = () => {
     if (!/[a-z]/.test(password)) errors.push("one lowercase letter");
     if (password.length < 6) errors.push("at least 6 characters");
     setPasswordError(
-      errors.length ? `Password must include ${errors.join(", ")}.` : ""
+      errors.length && password.length > 0
+        ? `Password must include ${errors.join(", ")}.`
+        : ""
     );
   };
   const handleInputChange = (e) => {
@@ -149,7 +151,7 @@ const SignUp = () => {
           data-aos="fade-right"
           className="hidden md:flex w-1/2 bg-gradient-to-r from-primary to-primary/70 text-white flex-col items-center justify-center p-8"
         >
-          <img src={logo} className="mx-auto mb-2 rounded-xl" alt="" />
+          <img src={logo} className="mx-auto w-[80%] mb-2 rounded-xl" alt="" />
           <h2 className="text-3xl font-extrabold mb-4">Join FitForge Today</h2>
           <p className="text-lg text-center mb-6">
             Be part of a community committed to fitness and transformation. Sign
@@ -179,7 +181,7 @@ const SignUp = () => {
                 name="name"
                 value={formData.name}
                 onChange={handleInputChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:ring-2"
+                className="w-full px-4 py-2 border border-gray-300 dark:bg-black dark:text-gray-400 rounded-lg focus:ring-primary focus:ring-2"
                 placeholder="Enter your name"
                 required
               />
@@ -197,7 +199,7 @@ const SignUp = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:ring-2"
+                className="w-full px-4 py-2 border border-gray-300 dark:bg-black dark:text-gray-400 rounded-lg focus:ring-primary focus:ring-2"
                 placeholder="Enter your email"
                 required
               />
@@ -213,7 +215,7 @@ const SignUp = () => {
                 onChange={handleFileChange}
                 ref={fileInputRef}
                 required
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:ring-2"
+                className="w-full px-4 py-2 border border-gray-300 dark:bg-black dark:text-gray-400 rounded-lg focus:ring-primary focus:ring-2"
               />
               {formData.photo && (
                 <img
@@ -237,7 +239,7 @@ const SignUp = () => {
                   name="password"
                   value={formData.password}
                   onChange={handleInputChange}
-                  className={`w-full text-black px-4 py-2 border rounded-lg ${
+                  className={`w-full text-black px-4 py-2 border dark:bg-black dark:text-gray-400 rounded-lg ${
                     passwordError
                       ? "border-red-500 focus:ring-red-500"
                       : "focus:ring-primary"
@@ -267,7 +269,7 @@ const SignUp = () => {
           </div>
           <button
             onClick={handleSignInWithGoogle}
-            className="mt-4 w-full text-primary py-2 rounded-lg flex items-center justify-center border-2 border-gray-300"
+            className="mt-4 w-full text-primary py-2 rounded-lg flex items-center justify-center border-2 border-gray-400"
           >
             <svg
               className="w-5 h-5 mr-2"
