@@ -7,7 +7,6 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 import { MdEmail, MdLocationOn } from "react-icons/md";
-import { IoMdMailUnread } from "react-icons/io";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
@@ -37,6 +36,11 @@ const Footer = () => {
             Quick Links
           </h3>
           <ul className="mt-3 space-y-2 text-sm">
+            <li data-aos="fade-up">
+              <a href="/" className="hover:text-primary">
+                Home
+              </a>
+            </li>
             <li data-aos="fade-up">
               <a href="/trainers" className="hover:text-primary">
                 Trainers

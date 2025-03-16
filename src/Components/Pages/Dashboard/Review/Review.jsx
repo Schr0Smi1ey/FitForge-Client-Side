@@ -1,16 +1,49 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Rating from "react-rating";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
+import { GridLoader } from "react-spinners";
 
 const Review = () => {
   const [rating, setRating] = useState(0);
   const [feedback, setFeedback] = useState("");
+  const secureAxios = useAxiosSecure();
+  const { user, loading } = useContext(AuthContext);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({ rating, feedback });
-    // Submit logic here (API call, state update, etc.)
+    const res = await secureAxios.post(
+      "/reviews",
+      {
+        rating,
+        feedback,
+      },
+      {
+        params: { email: user.email },
+      }
+    );
+    // if (res.data.insertedId) {
+    console.log(res);
+    setRating(0);
+    setFeedback("");
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Reviews added successfully",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+    // }
   };
 
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <GridLoader color="#198068" size={40} />
+      </div>
+    );
+  }
   return (
     <div className="max-w-5xl mx-auto p-6 bg-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-bold mb-4 text-center text-primary">
