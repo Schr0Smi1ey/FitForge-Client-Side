@@ -17,11 +17,11 @@ const Trainer = () => {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <div className="max-w-6xl p-4 pt-32 mx-auto">
+    <div className="max-w-6xl p-4 py-32 mx-auto">
       <Helmet>
         <title>FitForge | {trainer.fullName}</title>
       </Helmet>
-      <div className="bg-white rounded-2xl shadow-lg p-4 md:p-6 lg:p-8">
+      <div className="bg-white dark:bg-black rounded-2xl shadow-lg p-4 md:p-6 lg:p-8">
         {/* Header Section */}
         <div className="flex flex-col md:flex-row gap-8 mb-8">
           <img
@@ -30,7 +30,7 @@ const Trainer = () => {
             className="w-32 h-32 rounded-full border-4 border-purple-100 object-cover"
           />
           <div className="flex-1">
-            <h1 className="text-3xl font-bold text-gray-800 mb-2">
+            <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-2">
               {trainer.fullName}
             </h1>
             <div className="flex items-center gap-4 mb-4">
@@ -44,7 +44,7 @@ const Trainer = () => {
                 href={trainer.socialLinks[0]}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 bg-gray-100 rounded-lg hover:bg-primary/30 transition-colors"
+                className="p-2 bg-gray-100 dark:bg-black dark:hover:scale-110 rounded-lg hover:bg-primary/30 transition-colors"
               >
                 <FaLinkedin className="w-6 h-6 text-blue-600" />
               </a>
@@ -52,7 +52,7 @@ const Trainer = () => {
                 href={trainer.socialLinks[1]}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 bg-gray-100 rounded-lg hover:bg-primary/30 transition-colors"
+                className="p-2 bg-gray-100 dark:bg-black dark:hover:scale-110 rounded-lg hover:bg-primary/30 transition-colors"
               >
                 <FaFacebook className="w-6 h-6 text-blue-600" />
               </a>
@@ -60,7 +60,7 @@ const Trainer = () => {
                 href={trainer.socialLinks[1]}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 bg-gray-100 rounded-lg hover:bg-primary/30 transition-colors"
+                className="p-2 bg-gray-100 dark:bg-black dark:hover:scale-110 rounded-lg hover:bg-primary/30 transition-colors"
               >
                 <FaTwitter className="w-6 h-6 text-blue-600" />
               </a>
@@ -71,10 +71,12 @@ const Trainer = () => {
         {/* Details Grid */}
         <div className="grid md:grid-cols-2 gap-8">
           <div>
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">
+            <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-300 mb-4">
               Biography
             </h2>
-            <p className="text-gray-600 leading-relaxed">{trainer.biography}</p>
+            <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+              {trainer.biography}
+            </p>
           </div>
 
           <div>
@@ -149,19 +151,19 @@ const Trainer = () => {
                         key={slot._id}
                         className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors text-center"
                       >
-                        <td className="px-6 py-4 font-medium text-gray-700 dark:text-gray-300">
+                        <td className="px-6 py-4 font-medium text-gray-700 dark:text-gray-400">
                           {slot.selectedDay}
                         </td>
                         <td className="px-6 py-4">
-                          <span className="bg-primary-100 dark:bg-primary-900/30 px-3 py-1 rounded-full text-sm">
+                          <span className="bg-primary-100 text-gray-700 dark:text-gray-400 dark:bg-primary-900/30 px-3 py-1 rounded-full text-sm">
                             {slot.slotName}
                           </span>
                         </td>
-                        <td className="px-6 py-4 text-gray-600 dark:text-gray-400">
+                        <td className="px-6 py-4 text-gray-700 dark:text-gray-400">
                           {slot.slotTime}
                         </td>
                         <td className="px-6 py-4">
-                          <div className="flex justify-center items-center gap-2">
+                          <div className="flex justify-center text-gray-700 dark:text-gray-400 items-center gap-2">
                             <span className="w-2 h-2 bg-primary rounded-full"></span>
                             {slot.selectedClass}
                           </div>
@@ -169,10 +171,10 @@ const Trainer = () => {
                         <td className="px-6 py-4">
                           <Link to={`/book-trainer/${trainer._id}/${slot._id}`}>
                             <button
-                              className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg transition-all 
+                              className="flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg transition-all 
       focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-gray-900"
                             >
-                              <FaCalendarAlt className="w-5 h-5" />
+                              <FaCalendarAlt className="flex w-5 h-5" />
                               <span>Book Now</span>
                             </button>
                           </Link>
@@ -185,9 +187,9 @@ const Trainer = () => {
             </div>
 
             {/* CTA Section */}
-            <div className="mt-12 border-t pt-12">
+            <div className="mt-12 border-t dark:border-gray-400 pt-12">
               <div className="max-w-4xl mx-auto text-center">
-                <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                <h3 className="text-3xl font-bold text-gray-900 dark:text-gray-300 mb-4">
                   Ready to Transform Lives?
                   <span className="block text-primary mt-2">
                     Become a Trainer

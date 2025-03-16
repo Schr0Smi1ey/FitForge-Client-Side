@@ -25,10 +25,11 @@ import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import { Moon, Sun } from "lucide-react";
 
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { user, loading } = useContext(AuthContext);
+  const { user, loading, theme, toggleTheme } = useContext(AuthContext);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isTrainer, setIsTrainer] = useState(false);
   const [isMember, setIsMember] = useState(false);
@@ -70,7 +71,7 @@ const Dashboard = () => {
   }, [isAdmin, isMember, isTrainer, navigate]);
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen dark:bg-black dark:text-white">
       <Helmet>
         <title>FitForge | Dashboard</title>
       </Helmet>
@@ -223,7 +224,7 @@ const Dashboard = () => {
 
           {/* General Links */}
           <div className="border-t border-white my-4"></div>
-          <div className="text-base md:text-lg lg:text-xl space-y-4">
+          <div className="text-base md:text-lg lg:text-xl space-y-4 mt-4">
             <li className="w-fit">
               <NavLink to="/" className="flex items-center gap-2">
                 <FaHome /> Home
@@ -243,6 +244,20 @@ const Dashboard = () => {
               <NavLink to="/community" className="flex items-center gap-2">
                 <FaComments /> Community
               </NavLink>
+            </li>
+            <li>
+              <button
+                onClick={toggleTheme}
+                className="relative w-16 h-8 flex items-center bg-gray-300 dark:bg-gray-700 rounded-full p-1 transition-colors duration-300"
+              >
+                <div
+                  className={`absolute left-1 w-6 h-6 bg-white dark:bg-yellow-400 rounded-full shadow-md transform transition-transform duration-300 ${
+                    theme === "dark" ? "translate-x-8" : "translate-x-0"
+                  }`}
+                ></div>
+                <Sun className="absolute left-2 w-4 h-4 text-yellow-500 dark:hidden" />
+                <Moon className="absolute right-2 w-4 h-4 text-gray-900 hidden dark:block" />
+              </button>
             </li>
           </div>
         </ul>

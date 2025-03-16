@@ -52,7 +52,7 @@ const UpdateProfile = () => {
     updateUserProfile(formData.displayName, photoURL)
       .then(() => {
         setTimeout(() => {
-          navigate("/dashboard/user-profile");
+          navigate("/dashboard/profile");
           Toast("Profile Updated Successfully", "success");
         }, 200);
       })

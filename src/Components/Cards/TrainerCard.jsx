@@ -8,14 +8,14 @@ const TrainerCard = ({ trainer }) => {
     Aos.init({ duration: 500 });
   }, []);
   return (
-    <div className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+    <div className="bg-white dark:bg-black dark:text-white rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
       {/* Image Section */}
       <div className="relative group">
         <img
           data-aos="fade-down"
           src={trainer.profileImage}
           alt={trainer.fullName}
-          className="w-full h-60 object-cover transition-transform duration-300"
+          className="w-full h-72 object-cover transition-transform duration-300"
         />
         {/* Overlay on Hover */}
         <div className="absolute inset-0 bg-primary/60 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -45,7 +45,10 @@ const TrainerCard = ({ trainer }) => {
 
       {/* Info Section */}
       <div className="p-5 text-center">
-        <h3 data-aos="fade-up" className="text-xl font-bold text-gray-800">
+        <h3
+          data-aos="fade-up"
+          className="text-xl font-bold text-gray-800 dark:text-white"
+        >
           {trainer.fullName}
         </h3>
         <p data-aos="fade-up" className="text-base text-primary font-medium">
@@ -66,7 +69,10 @@ const TrainerCard = ({ trainer }) => {
         </div>
 
         {/* Availability */}
-        <div data-aos="fade-up" className="text-base text-gray-600">
+        <div
+          data-aos="fade-up"
+          className="text-base text-gray-600 dark:text-white"
+        >
           <span className="font-semibold">Available:</span>{" "}
           {trainer.availableDays.join(", ")}
         </div>

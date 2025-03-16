@@ -45,7 +45,7 @@ const Classes = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 pt-32">
+    <div className="container mx-auto px-4 py-8 md:py-20 lg:py-32">
       <Helmet>
         <title>FitForge | Classes</title>
       </Helmet>
@@ -54,13 +54,13 @@ const Classes = () => {
       <div className="text-center mb-12">
         <h1
           data-aos="fade-up"
-          className="text-4xl font-bold text-gray-800 mb-4"
+          className="text-4xl font-bold text-gray-800 dark:text-white mb-4"
         >
           Explore Our Fitness Classes
         </h1>
         <p
           data-aos="fade-up"
-          className="text-lg text-gray-600 max-w-2xl mx-auto"
+          className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto"
         >
           Discover a variety of fitness classes designed to help you achieve
           your goals. From high-intensity workouts to relaxing yoga sessions, we
@@ -102,7 +102,7 @@ const Classes = () => {
         <button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50 hover:bg-gray-400 transition-colors"
+          className="px-4 py-2 bg-black text-white dark:bg-white dark:text-black font-medium rounded disabled:opacity-50 transition-colors"
         >
           Previous
         </button>
@@ -112,7 +112,7 @@ const Classes = () => {
         <button
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50 hover:bg-gray-400 transition-colors"
+          className="px-4 py-2 bg-black text-white dark:bg-white dark:text-black font-medium rounded disabled:opacity-50 transition-colors"
         >
           Next
         </button>

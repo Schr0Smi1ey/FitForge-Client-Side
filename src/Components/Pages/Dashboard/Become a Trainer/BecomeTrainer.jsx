@@ -196,7 +196,7 @@ const BecomeTrainer = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-md">
+    <div className="max-w-3xl mx-auto p-6 bg-white dark:bg-black dark:text-white shadow-md rounded-md">
       <Helmet>
         <title>FitForge | Dashboard | Become a Trainer</title>
       </Helmet>
@@ -206,14 +206,16 @@ const BecomeTrainer = () => {
       <p
         data-aos="fade-down"
         data-aos-delay="100"
-        className="text-lg text-gray-600 mb-6 text-center"
+        className="text-lg text-gray-600 dark:text-gray-400 mb-6 text-center"
       >
         Share your expertise and inspire others by becoming part of our team.
       </p>
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Full Name */}
         <div data-aos="fade-up">
-          <label className="font-semibold text-gray-700">Full Name</label>
+          <label className="font-semibold text-gray-700 dark:text-gray-300">
+            Full Name
+          </label>
           <input
             type="text"
             name="fullName"
@@ -221,7 +223,7 @@ const BecomeTrainer = () => {
             onChange={handleChange}
             placeholder="Enter your full name..."
             required
-            className="mt-1 w-full p-3 border rounded-md"
+            className="mt-1 w-full p-3 text-gray-700 border rounded-md"
           />
         </div>
 
@@ -233,13 +235,15 @@ const BecomeTrainer = () => {
             name="email"
             value={user?.email || "unknown@example.com"}
             readOnly
-            className="mt-1 w-full p-3 border rounded-md bg-gray-100"
+            className="mt-1 w-full p-3 border text-gray-700 rounded-md"
           />
         </div>
 
         {/* Age */}
         <div data-aos="fade-up">
-          <label className="font-semibold text-gray-700">Age</label>
+          <label className="font-semibold text-gray-700 dark:text-gray-300">
+            Age
+          </label>
           <input
             type="number"
             name="age"
@@ -247,38 +251,42 @@ const BecomeTrainer = () => {
             onChange={handleChange}
             placeholder="Enter your age..."
             required
-            className="mt-1 w-full p-3 border rounded-md"
+            className="mt-1 w-full p-3 text-gray-700 border rounded-md"
           />
         </div>
 
         {/* Profile Image */}
         <div data-aos="fade-up">
-          <label className="font-semibold text-gray-700">Profile Image</label>
+          <label className="font-semibold text-gray-700 dark:text-gray-300">
+            Profile Image
+          </label>
           <input
             type="file"
             accept="image/*"
             onChange={handleFileChange}
             ref={fileInputRef}
             required
-            className="mt-1 w-full p-2 border rounded-md"
+            className="mt-1 w-full p-2 text-gray-700 border rounded-md"
           />
         </div>
 
         {/* Skills */}
         <div data-aos="fade-up">
-          <label className="font-semibold text-gray-700">Skills</label>
+          <label className="font-semibold text-gray-700 dark:text-gray-300">
+            Skills
+          </label>
           <div className="mt-1">
             {skillsOptions.map((skill) => (
               <label
                 key={skill.value}
-                className="mr-4 inline-flex items-center"
+                className="mr-4 inline-flex dark:text-gray-400 items-center"
               >
                 <input
                   type="checkbox"
                   value={skill.label}
                   checked={selectedSkills.includes(skill.label)}
                   onChange={handleSkillsChange}
-                  className="mr-1"
+                  className="mr-1 text-black"
                 />
                 {skill.label}
               </label>
@@ -288,7 +296,7 @@ const BecomeTrainer = () => {
 
         {/* Available Days */}
         <div data-aos="fade-up">
-          <label className="font-semibold text-gray-700">
+          <label className="font-semibold text-gray-700 dark:text-gray-300">
             Available Days a Week
           </label>
           <Select
@@ -302,7 +310,7 @@ const BecomeTrainer = () => {
 
         {/* Available Time */}
         <div data-aos="fade-up">
-          <label className="font-semibold text-gray-700">
+          <label className="font-semibold text-gray-700 dark:text-gray-300">
             Available Time in a Day
           </label>
           <Select
@@ -315,7 +323,7 @@ const BecomeTrainer = () => {
 
         {/* Class Duration */}
         <div data-aos="fade-up">
-          <label className="font-semibold text-gray-700">
+          <label className="font-semibold text-gray-700 dark:text-gray-300">
             Class Duration (hour)
           </label>
           <input
@@ -324,14 +332,16 @@ const BecomeTrainer = () => {
             value={formData.classDuration}
             onChange={handleChange}
             required
-            className="mt-1 w-full p-3 border rounded-md"
+            className="mt-1 w-full p-3 text-gray-700 border rounded-md"
             placeholder="Enter class duration..."
           />
         </div>
 
         {/* Biography */}
         <div data-aos="fade-up">
-          <label className="font-semibold text-gray-700">Biography</label>
+          <label className="font-semibold text-gray-700 dark:text-gray-300">
+            Biography
+          </label>
           <textarea
             name="biography"
             value={formData.biography}
@@ -339,13 +349,15 @@ const BecomeTrainer = () => {
             placeholder="Tell us about yourself..."
             rows="6"
             required
-            className="mt-1 w-full p-3 border rounded-md"
+            className="mt-1 w-full p-3 text-gray-700 border rounded-md"
           ></textarea>
         </div>
 
         {/* Experience */}
         <div data-aos="fade-up">
-          <label className="font-semibold text-gray-700">Experience</label>
+          <label className="font-semibold text-gray-700 dark:text-gray-300">
+            Experience
+          </label>
           <input
             type="number"
             name="experience"
@@ -354,13 +366,15 @@ const BecomeTrainer = () => {
             placeholder="Describe your training experience..."
             rows="3"
             required
-            className="mt-1 w-full p-3 border rounded-md"
+            className="mt-1 w-full p-3 text-gray-700 border rounded-md"
           ></input>
         </div>
 
         {/* Social Links */}
         <div>
-          <label className="font-semibold text-gray-700">Social Links</label>
+          <label className="font-semibold text-gray-700 dark:text-gray-300">
+            Social Links
+          </label>
           <div className="mt-1 space-y-2">
             <input
               data-aos="fade-up"
@@ -369,7 +383,7 @@ const BecomeTrainer = () => {
               value={formData.linkedin}
               onChange={handleChange}
               placeholder="LinkedIn URL"
-              className="w-full p-3 border rounded-md"
+              className="w-full p-3 text-gray-700 border rounded-md"
             />
             <input
               data-aos="fade-up"
@@ -378,7 +392,7 @@ const BecomeTrainer = () => {
               value={formData.facebook}
               onChange={handleChange}
               placeholder="Facebook URL"
-              className="w-full p-3 border rounded-md"
+              className="w-full p-3 text-gray-700 border rounded-md"
             />
             <input
               data-aos="fade-up"
@@ -387,7 +401,7 @@ const BecomeTrainer = () => {
               value={formData.twitter}
               onChange={handleChange}
               placeholder="Twitter URL"
-              className="w-full p-3 border rounded-md"
+              className="w-full p-3 text-gray-700 border rounded-md"
             />
           </div>
         </div>

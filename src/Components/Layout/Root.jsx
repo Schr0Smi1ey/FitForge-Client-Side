@@ -6,7 +6,7 @@ import Footer from "../Shared/Footer/Footer";
 
 const Root = () => {
   return (
-    <div className="overflow-x-hidden">
+    <div className="dark:bg-black dark:text-white overflow-x-hidden">
       <Navbar></Navbar>
       <Outlet></Outlet>
       <Footer></Footer>

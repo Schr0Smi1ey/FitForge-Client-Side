@@ -66,7 +66,7 @@ const router = createBrowserRouter([
         element: <Community></Community>,
       },
       {
-        path: "/user-profile",
+        path: "/profile",
         element: (
           <div className="pt-32 container mx-auto px-4 min-h-screen">
             <PrivateRoute>

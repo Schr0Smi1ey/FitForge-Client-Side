@@ -54,14 +54,14 @@ const Featured = () => {
   }, []);
 
   return (
-    <section className="bg-gray-50 py-8 rounded-md px-6 md:px-12 lg:px-20 mt-10">
+    <section className="bg-gray-50 dark:bg-black py-8 rounded-md px-6 md:px-12 lg:px-20 mt-10">
       <div className="max-w-7xl mx-auto">
         {/* Section Heading */}
         <div className="text-center mb-12" data-aos="fade-up">
           <h2 className="text-4xl font-extrabold text-primary uppercase">
             Why Choose Us?
           </h2>
-          <p className="text-gray-600 mt-3 max-w-xl mx-auto">
+          <p className="text-gray-600 dark:text-gray-300 mt-3 max-w-xl mx-auto">
             Discover what makes FitForge the ultimate fitness destination for
             all your training needs.
           </p>
@@ -72,7 +72,7 @@ const Featured = () => {
           {featuredData.map((feature, index) => (
             <div
               key={index}
-              className="bg-white rounded-2xl shadow-lg p-6 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 group"
+              className="bg-white dark:bg-black border-2 border-white/40 rounded-2xl shadow-lg p-6 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 group"
               data-aos="fade-up"
             >
               <div className="relative overflow-hidden rounded-xl mb-5">
@@ -85,7 +85,9 @@ const Featured = () => {
               <h3 className="text-xl font-bold text-primary mb-3">
                 {feature.title}
               </h3>
-              <p className="text-gray-700 mb-4">{feature.description}</p>
+              <p className="text-gray-700 dark:text-gray-400 mb-4">
+                {feature.description}
+              </p>
             </div>
           ))}
         </div>

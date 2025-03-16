@@ -37,7 +37,7 @@ const FeaturedClasses = () => {
         <h2 className="text-2xl md:text-4xl font-extrabold text-primary uppercase">
           Featured Classes
         </h2>
-        <p className="text-gray-600 mt-3 max-w-xl mx-auto">
+        <p className="text-gray-600 dark:text-gray-300 mt-3 max-w-xl mx-auto">
           Elevate your fitness journey with expert-led classes tailored for all
           levels.
         </p>

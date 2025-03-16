@@ -40,7 +40,7 @@ const Community = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 pt-32">
+    <div className="container mx-auto px-4 py-8 md:py-20 lg:py-32">
       <Helmet>
         <title>FitForge | Community</title>
       </Helmet>
@@ -49,13 +49,13 @@ const Community = () => {
       <div className="text-center mb-12">
         <h1
           data-aos="fade-up"
-          className="text-4xl font-bold text-gray-800 mb-4"
+          className="text-4xl font-bold text-gray-800 dark:text-white mb-4"
         >
           Welcome to the FitForge Community
         </h1>
         <p
           data-aos="fade-up"
-          className="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed text-center"
+          className="text-lg text-gray-600 dark:text-gray-400 max-w-4xl mx-auto leading-relaxed text-center"
         >
           Join our vibrant fitness community to gain insights from experts and
           grow alongside like-minded individuals. Whether you're a beginner or a
@@ -66,7 +66,7 @@ const Community = () => {
       {/* Forum Posts Section */}
       <h2
         data-aos="fade-right"
-        className="text-2xl text-center font-semibold text-gray-800 mb-6"
+        className="text-2xl text-center font-semibold text-gray-800 dark:text-gray-400 mb-6"
       >
         Recent Forum Posts
       </h2>
@@ -96,7 +96,7 @@ const Community = () => {
         <button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50 hover:bg-gray-400 transition-colors"
+          className="px-4 py-2 bg-black text-white dark:bg-white dark:text-black font-medium rounded disabled:opacity-50 transition-colors"
         >
           Previous
         </button>
@@ -106,7 +106,7 @@ const Community = () => {
         <button
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50 hover:bg-gray-400 transition-colors"
+          className="px-4 py-2 bg-black text-white dark:bg-white dark:text-black font-medium rounded disabled:opacity-50 transition-colors"
         >
           Next
         </button>

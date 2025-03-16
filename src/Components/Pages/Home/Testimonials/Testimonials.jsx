@@ -83,7 +83,7 @@ const Testimonials = () => {
           >
             {reviews.map((item, index) => (
               <SwiperSlide key={index} className="max-w-sm">
-                <div className="bg-white text-gray-800 p-6 py-8 rounded-2xl shadow-lg mx-auto text-center transition-all duration-300 hover:shadow-xl">
+                <div className="bg-white dark:bg-black dark:text-white text-gray-800 p-6 py-8 rounded-2xl shadow-lg mx-auto text-center transition-all duration-300 hover:shadow-xl">
                   <Rating
                     initialRating={item.rating}
                     emptySymbol={
@@ -100,10 +100,10 @@ const Testimonials = () => {
                       className="w-14 h-14 rounded-full border-2 border-primary object-cover shadow-md"
                     />
                     <div>
-                      <p className="font-bold text-gray-900">
+                      <p className="font-bold text-gray-900 dark:text-gray-300">
                         {item.userData[0].name}
                       </p>
-                      <p className="text-sm text-gray-500 capitalize">
+                      <p className="text-sm text-gray-500 dark:text-gray-400 capitalize">
                         {item.userData[0].role} | FitForge
                       </p>
                     </div>

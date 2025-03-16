@@ -24,10 +24,23 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const customAxios = useCustomAxios();
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const image_hosting_api = `https://api.imgbb.com/1/upload?key=${
     import.meta.env.VITE_IMAGE_HOSTING_KEY
   }`;
+  console.log(theme);
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+  };
   const createUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
@@ -98,6 +111,8 @@ const AuthProvider = ({ children }) => {
     loading,
     setLoading,
     Toast,
+    theme,
+    toggleTheme,
     resetPassword,
     image_hosting_api,
   };

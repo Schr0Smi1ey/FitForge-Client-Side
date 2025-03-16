@@ -56,12 +56,12 @@ const Login = () => {
   };
 
   return (
-    <div className={`my-10 pt-20 md:pt-32 lg:pt-40`}>
+    <div className={`my-10 pt-20 md:py-32 lg:py-40`}>
       <Helmet>
         <title>FitForge | Login</title>
       </Helmet>
       <div
-        className={`min-h-screen lg:min-h-[600px] flex bg-white w-full container mx-auto max-w-5xl shadow-lg  rounded-lg overflow-hidden`}
+        className={`min-h-screen lg:min-h-[600px] flex bg-white dark:bg-black w-full container mx-auto max-w-5xl shadow-lg  rounded-lg overflow-hidden`}
       >
         <div
           className="hidden md:flex md:w-1/2 bg-gradient-to-r from-primary to-primary/70 text-white flex-col items-center justify-center p-8"
@@ -109,7 +109,7 @@ const Login = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   id="password"
-                  className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-primary focus:border-primary"
+                  className="mt-1 block text-black w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-primary focus:border-primary"
                   placeholder="Enter your password"
                   required
                 />

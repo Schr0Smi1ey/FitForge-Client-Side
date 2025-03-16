@@ -45,11 +45,14 @@ const Review = () => {
     );
   }
   return (
-    <div className="max-w-5xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <div className="max-w-5xl mx-auto p-6 bg-white dark:bg-black dark:text-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-bold mb-4 text-center text-primary">
         Leave a Review
       </h2>
       <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="text-center text-gray-700 dark:text-gray-300 mb-1">
+          <p>Please select a star rating to give your feedback:</p>
+        </div>
         <div className="flex justify-center">
           <Rating
             initialRating={rating}
@@ -61,7 +64,7 @@ const Review = () => {
         </div>
 
         <textarea
-          className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+          className="w-full p-3 bg-black border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
           placeholder="Write your feedback here..."
           rows="4"
           value={feedback}

@@ -18,7 +18,7 @@ const ClassCard = ({ classData }) => {
   }, []);
 
   return (
-    <div className="bg-white shadow-lg rounded-xl p-3 md:p-4 flex flex-col hover:shadow-2xl transition duration-300">
+    <div className="bg-white dark:bg-black dark:border-white/15 dark:border-2 shadow-lg rounded-xl p-3 md:p-4 flex flex-col hover:shadow-2xl transition duration-300">
       {/* Image */}
       <div data-aos="fade-down" className="relative">
         <img
@@ -30,12 +30,15 @@ const ClassCard = ({ classData }) => {
 
       {/* Class Info */}
       <div className="mt-4">
-        <h3 data-aos="fade-right" className="text-xl font-bold text-gray-900">
+        <h3
+          data-aos="fade-right"
+          className="text-xl font-bold text-gray-900 dark:text-white"
+        >
           {title}
         </h3>
         <p
           data-aos="fade-left"
-          className="text-gray-600 text-sm mt-2 line-clamp-3"
+          className="text-gray-600 dark:text-gray-400 text-sm mt-2 line-clamp-3"
         >
           {description}
         </p>
@@ -55,7 +58,10 @@ const ClassCard = ({ classData }) => {
             </Link>
           ))
         ) : (
-          <p data-aos="fade-right" className="text-gray-500 text-sm">
+          <p
+            data-aos="fade-right"
+            className="text-gray-500 dark:text-gray-400 text-sm"
+          >
             No trainers assigned
           </p>
         )}
@@ -74,8 +80,11 @@ const ClassCard = ({ classData }) => {
         </span>
 
         {/* Bookings Count */}
-        <div data-aos="fade-up" className="flex items-center text-gray-600">
-          <FaUsers className="mr-1 text-gray-500" /> {booked} booked
+        <div
+          data-aos="fade-up"
+          className="flex items-center text-black dark:text-white"
+        >
+          <FaUsers className="mr-1" /> {booked} booked
         </div>
       </div>
     </div>

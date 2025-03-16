@@ -3,8 +3,11 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import { AuthContext } from "../../../Contexts/AuthContext/AuthProvider";
 import "react-tooltip/dist/react-tooltip.css";
+import { FiMenu, FiX } from "react-icons/fi";
+import { motion } from "framer-motion";
+import { Moon, Sun } from "lucide-react";
 const NavBar = () => {
-  const { user, signOutUser, Toast, setLoading, theme } =
+  const { user, signOutUser, Toast, setLoading, theme, toggleTheme } =
     useContext(AuthContext);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -28,17 +31,11 @@ const NavBar = () => {
     setIsMenuOpen(!isMenuOpen);
     setIsProfileOpen(false);
   };
-  const toggleProfileDropdown = () => {
-    if (window.innerWidth <= 640) {
-      setIsMenuOpen(false);
-      return;
-    }
-    setIsProfileOpen((prevState) => !prevState);
-  };
+
   const showSignOutModal = (event) => {
     event.preventDefault();
     document.getElementById("signout-modal").showModal();
-    toggleProfileDropdown();
+    setIsProfileOpen(false);
   };
   const hideSignOutModal = () => {
     document.getElementById("signout-modal").close();
@@ -57,103 +54,152 @@ const NavBar = () => {
       });
     hideSignOutModal();
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event.target.closest(".profile-menu")) {
+        setIsProfileOpen(false);
+      }
+    };
+    if (isProfileOpen) {
+      document.addEventListener("click", handleClickOutside);
+    } else {
+      document.removeEventListener("click", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [isProfileOpen]);
+  const navItems = ["Home", "Trainers", "Classes", "Community"];
+  const getLinkPath = (item) => {
+    if (item === "Home") return "/";
+    return `/${item.toLowerCase().replace(" ", "-")}`;
+  };
   const navElements = (
     <ul
       className={`flex flex-col text-center lg:flex-row items-center justify-center gap-2 sm:gap-5 font-medium text-lg`}
     >
-      <NavLink onClick={toggleMenuDropdown} to="/">
-        <span className="font-bold text-base">Home</span>
-      </NavLink>
-      <NavLink onClick={toggleMenuDropdown} to={"/trainers"}>
-        <span className="font-bold text-base">Trainers</span>
-      </NavLink>
-      <NavLink onClick={toggleMenuDropdown} to={"/classes"}>
-        <span className="font-bold text-base">Classes</span>
-      </NavLink>
-      <NavLink onClick={toggleMenuDropdown} to={"/community"}>
-        <span className="font-bold text-base">Community</span>
-      </NavLink>
-      {user && (
-        <NavLink
-          className={"sm:hidden"}
-          onClick={toggleMenuDropdown}
-          to={"/dashboard"}
+      {navItems.map((item, index) => (
+        <motion.div
+          key={item}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ type: "spring", stiffness: 400 }}
         >
-          <span className="justify-between flex font-bold text-base w-fit">
-            Dashboard
-          </span>
-        </NavLink>
-      )}
-      {user && (
-        <Link
-          className="sm:hidden font-bold text-xl text-red-600"
-          onClick={showSignOutModal}
-        >
-          Logout
-        </Link>
-      )}
+          <NavLink
+            to={getLinkPath(item)}
+            className={`dark:text-white ${
+              scroll
+                ? "hover:text-white dark:hover:text-primary"
+                : "hover:text-primary dark:hover:text-primary"
+            }  text-base font-semibold transition-colors duration-300 relative group`}
+          >
+            {item}
+            <span
+              className={`absolute bottom-[-4px] left-0 w-0 h-[1.5px] bg-[#802819] transition-all duration-300 group-hover:w-full`}
+            ></span>
+          </NavLink>
+        </motion.div>
+      ))}
     </ul>
   );
   const navElementsEnd = (
-    <div className="flex items-center justify-center sm:justify-left gap-2 mb-2 md:mb-0 sm:gap-5">
+    <div className="flex items-center justify-center gap-5 sm:justify-left md:mb-0 relative">
+      <button
+        onClick={toggleTheme}
+        className="relative w-14 h-8 flex items-center bg-gray-300 dark:bg-gray-700 rounded-full p-1 transition-colors duration-300"
+      >
+        <div
+          className={`absolute left-1 w-6 h-6 bg-white dark:bg-yellow-400 rounded-full shadow-md transform transition-transform duration-300 ${
+            theme === "dark" ? "translate-x-6" : "translate-x-0"
+          }`}
+        ></div>
+        <Sun className="absolute left-2 w-4 h-4 text-yellow-500 dark:hidden" />
+        <Moon className="absolute right-2 w-4 h-4 text-gray-900 hidden dark:block" />
+      </button>
       {user && (
-        <div className={`dropdown dropdown-end`}>
-          <div
-            tabIndex={0}
-            role="button"
+        <div className="relative profile-menu">
+          <button
+            onClick={() => setIsProfileOpen((prevState) => !prevState)}
             className="btn border-2 border-primary btn-ghost btn-circle avatar"
           >
             <div className="w-10 rounded-full">
               <img
-                onClick={toggleProfileDropdown}
                 alt="Profile Image"
                 src={user.photoURL || "https://i.pravatar.cc/500"}
               />
             </div>
-          </div>
+          </button>
           {isProfileOpen && (
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] w-fit min-w-40 mt-4 mr-10 p-2 shadow"
-            >
-              <li className="block">
+            <ul className="absolute dark:bg-black dark:border-2 dark:border-white/40 right-4 bg-base-100 rounded-box z-10 w-fit min-w-40 mt-3 p-2 shadow-lg">
+              <li className="block text-center p-2">
                 <img
                   src={user.photoURL}
                   alt=""
                   className="block rounded-2xl mx-auto mb-2"
                 />
-              </li>
-              <li className="hover:bg-gradient-to-t hover:from-primary/20 hover:to-primary/10">
-                <Link
-                  to="/user-profile"
-                  onClick={toggleMenuDropdown}
-                  className="justify-between flex font-medium text-base"
-                >
+                <span className="font-semibold text-base">
                   {user.displayName}
+                </span>
+              </li>
+              <motion.div
+                key={"profile"}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400 }}
+                onClick={toggleMenuDropdown}
+                className="px-2 py-1 w-fit rounded-md"
+              >
+                <Link
+                  to="/profile"
+                  className="hover:text-primary text-base font-medium transition-colors duration-300 relative group"
+                >
+                  Profile
+                  <span className="absolute bottom-[-4px] left-0 w-0 h-[1.5px] bg-primary transition-all duration-300 group-hover:w-full"></span>
                 </Link>
-              </li>
-              <li className="hover:bg-gradient-to-t hover:from-primary/20 hover:to-primary/10">
-                <div className="my-1">
-                  <NavLink onClick={toggleMenuDropdown} to={"/dashboard"}>
-                    <span className="justify-between flex font-bold text-base w-fit">
-                      Dashboard
-                    </span>
-                  </NavLink>
-                </div>
-              </li>
-              <li className="font-semibold text-xl text-red-600 hover:bg-gradient-to-t hover:from-primary/20 hover:to-primary/10">
-                <Link onClick={showSignOutModal}>Logout</Link>
-              </li>
+              </motion.div>
+              <motion.div
+                key={"dashboard"}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400 }}
+                onClick={toggleMenuDropdown}
+                className="px-2 py-1 w-fit rounded-md"
+              >
+                <Link
+                  to="/dashboard"
+                  className="hover:text-primary text-base font-medium transition-colors duration-300 relative group"
+                >
+                  Dashboard
+                  <span className="absolute bottom-[-4px] left-0 w-0 h-[1.5px] bg-primary transition-all duration-300 group-hover:w-full"></span>
+                </Link>
+              </motion.div>
+              <motion.div
+                key={"logout"}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400 }}
+                onClick={toggleMenuDropdown}
+                className="px-2 py-1 w-fit rounded-md"
+              >
+                <button
+                  onClick={showSignOutModal}
+                  className="text-red-500 hover:text-red-600 mb-1 text-base font-medium transition-colors duration-300 relative group"
+                >
+                  Logout
+                  <span className="absolute bottom-[-4px] left-0 w-0 h-[1.5px] bg-primary transition-all duration-300 group-hover:w-full"></span>
+                </button>
+              </motion.div>
             </ul>
           )}
         </div>
       )}
-      <div className="flex flex-col sm:flex-row gap-0 sm:gap-4 items-center">
+      <div className="flex flex-col sm:flex-row gap-0 sm:gap-4 items-center ml-2">
         {!user && (
           <Link
             onClick={toggleMenuDropdown}
-            to={"/login"}
-            className="bg-white px-2 mb-2 sm:mb-0 py-1 rounded-lg text-black font-semibold text-lg"
+            to="/login"
+            className="dark:bg-black px-2 mb-2 sm:mb-0 py-1 rounded-lg font-semibold text-lg"
           >
             Login
           </Link>
@@ -162,7 +208,7 @@ const NavBar = () => {
         {!user && (
           <Link
             onClick={toggleMenuDropdown}
-            to={"/signup"}
+            to="/signup"
             className={`${
               scroll ? "bg-white text-black" : "bg-primary text-white"
             } px-2 py-1 rounded-lg font-semibold text-lg`}
@@ -173,10 +219,86 @@ const NavBar = () => {
       </div>
     </div>
   );
+  const mobileNavOptions = (
+    <div
+      className={`flex dark:bg-black dark:text-white items-center justify-center flex-wrap gap-5 px-2 py-4 ${
+        scroll ? "bg-primary" : "bg-white"
+      }`}
+    >
+      {navItems.map((item) => (
+        <motion.div
+          key={item}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => setIsMenuOpen(false)}
+        >
+          <NavLink
+            to={getLinkPath(item)}
+            className="hover:text-primary text-lg md:text-xl"
+          >
+            {item}
+          </NavLink>
+        </motion.div>
+      ))}
+      <div className="w-full h-[0.5px] bg-slate-700"></div>
+      <div className="flex itemsc-center justify-center flex-wrap gap-5 p-1">
+        {user &&
+          ["profile", "dashboard"].map((item) => (
+            <NavLink
+              to={getLinkPath(item)}
+              onClick={() => setIsMenuOpen(false)}
+              className="text-lg md:text-xl capitalize"
+            >
+              {item}
+            </NavLink>
+          ))}
+        {user && (
+          <button
+            onClick={showSignOutModal}
+            className="text-red-700 text-lg md:text-xl capitalize"
+          >
+            Logout
+          </button>
+        )}
+        {!user && (
+          <Link
+            onClick={toggleMenuDropdown}
+            to="/login"
+            className="px-2 py-1 rounded-lg text-lg md:text-xl font-semibold mr-2 capitalize"
+          >
+            Login
+          </Link>
+        )}
+
+        {!user && (
+          <Link
+            onClick={toggleMenuDropdown}
+            to="/signup"
+            className={`bg-primary text-white px-2 py-1 rounded-lg font-semibold text-lg md:text-xl capitalize`}
+          >
+            Sign Up
+          </Link>
+        )}
+      </div>
+      <div className="w-full h-[0.5px] bg-slate-700"></div>
+      <button
+        onClick={toggleTheme}
+        className="relative w-14 h-8 ml-4 mr-2 flex items-center bg-gray-300 dark:bg-gray-700 rounded-full p-1 transition-colors duration-300"
+      >
+        <div
+          className={`absolute left-1 w-6 h-6 bg-white dark:bg-yellow-400 rounded-full shadow-md transform transition-transform duration-300 ${
+            theme === "dark" ? "translate-x-6" : "translate-x-0"
+          }`}
+        ></div>
+        <Sun className="absolute left-2 w-4 h-4 text-yellow-500 dark:hidden" />
+        <Moon className="absolute right-2 w-4 h-4 text-gray-900 hidden dark:block" />
+      </button>
+    </div>
+  );
   return (
     <div
-      className={`navbar shadow-md rounded-b-md container mx-auto center z-[70] w-[98%] sm:w-full md:w-[96%] py-2 px-3 md:py-3 md:px-5 flex justify-between items-center my-4 fixed top-0 left-[49.8%] sm:left-[50.7%] md:left-[50.7%] lg:left-1/2 xl:left-[50.1%]  transform -translate-x-1/2 transition-all duration-500 -translate-y-4 ${
-        scroll ? "bg-primary mt-4 rounded-b-2xl" : "bg-white"
+      className={`fixed w-full dark:bg-black py-2 dark:text-white top-0 z-50 shadow-lg ${
+        scroll ? "bg-primary" : "bg-white"
       }`}
     >
       <dialog
@@ -193,7 +315,7 @@ const NavBar = () => {
           <div className="modal-action justify-between flex mx-auto items-center">
             <button
               onClick={hideSignOutModal}
-              className="px-4 py-2 bg-green-500 font-semibold text-base rounded-lg hover:bg-gray-300"
+              className="px-4 py-2 bg-green-500 font-semibold text-base rounded-lg hover:bg-black"
             >
               Cancel
             </button>
@@ -206,58 +328,57 @@ const NavBar = () => {
           </div>
         </div>
       </dialog>
-      <div className="navbar-start">
-        <Link
-          to={"/"}
-          className="text-black border-[2px] border-primary flex items-center gap-2 px-2 py-1 sm:px-4 sm:py-2 rounded-lg bg-white hover:border-2 hover:border-black"
-        >
-          <span className="font-bold text-base sm:text-lg md:text-xl">
-            Fit<span className="text-primary">F</span>orge
-          </span>
-        </Link>
-      </div>
-      <div className="navbar-center hidden lg:flex">{navElements}</div>
-      <div className="navbar-end gap-2">
-        <div className="hidden sm:flex">{navElementsEnd}</div>
-        <div className="dropdown dropdown-left">
-          <div
-            tabIndex={0}
-            role="button"
-            className={`btn btn-ghost lg:hidden ${
-              theme == "dark" ? "text-white" : "text-black"
-            }`}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-8 w-8"
-              fill="none"
-              onClick={toggleMenuDropdown}
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+      <div className="container mx-auto p-1">
+        <div className="flex justify-between items-center">
+          <div className="justify-start">
+            <Link
+              to={"/"}
+              className={`border-[2px] ${
+                scroll ? "border-white" : "border-primary "
+              } flex items-center gap-2 px-2 py-1 sm:px-4 rounded-lg`}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
+              <span className="font-bold tracking-wider text-base sm:text-lg md:text-xl">
+                Fit
+                <span
+                  className={`text-primary dark:text-primary ${
+                    scroll ? "text-white" : ""
+                  }`}
+                >
+                  F
+                </span>
+                orge
+              </span>
+            </Link>
           </div>
-          {isMenuOpen && (
-            <ul className="menu menu-sm dropdown-content text-black lg:text-white bg-base-100 rounded-box z-[1] mt-14 w-fit min-w-40 p-2 pb-4 space-y-2 shadow">
-              {user ? (
-                <div className="sm:hidden">{navElementsEnd}</div>
+          <div className="navbar-center hidden lg:flex">{navElements}</div>
+          <div className="hidden lg:flex">{navElementsEnd}</div>
+          <div className="lg:hidden">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="dark:text-white hover:text-primary transition-colors p-2"
+            >
+              {isMenuOpen ? (
+                <FiX className="w-6 h-6 md:w-7 md:h-7" />
               ) : (
-                <div>{navElements}</div>
+                <FiMenu className="w-6 h-6 md:w-7 md:h-7" />
               )}
-              {user ? (
-                <div>{navElements}</div>
-              ) : (
-                <div className="sm:hidden">{navElementsEnd}</div>
-              )}
-            </ul>
-          )}
+            </button>
+          </div>
         </div>
+        {/* Mobile Menu Button */}
+
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="lg:hidden mt-2 md:mt-4 border-t border-slate-700"
+          >
+            {mobileNavOptions}
+            <div className="border-t mb-4 border-slate-700"></div>
+          </motion.div>
+        )}
       </div>
     </div>
   );

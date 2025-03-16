@@ -17,7 +17,7 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer className="bg-gray-900 text-gray-300 py-10">
+    <footer className="bg-black text-gray-300 py-10">
       <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center lg:text-left">
         {/* Logo & About */}
         <div>

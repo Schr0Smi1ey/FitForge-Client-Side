@@ -15,17 +15,17 @@ const Trainers = () => {
   }, []);
 
   return (
-    <div className="min-h-screen container mx-auto pt-32">
+    <div className="min-h-screen container mx-auto py-8 md:py-20 lg:py-32">
       <Helmet>
         <title>FitForge | Trainers</title>
       </Helmet>
 
       {/* Heading Section */}
       <div className="text-center mb-12" data-aos="fade-up">
-        <h1 className="text-4xl font-bold text-gray-800 mb-4">
+        <h1 className="text-4xl font-bold text-gray-800 dark:text-white mb-4">
           Meet Our Expert Trainers
         </h1>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+        <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
           Our certified trainers are here to guide, motivate, and help you
           achieve your fitness goals. Whether you're a beginner or an advanced
           athlete, our team is dedicated to providing personalized support and

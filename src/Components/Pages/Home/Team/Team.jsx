@@ -34,7 +34,7 @@ const Team = () => {
         Meet Our Expert Trainers
       </h2>
       <p
-        className="text-gray-600 max-w-2xl mx-auto mb-10 text-lg"
+        className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-10 text-lg"
         data-aos="zoom-in"
         data-aos-delay="200"
       >

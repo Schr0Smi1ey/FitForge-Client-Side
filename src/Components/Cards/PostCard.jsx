@@ -81,14 +81,14 @@ const PostCard = ({ postData, refetch, home }) => {
     title.length > 40 ? title.substring(0, 40) + "..." : title;
   return (
     <div className="max-w-4xl w-full mx-auto my-4">
-      <div className="bg-white shadow-lg rounded-xl">
+      <div className="bg-white dark:bg-black dark:border-2 dark:border-white/40 p-1 shadow-lg rounded-xl">
         {/* Image Section */}
 
         <div data-aos="fade-up" className="relative">
           <img
             src={image}
             alt={home ? (isExpanded ? title : minimizedTitle) : title}
-            className="w-full h-96 object-fill"
+            className="w-full h-96 object-fill rounded-lg"
           />
           <div className="absolute top-2 left-2 bg-black bg-opacity-60 text-white px-3 py-1 rounded">
             {convertDate(postedDate, "PostCard")}
@@ -105,7 +105,7 @@ const PostCard = ({ postData, refetch, home }) => {
           </h2>
           <p
             data-aos="fade-left"
-            className="text-gray-700 text-base md:text-lg mb-4"
+            className="text-gray-700 dark:text-gray-500 text-base md:text-lg mb-4"
           >
             {home
               ? isExpanded
@@ -135,7 +135,9 @@ const PostCard = ({ postData, refetch, home }) => {
                 className="w-12 h-12 rounded-full object-cover"
               />
               <div>
-                <p className="font-bold text-lg">{posterData?.user?.name}</p>
+                <p className="font-bold dark:text-gray-400 text-lg">
+                  {posterData?.user?.name}
+                </p>
                 <p className="flex items-center gap-2 text-gray-500 text-base">
                   <span>
                     {posterData?.user?.role === "admin" ? (
@@ -150,7 +152,10 @@ const PostCard = ({ postData, refetch, home }) => {
             </div>
 
             {/* Post Date */}
-            <div data-aos="fade-up" className="text-gray-600">
+            <div
+              data-aos="fade-up"
+              className="text-gray-600 dark:text-gray-400"
+            >
               <p className="text-sm md:text-base">
                 {convertDate(postedDate, "PostCard")}
               </p>
@@ -160,10 +165,12 @@ const PostCard = ({ postData, refetch, home }) => {
             {!home && (
               <div data-aos="fade-left" className="flex items-center space-x-4">
                 <div className="flex items-center gap-1">
-                  <span className="font-bold">{totalUpVote}</span>
+                  <span className="font-bold text-gray-600 dark:text-gray-400">
+                    {totalUpVote}
+                  </span>
                   <button
                     onClick={() => handleVote("up")}
-                    className="p-2 rounded-full hover:bg-gray-200 transition"
+                    className="p-2 rounded-full text-gray-600 dark:text-gray-400 transition"
                   >
                     <AiOutlineLike
                       className={`text-3xl ${liked ? "text-green-500" : ""}`}
@@ -171,10 +178,12 @@ const PostCard = ({ postData, refetch, home }) => {
                   </button>
                 </div>
                 <div className="flex items-center gap-1">
-                  <span className="font-bold">{totalDownVote}</span>
+                  <span className="font-bold text-gray-600 dark:text-gray-400">
+                    {totalDownVote}
+                  </span>
                   <button
                     onClick={() => handleVote("down")}
-                    className="p-2 rounded-full hover:bg-gray-200 transition"
+                    className="p-2 rounded-full text-gray-600 dark:text-gray-400 transition"
                   >
                     <AiOutlineDislike
                       className={`text-3xl ${disliked ? "text-red-500" : ""}`}

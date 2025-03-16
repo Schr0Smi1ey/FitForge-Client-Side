@@ -7,11 +7,10 @@ a.active::after {
   content: "";
   position: absolute;
   left: 0;
-  bottom: 0;
+  bottom: -4px;
   width: 100%;
-  height: 3px;
-  background-image: linear-gradient(to right, #a94a4a, #9d3232);
-  margin-top: 14px;
+  height: 2px;
+  background-image: linear-gradient(to right, #802819);
   border-radius: 2px;
   font-weight: 700;
 }

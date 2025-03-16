@@ -138,7 +138,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className={`my-10 pt-20 md:pt-32 lg:pt-40`}>
+    <div className={`my-10 py-20 md:py-32 lg:py-40`}>
       <Helmet>
         <title>FitForge | Sign Up</title>
       </Helmet>
@@ -237,7 +237,7 @@ const SignUp = () => {
                   name="password"
                   value={formData.password}
                   onChange={handleInputChange}
-                  className={`w-full px-4 py-2 border rounded-lg ${
+                  className={`w-full text-black px-4 py-2 border rounded-lg ${
                     passwordError
                       ? "border-red-500 focus:ring-red-500"
                       : "focus:ring-primary"
