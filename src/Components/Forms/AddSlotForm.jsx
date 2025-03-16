@@ -251,8 +251,9 @@ const AddSlotForm = () => {
           <label data-aos="fade-up" data-aos-delay="250" className="font-bold">
             Select Class
           </label>
-          <div data-aos="fade-up" data-aos-delay="260">
+          <div className="dark:bg-black">
             <Select
+              className="dark:bg-black dark:border-2 dark:border-white/10 dark:text-black"
               options={classOptions}
               // value={formData.selectedClass}
               onChange={(option) => handleSelectChange(option, "selectedClass")}
@@ -265,8 +266,9 @@ const AddSlotForm = () => {
           <label data-aos="fade-up" data-aos-delay="270" className="font-bold">
             Select Slot
           </label>
-          <div data-aos="fade-up" data-aos-delay="280">
+          <div>
             <Select
+              className="dark:bg-black dark:border-2 dark:border-white/10 dark:text-black"
               options={slotNameOptions}
               // value={formData.slotName}
               onChange={(option) => handleSelectChange(option, "slotName")}
@@ -297,8 +299,9 @@ const AddSlotForm = () => {
           <label data-aos="fade-up" data-aos-delay="310" className="font-bold">
             Select Day
           </label>
-          <div data-aos="fade-up" data-aos-delay="320">
+          <div>
             <Select
+              className="dark:bg-black dark:border-2 dark:border-white/10 dark:text-black"
               options={dayOptions}
               // value={formData.selectedDay}
               onChange={(option) => handleSelectChange(option, "selectedDay")}

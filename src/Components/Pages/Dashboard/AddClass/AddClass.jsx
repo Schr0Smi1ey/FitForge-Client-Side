@@ -283,13 +283,13 @@ const AddClass = () => {
               <option value="" disabled>
                 Select Intensity
               </option>
-              <option value="Beginner" className="text-gray-500">
+              <option value="Beginner" className="dark:text-gray-500">
                 Beginner
               </option>
-              <option value="Intermediate" className="text-gray-500">
+              <option value="Intermediate" className="dark:text-gray-500">
                 Intermediate
               </option>
-              <option value="Advanced" className="text-gray-500">
+              <option value="Advanced" className="dark:text-gray-500">
                 Advanced
               </option>
             </select>

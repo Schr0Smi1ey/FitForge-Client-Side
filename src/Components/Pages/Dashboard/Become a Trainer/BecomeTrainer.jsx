@@ -1,7 +1,7 @@
 import React, { useState, useContext, useRef, useEffect } from "react";
-import Select from "react-select";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 import { GridLoader } from "react-spinners";
+import Select from "react-select";
 import axios from "axios";
 import Swal from "sweetalert2";
 import AOS from "aos";
@@ -28,21 +28,21 @@ const skillsOptions = [
 ];
 
 const daysOptions = [
-  { label: "Sun", value: "Sun" },
-  { label: "Mon", value: "Mon" },
-  { label: "Tues", value: "Tues" },
-  { label: "Wed", value: "Wed" },
-  { label: "Thu", value: "Thu" },
-  { label: "Fri", value: "Fri" },
-  { label: "Sat", value: "Sat" },
+  { value: "Sun", label: "Sun" },
+  { value: "Mon", label: "Mon" },
+  { value: "Tues", label: "Tues" },
+  { value: "Wed", label: "Wed" },
+  { value: "Thu", label: "Thu" },
+  { value: "Fri", label: "Fri" },
+  { value: "Sat", label: "Sat" },
 ];
 
 const timeSlots = [
-  { label: "Morning", value: "Morning" },
-  { label: "Noon", value: "Noon" },
-  { label: "Afternoon", value: "Afternoon" },
-  { label: "Evening", value: "Evening" },
-  { label: "Night", value: "Night" },
+  { value: "Morning", label: "Morning" },
+  { value: "Noon", label: "Noon" },
+  { value: "Afternoon", label: "Afternoon" },
+  { value: "Evening", label: "Evening" },
+  { value: "Night", label: "Night" },
 ];
 
 const BecomeTrainer = () => {
@@ -66,6 +66,7 @@ const BecomeTrainer = () => {
   const [selectedSkills, setSelectedSkills] = useState([]);
   const [availableDays, setAvailableDays] = useState([]);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
+
   const secureAxios = useAxiosSecure();
 
   if (loading) {
@@ -159,7 +160,6 @@ const BecomeTrainer = () => {
       applyDate: new Date().toISOString(),
       slots: [],
     };
-
     try {
       const res = await secureAxios.post("/trainers", trainerData);
       if (res.data.trainerId) {
@@ -194,7 +194,6 @@ const BecomeTrainer = () => {
       Swal.fire("Application submission failed", "", "error");
     }
   };
-
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white dark:bg-black dark:text-white shadow-md rounded-md">
       <Helmet>
@@ -297,25 +296,36 @@ const BecomeTrainer = () => {
         </div>
 
         {/* Available Days */}
-        <div data-aos="fade-up">
-          <label className="font-semibold text-gray-700 dark:text-gray-300">
+        <div>
+          <label
+            data-aos="fade-up"
+            className="font-semibold text-gray-700 dark:text-gray-300"
+          >
             Available Days a Week
           </label>
           <Select
+            className="dark:bg-black dark:border-2 dark:border-white/10 dark:text-black"
             isMulti
+            defaultValue={availableDays}
             options={daysOptions}
-            value={availableDays}
             onChange={setAvailableDays}
+            required
             placeholder="Select available days..."
           />
         </div>
 
         {/* Available Time */}
-        <div data-aos="fade-up">
-          <label className="font-semibold text-gray-700 dark:text-gray-300">
+        <div>
+          <label
+            data-aos="fade-up"
+            className="font-semibold text-gray-700 dark:text-gray-300"
+          >
             Available Time in a Day
           </label>
           <Select
+            className="dark:bg-black dark:border-2 dark:border-white/10 dark:text-black"
+            id="availableTime"
+            name="availableTime"
             options={timeSlots}
             value={selectedTimeSlot}
             onChange={setSelectedTimeSlot}
@@ -329,6 +339,7 @@ const BecomeTrainer = () => {
             Class Duration (hour)
           </label>
           <input
+            id="classDuration"
             type="number"
             name="classDuration"
             value={formData.classDuration}

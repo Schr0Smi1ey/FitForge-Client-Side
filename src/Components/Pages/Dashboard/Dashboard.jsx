@@ -26,7 +26,32 @@ import { Helmet } from "react-helmet";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { Moon, Sun } from "lucide-react";
+import { motion } from "framer-motion";
 
+const adminMenuItems = [
+  { name: "Subscribers", icon: <FaUsers /> },
+  { name: "Trainers", icon: <FaChalkboardTeacher /> },
+  { name: "Applications", icon: <FaFileAlt /> },
+  { name: "Balance", icon: <FaWallet /> },
+  { name: "Add Class", icon: <FaDumbbell /> },
+];
+
+const memberMenuItems = [
+  { name: "Activity Log", icon: <FaListAlt /> },
+  { name: "Become a Trainer", icon: <FaClipboardCheck /> },
+  { name: "Booked Trainers", icon: <FaCalendarCheck /> },
+  { name: "Review", icon: <FaStar /> },
+];
+const trainerMenuItems = [
+  { name: "Add Slot", icon: <FaPlusSquare /> },
+  { name: "Manage Slots", icon: <FaClipboardCheck /> },
+];
+const generalMenuItems = [
+  { name: "Home", path: "/", icon: <FaHome /> },
+  { name: "Trainers", path: "/trainers", icon: <FaChalkboardTeacher /> },
+  { name: "Classes", path: "/classes", icon: <FaDumbbell /> },
+  { name: "Community", path: "/community", icon: <FaComments /> },
+];
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, loading, theme, toggleTheme } = useContext(AuthContext);
@@ -60,6 +85,15 @@ const Dashboard = () => {
       },
     });
   }
+  const getLinkPath = (item) => {
+    if (item === "Become a Trainer") return "/dashboard/become-a-trainer";
+    if (item === "Dashboard") return "/dashboard";
+    return `/dashboard/${item.toLowerCase().replace(" ", "-")}`;
+  };
+  const handleToggleTheme = () => {
+    toggleTheme();
+    setIsOpen(false);
+  };
   useEffect(() => {
     if (isAdmin) {
       navigate("/dashboard/subscribers");
@@ -97,157 +131,130 @@ const Dashboard = () => {
           className="text-white font-semibold pt-5 md:ml-4"
         >
           {isAdmin && (
-            <div className="text-base md:text-lg lg:text-xl   space-y-4">
-              <li className="w-fit">
-                <NavLink
-                  onClick={() => setIsOpen(false)}
-                  to="/dashboard/subscribers"
-                  className="flex items-center gap-2"
-                >
-                  <FaUsers /> Subscribers
-                </NavLink>
-              </li>
-              <li className="w-fit">
-                <NavLink
-                  onClick={() => setIsOpen(false)}
-                  to="/dashboard/trainers"
-                  className="flex items-center gap-2"
-                >
-                  <FaChalkboardTeacher /> Trainers
-                </NavLink>
-              </li>
-              <li className="w-fit">
-                <NavLink
-                  onClick={() => setIsOpen(false)}
-                  to="/dashboard/applications"
-                  className="flex items-center gap-2"
-                >
-                  <FaFileAlt /> Applications
-                </NavLink>
-              </li>
-              <li className="w-fit">
-                <NavLink
-                  onClick={() => setIsOpen(false)}
-                  to="/dashboard/balance"
-                  className="flex items-center gap-2"
-                >
-                  <FaWallet /> Balance
-                </NavLink>
-              </li>
-              <li className="w-fit">
-                <NavLink
-                  onClick={() => setIsOpen(false)}
-                  to="/dashboard/add-class"
-                  className="flex items-center gap-2"
-                >
-                  <FaDumbbell /> Add Class
-                </NavLink>
-              </li>
+            <div className="text-base md:text-lg lg:text-xl space-y-4">
+              <motion.div className="flex flex-col items-center w-fit space-y-2">
+                {adminMenuItems.map(({ name, icon }) => (
+                  <motion.div
+                    key={name}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ type: "spring", stiffness: 400 }}
+                    onClick={() => setIsOpen(false)}
+                    className="py-2 w-full text-center rounded-md"
+                  >
+                    <NavLink
+                      to={getLinkPath(name)}
+                      className="flex items-center gap-3 w-fit hover:text-[#802819] transition-colors duration-300 relative group"
+                    >
+                      {icon}
+                      <span className="capitalize">{name}</span>
+                      <span className="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-[#802819] transition-all duration-300 group-hover:w-full"></span>
+                    </NavLink>
+                  </motion.div>
+                ))}
+              </motion.div>
             </div>
           )}
 
           {isMember && (
-            <div className="text-base md:text-lg lg:text-xl space-y-4">
-              <li className="w-fit">
-                <NavLink
-                  onClick={() => setIsOpen(false)}
-                  to="/dashboard/activity-log"
-                  className="flex items-center gap-2"
-                >
-                  <FaListAlt /> Activity Log
-                </NavLink>
-              </li>
-              <li className="w-fit">
-                <NavLink
-                  onClick={() => setIsOpen(false)}
-                  to="/dashboard/become-a-trainer"
-                  className="flex items-center gap-2"
-                >
-                  <FaClipboardCheck /> Become a Trainer
-                </NavLink>
-              </li>
-              <li className="w-fit">
-                <NavLink
-                  onClick={() => setIsOpen(false)}
-                  to="/dashboard/booked-trainers"
-                  className="flex items-center gap-2"
-                >
-                  <FaCalendarCheck /> Booked Trainers
-                </NavLink>
-              </li>
-              <li className="w-fit">
-                <NavLink
-                  onClick={() => setIsOpen(false)}
-                  to="/dashboard/review"
-                  className="flex items-center gap-2"
-                >
-                  <FaStar /> Review
-                </NavLink>
-              </li>
+            <div className="text-base md:text-lg w-fit lg:text-xl space-y-4">
+              <motion.div className="flex flex-col items-center space-y-2">
+                {memberMenuItems.map(({ name, icon }) => (
+                  <motion.div
+                    key={name}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ type: "spring", stiffness: 400 }}
+                    onClick={() => setIsOpen(false)}
+                    className="py-2 w-full text-center rounded-md"
+                  >
+                    <NavLink
+                      to={getLinkPath(name)}
+                      className="flex items-center w-fit gap-3 hover:text-[#802819] transition-colors duration-300 relative group"
+                    >
+                      {icon}
+                      <span className="capitalize">{name}</span>
+                      <span className="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-[#802819] transition-all duration-300 group-hover:w-full"></span>
+                    </NavLink>
+                  </motion.div>
+                ))}
+              </motion.div>
             </div>
           )}
 
           {isTrainer && (
             <div className="text-base md:text-lg lg:text-xl space-y-4">
-              <li className="w-fit">
-                <NavLink
-                  onClick={() => setIsOpen(false)}
-                  to="/dashboard/add-slot"
-                  className="flex items-center gap-2"
-                >
-                  <FaPlusSquare /> Add Slot
-                </NavLink>
-              </li>
-              <li className="w-fit">
-                <NavLink
-                  onClick={() => setIsOpen(false)}
-                  to="/dashboard/manage-slots"
-                  className="flex items-center gap-2"
-                >
-                  <FaClipboardCheck /> Manage Slots
-                </NavLink>
-              </li>
+              <motion.div className="flex flex-col items-center space-y-2">
+                {trainerMenuItems.map(({ name, icon }) => (
+                  <motion.div
+                    key={name}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ type: "spring", stiffness: 400 }}
+                    onClick={() => setIsOpen(false)}
+                    className="py-2 w-full text-center rounded-md"
+                  >
+                    <NavLink
+                      to={getLinkPath(name)}
+                      className="flex items-center w-fit gap-3 hover:text-[#802819] transition-colors duration-300 relative group"
+                    >
+                      {icon}
+                      <span className="capitalize">{name}</span>
+                      <span className="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-[#802819] transition-all duration-300 group-hover:w-full"></span>
+                    </NavLink>
+                  </motion.div>
+                ))}
+              </motion.div>
             </div>
           )}
 
           {(isAdmin || isTrainer) && (
-            <li className="w-fit text-base md:text-lg lg:text-xl mt-3">
-              <NavLink
+            <motion.div className="flex flex-col items-center space-y-2">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400 }}
                 onClick={() => setIsOpen(false)}
-                to="/dashboard/add-forum"
-                className="flex items-center gap-2"
+                className="py-2 w-full text-center rounded-md mt-3"
               >
-                <FaComments /> Add Forum
-              </NavLink>
-            </li>
+                <NavLink
+                  to="/dashboard/add-forum"
+                  className="flex items-center w-fit gap-3 text-base md:text-lg lg:text-xl hover:text-[#802819] transition-colors duration-300 relative group"
+                >
+                  <FaComments />
+                  <span className="capitalize">Add Forum</span>
+                  <span className="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-[#802819] transition-all duration-300 group-hover:w-full"></span>
+                </NavLink>
+              </motion.div>
+            </motion.div>
           )}
 
           {/* General Links */}
           <div className="border-t border-white my-4 mt-6"></div>
           <div className="text-base md:text-lg lg:text-xl space-y-4 mt-4">
-            <li className="w-fit">
-              <NavLink to="/" className="flex items-center gap-2">
-                <FaHome /> Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/trainers" className="flex items-center gap-2">
-                <FaChalkboardTeacher /> Trainers
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/classes" className="flex items-center gap-2">
-                <FaDumbbell /> Classes
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/community" className="flex items-center gap-2">
-                <FaComments /> Community
-              </NavLink>
-            </li>
+            <motion.div className="flex flex-col items-center space-y-2">
+              {generalMenuItems.map(({ name, path, icon }) => (
+                <motion.div
+                  key={name}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 400 }}
+                  className="py-2 w-full text-center rounded-md"
+                >
+                  <NavLink
+                    to={path}
+                    className="flex items-center gap-3 w-fit hover:text-[#802819] transition-colors duration-300 relative group"
+                  >
+                    {icon}
+                    <span className="capitalize">{name}</span>
+                    <span className="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-[#802819] transition-all duration-300 group-hover:w-full"></span>
+                  </NavLink>
+                </motion.div>
+              ))}
+            </motion.div>
             <li>
               <button
-                onClick={toggleTheme}
+                onClick={handleToggleTheme}
                 className="relative w-16 h-8 flex items-center bg-gray-300 dark:bg-gray-700 rounded-full p-1 transition-colors duration-300"
               >
                 <div

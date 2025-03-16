@@ -160,7 +160,7 @@ const ManageSlot = () => {
           </table>
           {showModal && (
             <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-              <div className="bg-white p-5 rounded-lg shadow-lg w-1/3 relative">
+              <div className="bg-white dark:bg-black dark:text-white dark:border-2 dark:border-white/10 p-5 rounded-lg shadow-lg w-1/3 relative">
                 <button
                   onClick={() => setShowModal(false)}
                   className="absolute top-2 right-2 text-xl text-red-500"
@@ -176,7 +176,7 @@ const ManageSlot = () => {
                 </h2>
                 <table className="w-full border-collapse border border-gray-300">
                   <thead>
-                    <tr className="text-center bg-gray-200">
+                    <tr className="text-center bg-primary text-white">
                       <th
                         data-aos="fade-up"
                         data-aos-delay="200"
