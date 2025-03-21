@@ -17,7 +17,7 @@ import {
   FaStar,
 } from "react-icons/fa";
 import { RiMenuFold4Fill, RiMenuUnfold4Fill } from "react-icons/ri";
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { NavLink, Outlet, replace, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Contexts/AuthContext/AuthProvider";
 import { GridLoader } from "react-spinners";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
@@ -96,11 +96,11 @@ const Dashboard = () => {
   };
   useEffect(() => {
     if (isAdmin) {
-      navigate("/dashboard/subscribers");
+      navigate("/dashboard/subscribers", { replace: true });
     } else if (isTrainer) {
-      navigate("/dashboard/add-slot");
+      navigate("/dashboard/add-slot", { replace: true });
     } else if (isMember) {
-      navigate("/dashboard/activity-log");
+      navigate("/dashboard/activity-log", { replace: true });
     }
   }, [isAdmin, isMember, isTrainer, navigate]);
 
