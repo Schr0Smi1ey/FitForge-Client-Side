@@ -92,8 +92,6 @@ const Banner = () => {
       prevIndex === 0 ? sliderContent.length - 1 : prevIndex - 1
     );
   };
-
-  // ✅ Handle Swipe Gesture for Touch Devices & Mouse Drag
   const handleTouchStart = (e) => {
     setStartX(e.touches ? e.touches[0].clientX : e.clientX);
   };
@@ -104,9 +102,9 @@ const Banner = () => {
     const diff = startX - endX;
 
     if (diff > 50) {
-      nextSlide(); // Swipe left → go to next slide
+      nextSlide();
     } else if (diff < -50) {
-      prevSlide(); // Swipe right → go to previous slide
+      prevSlide();
     }
 
     setStartX(null);
@@ -117,7 +115,7 @@ const Banner = () => {
 
   return (
     <div
-      className="container mx-auto py-24 relative"
+      className="container mx-auto py-24 relative cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onTouchStart={handleTouchStart}
