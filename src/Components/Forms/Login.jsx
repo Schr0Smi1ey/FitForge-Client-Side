@@ -4,7 +4,7 @@ import { IoMdEye } from "react-icons/io";
 import { VscEyeClosed } from "react-icons/vsc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import logo from "../../assets/fitforge-logo.png";
+import logo from "../../assets/fitforge-logo.webp";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import useCustomAxios from "../../Hooks/useCustomAxios";

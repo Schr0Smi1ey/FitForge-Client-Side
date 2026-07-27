@@ -4,7 +4,8 @@ import { IoMdEye } from "react-icons/io";
 import { VscEyeClosed } from "react-icons/vsc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import logo from "../../assets/fitforge-logo.png";
+import logo from "../../assets/fitforge-logo.webp";
+import compressImage, { IMAGE_TARGETS } from "../../utils/compressImage";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import axios from "axios";
@@ -80,7 +81,7 @@ const SignUp = () => {
   };
   const ConvertToLink = async (photo) => {
     const formData = new FormData();
-    formData.append("image", photo);
+    formData.append("image", await compressImage(photo, IMAGE_TARGETS.avatar));
     const res = await axios.post(image_hosting_api, formData, {
       headers: {
         "Content-Type": "multipart/form-data",

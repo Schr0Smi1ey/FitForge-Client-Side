@@ -3,6 +3,7 @@ import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 import { GridLoader } from "react-spinners";
 import Select from "react-select";
 import axios from "axios";
+import compressImage, { IMAGE_TARGETS } from "../../../../utils/compressImage";
 import Swal from "sweetalert2";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -112,7 +113,7 @@ const BecomeTrainer = () => {
 
   const convertImageToUrl = async (file) => {
     const formData = new FormData();
-    formData.append("image", file);
+    formData.append("image", await compressImage(file, IMAGE_TARGETS.content));
     try {
       const res = await axios.post(image_hosting_api, formData, {
         headers: {

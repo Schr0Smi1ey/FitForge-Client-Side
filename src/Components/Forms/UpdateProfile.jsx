@@ -5,6 +5,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { AuthContext } from "../../Contexts/AuthContext/AuthProvider";
 import axios from "axios";
+import compressImage, { IMAGE_TARGETS } from "../../utils/compressImage";
 const UpdateProfile = () => {
   const { user, updateUserProfile, Toast, setLoading, image_hosting_api } =
     useContext(AuthContext);
@@ -33,7 +34,7 @@ const UpdateProfile = () => {
   };
   const ConvertToLink = async (photo) => {
     const formData = new FormData();
-    formData.append("image", photo);
+    formData.append("image", await compressImage(photo, IMAGE_TARGETS.avatar));
     const res = await axios.post(image_hosting_api, formData, {
       headers: {
         "Content-Type": "multipart/form-data",

@@ -12,7 +12,7 @@ import {
   EffectCoverflow,
 } from "swiper/modules";
 import { FaQuoteLeft, FaRegStar, FaStar } from "react-icons/fa";
-import userImg from "../../../../assets/Home/Testimonials/commenter1.jpg";
+import userImg from "../../../../assets/Home/Testimonials/commenter1.webp";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";

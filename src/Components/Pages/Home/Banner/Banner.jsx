@@ -2,11 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-import slide1 from "../../../../assets/Home/Banner/slide-1.png";
-import slide2 from "../../../../assets/Home/Banner/slide-2.png";
-import slide3 from "../../../../assets/Home/Banner/slide-3.png";
-import slide4 from "../../../../assets/Home/Banner/slide-4.png";
-import slide5 from "../../../../assets/Home/Banner/slide-5.png";
+import slide1 from "../../../../assets/Home/Banner/slide-1.webp";
+import slide2 from "../../../../assets/Home/Banner/slide-2.webp";
+import slide3 from "../../../../assets/Home/Banner/slide-3.webp";
+import slide4 from "../../../../assets/Home/Banner/slide-4.webp";
+import slide5 from "../../../../assets/Home/Banner/slide-5.webp";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 

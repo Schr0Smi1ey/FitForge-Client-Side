@@ -1,6 +1,7 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 import axios from "axios";
+import compressImage, { IMAGE_TARGETS } from "../../../../utils/compressImage";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
@@ -36,7 +37,7 @@ const AddClass = () => {
 
   const ConvertToLink = async (photo) => {
     const formData = new FormData();
-    formData.append("image", photo);
+    formData.append("image", await compressImage(photo, IMAGE_TARGETS.content));
     const res = await axios.post(image_hosting_api, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
