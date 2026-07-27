@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [main, enhanced]
+  pull_request:
+    branches: [main, enhanced]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [20.x, 22.x]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+
+      # `npm ci` (not `npm install`) so the lockfile is honoured exactly and a
+      # drifted lockfile fails the build instead of being silently rewritten.
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm test
+
+      # Runs last and catches what lint and unit tests cannot: a broken import
+      # path. Note the build is case-sensitive here but not on Windows, so this
+      # step is what catches a "utils" vs "Utils" mistake before it reaches
+      # production.
+      - name: Build
+        run: npm run build
+        env:
+          # Vite inlines VITE_* at build time. These are build-time placeholders
+          # so the bundle compiles in CI; the real values live in the host's
+          # environment settings, never in the repo.
+          VITE_apiKey: ci-placeholder
+          VITE_authDomain: ci-placeholder
+          VITE_projectId: ci-placeholder
+          VITE_storageBucket: ci-placeholder
+          VITE_messagingSenderId: ci-placeholder
+          VITE_appId: ci-placeholder
+          VITE_IMAGE_HOSTING_KEY: ci-placeholder
+          VITE_Payment_Gateway_PK: pk_test_ci_placeholder
