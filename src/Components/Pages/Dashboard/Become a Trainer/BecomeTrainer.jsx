@@ -126,7 +126,7 @@ const BecomeTrainer = () => {
         Swal.fire("Image Upload Failed", "", "error");
         return null;
       }
-    } catch (err) {
+    } catch {
       Swal.fire("Image Upload Failed", "", "error");
       return null;
     }
@@ -191,7 +191,7 @@ const BecomeTrainer = () => {
       } else {
         Swal.fire(res.data.error, "", "error");
       }
-    } catch (error) {
+    } catch {
       Swal.fire("Application submission failed", "", "error");
     }
   };

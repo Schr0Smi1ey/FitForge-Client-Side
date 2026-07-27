@@ -6,7 +6,7 @@ import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { Helmet } from "react-helmet";
 import Aos from "aos";
 import "aos/dist/aos.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const BookedTrainer = () => {
   const { user, loading } = useContext(AuthContext);
   const [payments, setPayments] = useState([]);
@@ -15,7 +15,7 @@ const BookedTrainer = () => {
   useEffect(() => {
     Aos.init({ duration: 500 });
   }, []);
-  const { data: paymentData = [], isFetching } = useQuery({
+  const { isFetching } = useQuery({
     queryKey: ["payments"],
     queryFn: async () => {
       const res = await secureAxios.get("/booked-trainers", {

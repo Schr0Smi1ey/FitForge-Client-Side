@@ -13,7 +13,7 @@ const Subscribers = () => {
   useEffect(() => {
     Aos.init({ duration: 500 });
   }, []);
-  const { data: subscriberData = [], isFetching } = useQuery({
+  const { isFetching } = useQuery({
     queryKey: ["subscribers"],
     queryFn: async () => {
       const res = await secureAxios.get("/subscribers", {

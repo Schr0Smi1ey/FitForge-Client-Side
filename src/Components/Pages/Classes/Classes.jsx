@@ -24,7 +24,7 @@ const Classes = () => {
     setCurrentPage(1);
   };
 
-  const { data, isFetching, refetch } = useQuery({
+  const { isFetching, refetch } = useQuery({
     queryKey: ["classes", currentPage, searchQuery],
     queryFn: async () => {
       const query = searchQuery ? `&search=${searchQuery}` : "";

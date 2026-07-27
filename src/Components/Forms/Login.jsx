@@ -95,7 +95,7 @@ const Login = () => {
           </h2>
           <p className="text-center text-lg mb-6">
             Log in to track your workouts, set new fitness goals, and stay
-            motivated. Your fitness journey starts here—let's forge a stronger,
+            motivated. Your fitness journey starts here—let&apos;s forge a stronger,
             healthier you!
           </p>
         </div>

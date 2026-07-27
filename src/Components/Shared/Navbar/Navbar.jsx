@@ -79,7 +79,7 @@ const NavBar = () => {
     <ul
       className={`flex flex-col text-center lg:flex-row items-center justify-center gap-2 sm:gap-5 font-medium text-lg`}
     >
-      {navItems.map((item, index) => (
+      {navItems.map((item) => (
         <motion.div
           key={item}
           whileHover={{ scale: 1.05 }}
@@ -245,6 +245,7 @@ const NavBar = () => {
         {user &&
           ["profile", "dashboard"].map((item) => (
             <NavLink
+              key={item}
               to={getLinkPath(item)}
               onClick={() => setIsMenuOpen(false)}
               className="text-lg md:text-xl capitalize"

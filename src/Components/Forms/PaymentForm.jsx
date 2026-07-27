@@ -5,19 +5,15 @@ import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { AuthContext } from "../../Contexts/AuthContext/AuthProvider";
 import { FaLock } from "react-icons/fa";
-import { PACKAGE_PRICES } from "../../utils/packages";
 
 const PaymentForm = ({ trainer, slot, packageName }) => {
   const [error, setError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
-  const [transactionId, setTransactionId] = useState("");
   const stripe = useStripe();
   const elements = useElements();
   const secureAxios = useAxiosSecure();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-  // Display only — the server charges from packageName, not from this number.
-  const totalPrice = PACKAGE_PRICES[packageName] ?? 0;
 
   useEffect(() => {
     if (!packageName || !trainer?._id || !slot?._id) return;
@@ -50,7 +46,7 @@ const PaymentForm = ({ trainer, slot, packageName }) => {
       return;
     }
 
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
+    const { error } = await stripe.createPaymentMethod({
       type: "card",
       card,
     });
@@ -76,7 +72,6 @@ const PaymentForm = ({ trainer, slot, packageName }) => {
       setError(confirmError.message);
     } else {
       if (paymentIntent.status === "succeeded") {
-        setTransactionId(paymentIntent.id);
 
         // The booking is recorded by the Stripe webhook, not by this request.
         // Stripe has confirmed the charge, so the payment HAS succeeded — we just

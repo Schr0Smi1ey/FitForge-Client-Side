@@ -10,14 +10,9 @@ import { convertDate } from "../../../../utils/Utilities";
 import Aos from "aos";
 import "aos/dist/aos.css";
 const AddForum = () => {
-  const { user, loading, image_hosting_api } = useContext(AuthContext);
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <GridLoader color="#198068" size={40} />
-      </div>
-    );
-  }
+  // `Toast` was missing from this destructuring while being called below, so the
+  // image-upload failure path threw ReferenceError instead of showing the error.
+  const { user, loading, image_hosting_api, Toast } = useContext(AuthContext);
   const [forum, setForum] = useState({
     title: "",
     description: "",
@@ -32,6 +27,16 @@ const AddForum = () => {
   useEffect(() => {
     Aos.init({ duration: 500 });
   }, []);
+  // Every hook must run before this early return. It used to sit above them, so
+  // the number of hooks changed as `loading` flipped and React errored with
+  // "Rendered fewer hooks than expected".
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <GridLoader color="#198068" size={40} />
+      </div>
+    );
+  }
   const handleChange = (e) => {
     setForum({ ...forum, [e.target.name]: e.target.value });
   };
@@ -166,7 +171,6 @@ const AddForum = () => {
               type="file"
               accept="image/*"
               onChange={handleFileChange}
-              preview="true"
               ref={fileInputRef}
               className="w-full p-2 border rounded-lg dark:border-2 dark:border-gray-600 focus:ring-primary focus:border-primary transition-all"
               required

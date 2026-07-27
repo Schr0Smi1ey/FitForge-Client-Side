@@ -12,7 +12,6 @@ import {
   EffectCoverflow,
 } from "swiper/modules";
 import { FaQuoteLeft, FaRegStar, FaStar } from "react-icons/fa";
-import userImg from "../../../../assets/Home/Testimonials/commenter1.webp";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
@@ -92,7 +91,7 @@ const Testimonials = () => {
                     fullSymbol={<FaStar className="text-yellow-500 text-lg" />}
                     readonly
                   />
-                  <p className="mb-4 text-lg italic">"{item.feedback}"</p>
+                  <p className="mb-4 text-lg italic">&ldquo;{item.feedback}&rdquo;</p>
                   <div className="flex items-center justify-center gap-4 pt-4">
                     <img
                       src={item.userData[0].photo}

@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
-import useCustomAxios from "../../../../Hooks/useCustomAxios";
 import { Link } from "react-router-dom";
 import { GridLoader } from "react-spinners";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
@@ -10,13 +9,6 @@ import { Helmet } from "react-helmet";
 const Applications = () => {
   const secureAxios = useAxiosSecure();
   const { user, loading } = useContext(AuthContext);
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <GridLoader color="#198068" size={40} />
-      </div>
-    );
-  }
   const { data: appliedTrainers = [], isFetching } = useQuery({
     queryKey: ["appliedTrainers"],
     queryFn: async () => {
@@ -26,7 +18,10 @@ const Applications = () => {
       return res.data;
     },
   });
-  if (isFetching) {
+  // Both guards live below every hook. The `loading` check used to sit above
+  // useQuery, so the hook count changed as auth resolved and React errored with
+  // "Rendered fewer hooks than expected".
+  if (loading || isFetching) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <GridLoader color="#198068" size={40} />

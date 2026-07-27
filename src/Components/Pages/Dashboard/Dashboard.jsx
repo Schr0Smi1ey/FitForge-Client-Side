@@ -3,11 +3,8 @@ import {
   FaUsers,
   FaWallet,
   FaChalkboardTeacher,
-  FaUserGraduate,
   FaFileAlt,
   FaPlusSquare,
-  FaBars,
-  FaUser,
   FaListAlt,
   FaClipboardCheck,
   FaCalendarCheck,
@@ -17,7 +14,7 @@ import {
   FaStar,
 } from "react-icons/fa";
 import { RiMenuFold4Fill, RiMenuUnfold4Fill } from "react-icons/ri";
-import { NavLink, Outlet, replace, useNavigate } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Contexts/AuthContext/AuthProvider";
 import { GridLoader } from "react-spinners";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
@@ -63,28 +60,24 @@ const Dashboard = () => {
   useEffect(() => {
     Aos.init({ duration: 500 });
   }, []);
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <GridLoader color="#198068" size={40} />
-      </div>
-    );
-  }
-
-  if (user) {
-    useQuery({
-      queryKey: ["user"],
-      queryFn: async () => {
-        const res = await secureAxios.get("/user", {
-          params: { email: user.email },
-        });
-        setIsAdmin(res.data.user.role === "admin");
-        setIsTrainer(res.data.user.role === "trainer");
-        setIsMember(res.data.user.role === "member");
-        return res.data;
-      },
-    });
-  }
+  // Was wrapped in `if (user) { ... }`, which made the hook conditional — the
+  // hook count changed as auth resolved and React errored with "Rendered fewer
+  // hooks than expected". React Query's own `enabled` flag is how you skip a
+  // fetch without skipping the hook. The email is in the key so switching
+  // account refetches instead of serving the previous user's roles.
+  useQuery({
+    queryKey: ["user", user?.email],
+    enabled: Boolean(user?.email),
+    queryFn: async () => {
+      const res = await secureAxios.get("/user", {
+        params: { email: user.email },
+      });
+      setIsAdmin(res.data.user.role === "admin");
+      setIsTrainer(res.data.user.role === "trainer");
+      setIsMember(res.data.user.role === "member");
+      return res.data;
+    },
+  });
   const getLinkPath = (item) => {
     if (item === "Become a Trainer") return "/dashboard/become-a-trainer";
     if (item === "Dashboard") return "/dashboard";
@@ -103,6 +96,15 @@ const Dashboard = () => {
       navigate("/dashboard/activity-log", { replace: true });
     }
   }, [isAdmin, isMember, isTrainer, navigate]);
+
+  // Placed after every hook above, so the hook count is identical on each render.
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <GridLoader color="#198068" size={40} />
+      </div>
+    );
+  }
 
   return (
     <div className="flex min-h-screen dark:bg-black dark:text-white">

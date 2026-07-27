@@ -18,7 +18,7 @@ const Community = () => {
     Aos.init({ duration: 500 });
     window.scrollTo(0, 0);
   }, []);
-  const { data, isFetching, refetch } = useQuery({
+  const { isFetching, refetch } = useQuery({
     queryKey: ["posts", currentPage],
     queryFn: async () => {
       const res = await customAxios.get(
@@ -58,7 +58,7 @@ const Community = () => {
           className="text-lg text-gray-600 dark:text-gray-400 max-w-4xl mx-auto leading-relaxed text-center"
         >
           Join our vibrant fitness community to gain insights from experts and
-          grow alongside like-minded individuals. Whether you're a beginner or a
+          grow alongside like-minded individuals. Whether you&apos;re a beginner or a
           fitness pro, this is your space to excel, connect, and inspire!
         </p>
       </div>

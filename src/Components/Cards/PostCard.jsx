@@ -68,7 +68,7 @@ const PostCard = ({ postData, refetch, home }) => {
       if (res.status === 200) {
         refetch();
       }
-    } catch (error) {
+    } catch {
       Toast("Error voting", "error");
     }
   };

@@ -18,7 +18,7 @@ const LatestForumPosts = () => {
   const location = useLocation();
   const home = location.pathname === "/";
 
-  const { data = [], isFetching } = useQuery({
+  const { isFetching } = useQuery({
     queryKey: ["posts"],
     queryFn: async () => {
       const res = await customAxios.get(`/forums`);

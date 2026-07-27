@@ -25,7 +25,6 @@ const AddSlotForm = () => {
     Aos.init({ duration: 500 });
   }, []);
   const {
-    data: trainer,
     isFetching: isFetchingTrainer,
     refetch,
   } = useQuery({
@@ -39,7 +38,7 @@ const AddSlotForm = () => {
       return res.data;
     },
   });
-  const { data: classes, isFetching: isFetchingClasses } = useQuery({
+  const { isFetching: isFetchingClasses } = useQuery({
     queryKey: ["classes"],
     queryFn: async () => {
       const res = await customAxios.get("/classes?slotForm=true");

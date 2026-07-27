@@ -17,7 +17,7 @@ const ManageSlot = () => {
   useEffect(() => {
     Aos.init({ duration: 500 });
   }, []);
-  const { data, isFetching, refetch } = useQuery({
+  const { isFetching, refetch } = useQuery({
     queryKey: ["trainer"],
     queryFn: async () => {
       const res = await secureAxios.get("/slot", {

@@ -13,7 +13,7 @@ const FeaturedClasses = () => {
 
   const customAxios = useCustomAxios();
   const [classes, setClasses] = useState([]);
-  const { data, isFetching } = useQuery({
+  const { isFetching } = useQuery({
     queryKey: ["classes"],
     queryFn: async () => {
       const res = await customAxios.get("/classes?home=true");

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -64,6 +64,19 @@ const Banner = () => {
     AOS.init({ offset: 0, duration: 400, easing: "ease-in-sine" });
   }, []);
 
+  // useCallback so these keep a stable identity and can be listed as effect
+  // dependencies. Declared above the effects that use them, since a plain const
+  // is not hoisted and would be in the temporal dead zone otherwise.
+  const nextSlide = useCallback(() => {
+    setIndex((prevIndex) => (prevIndex + 1) % sliderContent.length);
+  }, [sliderContent.length]);
+
+  const prevSlide = useCallback(() => {
+    setIndex((prevIndex) =>
+      prevIndex === 0 ? sliderContent.length - 1 : prevIndex - 1
+    );
+  }, [sliderContent.length]);
+
   useEffect(() => {
     let interval;
     if (!isHovered) {
@@ -72,7 +85,7 @@ const Banner = () => {
       }, 4000);
     }
     return () => clearInterval(interval);
-  }, [isHovered]);
+  }, [isHovered, nextSlide]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -81,17 +94,8 @@ const Banner = () => {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [nextSlide, prevSlide]);
 
-  const nextSlide = () => {
-    setIndex((prevIndex) => (prevIndex + 1) % sliderContent.length);
-  };
-
-  const prevSlide = () => {
-    setIndex((prevIndex) =>
-      prevIndex === 0 ? sliderContent.length - 1 : prevIndex - 1
-    );
-  };
   const handleTouchStart = (e) => {
     setStartX(e.touches ? e.touches[0].clientX : e.clientX);
   };

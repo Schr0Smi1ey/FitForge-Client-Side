@@ -27,7 +27,7 @@ const Trainers = () => {
         </h1>
         <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
           Our certified trainers are here to guide, motivate, and help you
-          achieve your fitness goals. Whether you're a beginner or an advanced
+          achieve your fitness goals. Whether you&apos;re a beginner or an advanced
           athlete, our team is dedicated to providing personalized support and
           expertise.
         </p>
