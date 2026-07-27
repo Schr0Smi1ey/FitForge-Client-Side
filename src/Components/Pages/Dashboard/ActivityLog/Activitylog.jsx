@@ -1,21 +1,16 @@
 import TableSkeleton from "../../../Shared/Loader/TableSkeleton";
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 import { FaEye } from "react-icons/fa";
 import { convertDate } from "../../../../utils/Utilities.js";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure.jsx";
 import { Helmet } from "react-helmet";
-import Aos from "aos";
-import "aos/dist/aos.css";
 const Applications = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
   const [feedback, setFeedback] = useState("");
-  useEffect(() => {
-    Aos.init({ duration: 500 });
-  }, []);
   const { data: applicantData = [], isLoading } = useQuery({
     queryKey: ["applicantData"],
     queryFn: async () => {
@@ -49,8 +44,7 @@ const Applications = () => {
       </Helmet>
       {applicantData.error || !applicantData.length === 0 ? (
         <p
-          data-aos="fade-up"
-          data-aos-delay="150"
+          data-aos="fade-up" data-aos-delay="100"
           className="text-2xl text-red-500 font-bold text-center"
         >
           No Activity Log found!
@@ -58,32 +52,30 @@ const Applications = () => {
       ) : (
         <div>
           <h1
-            data-aos="fade-down"
-            data-aos-delay="150"
+            data-aos="fade-up" data-aos-delay="100"
             className="text-3xl font-bold text-gray-800 dark:text-gray-200 text-center"
           >
             📝 Activity Log
           </h1>
           <table
-            data-aos="fade-up"
-            data-aos-delay="150"
+            data-aos="fade-up" data-aos-delay="100"
             className="table table-zebra"
           >
             <thead>
               <tr className="text-center">
-                <th data-aos="fade-up" data-aos-delay="180">
+                <th data-aos="fade-up" data-aos-delay="200">
                   No.
                 </th>
-                <th data-aos="fade-up" data-aos-delay="180">
+                <th data-aos="fade-up" data-aos-delay="200">
                   Name
                 </th>
-                <th data-aos="fade-up" data-aos-delay="180">
+                <th data-aos="fade-up" data-aos-delay="200">
                   Email
                 </th>
-                <th data-aos="fade-up" data-aos-delay="180">
+                <th data-aos="fade-up" data-aos-delay="200">
                   Apply Date
                 </th>
-                <th data-aos="fade-up" data-aos-delay="180">
+                <th data-aos="fade-up" data-aos-delay="200">
                   Status
                 </th>
               </tr>
@@ -91,21 +83,20 @@ const Applications = () => {
             <tbody>
               {applications.map((applicant, index) => (
                 <tr key={applicant._id} className="text-center">
-                  <td data-aos="fade-up" data-aos-delay="230">
+                  <td data-aos="fade-up" data-aos-delay="200">
                     {index + 1}
                   </td>
-                  <td data-aos="fade-up" data-aos-delay="230">
+                  <td data-aos="fade-up" data-aos-delay="200">
                     {applicantData[0].user.name}
                   </td>
-                  <td data-aos="fade-up" data-aos-delay="230">
+                  <td data-aos="fade-up" data-aos-delay="200">
                     {applicantData[0].user.email}
                   </td>
-                  <td data-aos="fade-up" data-aos-delay="230">
+                  <td data-aos="fade-up" data-aos-delay="200">
                     {convertDate(applicant.applyDate, "ActivityLog")}
                   </td>
                   <td
-                    data-aos="fade-up"
-                    data-aos-delay="230"
+                    data-aos="fade-up" data-aos-delay="200"
                     className={`${
                       colors[applicant.status]
                     } rounded-full text-white p-2 px-3 w-fit text-center flex items-center justify-center mx-auto gap-2`}
@@ -135,8 +126,7 @@ const Applications = () => {
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white dark:bg-black rounded-lg shadow-lg p-6 w-9/12 md:w-1/3">
             <h2
-              data-aos="fade-down"
-              data-aos-delay="150"
+              data-aos="fade-up" data-aos-delay="100"
               className="text-2xl font-bold mb-4"
             >
               Rejected Application

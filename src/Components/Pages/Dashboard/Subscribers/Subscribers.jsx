@@ -1,18 +1,13 @@
 import TableSkeleton from "../../../Shared/Loader/TableSkeleton";
 import { useQuery } from "@tanstack/react-query";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 import { Helmet } from "react-helmet";
-import Aos from "aos";
-import "aos/dist/aos.css";
 const Subscribers = () => {
   const secureAxios = useAxiosSecure();
   const [subscribers, setSubscribers] = useState([]);
   const { user, loading } = useContext(AuthContext);
-  useEffect(() => {
-    Aos.init({ duration: 500 });
-  }, []);
   const { isFetching } = useQuery({
     queryKey: ["subscribers"],
     queryFn: async () => {
@@ -36,7 +31,7 @@ const Subscribers = () => {
       </Helmet>
       <div className="mb-6">
         <h1
-          data-aos="fade-down"
+          data-aos="fade-up"
           className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-300 text-center"
         >
           📋 Subscriber List
@@ -44,7 +39,7 @@ const Subscribers = () => {
       </div>
 
       {subscribers.length === 0 ? (
-        <div data-aos="fade-down" className="text-center">
+        <div data-aos="fade-up" className="text-center">
           <p className="text-2xl text-red-500 font-bold text-center">
             No subscribers found!
           </p>
@@ -53,9 +48,9 @@ const Subscribers = () => {
         <table className="table">
           <thead className="bg-primary text-white">
             <tr className="text-center text-base md:text-lg lg:text-xl">
-              <th data-aos="fade-down">No.</th>
-              <th data-aos="fade-down">Name</th>
-              <th data-aos="fade-down">Email</th>
+              <th data-aos="fade-up">No.</th>
+              <th data-aos="fade-up">Name</th>
+              <th data-aos="fade-up">Email</th>
             </tr>
           </thead>
           <tbody>

@@ -1,6 +1,4 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
 
 import slide1 from "../../../../assets/Home/Banner/slide-1.webp";
 import slide2 from "../../../../assets/Home/Banner/slide-2.webp";
@@ -60,9 +58,6 @@ const Banner = () => {
     },
   ];
 
-  useEffect(() => {
-    AOS.init({ offset: 0, duration: 400, easing: "ease-in-sine" });
-  }, []);
 
   // useCallback so these keep a stable identity and can be listed as effect
   // dependencies. Declared above the effects that use them, since a plain const
@@ -136,23 +131,20 @@ const Banner = () => {
         >
           <h1
             className="text-3xl lg:text-4xl font-extrabold mb-4"
-            data-aos="zoom-in"
-            data-aos-delay="100"
+            data-aos="fade-up" data-aos-delay="100"
           >
             {title}
           </h1>
           <p
             className="w-[85%] sm:w-full text-center mx-auto text-lg md:text-xl text-gray-300 mb-4"
-            data-aos="fade-up"
-            data-aos-delay="200"
+            data-aos="fade-up" data-aos-delay="200"
           >
             {description}
           </p>
           <button
             onClick={() => navigate(buttonNavigateTo)}
             className="bg-primary text-white font-semibold px-4 py-1 md:px-6 md:py-3 rounded-lg shadow-md hover:brightness-110 transition-all"
-            data-aos="fade-up"
-            data-aos-delay="300"
+            data-aos="fade-up" data-aos-delay="200"
           >
             {buttonText}
           </button>

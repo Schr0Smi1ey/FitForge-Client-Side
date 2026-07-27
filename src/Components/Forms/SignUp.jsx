@@ -6,8 +6,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import logo from "../../assets/fitforge-logo.webp";
 import compressImage, { IMAGE_TARGETS } from "../../utils/compressImage";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import axios from "axios";
 import useCustomAxios from "../../Hooks/useCustomAxios";
 
@@ -34,7 +32,6 @@ const SignUp = () => {
   });
   useEffect(() => {
     window.scrollTo(0, 0);
-    AOS.init({ duration: 500 });
   }, []);
   const handlePasswordVisibility = () => setShowPassword(!showPassword);
   const validatePassword = (password) => {
@@ -149,7 +146,7 @@ const SignUp = () => {
         className={`min-h-screen lg:min-h-[450px] flex rounded-lg container mx-auto shadow-xl w-full max-w-5xl overflow-hidden`}
       >
         <div
-          data-aos="fade-right"
+          data-aos="fade-up"
           className="hidden md:flex w-1/2 bg-gradient-to-r from-primary to-primary/70 text-white flex-col items-center justify-center p-8"
         >
           <img
@@ -167,7 +164,7 @@ const SignUp = () => {
         </div>
 
         <div
-          data-aos="fade-left"
+          data-aos="fade-up"
           className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center"
         >
           <h2 className="text-4xl font-extrabold text-primary mb-6 text-center">

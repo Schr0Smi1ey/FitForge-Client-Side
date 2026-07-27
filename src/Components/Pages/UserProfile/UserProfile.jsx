@@ -2,8 +2,6 @@ import Loader from "../../Shared/Loader/Loader";
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import { AuthContext } from "../../../Contexts/AuthContext/AuthProvider";
 const UserProfile = () => {
   const { user, loading } = useContext(AuthContext);
@@ -13,11 +11,10 @@ const UserProfile = () => {
   };
   useEffect(() => {
     window.scrollTo(0, 0);
-    AOS.init({ duration: 500 });
   }, []);
   if (loading) {
     return (
-      <Loader size={30} />
+      <Loader />
     );
   }
   return (
@@ -26,11 +23,11 @@ const UserProfile = () => {
         <title>FitForge | Profile</title>
       </Helmet>
       <div
-        data-aos="zoom-in"
+        data-aos="fade-up"
         className="bg-white dark:bg-black dark:text-white shadow-lg rounded-lg  flex flex-col sm:flex-row items-center sm:gap-20 justify-center max-w-4xl p-6"
       >
         <div
-          data-aos="fade-right"
+          data-aos="fade-up"
           className="flex justify-center items-center mb-6 sm:mb-0"
         >
           <img
@@ -42,20 +39,20 @@ const UserProfile = () => {
 
         <div className="flex flex-col justify-center items-center sm:items-start md:w-2/3 px-6">
           <h1
-            data-aos="fade-left"
+            data-aos="fade-up"
             className="text-2xl font-bold text-gray-800 dark:text-gray-300 mb-2"
           >
             Welcome, {user.displayName || "Guest"}!
           </h1>
           <p
-            data-aos="fade-left"
+            data-aos="fade-up"
             className="text-gray-600 dark:text-gray-300 text-lg mb-2"
           >
             Email:{" "}
             <span className="font-medium">{user.email || "Not Provided"}</span>
           </p>
           <p
-            data-aos="fade-left"
+            data-aos="fade-up"
             className="text-gray-600 dark:text-gray-300 text-lg mb-4"
           >
             Last sign in time:{" "}
@@ -65,7 +62,7 @@ const UserProfile = () => {
           </p>
 
           <button
-            data-aos="fade-left"
+            data-aos="fade-up"
             onClick={handleUpdateProfile}
             className="bg-primary/90 hover:bg-primary text-white px-6 py-2 rounded-lg text-lg font-bold"
           >

@@ -1,11 +1,9 @@
-import React, { useState, useContext, useRef, useEffect } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 import Select from "react-select";
 import axios from "axios";
 import compressImage, { IMAGE_TARGETS } from "../../../../utils/compressImage";
 import Swal from "sweetalert2";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { Helmet } from "react-helmet";
 import Loader from "../../../Shared/Loader/Loader";
@@ -61,9 +59,6 @@ const BecomeTrainer = () => {
     facebook: "",
     twitter: "",
   });
-  useEffect(() => {
-    AOS.init({ duration: 500 });
-  }, []);
   const [selectedSkills, setSelectedSkills] = useState([]);
   const [availableDays, setAvailableDays] = useState([]);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
@@ -72,7 +67,7 @@ const BecomeTrainer = () => {
 
   if (loading) {
     return (
-      <Loader size={40} />
+      <Loader />
     );
   }
 
@@ -198,12 +193,11 @@ const BecomeTrainer = () => {
       <Helmet>
         <title>FitForge | Dashboard | Become a Trainer</title>
       </Helmet>
-      <h2 data-aos="fade-down" className="text-3xl font-bold mb-4 text-center">
+      <h2 data-aos="fade-up" className="text-3xl font-bold mb-4 text-center">
         Join Us as a Trainer
       </h2>
       <p
-        data-aos="fade-down"
-        data-aos-delay="100"
+        data-aos="fade-up" data-aos-delay="100"
         className="text-lg text-gray-600 dark:text-gray-400 mb-6 text-center"
       >
         Share your expertise and inspire others by becoming part of our team.

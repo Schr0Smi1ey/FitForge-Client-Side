@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import { AuthContext } from "../../Contexts/AuthContext/AuthProvider";
 import axios from "axios";
 import compressImage, { IMAGE_TARGETS } from "../../utils/compressImage";
@@ -16,7 +14,6 @@ const UpdateProfile = () => {
   });
   useEffect(() => {
     window.scrollTo(0, 0);
-    AOS.init({ duration: 500 });
   }, []);
 
   const handleChange = (e) => {
@@ -74,11 +71,11 @@ const UpdateProfile = () => {
         <title>FitForge | Update Profile</title>
       </Helmet>
       <div
-        data-aos="zoom-in"
+        data-aos="fade-up"
         className="bg-white dark:bg-black dark:text-white shadow-lg rounded-lg w-full max-w-md p-6"
       >
         <h2
-          data-aos="fade-down"
+          data-aos="fade-up"
           className="text-3xl text-center font-bold text-gray-800 dark:text-gray-300 mb-4"
         >
           Update Profile

@@ -46,7 +46,7 @@ const Review = () => {
 
   if (loading) {
     return (
-      <Loader size={40} />
+      <Loader />
     );
   }
   return (

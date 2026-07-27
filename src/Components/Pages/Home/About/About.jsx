@@ -1,13 +1,8 @@
-import React, { useContext, useEffect } from "react";
-import "aos/dist/aos.css";
-import Aos from "aos";
+import React, { useContext } from "react";
 import "./About.css";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 
 const About = () => {
-  useEffect(() => {
-    Aos.init({ duration: 500 });
-  }, []);
   const { user } = useContext(AuthContext);
   return (
     <section

@@ -1,11 +1,11 @@
 /**
  * Brand colours as JavaScript values.
  *
- * Tailwind classes cover markup, but several libraries here (react-spinners,
- * MUI charts, SweetAlert) take a colour as a prop or config value where a class
- * name is useless. Those call sites used to hardcode the hex, which is how a
- * second, slightly different green (#3D8D7A) ended up competing with the brand
- * primary. Import from here instead.
+ * Tailwind classes cover markup, but several libraries here (MUI charts,
+ * SweetAlert) take a colour as a prop or config value where a class name is
+ * useless. Those call sites used to hardcode the hex, which is how a second,
+ * slightly different green (#3D8D7A) ended up competing with the brand primary.
+ * Import from here instead.
  *
  * Keep in sync with the `colors` block in tailwind.config.js — same values,
  * two consumers.

@@ -5,8 +5,6 @@ import { VscEyeClosed } from "react-icons/vsc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import logo from "../../assets/fitforge-logo.webp";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import useCustomAxios from "../../Hooks/useCustomAxios";
 
 const Login = () => {
@@ -21,7 +19,6 @@ const Login = () => {
   const handlePasswordVisibility = () => setShowPassword(!showPassword);
   useEffect(() => {
     window.scrollTo(0, 0);
-    AOS.init({ duration: 500 });
   }, []);
   const sendToDatabase = async (
     email,
@@ -87,7 +84,7 @@ const Login = () => {
       >
         <div
           className="hidden md:flex md:w-1/2 bg-gradient-to-r from-primary to-primary/70 text-white flex-col items-center justify-center p-8"
-          data-aos="fade-right"
+          data-aos="fade-up"
         >
           <img
             src={logo}
@@ -107,7 +104,7 @@ const Login = () => {
 
         <div
           className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center"
-          data-aos="fade-left"
+          data-aos="fade-up"
         >
           <h2 className="text-3xl font-bold text-primary text-center mb-6">
             Login

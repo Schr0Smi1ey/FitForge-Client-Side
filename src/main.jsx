@@ -1,7 +1,10 @@
 import React from "react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import "./index.css";
+import { AOS_CONFIG } from "./motion.js";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./Components/Layout/Root.jsx";
 import ErrorPage from "./Components/Shared/ErrorPage/ErrorPage.jsx";
@@ -34,6 +37,20 @@ import Classes from "./Components/Pages/Classes/Classes.jsx";
 import UserProfile from "./Components/Pages/UserProfile/UserProfile.jsx";
 import UpdateProfile from "./Components/Forms/UpdateProfile.jsx";
 import Review from "./Components/Pages/Dashboard/Review/Review.jsx";
+/*
+ * AOS is a global singleton, so it needs initialising exactly once.
+ *
+ * It used to be initialised inside a useEffect in 31 separate components, each
+ * re-configuring the same global object on mount. That is not just redundant:
+ * Banner.jsx passed a different config (duration 400, easing "ease-in-sine")
+ * from everywhere else's duration 500, so the app's animation timing depended on
+ * which component happened to mount last. Navigating to Home and back could
+ * genuinely change how the rest of the site animated.
+ *
+ * Configuring it here, before render, makes that deterministic.
+ */
+AOS.init(AOS_CONFIG);
+
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {

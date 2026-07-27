@@ -1,19 +1,14 @@
 import Loader from "../../../Shared/Loader/Loader";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import { PieChart } from "@mui/x-charts";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { Helmet } from "react-helmet";
 import RevenueByTier from "./RevenueByTier";
-import Aos from "aos";
-import "aos/dist/aos.css";
 const Balance = () => {
   const { user, loading } = useContext(AuthContext);
   const secureAxios = useAxiosSecure();
-  useEffect(() => {
-    Aos.init({ duration: 500 });
-  }, []);
   const { data: paymentData, isFetching } = useQuery({
     queryKey: ["payments"],
     queryFn: async () => {
@@ -49,7 +44,7 @@ const Balance = () => {
 
   if (loading || isFetching || isFetchingSubscribers || isFetchingStats) {
     return (
-      <Loader size={40} />
+      <Loader />
     );
   }
   const payments = paymentData?.payments || [];
@@ -72,7 +67,7 @@ const Balance = () => {
       <div className="mb-6 flex flex-col lg:flex-row items-center justify-between gap-6">
         {/* Payment Balance */}
         <h2
-          data-aos="fade-right"
+          data-aos="fade-up"
           className="text-2xl md:text-3xl font-bold text-center bg-primary text-white px-6 py-3 rounded-lg shadow-md"
         >
           💰 Payment Balance: $ {totalBalance}
@@ -80,7 +75,7 @@ const Balance = () => {
 
         {/* Pie Chart Section */}
         <div
-          data-aos="fade-left"
+          data-aos="fade-up"
           className="bg-white dark:bg-black dark:text-white p-4 rounded-lg shadow-md w-full md:w-auto"
         >
           <h3 className="text-lg md:text-xl font-semibold text-center mb-4">
@@ -134,51 +129,44 @@ const Balance = () => {
             <thead className="bg-primary text-white text-base md:text-lg lg:text-xl">
               <tr className="text-center">
                 <th
-                  data-aos="fade-up"
-                  data-aos-delay="100"
+                  data-aos="fade-up" data-aos-delay="100"
                   className="p-1 border"
                   colSpan={2}
                 >
                   Trainer
                 </th>
                 <th
-                  data-aos="fade-up"
-                  data-aos-delay="100"
+                  data-aos="fade-up" data-aos-delay="100"
                   className="p-1 border"
                 >
                   Trainee
                 </th>
                 <th
-                  data-aos="fade-up"
-                  data-aos-delay="100"
+                  data-aos="fade-up" data-aos-delay="100"
                   className="p-1 border"
                 >
                   Class
                 </th>
                 <th
-                  data-aos="fade-up"
-                  data-aos-delay="100"
+                  data-aos="fade-up" data-aos-delay="100"
                   className="p-1 border"
                 >
                   Slot
                 </th>
                 <th
-                  data-aos="fade-up"
-                  data-aos-delay="100"
+                  data-aos="fade-up" data-aos-delay="100"
                   className="p-1 border"
                 >
                   Package
                 </th>
                 <th
-                  data-aos="fade-up"
-                  data-aos-delay="100"
+                  data-aos="fade-up" data-aos-delay="100"
                   className="p-1 border"
                 >
                   Price ($)
                 </th>
                 <th
-                  data-aos="fade-up"
-                  data-aos-delay="100"
+                  data-aos="fade-up" data-aos-delay="100"
                   className="p-1 border"
                 >
                   Date
@@ -191,8 +179,7 @@ const Balance = () => {
               {payments.map((payment) => (
                 <tr key={payment._id}>
                   <td
-                    data-aos="fade-up"
-                    data-aos-delay="250"
+                    data-aos="fade-up" data-aos-delay="200"
                     className="p-1 border"
                     colSpan={2}
                   >
@@ -206,44 +193,38 @@ const Balance = () => {
                     </div>
                   </td>
                   <td
-                    data-aos="fade-up"
-                    data-aos-delay="250"
+                    data-aos="fade-up" data-aos-delay="200"
                     className="p-1 border"
                   >
                     {user.displayName || "N/A"}
                   </td>
                   <td
-                    data-aos="fade-up"
-                    data-aos-delay="250"
+                    data-aos="fade-up" data-aos-delay="200"
                     className="p-1 border"
                   >
                     {payment.classDetails.title}
                   </td>
                   <td
-                    data-aos="fade-up"
-                    data-aos-delay="250"
+                    data-aos="fade-up" data-aos-delay="200"
                     className="p-1 border"
                   >
                     {payment.slotDetails.slotName} (
                     {payment.slotDetails.selectedDay})
                   </td>
                   <td
-                    data-aos="fade-up"
-                    data-aos-delay="250"
+                    data-aos="fade-up" data-aos-delay="200"
                     className="p-1 border"
                   >
                     {payment.packageName}
                   </td>
                   <td
-                    data-aos="fade-up"
-                    data-aos-delay="250"
+                    data-aos="fade-up" data-aos-delay="200"
                     className="p-1 border font-semibold"
                   >
                     ${payment.price}
                   </td>
                   <td
-                    data-aos="fade-up"
-                    data-aos-delay="250"
+                    data-aos="fade-up" data-aos-delay="200"
                     className="p-1 border text-gray-500"
                   >
                     {new Date(payment.date).toLocaleDateString()}

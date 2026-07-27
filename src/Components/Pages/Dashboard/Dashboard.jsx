@@ -20,8 +20,6 @@ import { AuthContext } from "../../../Contexts/AuthContext/AuthProvider";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet";
-import Aos from "aos";
-import "aos/dist/aos.css";
 import { Moon, Sun } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -57,9 +55,6 @@ const Dashboard = () => {
   const [isMember, setIsMember] = useState(false);
   const secureAxios = useAxiosSecure();
   const navigate = useNavigate();
-  useEffect(() => {
-    Aos.init({ duration: 500 });
-  }, []);
   // Was wrapped in `if (user) { ... }`, which made the hook conditional — the
   // hook count changed as auth resolved and React errored with "Rendered fewer
   // hooks than expected". React Query's own `enabled` flag is how you skip a
@@ -100,7 +95,7 @@ const Dashboard = () => {
   // Placed after every hook above, so the hook count is identical on each render.
   if (loading) {
     return (
-      <Loader size={40} />
+      <Loader />
     );
   }
 
@@ -116,8 +111,7 @@ const Dashboard = () => {
           ${isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}`}
       >
         <button
-          data-aos="fade-right"
-          data-aos-delay="100"
+          data-aos="fade-up" data-aos-delay="100"
           key={isOpen}
           aria-label="Close dashboard menu"
           aria-expanded={isOpen}
@@ -128,8 +122,7 @@ const Dashboard = () => {
         </button>
 
         <ul
-          data-aos="fade-right"
-          data-aos-delay="150"
+          data-aos="fade-up" data-aos-delay="100"
           className="text-white font-semibold pt-5 md:ml-4"
         >
           {isAdmin && (
@@ -285,7 +278,7 @@ const Dashboard = () => {
 
         <div className="container mx-auto p-4">
           {loading ? (
-            <Loader size={40} />
+            <Loader size="md" fullScreen={false} />
           ) : (
             <Outlet />
           )}

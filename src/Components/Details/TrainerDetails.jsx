@@ -16,7 +16,7 @@ const TrainerDetails = () => {
   const navigate = useNavigate();
   if (!trainer || loading) {
     return (
-      <Loader size={40} />
+      <Loader />
     );
   }
 

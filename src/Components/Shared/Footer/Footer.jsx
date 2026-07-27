@@ -7,24 +7,17 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 import { MdEmail, MdLocationOn } from "react-icons/md";
-import Aos from "aos";
-import "aos/dist/aos.css";
-import { useEffect } from "react";
 
 const Footer = () => {
-  useEffect(() => {
-    Aos.init({ duration: 500 });
-  }, []);
-
   return (
     <footer className="bg-black text-gray-300 py-10">
       <div className="container mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center lg:text-left">
         {/* Logo & About */}
         <div>
-          <h2 data-aos="fade-right" className="text-3xl font-bold text-primary">
+          <h2 data-aos="fade-up" className="text-3xl font-bold text-primary">
             FitForge
           </h2>
-          <p data-aos="fade-right" className="mt-3 text-sm">
+          <p data-aos="fade-up" className="mt-3 text-sm">
             Unleash your potential with FitForge. Train hard, recover smart, and
             stay motivated.
           </p>
@@ -91,10 +84,10 @@ const Footer = () => {
 
         {/* Follow Us */}
         <div>
-          <h3 data-aos="fade-left" className="text-xl font-semibold text-white">
+          <h3 data-aos="fade-up" className="text-xl font-semibold text-white">
             Follow Us
           </h3>
-          <p data-aos="fade-left" className="mt-3 text-sm">
+          <p data-aos="fade-up" className="mt-3 text-sm">
             Join our community and stay motivated. Follow us for fitness tips,
             workouts, and exclusive content!
           </p>

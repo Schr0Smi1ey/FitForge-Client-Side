@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { convertDate } from "../../utils/Utilities";
@@ -8,8 +8,6 @@ import { AuthContext } from "../../Contexts/AuthContext/AuthProvider";
 import { BsPersonBadge } from "react-icons/bs";
 import { HiCheckBadge } from "react-icons/hi2";
 import useCustomAxios from "../../Hooks/useCustomAxios";
-import Aos from "aos";
-import "aos/dist/aos.css";
 import Loader from "../Shared/Loader/Loader";
 const PostCard = ({ postData, refetch, home }) => {
   const {
@@ -26,9 +24,6 @@ const PostCard = ({ postData, refetch, home }) => {
   } = postData;
   const { user, loading, Toast } = useContext(AuthContext);
   const [isExpanded, setIsExpanded] = useState(false);
-  useEffect(() => {
-    Aos.init({ duration: 500 });
-  }, []);
   const secureAxios = useAxiosSecure();
   const navigate = useNavigate();
   const customAxios = useCustomAxios();
@@ -43,7 +38,7 @@ const PostCard = ({ postData, refetch, home }) => {
   });
   if (loading || isFetching) {
     return (
-      <Loader size={40} />
+      <Loader size="md" fullScreen={false} />
     );
   }
 
@@ -96,13 +91,13 @@ const PostCard = ({ postData, refetch, home }) => {
         {/* Content Section */}
         <div className="p-6">
           <h2
-            data-aos="fade-right"
+            data-aos="fade-up"
             className="text-2xl md:text-3xl font-bold mb-4"
           >
             {home ? (isExpanded ? title : minimizedTitle) : title}
           </h2>
           <p
-            data-aos="fade-left"
+            data-aos="fade-up"
             className="text-gray-700 dark:text-gray-500 text-base md:text-lg mb-4"
           >
             {home
@@ -126,7 +121,7 @@ const PostCard = ({ postData, refetch, home }) => {
           {/* User & Meta Info */}
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             {/* User Info */}
-            <div data-aos="fade-right" className="flex items-center gap-4">
+            <div data-aos="fade-up" className="flex items-center gap-4">
               <img
                 src={posterData?.user?.photoURL}
                 alt={posterData?.user?.name}
@@ -161,7 +156,7 @@ const PostCard = ({ postData, refetch, home }) => {
 
             {/* Vote Buttons */}
             {!home && (
-              <div data-aos="fade-left" className="flex items-center space-x-4">
+              <div data-aos="fade-up" className="flex items-center space-x-4">
                 <div className="flex items-center gap-1">
                   <span className="font-bold text-gray-600 dark:text-gray-400">
                     {totalUpVote}

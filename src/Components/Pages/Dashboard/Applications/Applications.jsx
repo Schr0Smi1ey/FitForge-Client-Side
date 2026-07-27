@@ -38,7 +38,7 @@ const Applications = () => {
       </Helmet>
 
       <div
-        data-aos="fade-down"
+        data-aos="fade-up"
         className="mx-auto mb-6 w-fit rounded-2xl border dark:border-gray-700 bg-white dark:bg-black px-8 py-5 text-center shadow-sm"
       >
         <p className="text-4xl font-extrabold text-primary">{pendingCount}</p>
@@ -49,7 +49,7 @@ const Applications = () => {
 
       {appliedTrainers.length === 0 ? (
         <p
-          data-aos="fade-down"
+          data-aos="fade-up"
           className="text-2xl text-red-500 font-bold text-center"
         >
           No Applications found
@@ -58,7 +58,7 @@ const Applications = () => {
         <div>
           <div className="mb-6">
             <h1
-              data-aos="fade-down"
+              data-aos="fade-up"
               className="text-3xl font-bold text-gray-800 dark:text-gray-300 text-center"
             >
               📋 All Applications
@@ -67,11 +67,11 @@ const Applications = () => {
           <table className="table table-zebra">
             <thead className="bg-primary text-white text-base md:text-lg lg:text-xl">
               <tr className="text-center">
-                <th data-aos="fade-down">No.</th>
-                <th data-aos="fade-down">Name</th>
-                <th data-aos="fade-down">Email</th>
-                <th data-aos="fade-down">Apply Date</th>
-                <th data-aos="fade-down">Details</th>
+                <th data-aos="fade-up">No.</th>
+                <th data-aos="fade-up">Name</th>
+                <th data-aos="fade-up">Email</th>
+                <th data-aos="fade-up">Apply Date</th>
+                <th data-aos="fade-up">Details</th>
               </tr>
             </thead>
             <tbody className="text-gray-700 dark:text-gray-400 text-sm md:text-base lg:text-lg">

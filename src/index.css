@@ -15,8 +15,9 @@ body {
 /*
  * Respect the OS "reduce motion" setting.
  *
- * AOS is initialised in 31 components and framer-motion animates throughout, so
- * handling this centrally is the only way to cover them all consistently.
+ * AOS is configured once in main.jsx and framer-motion animates in a couple of
+ * places, so handling this centrally is the only way to cover them all
+ * consistently.
  *
  * The [data-aos] rule is the important part and easy to miss: AOS starts
  * elements at opacity 0 and animates them in. Cancelling the animation without
@@ -37,5 +38,17 @@ body {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
+  }
+
+  /*
+   * The loader is deliberately exempt from the blanket rule above. That rule
+   * caps every animation at 0.01ms and one iteration, which would freeze the
+   * spinner on its first frame — a motionless ring next to text saying
+   * "Loading" reads as a broken page rather than a calm one. The guidance is
+   * about large-scale and parallax motion, not a small activity indicator, so
+   * it keeps turning here, just slowly enough not to draw the eye.
+   */
+  [data-loader-ring] {
+    animation: spin 2s linear infinite !important;
   }
 }

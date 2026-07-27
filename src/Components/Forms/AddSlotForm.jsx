@@ -1,13 +1,11 @@
 import Loader from "../Shared/Loader/Loader";
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import Select from "react-select";
 import { useQuery } from "@tanstack/react-query";
 import useCustomAxios from "../../Hooks/useCustomAxios";
 import { AuthContext } from "../../Contexts/AuthContext/AuthProvider";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import Aos from "aos";
-import "aos/dist/aos.css";
 const AddSlotForm = () => {
   const { user, loading } = useContext(AuthContext);
   const [userData, setUserData] = useState(null);
@@ -21,9 +19,6 @@ const AddSlotForm = () => {
   });
   const secureAxios = useAxiosSecure();
   const customAxios = useCustomAxios();
-  useEffect(() => {
-    Aos.init({ duration: 500 });
-  }, []);
   const {
     isFetching: isFetchingTrainer,
     refetch,
@@ -49,7 +44,7 @@ const AddSlotForm = () => {
 
   if (loading || isFetchingClasses || isFetchingTrainer) {
     return (
-      <Loader size={40} />
+      <Loader />
     );
   }
 
@@ -126,15 +121,13 @@ const AddSlotForm = () => {
   return (
     <div className="mx-auto bg-white dark:bg-black dark:text-white p-6 rounded-lg shadow-md">
       <h2
-        data-aos="fade-down"
-        data-aos-delay="150"
+        data-aos="fade-up" data-aos-delay="100"
         className="text-2xl text-center font-bold mb-2"
       >
         Add a New Slot
       </h2>
       <p
-        data-aos="fade-down"
-        data-aos-delay="150"
+        data-aos="fade-up" data-aos-delay="100"
         className="text-lg text-center text-gray-600 dark:text-gray-400 mb-6"
       >
         Customize your availability and connect with clients effortlessly.
@@ -143,8 +136,7 @@ const AddSlotForm = () => {
       {/* Trainer Info (Read-Only) */}
       {trainerData && (
         <div
-          data-aos="fade-up"
-          data-aos-delay="200"
+          data-aos="fade-up" data-aos-delay="200"
           className="grid grid-cols-2 gap-4 bg-gray-100 dark:bg-black dark:text-gray-400 p-4 rounded-md"
         >
           <div>
@@ -245,7 +237,7 @@ const AddSlotForm = () => {
       <form onSubmit={handleSubmit} className="mt-4 space-y-4">
         {/* Class Selection */}
         <div>
-          <label data-aos="fade-up" data-aos-delay="250" className="font-bold">
+          <label data-aos="fade-up" data-aos-delay="200" className="font-bold">
             Select Class
           </label>
           <div className="dark:bg-black">
@@ -260,7 +252,7 @@ const AddSlotForm = () => {
         </div>
         {/* Slot Name */}
         <div>
-          <label data-aos="fade-up" data-aos-delay="270" className="font-bold">
+          <label data-aos="fade-up" data-aos-delay="200" className="font-bold">
             Select Slot
           </label>
           <div>
@@ -276,12 +268,11 @@ const AddSlotForm = () => {
 
         {/* Slot Time */}
         <div>
-          <label data-aos="fade-up" data-aos-delay="290" className="font-bold">
+          <label data-aos="fade-up" data-aos-delay="200" className="font-bold">
             Slot Time (Hours)
           </label>
           <input
-            data-aos="fade-up"
-            data-aos-delay="280"
+            data-aos="fade-up" data-aos-delay="200"
             type="number"
             name="slotTime"
             value={formData.slotTime}
@@ -293,7 +284,7 @@ const AddSlotForm = () => {
 
         {/* Day Selection */}
         <div>
-          <label data-aos="fade-up" data-aos-delay="310" className="font-bold">
+          <label data-aos="fade-up" data-aos-delay="200" className="font-bold">
             Select Day
           </label>
           <div>
@@ -309,8 +300,7 @@ const AddSlotForm = () => {
 
         {/* Submit Button */}
         <button
-          data-aos="fade-up"
-          data-aos-delay="260"
+          data-aos="fade-up" data-aos-delay="200"
           data-aos-offset="30px"
           type="submit"
           className="py-2 rounded-xl font-semibold text-lg bg-primary text-white w-full mt-4"

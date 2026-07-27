@@ -1,20 +1,15 @@
 import Loader from "../../../Shared/Loader/Loader";
-import React, { useEffect } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
+import React from "react";
 import TrainerCard from "../../../Cards/TrainerCard";
+import Reveal from "../../../Shared/Reveal/Reveal";
 import useTrainers from "../../../../Hooks/useTrainers";
 
 const Team = () => {
-  useEffect(() => {
-    AOS.init({ duration: 500 });
-  }, []);
-
   const { trainers, isFetching } = useTrainers();
 
   if (isFetching) {
     return (
-      <Loader size={40} />
+      <Loader size="md" fullScreen={false} />
     );
   }
 
@@ -27,23 +22,22 @@ const Team = () => {
     >
       <h2
         className="text-primary text-2xl md:text-4xl font-extrabold mb-6"
-        data-aos="zoom-in"
+        data-aos="fade-up"
       >
         Meet Our Expert Trainers
       </h2>
       <p
         className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-10 text-lg"
-        data-aos="zoom-in"
-        data-aos-delay="200"
+        data-aos="fade-up" data-aos-delay="200"
       >
         Our trainers bring a wealth of experience and passion to help you
         achieve your fitness goals.
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {toShow.map((trainer, index) => (
-          <div key={index} data-aos="fade-up" data-aos-delay={index * 200}>
+          <Reveal key={index} index={index}>
             <TrainerCard trainer={trainer} />
-          </div>
+          </Reveal>
         ))}
       </div>
     </div>

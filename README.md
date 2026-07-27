@@ -52,12 +52,13 @@ src/
     Forms/            login, signup, payment, add-slot, profile
     Layout/           root layout
     Pages/            route-level pages, incl. Dashboard/*
-    Shared/           Navbar, Footer, Loader, TableSkeleton, ErrorPage
+    Shared/           Navbar, Footer, Loader, TableSkeleton, Reveal, ErrorPage
   Contexts/           AuthContext (Firebase user, theme, toasts)
   Hooks/              useAxiosSecure (attaches the JWT), useCustomAxios
   ProtectedRoute/     route guards
   utils/              compressImage, packages, shared helpers
   theme.js            brand palette for libraries that take a colour prop
+  motion.js           AOS config + the shared stagger scale
 ```
 
 **Data fetching** is TanStack Query throughout. **Styling** is Tailwind + DaisyUI
@@ -69,11 +70,58 @@ The palette is defined twice on purpose, and a test asserts the two agree:
 
 - `tailwind.config.js` — for markup (`bg-primary`, `text-accent`, …)
 - `src/theme.js` — for libraries that take a colour **prop** and cannot use a class
-  name (MUI charts, react-spinners, SweetAlert)
+  name (MUI charts, SweetAlert)
 
 The only hardcoded hex values left in the codebase are genuinely third-party:
 Google's sign-in brand colours, and Stripe's `CardElement` defaults, which are
 passed into a cross-origin iframe that cannot read our stylesheet.
+
+### Loading states
+
+Two components, one rule: **if the shape of the result is known, draw the shape.**
+
+| Component | Use |
+| --- | --- |
+| `Shared/Loader` | Everything else. A CSS ring — no spinner library |
+| `Shared/Loader/TableSkeleton` | Table-shaped dashboard routes |
+
+A skeleton keeps the page the right size so content lands in place; a spinner in
+a table makes everything below it jump when the data arrives.
+
+`Loader` takes `size="sm" | "md" | "lg"` (16 / 32 / 48px), not free pixel
+numbers. Call sites previously passed 30, 40 and 50 interchangeably, so the
+loader was a slightly different size on nearly every route. Pair `size="md"` with
+`fullScreen={false}` when the loader sits inside page chrome that has already
+rendered — the default fills the viewport, which is right for a whole route and
+wrong for one card.
+
+### Motion
+
+Scroll reveals go through `Shared/Reveal`, which reads its timing from
+`src/motion.js`. Call sites say *what*, not *how*:
+
+```jsx
+{posts.map((post, index) => (
+  <Reveal key={index} index={index}>
+    <PostCard postData={post} />
+  </Reveal>
+))}
+```
+
+- **One animation.** `fade-up` everywhere. It was previously five (`fade-up`,
+  `fade-down`, `fade-left`, `fade-right`, `zoom-in`) plus a typo'd `"fade-down "`
+  whose trailing space AOS silently ignored, so that element never animated at all.
+- **Three delays.** `STAGGER = [0, 100, 200]`, indexed by an item's position in
+  its group and clamped at the end, so a long list does not accumulate lag. There
+  were 21 distinct hand-typed delay values before.
+- **One `AOS.init()`**, in `main.jsx`. It used to run inside a `useEffect` in 31
+  separate components, all reconfiguring the same global singleton — and
+  `Banner.jsx` passed a *different* duration and easing, so the app's animation
+  timing depended on which component mounted last.
+
+`Reveal` emits AOS attributes today. The indirection exists so that moving to
+framer-motion's `whileInView` is a change to one file rather than a sweep across
+every animated page.
 
 ---
 
@@ -110,7 +158,10 @@ implying a known limit.
 - `prefers-reduced-motion` is honoured globally. Scroll animations start at
   `opacity: 0`, so the reduced-motion rules restore opacity as well as cancelling
   the animation — otherwise the page would be blank for the users who asked for
-  less motion.
+  less motion. The loader ring is the one deliberate exception: the blanket rule
+  caps animations at one iteration, which would freeze it on its first frame, and
+  a motionless ring beside the word "Loading" reads as a broken page. It keeps
+  turning, at half speed.
 
 > Not yet measured: a Lighthouse accessibility score, and a full keyboard-only pass
 > of the booking flow. Those numbers are not claimed here until they are actually

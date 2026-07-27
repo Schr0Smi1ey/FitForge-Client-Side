@@ -1,17 +1,12 @@
 import Loader from "../../../Shared/Loader/Loader";
-import React, { useEffect, useState } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
+import React, { useState } from "react";
 import PostCard from "../../../Cards/PostCard";
+import Reveal from "../../../Shared/Reveal/Reveal";
 import useCustomAxios from "../../../../Hooks/useCustomAxios";
 import { useQuery } from "@tanstack/react-query";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const LatestForumPosts = () => {
-  useEffect(() => {
-    AOS.init({ duration: 500 });
-  }, []);
-
   const customAxios = useCustomAxios();
   const [posts, setPosts] = useState([]);
   const navigate = useNavigate();
@@ -29,7 +24,7 @@ const LatestForumPosts = () => {
 
   if (isFetching) {
     return (
-      <Loader size={40} />
+      <Loader size="md" fullScreen={false} />
     );
   }
 
@@ -49,13 +44,9 @@ const LatestForumPosts = () => {
       {/* Posts Grid */}
       <div className="grid lg:grid-cols-3 grid-cols-1 gap-6">
         {posts.map((post, index) => (
-          <div
-            key={index}
-            data-aos="fade-up"
-            data-aos-delay={index * 100 + 200}
-          >
+          <Reveal key={index} index={index}>
             <PostCard postData={post} home={home} />
-          </div>
+          </Reveal>
         ))}
       </div>
 
@@ -65,8 +56,7 @@ const LatestForumPosts = () => {
           <button
             onClick={() => navigate("/community")}
             className="bg-primary/90 rounded-tl-xl rounded-br-xl text-white px-6 py-3 text-lg font-semibold shadow-md hover:bg-primary transition-all duration-300"
-            data-aos="fade-up"
-            data-aos-delay="500"
+            data-aos="fade-up" data-aos-delay="200"
           >
             Explore More
           </button>

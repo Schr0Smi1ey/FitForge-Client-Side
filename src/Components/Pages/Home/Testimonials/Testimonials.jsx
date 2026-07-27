@@ -13,16 +13,10 @@ import {
   EffectCoverflow,
 } from "swiper/modules";
 import { FaQuoteLeft, FaRegStar, FaStar } from "react-icons/fa";
-import Aos from "aos";
-import "aos/dist/aos.css";
-import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const Testimonials = () => {
-  useEffect(() => {
-    Aos.init({ duration: 500 });
-  }, []);
   const secureAxios = useAxiosSecure();
   const { data: reviews = [], isFetching } = useQuery({
     queryKey: ["reviews"],
@@ -33,14 +27,14 @@ const Testimonials = () => {
   });
   if (isFetching) {
     return (
-      <Loader size={40} />
+      <Loader size="md" fullScreen={false} />
     );
   }
   return (
     <div className="bg-primary pb-8 pt-14 rounded-md px-6 md:px-12 lg:px-20 mt-10">
       <div className="container mx-auto text-white flex flex-col md:flex-row items-center justify-between gap-12">
         {/* Left Side - Text Content */}
-        <div data-aos="fade-right" className="md:w-[45%] text-left space-y-6">
+        <div data-aos="fade-up" className="md:w-[45%] text-left space-y-6">
           <div className="relative">
             <FaQuoteLeft className="text-4xl lg:text-6xl text-white/60 absolute -top-5 sm:-top-8 sm:-left-10" />
           </div>
@@ -56,7 +50,7 @@ const Testimonials = () => {
         </div>
 
         {/* Right Side - Swiper Carousel */}
-        <div data-aos="fade-left" className="relative md:w-[50%]">
+        <div data-aos="fade-up" className="relative md:w-[50%]">
           <Swiper
             effect="coverflow"
             grabCursor={true}

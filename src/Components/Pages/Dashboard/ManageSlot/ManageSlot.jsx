@@ -1,12 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { FaEye, FaTrash, FaTimes } from "react-icons/fa";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { Helmet } from "react-helmet";
-import Aos from "aos";
-import "aos/dist/aos.css";
 import TableSkeleton from "../../../Shared/Loader/TableSkeleton";
 import { BRAND } from "../../../../theme";
 const ManageSlot = () => {
@@ -15,9 +13,6 @@ const ManageSlot = () => {
   const [slotData, setSlotData] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [bookedMembers, setBookedMembers] = useState([]);
-  useEffect(() => {
-    Aos.init({ duration: 500 });
-  }, []);
   const { isFetching, refetch } = useQuery({
     queryKey: ["trainer"],
     queryFn: async () => {
@@ -82,7 +77,7 @@ const ManageSlot = () => {
       </Helmet>
       {slotData.length === 0 ? (
         <p
-          data-aos="fade-down"
+          data-aos="fade-up"
           className="text-2xl text-red-500 font-bold text-center"
         >
           No Slot found!
@@ -90,8 +85,7 @@ const ManageSlot = () => {
       ) : (
         <div>
           <h1
-            data-aos="fade-down "
-            data-aos-delay="150"
+            data-aos="fade-up" data-aos-delay="100"
             className="text-3xl mb-6 font-bold text-gray-800 dark:text-gray-300 text-center"
           >
             🗓️ Manage Slots
@@ -133,8 +127,7 @@ const ManageSlot = () => {
                   </td>
                   <td className="flex justify-center">
                     <div
-                      data-aos="fade-up"
-                      data-aos-delay="200"
+                      data-aos="fade-up" data-aos-delay="200"
                       className="flex gap-3 items-center"
                     >
                       {slot.bookedMembers.length > 0 ? (
@@ -167,8 +160,7 @@ const ManageSlot = () => {
                   <FaTimes />
                 </button>
                 <h2
-                  data-aos="fade-down"
-                  data-aos-delay="150"
+                  data-aos="fade-up" data-aos-delay="100"
                   className="text-lg text-primary font-semibold mb-4 text-center"
                 >
                   Booked Members
@@ -177,8 +169,7 @@ const ManageSlot = () => {
                   <thead>
                     <tr className="text-center bg-primary text-white">
                       <th
-                        data-aos="fade-up"
-                        data-aos-delay="200"
+                        data-aos="fade-up" data-aos-delay="200"
                         className="border border-gray-300 p-2"
                       >
                         Profile
@@ -192,8 +183,7 @@ const ManageSlot = () => {
                         className="text-center border border-gray-300"
                       >
                         <td
-                          data-aos="fade-up"
-                          data-aos-delay="250"
+                          data-aos="fade-up" data-aos-delay="200"
                           className="p-2"
                         >
                           {member.email}

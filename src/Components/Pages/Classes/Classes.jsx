@@ -3,8 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 import useCustomAxios from "../../../Hooks/useCustomAxios";
 import ClassCard from "../../Cards/ClassCard";
 import { Helmet } from "react-helmet";
-import Aos from "aos";
-import "aos/dist/aos.css";
 import Loader from "../../Shared/Loader/Loader";
 const Classes = () => {
   const [classes, setClasses] = useState([]);
@@ -15,7 +13,6 @@ const Classes = () => {
   const customAxios = useCustomAxios();
 
   useEffect(() => {
-    Aos.init({ duration: 500 });
     window.scrollTo(0, 0);
   }, [classes]);
   const handleSearch = (e) => {
@@ -79,7 +76,7 @@ const Classes = () => {
       </div>
       <div>
         {isFetching ? (
-          <Loader size={40} />
+          <Loader size="md" fullScreen={false} />
         ) : classes.length > 0 ? (
           <div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

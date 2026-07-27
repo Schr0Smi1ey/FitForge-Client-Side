@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import card1 from "../../../../assets/Home/Featured/1.webp";
 import card2 from "../../../../assets/Home/Featured/2.webp";
@@ -6,8 +6,6 @@ import card3 from "../../../../assets/Home/Featured/3.webp";
 import card4 from "../../../../assets/Home/Featured/4.webp";
 import card5 from "../../../../assets/Home/Featured/5.webp";
 import card6 from "../../../../assets/Home/Featured/6.webp";
-import Aos from "aos";
-import "aos/dist/aos.css";
 
 const featuredData = [
   {
@@ -49,10 +47,6 @@ const featuredData = [
 ];
 
 const Featured = () => {
-  useEffect(() => {
-    Aos.init({ duration: 500 });
-  }, []);
-
   return (
     <section className="bg-gray-50 dark:bg-black py-8 rounded-md px-6 md:px-12 lg:px-20 mt-10">
       <div className="max-w-7xl mx-auto">

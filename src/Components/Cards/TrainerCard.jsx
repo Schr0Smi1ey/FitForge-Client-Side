@@ -1,18 +1,12 @@
 import { FaFacebookF, FaTwitter, FaLinkedin } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import Aos from "aos";
-import "aos/dist/aos.css";
-import { useEffect } from "react";
 const TrainerCard = ({ trainer }) => {
-  useEffect(() => {
-    Aos.init({ duration: 500 });
-  }, []);
   return (
     <div className="bg-white dark:bg-black dark:text-white rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
       {/* Image Section */}
       <div className="relative group">
         <img
-          data-aos="fade-down"
+          data-aos="fade-up"
           src={trainer.profileImage}
           alt={trainer.fullName}
           className="w-full h-72 object-cover transition-transform duration-300"
@@ -59,7 +53,7 @@ const TrainerCard = ({ trainer }) => {
         <div className="flex flex-wrap justify-center gap-2 my-3">
           {trainer.skills.slice(0, 3).map((skill, index) => (
             <span
-              data-aos="fade-right"
+              data-aos="fade-up"
               key={index}
               className="px-3 py-1 bg-primary/10 text-primary text-xs rounded-full font-medium"
             >

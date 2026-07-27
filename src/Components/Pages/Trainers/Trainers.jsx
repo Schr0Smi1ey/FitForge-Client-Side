@@ -3,14 +3,11 @@ import React, { useEffect } from "react";
 import useTrainers from "../../../Hooks/useTrainers";
 import TrainerCard from "../../Cards/TrainerCard";
 import { Helmet } from "react-helmet";
-import Aos from "aos";
-import "aos/dist/aos.css";
 
 const Trainers = () => {
   const { trainers, isFetching } = useTrainers();
 
   useEffect(() => {
-    Aos.init({ duration: 500 });
     window.scrollTo(0, 0);
   }, []);
 
@@ -36,13 +33,12 @@ const Trainers = () => {
       {/* Trainers Grid */}
       <div>
         {isFetching ? (
-          <Loader size={40} />
+          <Loader size="md" fullScreen={false} />
         ) : trainers.length > 0 ? (
           <div>
             <div
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-              data-aos="fade-up"
-              data-aos-delay="200"
+              data-aos="fade-up" data-aos-delay="200"
             >
               {trainers.map((trainer) => (
                 <TrainerCard key={trainer._id} trainer={trainer} />

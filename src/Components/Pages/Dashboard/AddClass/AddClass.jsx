@@ -1,12 +1,10 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 import axios from "axios";
 import compressImage, { IMAGE_TARGETS } from "../../../../utils/compressImage";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
-import Aos from "aos";
-import "aos/dist/aos.css";
 const AddClass = () => {
   const [formData, setFormData] = useState({
     title: "",
@@ -19,9 +17,6 @@ const AddClass = () => {
   const { image_hosting_api, Toast } = useContext(AuthContext);
   const fileInputRef = useRef(null);
   const secureAxios = useAxiosSecure();
-  useEffect(() => {
-    Aos.init({ duration: 500 });
-  }, []);
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "duration") {
@@ -89,8 +84,7 @@ const AddClass = () => {
         <title>FitForge | Dashboard | Add Class</title>
       </Helmet>
       <h2
-        data-aos="fade-down"
-        data-aos-delay="100"
+        data-aos="fade-up" data-aos-delay="100"
         className="text-3xl font-bold mb-6 text-center text-primary"
       >
         Add New Class
@@ -103,15 +97,13 @@ const AddClass = () => {
         {/* Class Title */}
         <div>
           <label
-            data-aos="fade-up"
-            data-aos-delay="150"
+            data-aos="fade-up" data-aos-delay="100"
             className="block text-gray-600 dark:text-gray-400 font-semibold mb-1"
           >
             Class Title
           </label>
           <input
-            data-aos="fade-up"
-            data-aos-delay="150"
+            data-aos="fade-up" data-aos-delay="100"
             type="text"
             name="title"
             value={formData.title}
@@ -124,15 +116,13 @@ const AddClass = () => {
         {/* Image Upload */}
         <div>
           <label
-            data-aos="fade-up"
-            data-aos-delay="150"
+            data-aos="fade-up" data-aos-delay="100"
             className="block text-gray-600 dark:text-gray-400 font-semibold mb-1"
           >
             Upload Image
           </label>
           <input
-            data-aos="fade-up"
-            data-aos-delay="150"
+            data-aos="fade-up" data-aos-delay="100"
             type="file"
             accept="image/*"
             onChange={handleFileChange}
@@ -145,15 +135,13 @@ const AddClass = () => {
         {/* Description */}
         <div>
           <label
-            data-aos="fade-up"
-            data-aos-delay="150"
+            data-aos="fade-up" data-aos-delay="100"
             className="block text-gray-600 dark:text-gray-400 font-semibold mb-1"
           >
             Description
           </label>
           <textarea
-            data-aos="fade-up"
-            data-aos-delay="150"
+            data-aos="fade-up" data-aos-delay="100"
             name="description"
             value={formData.description}
             onChange={handleChange}
@@ -166,15 +154,13 @@ const AddClass = () => {
         {/* Category */}
         <div>
           <label
-            data-aos="fade-up"
-            data-aos-delay="150"
+            data-aos="fade-up" data-aos-delay="100"
             className="block text-gray-600 dark:text-gray-400 font-semibold mb-1"
           >
             Category
           </label>
           <select
-            data-aos="fade-up"
-            data-aos-delay="150"
+            data-aos="fade-up" data-aos-delay="100"
             name="category"
             value={formData.category}
             onChange={handleChange}
@@ -233,15 +219,13 @@ const AddClass = () => {
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label
-              data-aos="fade-up"
-              data-aos-delay="150"
+              data-aos="fade-up" data-aos-delay="100"
               className="block text-gray-600 dark:text-gray-400 font-semibold mb-1"
             >
               Duration
             </label>
             <select
-              data-aos="fade-up"
-              data-aos-delay="150"
+              data-aos="fade-up" data-aos-delay="100"
               name="duration"
               value={formData.duration}
               onChange={handleChange}
@@ -266,15 +250,13 @@ const AddClass = () => {
           {/* Intensity */}
           <div>
             <label
-              data-aos="fade-up"
-              data-aos-delay="150"
+              data-aos="fade-up" data-aos-delay="100"
               className="block text-gray-600 dark:text-gray-400 font-semibold mb-1"
             >
               Intensity
             </label>
             <select
-              data-aos="fade-up"
-              data-aos-delay="150"
+              data-aos="fade-up" data-aos-delay="100"
               name="intensity"
               value={formData.intensity}
               onChange={handleChange}
@@ -299,8 +281,7 @@ const AddClass = () => {
 
         {/* Submit Button */}
         <button
-          data-aos="fade-up"
-          data-aos-delay="150"
+          data-aos="fade-up" data-aos-delay="100"
           type="submit"
           className="w-full bg-primary text-white py-3 rounded-lg text-lg font-semibold hover:bg-opacity-90 transition-all duration-200"
         >

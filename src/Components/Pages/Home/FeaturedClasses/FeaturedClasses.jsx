@@ -1,16 +1,10 @@
-import React, { useEffect, useState } from "react";
-import Aos from "aos";
-import "aos/dist/aos.css";
+import React, { useState } from "react";
 import ClassCard from "../../../Cards/ClassCard";
 import useCustomAxios from "../../../../Hooks/useCustomAxios";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../../Shared/Loader/Loader";
 
 const FeaturedClasses = () => {
-  useEffect(() => {
-    Aos.init({ duration: 500 });
-  }, []);
-
   const customAxios = useCustomAxios();
   const [classes, setClasses] = useState([]);
   const { isFetching } = useQuery({
@@ -24,7 +18,7 @@ const FeaturedClasses = () => {
 
   if (isFetching) {
     return (
-      <Loader size={40} />
+      <Loader size="md" fullScreen={false} />
     );
   }
 

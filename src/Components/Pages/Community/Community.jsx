@@ -5,8 +5,6 @@ import { useQuery } from "@tanstack/react-query";
 import useCustomAxios from "../../../Hooks/useCustomAxios";
 import { Helmet } from "react-helmet";
 import { AuthContext } from "../../../Contexts/AuthContext/AuthProvider";
-import Aos from "aos";
-import "aos/dist/aos.css";
 const Community = () => {
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -15,7 +13,6 @@ const Community = () => {
   const { user, loading } = useContext(AuthContext);
   const customAxios = useCustomAxios();
   useEffect(() => {
-    Aos.init({ duration: 500 });
     window.scrollTo(0, 0);
   }, []);
   const { isFetching, refetch } = useQuery({
@@ -65,7 +62,7 @@ const Community = () => {
 
       {/* Forum Posts Section */}
       <h2
-        data-aos="fade-right"
+        data-aos="fade-up"
         className="text-2xl text-center font-semibold text-gray-800 dark:text-gray-400 mb-6"
       >
         Recent Forum Posts
@@ -73,7 +70,7 @@ const Community = () => {
 
       <div>
         {isFetching || loading ? (
-          <Loader size={40} />
+          <Loader size="md" fullScreen={false} />
         ) : posts.length > 0 ? (
           <div>
             <div className="max-w-6xl mx-auto grid grid-cols-1 gap-6">

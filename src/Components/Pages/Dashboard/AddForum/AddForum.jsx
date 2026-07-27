@@ -1,5 +1,5 @@
 import Loader from "../../../Shared/Loader/Loader";
-import { useState, useContext, useRef, useEffect } from "react";
+import { useState, useContext, useRef } from "react";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 import axios from "axios";
 import compressImage, { IMAGE_TARGETS } from "../../../../utils/compressImage";
@@ -7,8 +7,6 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { Helmet } from "react-helmet";
 import { convertDate } from "../../../../utils/Utilities";
-import Aos from "aos";
-import "aos/dist/aos.css";
 const AddForum = () => {
   // `Toast` was missing from this destructuring while being called below, so the
   // image-upload failure path threw ReferenceError instead of showing the error.
@@ -24,15 +22,12 @@ const AddForum = () => {
   });
   const fileInputRef = useRef(null);
   const secureAxios = useAxiosSecure();
-  useEffect(() => {
-    Aos.init({ duration: 500 });
-  }, []);
   // Every hook must run before this early return. It used to sit above them, so
   // the number of hooks changed as `loading` flipped and React errored with
   // "Rendered fewer hooks than expected".
   if (loading) {
     return (
-      <Loader size={40} />
+      <Loader />
     );
   }
   const handleChange = (e) => {
@@ -102,8 +97,7 @@ const AddForum = () => {
       </Helmet>
       <div className="w-full container mx-auto max-w-3xl bg-white dark:bg-black dark:text-white shadow-2xl rounded-2xl p-6">
         <h2
-          data-aos="fade-down"
-          data-aos-delay="100"
+          data-aos="fade-up" data-aos-delay="100"
           className="text-3xl font-bold text-gray-800 dark:text-gray-300 text-center mb-4"
         >
           📢 Create a New Forum
@@ -115,15 +109,13 @@ const AddForum = () => {
         >
           <div>
             <label
-              data-aos="fade-up"
-              data-aos-delay="150"
+              data-aos="fade-up" data-aos-delay="100"
               className="font-semibold text-gray-700 dark:text-gray-400"
             >
               Forum Title
             </label>
             <input
-              data-aos="fade-up"
-              data-aos-delay="160"
+              data-aos="fade-up" data-aos-delay="200"
               type="text"
               name="title"
               placeholder="Enter forum title..."
@@ -136,15 +128,13 @@ const AddForum = () => {
 
           <div>
             <label
-              data-aos="fade-up"
-              data-aos-delay="170"
+              data-aos="fade-up" data-aos-delay="200"
               className="font-semibold text-gray-700 dark:text-gray-400"
             >
               Description
             </label>
             <textarea
-              data-aos="fade-up"
-              data-aos-delay="180"
+              data-aos="fade-up" data-aos-delay="200"
               name="description"
               placeholder="Describe your forum..."
               rows="4"
@@ -157,15 +147,13 @@ const AddForum = () => {
 
           <div>
             <label
-              data-aos="fade-up"
-              data-aos-delay="190"
+              data-aos="fade-up" data-aos-delay="200"
               className="block text-gray-700 dark:text-gray-400 font-medium"
             >
               Image
             </label>
             <input
-              data-aos="fade-up"
-              data-aos-delay="200"
+              data-aos="fade-up" data-aos-delay="200"
               type="file"
               accept="image/*"
               onChange={handleFileChange}
@@ -176,15 +164,13 @@ const AddForum = () => {
           </div>
           <div>
             <label
-              data-aos="fade-up"
-              data-aos-delay="210"
+              data-aos="fade-up" data-aos-delay="200"
               className="font-semibold text-gray-700 dark:text-gray-400"
             >
               Posted By
             </label>
             <input
-              data-aos="fade-up"
-              data-aos-delay="220"
+              data-aos="fade-up" data-aos-delay="200"
               type="text"
               name="postedBy"
               value={forum.postedBy}
@@ -194,15 +180,13 @@ const AddForum = () => {
           </div>
           <div>
             <label
-              data-aos="fade-up"
-              data-aos-delay="230"
+              data-aos="fade-up" data-aos-delay="200"
               className="font-semibold text-gray-700 dark:text-gray-400"
             >
               Posted Date
             </label>
             <input
-              data-aos="fade-up"
-              data-aos-delay="240"
+              data-aos="fade-up" data-aos-delay="200"
               type="text"
               name="postedDate"
               value={convertDate(forum.postedDate, "AddForum")}
@@ -211,8 +195,7 @@ const AddForum = () => {
             />
           </div>
           <button
-            data-aos="fade-up"
-            data-aos-delay="250"
+            data-aos="fade-up" data-aos-delay="200"
             type="submit"
             className="w-full bg-primary hover:bg-primary text-white font-bold text-lg py-3 rounded-lg shadow-md transition-all"
           >

@@ -25,6 +25,33 @@ describe("Loader", () => {
     const { container } = render(<Loader fullScreen={false} />);
     expect(container.firstChild.className).not.toContain("min-h-screen");
   });
+
+  // Call sites used to pass raw pixel numbers (30, 40 and 50 were all in use),
+  // so the loader was a different size on almost every route. Sizes are now a
+  // closed set and anything outside it falls back rather than rendering a
+  // ring with no dimensions at all.
+  it("renders the requested size from the scale", () => {
+    const { container } = render(<Loader size="sm" />);
+    expect(container.querySelector("[data-loader-ring]").className).toContain(
+      "h-4 w-4"
+    );
+  });
+
+  it("falls back to the page-level size when given an unknown one", () => {
+    const { container } = render(<Loader size="enormous" />);
+    expect(container.querySelector("[data-loader-ring]").className).toContain(
+      "h-12 w-12"
+    );
+  });
+
+  // The ring is the only decorative part; the status role and label carry the
+  // meaning, so the ring itself must stay out of the accessibility tree.
+  it("hides the ring from assistive technology", () => {
+    const { container } = render(<Loader />);
+    expect(
+      container.querySelector("[data-loader-ring]").getAttribute("aria-hidden")
+    ).toBe("true");
+  });
 });
 
 describe("TableSkeleton", () => {

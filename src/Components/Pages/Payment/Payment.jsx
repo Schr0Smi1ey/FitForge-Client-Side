@@ -3,8 +3,6 @@ import { Elements } from "@stripe/react-stripe-js";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet";
-import AOS from "aos";
-import "aos/dist/aos.css";
 
 import PaymentForm from "../../Forms/PaymentForm";
 
@@ -17,7 +15,6 @@ const Payment = () => {
   const { trainer, slot, packageName } = location.state || {};
 
   useEffect(() => {
-    AOS.init({ duration: 500 });
     window.scrollTo(0, 0);
   }, []);
 
@@ -33,7 +30,7 @@ const Payment = () => {
       >
         <h2
           className="text-3xl font-extrabold text-primary text-center mb-6"
-          data-aos="zoom-in"
+          data-aos="fade-up"
         >
           Secure Payment
         </h2>
@@ -41,8 +38,7 @@ const Payment = () => {
         {/* Trainer & Slot Summary */}
         <div
           className="p-5 rounded-lg mb-6 text-gray-800 dark:text-white space-y-4"
-          data-aos="fade-up"
-          data-aos-delay="200"
+          data-aos="fade-up" data-aos-delay="200"
         >
           <div className="flex items-center gap-4">
             <img
@@ -93,7 +89,7 @@ const Payment = () => {
         </div>
 
         {/* Stripe Payment Form */}
-        <div data-aos="fade-up" data-aos-delay="400">
+        <div data-aos="fade-up" data-aos-delay="200">
           <Elements stripe={stripePromise}>
             <PaymentForm
               trainer={trainer}
@@ -107,8 +103,7 @@ const Payment = () => {
         <button
           onClick={() => navigate(-1)}
           className="mt-6 w-full text-gray-600 hover:text-primary font-semibold text-center block transition"
-          data-aos="fade-up"
-          data-aos-delay="600"
+          data-aos="fade-up" data-aos-delay="200"
         >
           &larr; Back to Plans
         </button>

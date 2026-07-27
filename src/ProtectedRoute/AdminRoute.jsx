@@ -12,7 +12,7 @@ const AdminRoute = ({ children }) => {
   if (loading || isAdminLoading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <Loader size={50} fullScreen={false} />
+        <Loader fullScreen={false} />
       </div>
     );
   }
