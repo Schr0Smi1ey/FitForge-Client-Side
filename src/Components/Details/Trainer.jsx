@@ -143,12 +143,19 @@ const Trainer = () => {
                         Class
                       </th>
                       <th className="px-6 py-4 text-primary font-semibold">
+                        Seats
+                      </th>
+                      <th className="px-6 py-4 text-primary font-semibold">
                         Action
                       </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                    {trainer.slots.map((slot) => (
+                    {trainer.slots.map((slot) => {
+                      const capacity = slot.capacity ?? 0;
+                      const booked = slot.bookedMembers?.length ?? 0;
+                      const isFull = capacity > 0 && booked >= capacity;
+                      return (
                       <tr
                         key={slot._id}
                         className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors text-center"
@@ -171,18 +178,45 @@ const Trainer = () => {
                           </div>
                         </td>
                         <td className="px-6 py-4">
-                          <Link to={`/book-trainer/${trainer._id}/${slot._id}`}>
+                          <div
+                            className={`text-sm font-medium ${
+                              isFull
+                                ? "text-red-600 dark:text-red-400"
+                                : "text-gray-700 dark:text-gray-400"
+                            }`}
+                          >
+                            {booked}/{capacity || "?"}
+                            {isFull && <span className="ml-1">· Full</span>}
+                          </div>
+                        </td>
+                        <td className="px-6 py-4">
+                          {isFull ? (
+                            // Rendered as a real disabled button rather than a
+                            // styled link, so it is unreachable by keyboard and
+                            // by click, not merely greyed out.
                             <button
-                              className="flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg transition-all 
-      focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+                              disabled
+                              aria-label="This slot is fully booked"
+                              className="flex items-center justify-center gap-2 bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 px-4 py-2 rounded-lg cursor-not-allowed"
                             >
                               <FaCalendarAlt className="flex w-5 h-5" />
-                              <span>Book Now</span>
+                              <span>Fully Booked</span>
                             </button>
-                          </Link>
+                          ) : (
+                            <Link to={`/book-trainer/${trainer._id}/${slot._id}`}>
+                              <button
+                                className="flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg transition-all
+      focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+                              >
+                                <FaCalendarAlt className="flex w-5 h-5" />
+                                <span>Book Now</span>
+                              </button>
+                            </Link>
+                          )}
                         </td>
                       </tr>
-                    ))}
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>
