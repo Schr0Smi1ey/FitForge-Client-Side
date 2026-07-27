@@ -15,6 +15,7 @@ front end; the API lives in
 
 - [Features](#features)
 - [Architecture](#architecture)
+- [Design system](#design-system) — [tokens](#design-tokens) · [loading states](#loading-states) · [motion](#motion)
 - [Booking and payment](#booking-and-payment)
 - [Accessibility](#accessibility)
 - [Performance](#performance)
@@ -59,10 +60,19 @@ src/
   utils/              compressImage, packages, shared helpers
   theme.js            brand palette for libraries that take a colour prop
   motion.js           AOS config + the shared stagger scale
+  main.jsx            router, providers, and the app's single AOS.init()
 ```
 
 **Data fetching** is TanStack Query throughout. **Styling** is Tailwind + DaisyUI
 with a class-based dark mode.
+
+---
+
+## Design system
+
+Three things were each defined in dozens of places and are now defined once. The
+pattern is the same in all three cases: a shared module owns the values, and call
+sites name what they want instead of restating how to produce it.
 
 ### Design tokens
 
@@ -88,12 +98,20 @@ Two components, one rule: **if the shape of the result is known, draw the shape.
 A skeleton keeps the page the right size so content lands in place; a spinner in
 a table makes everything below it jump when the data arrives.
 
-`Loader` takes `size="sm" | "md" | "lg"` (16 / 32 / 48px), not free pixel
-numbers. Call sites previously passed 30, 40 and 50 interchangeably, so the
-loader was a slightly different size on nearly every route. Pair `size="md"` with
-`fullScreen={false}` when the loader sits inside page chrome that has already
-rendered — the default fills the viewport, which is right for a whole route and
-wrong for one card.
+`Loader` is one element and one keyframe. It takes `size="sm" | "md" | "lg"`
+(16 / 32 / 48px), not free pixel numbers — call sites previously passed 30, 40 and
+50 interchangeably, so the loader was a slightly different size on nearly every
+route.
+
+```jsx
+<Loader />                              // whole route: fills the viewport
+<Loader size="md" fullScreen={false} /> // inside chrome that already rendered
+```
+
+`fullScreen` defaults to `true`, which is right for a route and wrong for one
+card. Several nested loaders inherited that default, so a single card — or one
+section of the home page — reserved a whole viewport while it loaded, and Home
+briefly became several screens tall as four sections loaded independently.
 
 ### Motion
 
@@ -108,16 +126,24 @@ Scroll reveals go through `Shared/Reveal`, which reads its timing from
 ))}
 ```
 
-- **One animation.** `fade-up` everywhere. It was previously five (`fade-up`,
-  `fade-down`, `fade-left`, `fade-right`, `zoom-in`) plus a typo'd `"fade-down "`
-  whose trailing space AOS silently ignored, so that element never animated at all.
-- **Three delays.** `STAGGER = [0, 100, 200]`, indexed by an item's position in
-  its group and clamped at the end, so a long list does not accumulate lag. There
-  were 21 distinct hand-typed delay values before.
-- **One `AOS.init()`**, in `main.jsx`. It used to run inside a `useEffect` in 31
-  separate components, all reconfiguring the same global singleton — and
-  `Banner.jsx` passed a *different* duration and easing, so the app's animation
-  timing depended on which component mounted last.
+| | Before | Now |
+| --- | --- | --- |
+| `AOS.init()` calls | 31 components | 1, in `main.jsx` |
+| Animations | 5, plus one typo | `fade-up` |
+| Delay values | 21 hand-typed | `STAGGER = [0, 100, 200]` |
+
+- **One `AOS.init()`.** AOS is a global singleton, so initialising it in a
+  `useEffect` in 31 components meant 31 reconfigurations of the same object — and
+  `Banner.jsx` passed a *different* duration and easing from everywhere else. The
+  app's animation timing therefore depended on which component happened to mount
+  last: visiting Home and navigating away changed how the rest of the site
+  animated.
+- **One animation.** It was previously `fade-up`, `fade-down`, `fade-left`,
+  `fade-right` and `zoom-in`, plus a typo'd `"fade-down "` whose trailing space
+  AOS silently ignored — that element never animated at all, and nobody noticed.
+- **Three delays.** Indexed by an item's position in its group and clamped at the
+  end, so a long list does not accumulate lag. Two call sites previously computed
+  delays as `index * 200`, which grew without bound.
 
 `Reveal` emits AOS attributes today. The indirection exists so that moving to
 framer-motion's `whileInView` is a change to one file rather than a sweep across
@@ -152,16 +178,20 @@ implying a known limit.
   (`aria-pressed`), the profile menu and both hamburgers (`aria-expanded`).
 - Loading states use `role="status"` with a visually hidden label, so a screen
   reader is told something is loading rather than encountering an unnamed spinner.
+  The ring itself is `aria-hidden` — it carries no information the label does not.
 - Decorative logos and SVG flourishes are `aria-hidden`; content images have real
   `alt` text.
 - Visible `focus-visible` rings on interactive controls.
 - `prefers-reduced-motion` is honoured globally. Scroll animations start at
   `opacity: 0`, so the reduced-motion rules restore opacity as well as cancelling
-  the animation — otherwise the page would be blank for the users who asked for
-  less motion. The loader ring is the one deliberate exception: the blanket rule
-  caps animations at one iteration, which would freeze it on its first frame, and
-  a motionless ring beside the word "Loading" reads as a broken page. It keeps
-  turning, at half speed.
+  the animation — otherwise the page would be blank for exactly the users who asked
+  for less motion.
+
+The loader ring is the one deliberate exception to that global rule. The blanket
+reset caps every animation at one iteration, which would freeze the ring on its
+first frame, and a motionless ring beside the word "Loading" reads as a broken
+page rather than a calm one. The guidance is aimed at large-scale and parallax
+motion, not a small activity indicator, so it keeps turning — at half speed.
 
 > Not yet measured: a Lighthouse accessibility score, and a full keyboard-only pass
 > of the booking flow. Those numbers are not claimed here until they are actually
@@ -187,6 +217,10 @@ avatars, so new uploads cannot recreate the problem. It preserves EXIF orientati
 so portrait photos are not rotated, skips GIFs, and falls back to the original file
 if re-encoding fails — compression can never block an upload.
 
+Three dependencies were dropped along the way: `react-spinners` (the loader is now
+plain CSS), plus `motion` and `simple-parallax-js`, which had no imports anywhere.
+`motion` is framer-motion under its newer name, so both were installed at once.
+
 ---
 
 ## Setup
@@ -205,7 +239,9 @@ npm run dev                   # http://localhost:5173
 secret key there.
 
 The API must be running too, and its CORS allow-list must include
-`http://localhost:5173` (it does by default). See the
+`http://localhost:5173` (it does by default). If port 5173 is already taken, Vite
+falls back to 5174 and the API will reject the requests as cross-origin — free the
+port rather than chasing the CORS errors. See the
 [server README](https://github.com/Schr0Smi1ey/FitForge-Server-Side#setup) — note
 that **bookings require a configured Stripe webhook**, or payments will succeed
 while no booking is recorded.
@@ -214,6 +250,7 @@ while no booking is recorded.
 | --- | --- |
 | `npm run dev` | Dev server |
 | `npm run build` | Production build |
+| `npm run preview` | Serve the production build locally |
 | `npm run lint` | ESLint |
 | `npm test` | Vitest (single run) |
 | `npm run test:watch` | Vitest (watch) |
@@ -226,9 +263,22 @@ while no booking is recorded.
 npm test
 ```
 
-22 tests covering the slot-fullness rules (including the off-by-one on the last
-seat), the package price table against the server's canonical prices, and the
-loading components' accessibility semantics.
+36 tests across 6 files:
+
+| File | Covers |
+| --- | --- |
+| `SlotAvailability.test.jsx` | Slot-fullness rules, including the off-by-one on the last seat and a missing capacity field |
+| `Loader.test.jsx` | The size scale and its fallback, plus the accessibility semantics of `Loader` and `TableSkeleton` |
+| `Reveal.test.jsx` | Stagger by index, clamping on long lists, the explicit-delay escape hatch |
+| `motion.test.js` | The stagger scale, and that the animation names are ones AOS actually defines |
+| `packages.test.js` | The package price table against the server's canonical prices |
+| `theme.test.js` | `theme.js` and `tailwind.config.js` agreeing on the palette |
+
+Two of these guard mistakes that are invisible at runtime. AOS has no `fade-in`;
+an unrecognised name still fades, because AOS matches `[data-aos^="fade"]` for the
+opacity transition — so a typo looks fine and would quietly stop working if that
+stylesheet changed. And the price test fails loudly if the client's displayed
+price drifts from what the server will actually charge.
 
 CI runs lint → test → build on Node 20 and 22. The build step is load-bearing:
 CI is case-sensitive where local Windows development is not, so it is what catches
