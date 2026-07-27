@@ -152,7 +152,12 @@ const SignUp = () => {
           data-aos="fade-right"
           className="hidden md:flex w-1/2 bg-gradient-to-r from-primary to-primary/70 text-white flex-col items-center justify-center p-8"
         >
-          <img src={logo} className="mx-auto w-[80%] mb-2 rounded-xl" alt="" />
+          <img
+            src={logo}
+            className="mx-auto w-[80%] mb-2 rounded-xl"
+            alt=""
+            aria-hidden="true"
+          />
           <h2 className="text-3xl font-extrabold mb-4">Join FitForge Today</h2>
           <p className="text-lg text-center mb-6">
             Be part of a community committed to fitness and transformation. Sign
@@ -273,6 +278,8 @@ const SignUp = () => {
             className="mt-4 w-full text-primary py-2 rounded-lg flex items-center justify-center border-2 border-gray-400"
           >
             <svg
+              aria-hidden="true"
+              focusable="false"
               className="w-5 h-5 mr-2"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 48 48"

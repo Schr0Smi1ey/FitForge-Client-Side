@@ -1,3 +1,4 @@
+import Loader from "../../../Shared/Loader/Loader";
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -17,7 +18,6 @@ import "aos/dist/aos.css";
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
-import { GridLoader } from "react-spinners";
 
 const Testimonials = () => {
   useEffect(() => {
@@ -33,9 +33,7 @@ const Testimonials = () => {
   });
   if (isFetching) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <GridLoader color="#198068" size={40} />
-      </div>
+      <Loader size={40} />
     );
   }
   return (

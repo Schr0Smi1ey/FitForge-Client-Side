@@ -1,7 +1,7 @@
+import Loader from "../../Shared/Loader/Loader";
 import React, { useEffect } from "react";
 import useTrainers from "../../../Hooks/useTrainers";
 import TrainerCard from "../../Cards/TrainerCard";
-import { GridLoader } from "react-spinners";
 import { Helmet } from "react-helmet";
 import Aos from "aos";
 import "aos/dist/aos.css";
@@ -36,9 +36,7 @@ const Trainers = () => {
       {/* Trainers Grid */}
       <div>
         {isFetching ? (
-          <div className="flex items-center justify-center min-h-screen">
-            <GridLoader color="#198068" size={40} />
-          </div>
+          <Loader size={40} />
         ) : trainers.length > 0 ? (
           <div>
             <div

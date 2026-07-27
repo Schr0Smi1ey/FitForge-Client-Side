@@ -1,8 +1,8 @@
+import TableSkeleton from "../../../Shared/Loader/TableSkeleton";
 import { useQuery } from "@tanstack/react-query";
 import { useContext, useEffect, useState } from "react";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
-import { GridLoader } from "react-spinners";
 import { Helmet } from "react-helmet";
 import Aos from "aos";
 import "aos/dist/aos.css";
@@ -26,9 +26,7 @@ const Subscribers = () => {
   });
   if (loading || isFetching) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <GridLoader color="#198068" size={40} />
-      </div>
+      <TableSkeleton rows={5} columns={4} />
     );
   }
   return (

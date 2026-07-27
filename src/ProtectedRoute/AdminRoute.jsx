@@ -1,6 +1,6 @@
+import Loader from "../Components/Shared/Loader/Loader";
 import { useContext } from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import { GridLoader } from "react-spinners";
 import useAdmin from "../Hooks/useAdmin";
 import { AuthContext } from "../Contexts/AuthContext/AuthProvider";
 
@@ -12,7 +12,7 @@ const AdminRoute = ({ children }) => {
   if (loading || isAdminLoading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <GridLoader color="#198068" size={50} />
+        <Loader size={50} fullScreen={false} />
       </div>
     );
   }

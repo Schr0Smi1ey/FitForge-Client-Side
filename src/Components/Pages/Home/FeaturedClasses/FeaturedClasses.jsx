@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import ClassCard from "../../../Cards/ClassCard";
-import { GridLoader } from "react-spinners";
 import useCustomAxios from "../../../../Hooks/useCustomAxios";
 import { useQuery } from "@tanstack/react-query";
+import Loader from "../../../Shared/Loader/Loader";
 
 const FeaturedClasses = () => {
   useEffect(() => {
@@ -24,9 +24,7 @@ const FeaturedClasses = () => {
 
   if (isFetching) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <GridLoader color="#198068" size={40} />
-      </div>
+      <Loader size={40} />
     );
   }
 

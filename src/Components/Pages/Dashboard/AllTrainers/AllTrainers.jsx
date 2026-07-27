@@ -1,6 +1,6 @@
+import TableSkeleton from "../../../Shared/Loader/TableSkeleton";
 import React, { useContext, useEffect, useState } from "react";
 import useTrainers from "../../../../Hooks/useTrainers";
-import { GridLoader } from "react-spinners";
 import { FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
@@ -9,6 +9,7 @@ import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { Helmet } from "react-helmet";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import { BRAND } from "../../../../theme";
 const AllTrainers = () => {
   const { trainers, isFetching } = useTrainers();
   const { user, loading } = useContext(AuthContext);
@@ -21,9 +22,7 @@ const AllTrainers = () => {
   }, []);
   if (isFetching || loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <GridLoader color="#198068" size={40} />
-      </div>
+      <TableSkeleton rows={5} columns={5} />
     );
   }
   const handleReject = (trainer) => {
@@ -38,8 +37,8 @@ const AllTrainers = () => {
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#32CD32",
-      cancelButtonColor: "#FF4500",
+      confirmButtonColor: BRAND.success,
+      cancelButtonColor: BRAND.danger,
       confirmButtonText: "Yes, cancel it!",
     }).then(async (result) => {
       if (result.isConfirmed) {

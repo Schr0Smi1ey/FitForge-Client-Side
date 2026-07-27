@@ -1,6 +1,6 @@
+import Loader from "../../../Shared/Loader/Loader";
 import { useState, useContext, useRef, useEffect } from "react";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
-import { GridLoader } from "react-spinners";
 import axios from "axios";
 import compressImage, { IMAGE_TARGETS } from "../../../../utils/compressImage";
 import Swal from "sweetalert2";
@@ -32,9 +32,7 @@ const AddForum = () => {
   // "Rendered fewer hooks than expected".
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <GridLoader color="#198068" size={40} />
-      </div>
+      <Loader size={40} />
     );
   }
   const handleChange = (e) => {

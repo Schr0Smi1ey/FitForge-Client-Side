@@ -95,7 +95,7 @@ const AuthProvider = ({ children }) => {
       progress: undefined,
       theme: "light",
       transition: Flip,
-      toastClassName: "rounded-lg bg-[#f5f5f5] text-black w-96",
+      toastClassName: "rounded-lg bg-surface text-black w-96",
       bodyClassName: "font-medium text-lg",
     });
   };

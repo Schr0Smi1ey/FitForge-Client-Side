@@ -96,7 +96,7 @@ const NavBar = () => {
           >
             {item}
             <span
-              className={`absolute bottom-[-4px] left-0 w-0 h-[1.5px] bg-[#802819] transition-all duration-300 group-hover:w-full`}
+              className={`absolute bottom-[-4px] left-0 w-0 h-[1.5px] bg-accent transition-all duration-300 group-hover:w-full`}
             ></span>
           </NavLink>
         </motion.div>
@@ -107,7 +107,11 @@ const NavBar = () => {
     <div className="flex items-center justify-center gap-5 sm:justify-left md:mb-0 relative">
       <button
         onClick={toggleTheme}
-        className="relative w-14 h-8 flex items-center bg-gray-300 dark:bg-gray-700 rounded-full p-1 transition-colors duration-300"
+        aria-label={
+          theme === "dark" ? "Switch to light theme" : "Switch to dark theme"
+        }
+        aria-pressed={theme === "dark"}
+        className="relative w-14 h-8 flex items-center bg-gray-300 dark:bg-gray-700 rounded-full p-1 transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
       >
         <div
           className={`absolute left-1 w-6 h-6 bg-white dark:bg-yellow-400 rounded-full shadow-md transform transition-transform duration-300 ${
@@ -121,7 +125,10 @@ const NavBar = () => {
         <div className="relative profile-menu">
           <button
             onClick={() => setIsProfileOpen((prevState) => !prevState)}
-            className="btn border-2 border-primary hover:border-primary btn-ghost btn-circle avatar"
+            aria-label="Account menu"
+            aria-expanded={isProfileOpen}
+            aria-haspopup="menu"
+            className="btn border-2 border-primary hover:border-primary btn-ghost btn-circle avatar focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
           >
             <div className="w-10 rounded-full">
               <img
@@ -135,7 +142,7 @@ const NavBar = () => {
               <li className="block text-center p-2">
                 <img
                   src={user.photoURL}
-                  alt=""
+                  alt={`${user.displayName || "Your"} profile picture`}
                   className="block rounded-2xl mx-auto mb-2"
                 />
                 <span className="font-semibold text-base">
@@ -356,7 +363,9 @@ const NavBar = () => {
           <div className="lg:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="dark:text-white hover:text-primary transition-colors p-2"
+              aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={isMenuOpen}
+              className="dark:text-white hover:text-primary transition-colors p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
             >
               {isMenuOpen ? (
                 <FiX className="w-6 h-6 md:w-7 md:h-7" />

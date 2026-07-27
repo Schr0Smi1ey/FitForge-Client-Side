@@ -1,13 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext, useEffect, useState } from "react";
 import { FaEye, FaTrash, FaTimes } from "react-icons/fa";
-import { GridLoader } from "react-spinners";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { Helmet } from "react-helmet";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import TableSkeleton from "../../../Shared/Loader/TableSkeleton";
+import { BRAND } from "../../../../theme";
 const ManageSlot = () => {
   const secureAxios = useAxiosSecure();
   const { user } = useContext(AuthContext);
@@ -30,9 +31,7 @@ const ManageSlot = () => {
 
   if (isFetching) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <GridLoader color="#198068" size={40} />
-      </div>
+      <TableSkeleton rows={5} columns={5} />
     );
   }
 
@@ -42,8 +41,8 @@ const ManageSlot = () => {
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#32CD32",
-      cancelButtonColor: "#FF4500",
+      confirmButtonColor: BRAND.success,
+      cancelButtonColor: BRAND.danger,
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {

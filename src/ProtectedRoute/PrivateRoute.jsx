@@ -1,6 +1,6 @@
+import Loader from "../Components/Shared/Loader/Loader";
 import { useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { GridLoader } from "react-spinners";
 import { Navigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../Contexts/AuthContext/AuthProvider";
 
@@ -21,7 +21,7 @@ const PrivateRoute = ({ children }) => {
   if (loading || (!user && !isRedirecting)) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <GridLoader color="#198068" size={50} />
+        <Loader size={50} fullScreen={false} />
       </div>
     );
   }

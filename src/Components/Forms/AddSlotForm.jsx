@@ -1,9 +1,9 @@
+import Loader from "../Shared/Loader/Loader";
 import React, { useState, useEffect, useContext } from "react";
 import Select from "react-select";
 import { useQuery } from "@tanstack/react-query";
 import useCustomAxios from "../../Hooks/useCustomAxios";
 import { AuthContext } from "../../Contexts/AuthContext/AuthProvider";
-import { GridLoader } from "react-spinners";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import Aos from "aos";
@@ -49,9 +49,7 @@ const AddSlotForm = () => {
 
   if (loading || isFetchingClasses || isFetchingTrainer) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <GridLoader color="#198068" size={40} />
-      </div>
+      <Loader size={40} />
     );
   }
 

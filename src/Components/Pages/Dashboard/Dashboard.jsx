@@ -1,3 +1,4 @@
+import Loader from "../../Shared/Loader/Loader";
 import { useContext, useEffect, useState } from "react";
 import {
   FaUsers,
@@ -16,7 +17,6 @@ import {
 import { RiMenuFold4Fill, RiMenuUnfold4Fill } from "react-icons/ri";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Contexts/AuthContext/AuthProvider";
-import { GridLoader } from "react-spinners";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet";
@@ -100,9 +100,7 @@ const Dashboard = () => {
   // Placed after every hook above, so the hook count is identical on each render.
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <GridLoader color="#198068" size={40} />
-      </div>
+      <Loader size={40} />
     );
   }
 
@@ -121,7 +119,9 @@ const Dashboard = () => {
           data-aos="fade-right"
           data-aos-delay="100"
           key={isOpen}
-          className="lg:hidden mt-5 md:ml-4 text-white text-2xl"
+          aria-label="Close dashboard menu"
+          aria-expanded={isOpen}
+          className="lg:hidden mt-5 md:ml-4 text-white text-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2"
           onClick={() => setIsOpen(false)}
         >
           <RiMenuUnfold4Fill className="flex md:w-12 md:h-12" />
@@ -146,11 +146,11 @@ const Dashboard = () => {
                   >
                     <NavLink
                       to={getLinkPath(name)}
-                      className="flex items-center gap-3 w-fit hover:text-[#802819] transition-colors duration-300 relative group"
+                      className="flex items-center gap-3 w-fit hover:text-accent transition-colors duration-300 relative group"
                     >
                       {icon}
                       <span className="capitalize">{name}</span>
-                      <span className="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-[#802819] transition-all duration-300 group-hover:w-full"></span>
+                      <span className="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-accent transition-all duration-300 group-hover:w-full"></span>
                     </NavLink>
                   </motion.div>
                 ))}
@@ -172,11 +172,11 @@ const Dashboard = () => {
                   >
                     <NavLink
                       to={getLinkPath(name)}
-                      className="flex items-center w-fit gap-3 hover:text-[#802819] transition-colors duration-300 relative group"
+                      className="flex items-center w-fit gap-3 hover:text-accent transition-colors duration-300 relative group"
                     >
                       {icon}
                       <span className="capitalize">{name}</span>
-                      <span className="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-[#802819] transition-all duration-300 group-hover:w-full"></span>
+                      <span className="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-accent transition-all duration-300 group-hover:w-full"></span>
                     </NavLink>
                   </motion.div>
                 ))}
@@ -198,11 +198,11 @@ const Dashboard = () => {
                   >
                     <NavLink
                       to={getLinkPath(name)}
-                      className="flex items-center w-fit gap-3 hover:text-[#802819] transition-colors duration-300 relative group"
+                      className="flex items-center w-fit gap-3 hover:text-accent transition-colors duration-300 relative group"
                     >
                       {icon}
                       <span className="capitalize">{name}</span>
-                      <span className="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-[#802819] transition-all duration-300 group-hover:w-full"></span>
+                      <span className="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-accent transition-all duration-300 group-hover:w-full"></span>
                     </NavLink>
                   </motion.div>
                 ))}
@@ -221,11 +221,11 @@ const Dashboard = () => {
               >
                 <NavLink
                   to="/dashboard/add-forum"
-                  className="flex items-center w-fit gap-3 text-base md:text-lg lg:text-xl hover:text-[#802819] transition-colors duration-300 relative group"
+                  className="flex items-center w-fit gap-3 text-base md:text-lg lg:text-xl hover:text-accent transition-colors duration-300 relative group"
                 >
                   <FaComments />
                   <span className="capitalize">Add Forum</span>
-                  <span className="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-[#802819] transition-all duration-300 group-hover:w-full"></span>
+                  <span className="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-accent transition-all duration-300 group-hover:w-full"></span>
                 </NavLink>
               </motion.div>
             </motion.div>
@@ -245,11 +245,11 @@ const Dashboard = () => {
                 >
                   <NavLink
                     to={path}
-                    className="flex items-center gap-3 w-fit hover:text-[#802819] transition-colors duration-300 relative group"
+                    className="flex items-center gap-3 w-fit hover:text-accent transition-colors duration-300 relative group"
                   >
                     {icon}
                     <span className="capitalize">{name}</span>
-                    <span className="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-[#802819] transition-all duration-300 group-hover:w-full"></span>
+                    <span className="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-accent transition-all duration-300 group-hover:w-full"></span>
                   </NavLink>
                 </motion.div>
               ))}
@@ -275,7 +275,9 @@ const Dashboard = () => {
       {/* Main Content */}
       <div className="flex-1 py-4 pt-10 lg:ml-5">
         <button
-          className="lg:hidden text-primary-500 text-3xl ml-5 md:ml-10 mb-4"
+          aria-label="Open dashboard menu"
+          aria-expanded={isOpen}
+          className="lg:hidden text-primary-500 text-3xl ml-5 md:ml-10 mb-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
           onClick={() => setIsOpen(true)}
         >
           <RiMenuFold4Fill className="md:w-12 md:h-12" />
@@ -283,9 +285,7 @@ const Dashboard = () => {
 
         <div className="container mx-auto p-4">
           {loading ? (
-            <div className="flex items-center justify-center min-h-screen">
-              <GridLoader color="#198068" size={40} />
-            </div>
+            <Loader size={40} />
           ) : (
             <Outlet />
           )}

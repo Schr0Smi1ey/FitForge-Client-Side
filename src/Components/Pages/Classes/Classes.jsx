@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useCustomAxios from "../../../Hooks/useCustomAxios";
-import { GridLoader } from "react-spinners";
 import ClassCard from "../../Cards/ClassCard";
 import { Helmet } from "react-helmet";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import Loader from "../../Shared/Loader/Loader";
 const Classes = () => {
   const [classes, setClasses] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -79,9 +79,7 @@ const Classes = () => {
       </div>
       <div>
         {isFetching ? (
-          <div className="flex items-center justify-center min-h-screen">
-            <GridLoader color="#198068" size={40} />
-          </div>
+          <Loader size={40} />
         ) : classes.length > 0 ? (
           <div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

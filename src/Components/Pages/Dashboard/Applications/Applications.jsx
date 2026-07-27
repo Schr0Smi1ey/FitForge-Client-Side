@@ -1,7 +1,7 @@
+import TableSkeleton from "../../../Shared/Loader/TableSkeleton";
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { GridLoader } from "react-spinners";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 import { Helmet } from "react-helmet";
@@ -23,9 +23,7 @@ const Applications = () => {
   // "Rendered fewer hooks than expected".
   if (loading || isFetching) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <GridLoader color="#198068" size={40} />
-      </div>
+      <TableSkeleton rows={5} columns={5} />
     );
   }
   // The route already returns only pending applications, so this is the size of

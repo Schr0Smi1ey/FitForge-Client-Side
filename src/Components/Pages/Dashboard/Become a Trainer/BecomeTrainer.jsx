@@ -1,6 +1,5 @@
 import React, { useState, useContext, useRef, useEffect } from "react";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
-import { GridLoader } from "react-spinners";
 import Select from "react-select";
 import axios from "axios";
 import compressImage, { IMAGE_TARGETS } from "../../../../utils/compressImage";
@@ -9,6 +8,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { Helmet } from "react-helmet";
+import Loader from "../../../Shared/Loader/Loader";
 
 const skillsOptions = [
   { label: "Strength & Resistance", value: "Strength & Resistance" },
@@ -72,9 +72,7 @@ const BecomeTrainer = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <GridLoader color="#198068" size={40} />
-      </div>
+      <Loader size={40} />
     );
   }
 

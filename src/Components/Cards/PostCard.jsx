@@ -3,7 +3,6 @@ import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { convertDate } from "../../utils/Utilities";
 import { useQuery } from "@tanstack/react-query";
-import { GridLoader } from "react-spinners";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { AuthContext } from "../../Contexts/AuthContext/AuthProvider";
 import { BsPersonBadge } from "react-icons/bs";
@@ -11,6 +10,7 @@ import { HiCheckBadge } from "react-icons/hi2";
 import useCustomAxios from "../../Hooks/useCustomAxios";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import Loader from "../Shared/Loader/Loader";
 const PostCard = ({ postData, refetch, home }) => {
   const {
     title,
@@ -43,9 +43,7 @@ const PostCard = ({ postData, refetch, home }) => {
   });
   if (loading || isFetching) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <GridLoader color="#198068" size={40} />
-      </div>
+      <Loader size={40} />
     );
   }
 

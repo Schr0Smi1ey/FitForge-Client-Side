@@ -5,9 +5,37 @@
 @tailwind utilities;
 
 .book {
-  color: #198068;
+  @apply text-primary;
 }
 
 body {
   font-family: "Fira Sans", sans-serif;
+}
+
+/*
+ * Respect the OS "reduce motion" setting.
+ *
+ * AOS is initialised in 31 components and framer-motion animates throughout, so
+ * handling this centrally is the only way to cover them all consistently.
+ *
+ * The [data-aos] rule is the important part and easy to miss: AOS starts
+ * elements at opacity 0 and animates them in. Cancelling the animation without
+ * restoring opacity would leave the page permanently blank for exactly the users
+ * who asked for less motion — a worse outcome than the animation itself.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }

@@ -1,9 +1,9 @@
+import Loader from "../../../Shared/Loader/Loader";
 import { useContext, useState } from "react";
 import Rating from "react-rating";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
-import { GridLoader } from "react-spinners";
 
 const Review = () => {
   const [rating, setRating] = useState(0);
@@ -46,9 +46,7 @@ const Review = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <GridLoader color="#198068" size={40} />
-      </div>
+      <Loader size={40} />
     );
   }
   return (

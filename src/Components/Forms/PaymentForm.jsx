@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { AuthContext } from "../../Contexts/AuthContext/AuthProvider";
 import { FaLock } from "react-icons/fa";
+import { BRAND } from "../../theme";
 
 const PaymentForm = ({ trainer, slot, packageName }) => {
   const [error, setError] = useState("");
@@ -111,6 +112,9 @@ const PaymentForm = ({ trainer, slot, packageName }) => {
     <form className="pt-32 container mx-auto" onSubmit={handleSubmit}>
       <div className="bg-gray-100 dark:bg-black dark:text-white p-4 rounded-lg">
         <CardElement
+          // Stripe renders CardElement inside a cross-origin iframe, so it cannot
+          // read our stylesheet — these must be literal colour values passed as
+          // config. #424770 and #aab7c4 are Stripe's own documented defaults.
           options={{
             style: {
               base: {
@@ -121,7 +125,7 @@ const PaymentForm = ({ trainer, slot, packageName }) => {
                 },
               },
               invalid: {
-                color: "#ff4d4d",
+                color: BRAND.danger,
               },
             },
           }}

@@ -1,7 +1,7 @@
+import TableSkeleton from "../../../Shared/Loader/TableSkeleton";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
-import { GridLoader } from "react-spinners";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { Helmet } from "react-helmet";
 import Aos from "aos";
@@ -28,9 +28,7 @@ const BookedTrainer = () => {
 
   if (loading || isFetching) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <GridLoader color="#198068" size={40} />
-      </div>
+      <TableSkeleton rows={5} columns={5} />
     );
   }
 

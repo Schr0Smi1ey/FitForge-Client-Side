@@ -1,6 +1,6 @@
+import TableSkeleton from "../../../Shared/Loader/TableSkeleton";
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext, useEffect, useState } from "react";
-import { GridLoader } from "react-spinners";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 import { FaEye } from "react-icons/fa";
 import { convertDate } from "../../../../utils/Utilities.js";
@@ -38,9 +38,7 @@ const Applications = () => {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <GridLoader color="#198068" size={40} />
-      </div>
+      <TableSkeleton rows={5} columns={5} />
     );
   }
   const applications = applicantData[0]?.appliedTrainer;
@@ -62,7 +60,7 @@ const Applications = () => {
           <h1
             data-aos="fade-down"
             data-aos-delay="150"
-            className="text-3xl font-bold text-gray-800 text-center"
+            className="text-3xl font-bold text-gray-800 dark:text-gray-200 text-center"
           >
             📝 Activity Log
           </h1>
@@ -135,7 +133,7 @@ const Applications = () => {
       {/* Rejection Modal */}
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white rounded-lg shadow-lg p-6 w-9/12 md:w-1/3">
+          <div className="bg-white dark:bg-black rounded-lg shadow-lg p-6 w-9/12 md:w-1/3">
             <h2
               data-aos="fade-down"
               data-aos-delay="150"

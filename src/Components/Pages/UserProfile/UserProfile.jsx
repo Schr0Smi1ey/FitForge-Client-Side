@@ -1,10 +1,10 @@
+import Loader from "../../Shared/Loader/Loader";
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { AuthContext } from "../../../Contexts/AuthContext/AuthProvider";
-import { GridLoader } from "react-spinners";
 const UserProfile = () => {
   const { user, loading } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -17,9 +17,7 @@ const UserProfile = () => {
   }, []);
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <GridLoader color="#198068" size={30} />
-      </div>
+      <Loader size={30} />
     );
   }
   return (

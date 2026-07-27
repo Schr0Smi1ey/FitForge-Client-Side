@@ -1,9 +1,9 @@
+import Loader from "../../../Shared/Loader/Loader";
 import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import TrainerCard from "../../../Cards/TrainerCard";
 import useTrainers from "../../../../Hooks/useTrainers";
-import { GridLoader } from "react-spinners";
 
 const Team = () => {
   useEffect(() => {
@@ -14,9 +14,7 @@ const Team = () => {
 
   if (isFetching) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <GridLoader color="#198068" size={40} />
-      </div>
+      <Loader size={40} />
     );
   }
 

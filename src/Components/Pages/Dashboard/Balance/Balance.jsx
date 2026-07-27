@@ -1,7 +1,7 @@
+import Loader from "../../../Shared/Loader/Loader";
 import React, { useContext, useEffect } from "react";
 import { AuthContext } from "../../../../Contexts/AuthContext/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
-import { GridLoader } from "react-spinners";
 import { PieChart } from "@mui/x-charts";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { Helmet } from "react-helmet";
@@ -49,9 +49,7 @@ const Balance = () => {
 
   if (loading || isFetching || isFetchingSubscribers || isFetchingStats) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <GridLoader color="#198068" size={40} />
-      </div>
+      <Loader size={40} />
     );
   }
   const payments = paymentData?.payments || [];

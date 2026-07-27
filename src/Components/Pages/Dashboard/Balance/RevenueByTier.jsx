@@ -1,4 +1,5 @@
 import { BarChart } from "@mui/x-charts";
+import { BRAND } from "../../../../theme";
 
 /**
  * Revenue split across the three membership tiers.
@@ -40,7 +41,7 @@ const RevenueByTier = ({ revenueByTier = [], totalRevenue = 0, totalTransactions
       <div className="overflow-x-auto">
         <BarChart
           xAxis={[{ scaleType: "band", data: labels }]}
-          series={[{ data: totals, label: "Revenue ($)", color: "#198068" }]}
+          series={[{ data: totals, label: "Revenue ($)", color: BRAND.primary }]}
           height={280}
         />
       </div>

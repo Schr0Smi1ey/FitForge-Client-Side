@@ -89,7 +89,12 @@ const Login = () => {
           className="hidden md:flex md:w-1/2 bg-gradient-to-r from-primary to-primary/70 text-white flex-col items-center justify-center p-8"
           data-aos="fade-right"
         >
-          <img src={logo} className="mx-auto w-[80%] mb-2 rounded-xl" alt="" />
+          <img
+            src={logo}
+            className="mx-auto w-[80%] mb-2 rounded-xl"
+            alt=""
+            aria-hidden="true"
+          />
           <h2 className="text-4xl text-center font-bold mb-4">
             Welcome Back to FitForge!
           </h2>
@@ -174,6 +179,8 @@ const Login = () => {
             className="w-full py-2 flex items-center justify-center border-2 border-gray-300 text-primary font-semibold rounded-lg hover:bg-gray-100 transition"
           >
             <svg
+              aria-hidden="true"
+              focusable="false"
               className="w-5 h-5 mr-2"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 48 48"
@@ -213,6 +220,8 @@ const Login = () => {
       {/* <div className="pt-10 pb-24 px-4 md:pb-32 2xl:pb-[9%]"></div>
       <div className="w-screen relative mx-auto text-center">
         <svg
+          aria-hidden="true"
+          focusable="false"
           className="absolute w-full z-30 bottom-[-210px] text-white"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 170.68 1440 149.32"

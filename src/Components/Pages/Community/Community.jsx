@@ -1,8 +1,8 @@
+import Loader from "../../Shared/Loader/Loader";
 import React, { useContext, useEffect, useState } from "react";
 import PostCard from "../../Cards/PostCard";
 import { useQuery } from "@tanstack/react-query";
 import useCustomAxios from "../../../Hooks/useCustomAxios";
-import { GridLoader } from "react-spinners";
 import { Helmet } from "react-helmet";
 import { AuthContext } from "../../../Contexts/AuthContext/AuthProvider";
 import Aos from "aos";
@@ -73,9 +73,7 @@ const Community = () => {
 
       <div>
         {isFetching || loading ? (
-          <div className="flex items-center justify-center min-h-screen">
-            <GridLoader color="#198068" size={40} />
-          </div>
+          <Loader size={40} />
         ) : posts.length > 0 ? (
           <div>
             <div className="max-w-6xl mx-auto grid grid-cols-1 gap-6">

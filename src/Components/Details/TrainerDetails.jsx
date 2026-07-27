@@ -1,11 +1,12 @@
+import Loader from "../Shared/Loader/Loader";
 import React, { useContext, useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { FaFacebook, FaTwitter, FaInstagram, FaGlobe } from "react-icons/fa";
-import { GridLoader } from "react-spinners";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../Contexts/AuthContext/AuthProvider";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { Helmet } from "react-helmet";
+import { BRAND } from "../../theme";
 
 const TrainerDetails = () => {
   const { trainer } = useLoaderData();
@@ -15,9 +16,7 @@ const TrainerDetails = () => {
   const navigate = useNavigate();
   if (!trainer || loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <GridLoader color="#198068" size={40} />
-      </div>
+      <Loader size={40} />
     );
   }
 
@@ -27,8 +26,8 @@ const TrainerDetails = () => {
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#32CD32",
-      cancelButtonColor: "#FF4500",
+      confirmButtonColor: BRAND.success,
+      cancelButtonColor: BRAND.danger,
       confirmButtonText: "Yes, confirm it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
@@ -71,8 +70,8 @@ const TrainerDetails = () => {
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#32CD32",
-      cancelButtonColor: "#FF4500",
+      confirmButtonColor: BRAND.success,
+      cancelButtonColor: BRAND.danger,
       confirmButtonText: "Yes, reject it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
@@ -108,11 +107,11 @@ const TrainerDetails = () => {
   };
 
   return (
-    <div className="bg-gray-100 pt-32 p-8 flex flex-col items-center">
+    <div className="bg-gray-100 dark:bg-gray-900 pt-32 p-8 flex flex-col items-center">
       <Helmet>
         <title>FitForge | Trainer-Details</title>
       </Helmet>
-      <div className="bg-white shadow-lg rounded-xl max-w-4xl w-full overflow-hidden">
+      <div className="bg-white dark:bg-black shadow-lg rounded-xl max-w-4xl w-full overflow-hidden">
         <div className="flex flex-col md:flex-row">
           {/* Profile Image */}
           <div className="md:w-1/3 flex items-center justify-center p-6 bg-primary">
@@ -125,34 +124,34 @@ const TrainerDetails = () => {
 
           {/* Trainer Details */}
           <div className="p-8 md:w-2/3">
-            <h1 className="text-3xl font-bold text-gray-800">
+            <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-200">
               {trainer.fullName || "Unknown Trainer"}
             </h1>
-            <p className="text-gray-500 text-lg mb-4">
+            <p className="text-gray-500 dark:text-gray-400 text-lg mb-4">
               Age: {trainer.age || "N/A"}
             </p>
 
             <div className="mb-4">
-              <h2 className="text-xl font-semibold text-gray-700">Biography</h2>
-              <p className="text-gray-600 mt-2">
+              <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-300">Biography</h2>
+              <p className="text-gray-600 dark:text-gray-400 mt-2">
                 {trainer.biography || "No biography available."}
               </p>
             </div>
 
             <div className="mb-4">
-              <h2 className="text-xl font-semibold text-gray-700">
+              <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-300">
                 Experience
               </h2>
-              <p className="text-gray-600 mt-2">
+              <p className="text-gray-600 dark:text-gray-400 mt-2">
                 {trainer.experience || "No experience listed."}
               </p>
             </div>
 
             <div className="mb-4">
-              <h2 className="text-xl font-semibold text-gray-700">
+              <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-300">
                 Class Duration
               </h2>
-              <p className="text-gray-600 mt-2">
+              <p className="text-gray-600 dark:text-gray-400 mt-2">
                 {trainer.classDuration
                   ? `${trainer.classDuration} ${
                       trainer.classDuration > 1 ? "hours" : "hour"
@@ -162,7 +161,7 @@ const TrainerDetails = () => {
             </div>
 
             <div className="mb-4">
-              <h2 className="text-xl font-semibold text-gray-700">Skills</h2>
+              <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-300">Skills</h2>
               <div className="mt-2 flex flex-wrap gap-2">
                 {trainer.skills && trainer.skills.length > 0 ? (
                   trainer.skills.map((skill, index) => (
@@ -174,16 +173,16 @@ const TrainerDetails = () => {
                     </span>
                   ))
                 ) : (
-                  <p className="text-gray-500">No skills listed.</p>
+                  <p className="text-gray-500 dark:text-gray-400">No skills listed.</p>
                 )}
               </div>
             </div>
 
             <div className="mb-4">
-              <h2 className="text-xl font-semibold text-gray-700">
+              <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-300">
                 Availability
               </h2>
-              <p className="text-gray-600 mt-2">
+              <p className="text-gray-600 dark:text-gray-400 mt-2">
                 <strong>Days:</strong>{" "}
                 {trainer.availableDays
                   ? trainer.availableDays.join(", ")
@@ -195,7 +194,7 @@ const TrainerDetails = () => {
             </div>
 
             <div className="mb-4">
-              <h2 className="text-xl font-semibold text-gray-700">
+              <h2 className="text-xl font-semibold text-gray-700 dark:text-gray-300">
                 Social Links
               </h2>
               <div className="mt-2 flex space-x-4">
@@ -213,14 +212,14 @@ const TrainerDetails = () => {
                         href={link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-primary text-2xl hover:text-gray-700 transition-colors"
+                        className="text-primary text-2xl hover:text-gray-700 dark:text-gray-300 transition-colors"
                       >
                         {icon}
                       </a>
                     );
                   })
                 ) : (
-                  <p className="text-gray-500">No social links available.</p>
+                  <p className="text-gray-500 dark:text-gray-400">No social links available.</p>
                 )}
               </div>
             </div>
@@ -247,7 +246,7 @@ const TrainerDetails = () => {
       {/* Rejection Modal */}
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white rounded-lg shadow-lg p-6 w-11/12 md:w-1/2">
+          <div className="bg-white dark:bg-black rounded-lg shadow-lg p-6 w-11/12 md:w-1/2">
             <h2 className="text-2xl font-bold mb-4">Reject Application</h2>
             <p className="mb-4">
               Provide feedback for rejecting the application of{" "}
@@ -264,7 +263,7 @@ const TrainerDetails = () => {
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400 transition-colors"
+                  className="bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-4 py-2 rounded-md hover:bg-gray-400 dark:bg-gray-600 transition-colors"
                 >
                   Cancel
                 </button>
