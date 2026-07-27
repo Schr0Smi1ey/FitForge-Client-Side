@@ -20,16 +20,22 @@ const PaymentForm = ({ trainer, slot, packageName }) => {
   const totalPrice = PACKAGE_PRICES[packageName] ?? 0;
 
   useEffect(() => {
-    if (!packageName) return;
+    if (!packageName || !trainer?._id || !slot?._id) return;
+    // trainerId/slotId go to the server so it can stamp them onto the
+    // PaymentIntent's metadata — that metadata is what the webhook fulfils from.
     secureAxios
-      .post("/create-payment-intent", { packageName })
+      .post("/create-payment-intent", {
+        packageName,
+        trainerId: trainer._id,
+        slotId: slot._id,
+      })
       .then((res) => {
         setClientSecret(res.data.clientSecret);
       })
       .catch(() => {
         setError("Could not start payment. Please try again.");
       });
-  }, [secureAxios, packageName]);
+  }, [secureAxios, packageName, trainer?._id, slot?._id]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -72,29 +78,37 @@ const PaymentForm = ({ trainer, slot, packageName }) => {
       if (paymentIntent.status === "succeeded") {
         setTransactionId(paymentIntent.id);
 
-        // No `price` here on purpose — the server recomputes it from packageName,
-        // so sending one would imply the client has a say in what gets recorded.
-        const payment = {
-          email: user.email,
-          transactionId: paymentIntent.id,
-          date: new Date().toISOString(),
-          packageName,
-          trainerId: trainer._id,
-          slotId: slot._id,
-        };
-        const res = await secureAxios.post("/payments", payment, {
-          params: { email: user.email },
-        });
-        if (res.data?.insertedId) {
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Your payment has been successful",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          navigate("/");
+        // The booking is recorded by the Stripe webhook, not by this request.
+        // Stripe has confirmed the charge, so the payment HAS succeeded — we just
+        // poll briefly to see whether fulfilment has landed, since webhook
+        // delivery is asynchronous and usually takes a moment.
+        let fulfilled = false;
+        for (let attempt = 0; attempt < 5 && !fulfilled; attempt++) {
+          if (attempt > 0) await new Promise((r) => setTimeout(r, 1000));
+          try {
+            const res = await secureAxios.post(
+              "/payments",
+              { transactionId: paymentIntent.id },
+              { params: { email: user.email } }
+            );
+            fulfilled = Boolean(res.data?.fulfilled);
+          } catch {
+            // Polling is best-effort; the payment already went through.
+          }
         }
+
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Your payment has been successful",
+          // Never tell someone their booking failed when their card was charged.
+          text: fulfilled
+            ? "Your slot is booked."
+            : "Your booking is being confirmed and will appear shortly.",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        navigate("/");
       }
     }
   };
