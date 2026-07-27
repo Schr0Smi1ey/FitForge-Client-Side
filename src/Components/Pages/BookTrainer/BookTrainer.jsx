@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { FaCheckCircle, FaLock } from "react-icons/fa";
 import { useLoaderData, useNavigate } from "react-router-dom";
+import { PACKAGES } from "../../../utils/packages";
 
 const BookTrainer = () => {
   const [selectedPackage, setSelectedPackage] = useState("");
@@ -12,44 +13,7 @@ const BookTrainer = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const packages = [
-    {
-      name: "Basic",
-      price: 10,
-      features: [
-        "Access for 1 Month",
-        "Gym access during regular hours",
-        "Cardio & strength equipment",
-        "Locker rooms & showers",
-        "Water refill station access",
-        "Basic fitness assessment",
-      ],
-    },
-    {
-      name: "Premium",
-      price: 100,
-      features: [
-        "Access for 6 Months",
-        "All Standard benefits",
-        "Personal training sessions (4 per month)",
-        "Advanced body composition analysis",
-        "Exclusive access to premium equipment",
-        "Discounts on massage & nutrition counseling",
-      ],
-    },
-    {
-      name: "Standard",
-      price: 50,
-      features: [
-        "Access for 3 Months",
-        "All Basic benefits",
-        "Group fitness classes (Yoga, Zumba, Spinning)",
-        "Sauna & steam room access",
-        "Extended gym hours",
-        "Nutrition consultation (1 session)",
-      ],
-    },
-  ];
+  const packages = PACKAGES;
 
   const handleProceedToPayment = () => {
     if (!selectedPackage) return;

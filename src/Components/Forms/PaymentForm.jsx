@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { AuthContext } from "../../Contexts/AuthContext/AuthProvider";
 import { FaLock } from "react-icons/fa";
+import { PACKAGE_PRICES } from "../../utils/packages";
 
 const PaymentForm = ({ trainer, slot, packageName }) => {
   const [error, setError] = useState("");
@@ -15,20 +16,20 @@ const PaymentForm = ({ trainer, slot, packageName }) => {
   const secureAxios = useAxiosSecure();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-  const totalPrice =
-    (packageName === "Basic" && 10) ||
-    (packageName === "Standard" && 50) ||
-    (packageName === "Premium" && 100);
+  // Display only — the server charges from packageName, not from this number.
+  const totalPrice = PACKAGE_PRICES[packageName] ?? 0;
 
   useEffect(() => {
-    if (totalPrice > 0) {
-      secureAxios
-        .post("/create-payment-intent", { price: totalPrice })
-        .then((res) => {
-          setClientSecret(res.data.clientSecret);
-        });
-    }
-  }, [secureAxios, totalPrice]);
+    if (!packageName) return;
+    secureAxios
+      .post("/create-payment-intent", { packageName })
+      .then((res) => {
+        setClientSecret(res.data.clientSecret);
+      })
+      .catch(() => {
+        setError("Could not start payment. Please try again.");
+      });
+  }, [secureAxios, packageName]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -71,9 +72,10 @@ const PaymentForm = ({ trainer, slot, packageName }) => {
       if (paymentIntent.status === "succeeded") {
         setTransactionId(paymentIntent.id);
 
+        // No `price` here on purpose — the server recomputes it from packageName,
+        // so sending one would imply the client has a say in what gets recorded.
         const payment = {
           email: user.email,
-          price: totalPrice,
           transactionId: paymentIntent.id,
           date: new Date().toISOString(),
           packageName,
