@@ -28,11 +28,27 @@ const Applications = () => {
       </div>
     );
   }
+  // The route already returns only pending applications, so this is the size of
+  // the queue waiting on an admin — the one number this page exists to answer,
+  // which previously required counting the table by eye.
+  const pendingCount = appliedTrainers.length;
+
   return (
     <>
       <Helmet>
         <title>FitForge | Dashboard | Application</title>
       </Helmet>
+
+      <div
+        data-aos="fade-down"
+        className="mx-auto mb-6 w-fit rounded-2xl border dark:border-gray-700 bg-white dark:bg-black px-8 py-5 text-center shadow-sm"
+      >
+        <p className="text-4xl font-extrabold text-primary">{pendingCount}</p>
+        <p className="mt-1 text-sm uppercase tracking-wide text-gray-600 dark:text-gray-400">
+          {pendingCount === 1 ? "Application" : "Applications"} awaiting review
+        </p>
+      </div>
+
       {appliedTrainers.length === 0 ? (
         <p
           data-aos="fade-down"

@@ -5,6 +5,7 @@ import { GridLoader } from "react-spinners";
 import { PieChart } from "@mui/x-charts";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { Helmet } from "react-helmet";
+import RevenueByTier from "./RevenueByTier";
 import Aos from "aos";
 import "aos/dist/aos.css";
 const Balance = () => {
@@ -23,6 +24,16 @@ const Balance = () => {
     },
   });
 
+  // Aggregated server-side, so the browser never pulls every payment row just to
+  // add them up.
+  const { data: stats, isFetching: isFetchingStats } = useQuery({
+    queryKey: ["admin-stats"],
+    queryFn: async () => {
+      const res = await secureAxios.get("/admin-stats");
+      return res.data;
+    },
+  });
+
   const { data: subscribersData, isFetching: isFetchingSubscribers } = useQuery(
     {
       queryKey: ["subscribers"],
@@ -36,7 +47,7 @@ const Balance = () => {
     }
   );
 
-  if (loading || isFetching || isFetchingSubscribers) {
+  if (loading || isFetching || isFetchingSubscribers || isFetchingStats) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <GridLoader color="#198068" size={40} />
@@ -52,6 +63,14 @@ const Balance = () => {
       <Helmet>
         <title>FitForge | Dashboard | Balance</title>
       </Helmet>
+
+      <div className="mb-6">
+        <RevenueByTier
+          revenueByTier={stats?.revenueByTier}
+          totalRevenue={stats?.totalRevenue}
+          totalTransactions={stats?.totalTransactions}
+        />
+      </div>
       <div className="mb-6 flex flex-col lg:flex-row items-center justify-between gap-6">
         {/* Payment Balance */}
         <h2
