@@ -1,5 +1,7 @@
 # FitForge 🏋️‍♀️💪
 
+[![CI](https://github.com/Schr0Smi1ey/FitForge-Client-Side/actions/workflows/ci.yml/badge.svg?branch=enhanced)](https://github.com/Schr0Smi1ey/FitForge-Client-Side/actions/workflows/ci.yml)
+
 FitForge is an all-in-one fitness platform designed to connect users with professional trainers, book personalized training sessions, track progress, and engage with a vibrant fitness community. Whether you're a beginner or an experienced fitness enthusiast, FitForge provides an interactive experience with advanced booking, progress tracking, and community engagement..
 
 ## 🚀 Live Demo
